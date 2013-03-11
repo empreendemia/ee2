@@ -1,0 +1,191 @@
+<?php
+/**
+ * custom.phtml
+ * Monte seu pacote
+ * 
+ * @package views
+ * @subpackage net
+ * @author Mauro Ribeiro
+ * @since 2012-10-25
+ */
+?>
+<?php $this->layout()->og_title = 'NET - monte seu pacote' ?>
+<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_description = 'Responda 3 perguntas e veja qual o melhor pacote NET para sua empresa.' ?>
+
+<?php $this->layout()->title = 'NET - monte seu pacote' ?>
+
+<script type="text/javascript">
+$(function() {
+    var radio = {
+        speak : $('#questions input[name=speak]:checked').val(),
+        speed : $('#questions input[name=speed]:checked').val(),
+        tv : $('#questions input[name=tv]:checked').val()
+    }
+    var products = {
+        speakyes : {
+            veryfast : {
+                tvno : {
+                    name : 'Net Empresas Fixo Ilimitado',
+                    description : '<p>2 linhas de telefone</p><ul><li>Ligações locais e net para net ilimitadas</li></ul><p>Banda larga 20 mega</p><ul><li>Roteador wi-fi grátis</li></ul>',
+                    price : '229,90'
+                },
+                tvcompact : {
+                    name : 'Net Empresas Fixo Ilimitado',
+                    description : '<p>2 linhas de telefone</p><ul><li>Ligações locais e net para net ilimitadas</li></ul><p>Banda larga 20 mega</p><ul><li>Roteador wi-fi grátis</li></ul><p>TV compacto</p><ul><li>Pacote Notícias grátis por 12 meses</li></ul>',
+                    price : '261,90'
+                },
+                tvplushd : {
+                    name : 'Net Empresas Fixo Ilimitado',
+                    description : '<p>2 linhas de telefone</p><ul><li>Ligações locais e net para net ilimitadas</li></ul><p>Banda larga 20 mega</p><ul><li>Roteador wi-fi grátis</li></ul><p>TV Plus HD</p><ul><li>Pacote Notícias grátis por 12 meses</li></ul>',
+                    price : '309,80'
+                }
+            },
+            fast : {
+                tvno : {
+                    name : 'Net Empresas Fixo Ilimitado',
+                    description : '<p>2 linhas de telefone</p><ul><li>Ligações locais e net para net ilimitadas</li></ul><p>Banda larga 10 mega</p><ul><li>Roteador wi-fi grátis</li></ul>',
+                    price : '152,90'
+                },
+                tvcompact : {
+                    name : 'Net Empresas Fixo Ilimitado',
+                    description : '<p>2 linhas de telefone</p><ul><li>Ligações locais e net para net ilimitadas</li></ul><p>Banda larga 10 mega</p><ul><li>Roteador wi-fi grátis</li></ul><p>TV compacto</p><ul><li>Pacote Notícias grátis por 12 meses</li></ul>',
+                    price : '184,90'
+                },
+                tvplushd : {
+                    name : 'Net Empresas Fixo Ilimitado',
+                    description : '<p>2 linhas de telefone</p><ul><li>Ligações locais e net para net ilimitadas</li></ul><p>Banda larga 10 mega</p><ul><li>Roteador wi-fi grátis</li></ul><p>TV Plus HD</p><ul><li>Pacote Notícias grátis por 12 meses</li></ul>',
+                    price : '232,80'
+                }
+            }
+        },
+        speakno : {
+            veryfast : {
+                tvno : {
+                    name : 'Net Empresas Econômico',
+                    description : '<p>2 linhas de telefone</p><ul><li>Tarifa de ligações para outros fixos = R$ 0,12/min</li></ul><p>Banda larga 20 mega</p><ul><li>Roteador wi-fi grátis</li></ul>',
+                    price : '199,90'
+                },
+                tvcompact : {
+                    name : 'Net Empresas Econômico',
+                    description : '<p>2 linhas de telefone</p><ul><li>Tarifa de ligações para outros fixos = R$ 0,12/min</li></ul><p>Banda larga 20 mega</p><ul><li>Roteador wi-fi grátis</li></ul><p>TV compacto</p><ul><li>Pacote Notícias grátis por 12 meses</li></ul>',
+                    price : '231,90'
+                },
+                tvplushd : {
+                    name : 'Net Empresas Econômico',
+                    description : '<p>2 linhas de telefone</p><ul><li>Tarifa de ligações para outros fixos = R$ 0,12/min</li></ul><p>Banda larga 20 mega</p><ul><li>Roteador wi-fi grátis</li></ul><p>TV Plus HD</p><ul><li>Pacote Notícias grátis por 12 meses</li></ul>',
+                    price : '262,90'
+                }
+            },
+            fast : {
+                tvno : {
+                    name : 'Net Empresas Econômico',
+                    description : '<p>2 linhas de telefone</p><ul><li>Tarifa de ligações para outros fixos = R$ 0,12/min</li></ul><p>Banda larga 10 mega</p><ul><li>Roteador wi-fi grátis</li></ul>',
+                    price : '122,90'
+                },
+                tvcompact : {
+                    name : 'Net Empresas Econômico',
+                    description : '<p>2 linhas de telefone</p><ul><li>Tarifa de ligações para outros fixos = R$ 0,12/min</li></ul><p>Banda larga 10 mega</p><ul><li>Roteador wi-fi grátis</li></ul><p>TV compacto</p><ul><li>Pacote Notícias grátis por 12 meses</li></ul>',
+                    price : '154,90'
+                },
+                tvplushd : {
+                    name : 'Net Empresas Econômico',
+                    description : '<p>2 linhas de telefone</p><ul><li>Tarifa de ligações para outros fixos = R$ 0,12/min</li></ul><p>Banda larga 10 mega</p><ul><li>Roteador wi-fi grátis</li></ul><p>TV Plus HD</p><ul><li>Pacote Notícias grátis por 12 meses</li></ul>',
+                    price : '202,80'
+                }
+            }
+        }
+    }
+    function updatePlan(radio) {
+        var selectedProduct = products[radio.speak][radio.speed][radio.tv];
+        $('#product').fadeOut(200, function() {
+            $('#product-name').html(selectedProduct.name);
+            $('#product-details').html(selectedProduct.description);
+            $('#product-price').html('R$ '+selectedProduct.price+'/mês');
+            $('#product').fadeIn(200);
+        });
+    }
+    updatePlan(radio);
+    $('#questions input').change(function() {        
+        radio[$(this).attr('name')] = $(this).val();
+        updatePlan(radio);
+    });
+});
+</script>
+
+<div class="custom">
+    <h1>Responda 3 perguntas e veja qual o melhor pacote para sua empresa</h1>
+    <div id="questions" class="questions">
+        <div class="question">
+            <h2>Você fala muito ao telefone?</h2>
+            <ul>
+                <li><input type="radio" name="speak" value="speakyes" id="speak-yes" checked="checked" /><label for="speak-yes">Sim! Faço ligações o tempo todo e para todo o Brasil.</label></li>
+                <li><input type="radio" name="speak" value="speakno" id="speak-no" /><label for="speak-no">Não! Minha empres não tem a necessidade de fazer ligações o tempo inteiro.</label></li>
+            </ul>
+        </div>
+        <div class="question">
+            <h2>Internet rápida <br />ou MUITO rápida?</h2>
+            <ul>
+                <li><input type="radio" name="speed" value="veryfast" id="speed-veryfast" checked="checked" /><label for="speed-veryfast">MUITO rápida!</label></li>
+                <li><input type="radio" name="speed" value="fast" id="speed-fast" /><label for="speed-fast">Rápida.</label></li>
+            </ul>
+        </div>
+        <div class="question">
+            <h2>Você precisa de TV? <br />Qual a sua utilização?</h2>
+            <ul>
+                <li><input type="radio" name="tv" value="tvno" id="tv-no" checked="checked" /><label for="tv-no">Não preciso por enquanto.</label></li>
+                <li><input type="radio" name="tv" value="tvcompact" id="tv-compact" checked="checked" /><label for="tv-compact">Compacto, para assistir os canais mais simples.</label></li>
+                <li><input type="radio" name="tv" value="tvplushd" id="tv-plus" checked="checked" /><label for="tv-plus">Plus, para assistir os canais mais interessantes.</label></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+<div class="product-page" id="product" style="display:none">
+    <div class="box">
+        <h1 id="product-name"></h1>
+        <div id="product-details" class="details"></div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="faq-link"><a href="e/net/duvidas">Clique aqui e tire suas dúvidas.</a></div>
+
+    <div id="product-price" class="price">R$ 122,90/mês</div>
+
+    <div class="signup"><a href="#">Assinar Plano</a></div>
+
+    <div class="box">
+        <h1>Benefícios</h1>
+        <div class="benefits">
+            <div class="benefit">
+                <img src="" />
+                <h2>Instalação Grátis</h2>
+                <p>Promoção válida por tempo indeterminado.</p>
+            </div>
+            <div class="benefit">
+                <img src="" />
+                <h2>Serviços inteligentes Grátis</h2>
+                <p>Seu plano de telefone terá disponível vários serviços inteligentes gratuitamente por "tempo indeterminado".</p>
+            </div>
+            <div class="benefit">
+                <img src="" />
+                <h2>Extensões Grátis*</h2>
+                <p>Tenha até 4 extensões grátis por linha.</p>
+                <p class="obs">* Deverá ser solicitado no ato da compra</p>
+            </div>
+            <div class="benefit">
+                <img src="" />
+                <h2>Ligações locais Grátis</h2>
+                <p>As ligações locais entre telefones NET são grátis.</p>
+            </div>
+            <div class="benefit">
+                <img src="" />
+                <h2>Tarifas Únicas independente do dia e horário da ligação</h2>
+                <p>Uma só tarifa para cada tipo de ligação cobrada por minuto, independente do dia e horário.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

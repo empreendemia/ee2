@@ -1,0 +1,24 @@
+<?php
+/**
+ * business.phtml
+ * Email quando empresa recebe avaliação
+ * 
+ * @author Mauro Ribeiro, Lucas Gaspar
+ * @since 2011-08-10
+ */
+require_once APPLICATION_PATH."/views/helpers/Access.php";
+?>
+<body>
+    <div style="display:block;float:left"><a href="<?php echo $this->serverUrl().$this->from_user->url() ?>"><img src="<?php echo $this->serverUrl().$this->baseUrl().'/'.$this->from_user->imagePath(120) ?>" width="120" height="120" /></a></div>
+
+    <h1 style="display:block;margin:10px 140px;padding-top:10px;"><a href="<?php echo $this->serverUrl().$this->from_user->url() ?>" style="text-decoration:none"><?php echo $this->from_user->fullName() ?></a></h1>
+    <h3 style="display:block;margin:10px 140px;"><a href="<?php echo $this->serverUrl().$this->from_user->company->url() ?>" style="text-decoration:none"><?php echo $this->from_user->company->name ?></a></h3>
+
+    <?php
+    if ($this->business->rate == '+') $rate = '<span style="color:#480">positiva</span>';
+    else $rate = '<span style="color:#c00">negativa</span>';
+    ?>
+    <h2 style="display:block;margin:10px 140px;padding-top:20px;">deu uma avaliação <?php echo $rate ?> para <?php echo $this->company->name ?></h2>
+    <div style="display:block;margin:10px 140px;"><?php echo nl2br($this->business->testimonial) ?></div>
+    <div style="display:block;margin:20px 140px;padding:10px;background-color:#ccc;color:#fff">Para avaliar <b><?php echo $this->from_user->company->name ?></b> de volta, clique <a href="<?php echo Zend_View_Helper_Access::autoLoginLink($this->user, 'e/'.$this->from_user->company->slug.'/avaliacoes') ?>">aqui</a>.</div>
+</body>

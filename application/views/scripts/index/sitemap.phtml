@@ -1,0 +1,85 @@
+<?php
+/**
+ * sitemap.phtml
+ * Gerador de sitemap
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-09-15
+ */
+?>
+<?php header('Content-type: text/xml'); ?>
+<?php $header = '<?xml version="1.0" encoding="UTF-8"?>' ?>
+<?php echo $header ?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<?php
+// -----------------------------------------------------------------------------
+// Páginas principais
+// -----------------------------------------------------------------------------
+?>
+<url>
+  <loc>http://www.empreendemia.com.br</loc>
+  <changefreq>always</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www.empreendemia.com.br/lista-de-empresas</loc>
+  <changefreq>always</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www.empreendemia.com.br/quero-comprar/ofertas</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
+</url>
+<url>
+  <loc>http://www.empreendemia.com.br/quero-vender/servicos</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
+</url>
+<url>
+  <loc>http://www.empreendemia.com.br/faq</loc>
+  <changefreq>yearly</changefreq>
+  <priority>0.60</priority>
+</url>
+<?php
+// -----------------------------------------------------------------------------
+// Lista de empresas por estado
+// -----------------------------------------------------------------------------
+?>
+<?php foreach ($this->regions as $region) : ?>
+<url>
+  <loc>http://www.empreendemia.com.br/lista-de-empresas/<?php echo $region->slug ?></loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<?php endforeach ?>  
+<?php
+// -----------------------------------------------------------------------------
+// Lista de empresas por setor
+// -----------------------------------------------------------------------------
+?>
+<?php foreach ($this->sectors as $sector) : ?>
+<url>
+  <loc>http://www.empreendemia.com.br/lista-de-empresas/todos-estados/todas-cidades/<?php echo $sector->slug ?></loc>
+  <changefreq>hourly</changefreq>
+  <priority>0.70</priority>
+</url>
+<?php endforeach ?>
+<?php $count = 20 ?>  
+<?php
+// -----------------------------------------------------------------------------
+// Lista de empresas das principais cidades
+// -----------------------------------------------------------------------------
+?>
+<?php foreach ($this->cities as $city) : ?>
+<url>
+  <loc>http://www.empreendemia.com.br/lista-de-empresas/<?php echo $city->region->slug ?>/<?php echo $city->slug ?></loc>
+  <changefreq><?php if ($count-- > 0) echo 'daily'; else echo 'weekly' ?></changefreq>
+  <priority><?php if ($count-- > 0) echo '0.60'; else echo '0.51' ?></priority>
+</url>
+<?php endforeach ?>
+</urlset>

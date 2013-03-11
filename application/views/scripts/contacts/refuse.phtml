@@ -1,0 +1,56 @@
+<?php
+/**
+ * refuse.php
+ * Usuário recusou uma troca de cartão
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-09-19
+ */
+?><?php $this->layout()->title = 'Recusar troca de cartões' ?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 800 ?>
+<?php $this->modal->height = 250 ?>
+
+<div class="cols_small_large">
+    <div class="col_1">
+        <?php echo $this->user->image() ?>
+    </div>
+    <div class="col_2">
+        
+        <?php
+        // ---------------------------------------------------------------------
+        // O cara recusou o cartão
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($this->sent) : ?>
+        <script type="text/javascript">
+        $(function() {
+           parent.$('#request_'+<?php echo $this->user->id ?>+' .actions').html('<div class="action_made">recusado</div>');
+        });
+        </script>
+        <div class="plaintext">
+        <h1 class="h_title h_blue h_xlarge">Você recusou a troca de cartões com <?php echo $this->user->fullName() ?>!</h1>
+        </div>
+
+        <?php
+        // ---------------------------------------------------------------------
+        // Pergunta se realmente quer recusar
+        // ---------------------------------------------------------------------
+        ?>
+        <?php else : ?>
+        <?php $userData = new Zend_Session_Namespace('UserData'); ?>
+        <div class="plaintext">
+            <h1 class="h_title h_blue h_xlarge">Recusar o cartão de <?php echo $this->user->fullName() ?></h1>
+            <p>Você deseja recusar a troca de cartões?</p>
+        </div>
+        <div class="form">
+            <form action="<?php echo $this->url() ?>" method="POST">
+                <input type="submit" value="Recusar troca de cartões" />
+            </form>
+        </div>
+        <?php endif ?>
+    </div>
+</div>

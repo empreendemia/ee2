@@ -1,0 +1,207 @@
+<?php
+/**
+ * user-invite.phtml
+ * Usuário convida outras pessoas para a rede
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-09-23
+ */
+?>
+<?php $this->layout()->setLayout('panel_user') ?>
+
+<?php if ($this->sent) : ?>
+
+
+<style type="text/css">
+h2.h_title {
+    margin-bottom: 10px;
+}
+h3.h_title {
+    color: #888;
+    font-size: 10pt;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+ul li {
+    margin: 5px 20px;
+    font-size: 8pt;
+}
+
+ul li img {
+    margin-right: 10px;
+}
+</style>
+
+
+<div class="plaintext">
+<h2 class="h_title h_blue">Convidar pessoas para rede</h2>
+
+
+<?php
+// -----------------------------------------------------------------------------
+// Convites enviados com sucesso
+// -----------------------------------------------------------------------------
+?>
+<?php if (count($this->invites) > 0) : ?>
+<h3 class="h_title">Convites enviados</h3>
+<ul>
+    <?php foreach ($this->invites as $invite) : ?>
+    <li><?php echo $invite->name ?> - <?php echo $invite->email ?></li>
+    <?php endforeach ?>
+</ul>
+<?php if (count($this->users) == 0 && count($this->errors) == 0) : ?>
+<br />
+<p>Seus convites foram enviados com sucesso!</p>
+<p>Você receberá um aviso assim que seus convidados se cadastrarem na rede.</p>
+<p>Grande abraço,<br />Equipe Empreendemia</p>
+<br />
+<p>Agora que você já enviou seus convites, não gostaríamos que você fosse embora do nosso site. Por isso te damos recomendações sobre o que você pode fazer agora:</p>
+<ul>
+    <li>Enviar <a href="<?php echo $this->url() ?>">mais convites</a></li>
+    <li>Navegar na nossa <a href="lista-de-empresas">Lista de Empresas</a></li>
+    <li>Conferir as ofertas disponíveis no <a href="quero-comprar/ofertas">Mural de Ofertas</a></li>
+    <li>Voltar para a <a href="passo-a-passo">página inicial</a></li>
+</ul>
+<?php endif ?>
+<?php endif ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Tentou convidar gente que já está no sistema
+// -----------------------------------------------------------------------------
+?>
+<?php if (count($this->users) > 0) : ?>
+<h3 class="h_title">Já estão cadastrados</h3>
+<ul>
+    <?php foreach ($this->users as $user) : ?>
+    <li><?php echo $user->imageLink(40) ?> <a href="<?php echo $user->url() ?>"><?php echo $user->fullName() ?></a></li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>
+
+
+<?php
+// -----------------------------------------------------------------------------
+// Dados preenchidos incorretamente
+// -----------------------------------------------------------------------------
+?>
+<?php if (count($this->errors) > 0) : ?>
+<h3 class="h_title">Erros (preenchidos incorretamente)</h3>
+<ul class="invite_error_list">
+    <?php foreach ($this->errors as $error) : ?>
+    <li><?php echo $error->name ?> - <?php echo $error->email ?></li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>
+</div>
+
+
+<?php
+// -----------------------------------------------------------------------------
+// Fazer novos convites
+// -----------------------------------------------------------------------------
+?>
+<?php else : ?>
+
+<style type="text/css">
+.invite {
+        margin-top: 20px;
+}
+.invite dt {
+    float: left;
+    position: relative;
+    clear: both;
+    margin: 5px 5px 5px 0;
+}
+.invite dd {
+    float: left;
+    margin: 5px 5px 5px 0;
+    position: relative;
+}
+.invite label {
+    position: absolute;
+    left: 10px;
+    top: 4px;
+    color: #888;
+    font-size: 8pt;
+    cursor: text;
+}
+.invite .add_row {
+    clear: both;
+    margin-bottom: 20px;
+    font-size: 9pt;
+}
+</style>
+
+<script type="text/javascript">
+
+var row_count = 1;
+
+function addRow() {
+    $('.invite dl').append(
+        '<dt><label>Nome</label><input type="text" name="name_'+row_count+'" /></dt>'
+        +'<dd><label>Email</label><input type="text" name="email_'+row_count+'" /></dd>'
+    );
+    $('.invite input[name=name_'+row_count+']').focus();
+    $('.invite input[name=name_'+row_count+']').parent().find('label').fadeOut();
+    row_count++;
+}
+
+$(function() {
+    $('.invite input').live('click focus change', function() {
+        var input = $(this);
+        var label = input.parent().find('label');
+        label.fadeOut(50);
+    });
+    $('.invite input').live('blur', function() {
+        var input = $(this);
+        if (input.val() == '') {
+            var label = input.parent().find('label');
+            label.fadeIn();
+        }
+    });
+    $('.invite label').live('click', function() {
+        var label = $(this);
+        var input = label.parent().find('input');
+        label.fadeOut(50);
+        input.focus();
+    });
+    $('.add_row .focus_add').bind('focus', function() {
+        addRow();
+    });
+});
+</script>
+
+<div class="plaintext">
+<h2 class="h_title h_blue">Convide seus contatos para o Empreendemia</h2>
+<p>Traga seus clientes, fornecedores e parceiros para o Empreendemia e eles poderão deixar depoimentos sobre as vantagens em fazer negócios com sua empresa e fortalecer sua reputação, fundamental para diferenciar sua empresa dos concorrentes.</p>
+</div>
+
+<div class="invite">
+    <p>Convide por email</p><br />
+    <form method="POST" action="<?php echo $this->url() ?>">
+        <dl>
+            <dt><label>Nome</label><input type="text" name="name_0" /></dt>
+            <dd><label>Email</label><input type="text" name="email_0" /></dd>
+        </dl>
+        <div class="clear"></div>
+        <div class="add_row">
+            <a class="focus_add" href="<?php echo $this->url() ?>/#">+</a>
+            <a href="javascript: addRow()"> adicionar mais uma pessoa</a>
+        </div>
+        <input type="submit" value="Convidar essas pessoas" />
+    </form>
+
+</div>
+
+
+
+<div class="plaintext">
+    <br /><br />
+    <p><a href="javascript: facebookInvite()" class="facebookInvites"><img src="images/icons/facebook.png" />&nbsp; <span class="text">Convide seus contatos do Facebook</span></a></p>
+    <br />
+    <p>Quer convidar os membros de sua empresa? <a href="painel/empresa/pessoas">Clique aqui</a>.</p>
+</div>
+
+<?php endif ?>

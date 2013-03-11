@@ -1,0 +1,25 @@
+<?php
+/**
+ * invite.phtml
+ * Email de convite para se cadastrar na rede
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-09-23
+ */
+?>
+<body>
+    <div style="display:block;float:left"><a href="<?php echo $this->serverUrl().$this->user->url() ?>"><img src="<?php echo $this->serverUrl().$this->baseUrl().'/'.$this->user->imagePath(120) ?>" width="120" height="120" /></a></div>
+
+    <h1 style="display:block;margin:10px 140px;padding-top:10px;"><a href="<?php echo $this->serverUrl().$this->user->url() ?>" style="text-decoration:none"><?php echo $this->user->fullName() ?></a></h1>
+    <h3 style="display:block;margin:10px 140px;"><a href="<?php echo $this->serverUrl().$this->user->company->url() ?>" style="text-decoration:none"><?php echo $this->user->company->name ?></a></h3>
+
+    <h2 style="display:block;margin:10px 140px;padding-top:20px;">Vamos trocar cartões?</h2>
+    <div style="display:block;margin:10px 140px;">
+        <p>Olá, <?php echo $this->invite->name ?>!</p>
+        <p>Cadastrei a <a href="<?php echo $this->serverUrl().$this->user->company->url() ?>"><?php echo $this->user->company->name ?></a> no Empreendemia, uma rede focada em acelerar negócios entre empresas. É uma ferramenta bacana pra encontrar novos clientes e fornecedores. </p>
+        <p>Vamos trocar cartões por lá?</p>
+        <p>Para fazer o cadastro é só <a href="<?php echo $this->serverUrl() ?>/aceitar-convite/<?php echo $this->invite->email?>/<?php echo $this->invite->id ?>/<?php echo urlencode($this->invite->date) ?>">clicar aqui</a>.</p>
+        <p>Abraços,<br /><?php echo $this->user->fullName() ?></p>
+    </div>
+
+</body>

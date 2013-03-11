@@ -1,0 +1,36 @@
+<?php
+/**
+ * company.phtml
+ * Painel de controle da empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-22
+ */
+?><?php $this->layout()->setLayout('panel_company') ?>
+
+<style type="text/css">
+.instructions {
+    color: #888;
+    font-size: 10pt;
+}
+.instructions .h_title {
+    margin: 20px 0;
+    font-weight: bold;
+    font-size: 12pt;
+}
+.instructions p {
+    margin: 10px 0;
+}
+</style>
+
+<?php if ($this->company->isPlan('premium')) : ?>
+<div class="instructions">
+    <h2 class="h_title"><?php echo $this->company->name ?> é Premium!</h2>
+    <p>Você tem acesso à funcionalidades exclusivas para usuários Premium.</p>
+    <br />
+    <br />
+    <p>Em <a href="painel/empresa/sobre">sobre <img src="images/panel/about.png" /></a> você pode escrever mais informações sobre sua empresa.</p>
+    <p>Em <a href="painel/empresa/produtos">ver produtos <img src="images/panel/products.png" /></a> você pode adicionar mais informações e imagens ao seu produto.</p>
+    <p>Em <a href="painel/empresa/premium/personalizar">personalizar <img src="images/panel/custom_template.png" /></a> você pode adicionar imagens ao perfil de sua empresa.</p>
+</div>
+<?php endif ?>

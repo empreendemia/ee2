@@ -1,0 +1,169 @@
+<style type="text/css">
+
+.plaintext{
+    font-size:12px;
+}
+
+.main_header{
+    color: #0C478B;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top:20px;
+    margin-bottom:5px;
+}
+
+.example{
+    font-style:italic;
+}
+
+.main{
+    margin-top:40px;
+    margin-bottom:40px;
+}
+
+.col_left{
+    display:inline;
+}
+
+.col_left img{
+    vertical-align:top;
+}
+
+.col_right{
+    display:inline-block;
+}
+
+.col_right dt{
+    width:130px;
+    display:inline-block;
+    text-align : right;
+    vertical-align:top;
+    margin-bottom:10px;
+    color: #888888;
+}
+
+.col_right dd{
+    width:350px;
+    display:inline-block;
+    margin-bottom:10px;
+}
+
+.col_right dd input, .col_right dd textarea{
+    width:350px;
+}
+
+.col_right dd input[type=image]{
+    width:150px !important;
+    margin-left:210px;
+}
+
+.col_right dd textarea{
+    height:100px;
+}
+.col_right img{
+    vertical-align:top;
+}
+
+.sub_header{
+    font-weight:bold;
+}
+</style>
+
+<div class="page_service">
+<?php if (!$this->sent) : ?>
+<script>
+
+   $(document).ready(function(){
+    
+       Tracker.ga.userEvent('demmand landing page view');
+
+       $('.request_demand').click(function(){
+           Tracker.ga.userEvent('demmand start');
+           $('#step1').fadeOut('fast', function(){$('#step2').fadeIn('fast');});
+       });
+       
+       $('#submit').click(function(){
+           Tracker.ga.userEvent('demmand form send');
+	   $('.input_example').each(function(i,obj){
+	      if($(obj).attr('oldvalue') === $(obj).val()) $(obj).val('');
+	   });
+	   return true;
+       });
+   
+       var count_blur = 0;
+       $('.input_example').each(function(i,obj){
+           var old_value = $(obj).val();
+	   $(obj).attr('oldvalue', old_value);
+               
+           $(obj).css("font-style", "italic");
+           
+           $(obj).focus(function(){
+               if ($(this).val() == old_value){
+                   $(this).val("");
+                   $(this).css("font-style", "normal");
+               }
+           });
+
+           $(obj).blur(function(){
+               if (count_blur == 0){
+                   Tracker.ga.userEvent('demmand form field filled');
+                   count_blur++;
+               }
+               if ($(this).val() == ""){
+                   $(this).val(old_value);
+                   $(this).css("font-style", "italic");
+               }
+           });
+       });
+   });
+   
+</script>
+   <script>
+   </script>
+   <div id='step1' class="plaintext">
+       <div class='main_header'> Encontre fornecedores </div>
+       Nos diga o que sua empresa está precisando e enviaremos seu pedido para nossa base de fornecedores.
+       
+       <div class='main'>
+           <div class='col_left'><img src='images/pages/demands/demands_step_by_step.png' alt='Passo a passo' width="280px" /></div>
+	   <div class='col_right'>
+	       <div style="margin-top:-33px;"><img src='images/pages/demands/demands_testimonial.png' alt='Depoimento' width="350px"/></div>
+               <div><img src='images/pages/demands/demands_request_demand.png' alt='Faça agora seu pedido' width='180px' class='request_demand' style="margin-left:170px;cursor:pointer;" /></div>
+	   </div>
+       </div>
+
+       <div class="sub_header">Exemplo:</div>
+       <span class="example">
+           “Quero melhorar minha presença na internet e preciso de um profissional que, além de fazer um bom site, também saiba sobre marketing digital para me ajudar a vender mais pela internet.”
+       </span>
+   </div>
+   
+   <div id='step2' class="plaintext" style='display:none;'>
+       <div class='main_header'> Pedido de Serviço</div>
+      Fale o que sua empresa está precisando e buscaremos fornecedores para te ajudar. É de graça!
+      <div class='main'> 
+          <div class='col_left'><img src='images/pages/demands/demands_form_image.png' alt='Passo a passo' width="300px" /></div>
+          <div class='col_right' style='width:500px;'>
+              <?php echo $this->form; ?>
+          </div>
+      </div>
+   </div>
+<?php else : ?>
+    <div class="plaintext">
+        <div class='main_header'> Seu pedido foi enviado! </div>
+        O pedido foi enviado e em pouco tempo será avaliado pela nossa equipe. Assim que o pedido for aprovado, entraremos em contato por email.<br /><br />
+        Agora é só esperar um pouquinho e você receberá excelentes contatos de fornecedores em potencial.<br /> <br />
+        Se, além do seu pedido, você tiver interesse em entrar diretamente em contato com os fornecedores da nossa base, acesse a lista de empresas cadastradas <a id="companies_list_link" href="http://www.empreendemia.com.br/lista-de-empresas">aqui</a>.
+        <br /><br />
+        Abraços,<br />
+        Equipe Empreendemia
+    </div>  
+<script>
+       $('#companies_list_link').click(function(){
+           Tracker.ga.userEvent('demmand follow up');
+
+           return true;
+       });
+</script> 
+<?php endif;?>
+</div>

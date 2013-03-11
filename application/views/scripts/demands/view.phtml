@@ -1,0 +1,87 @@
+<?php
+/**
+ * view.phtml
+ * Ver os detalhes de um pedido de serviço
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-11
+ */
+?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/layouts/demands.css') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css') ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+<?php $this->headScript()->appendFile('js/Utils/Tracker.js') ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 800 ?>
+<?php $this->modal->height = 480 ?>
+
+<div class="view_demand">
+    <h1 class="h_title h_blue h_xlarge"><?php echo $this->demand->title ?></h1>
+    <div class="details">
+        <dl>
+            <dt>Cidade:</dt>
+            <dd>
+                <?php 
+                if ($this->demand->user_id != NULL){
+                    echo $this->demand->user->company->city->name, ', ', $this->demand->user->company->city->region->symbol; 
+                }
+                else
+                    echo $this->demand->city_state;
+                ?>
+            </dd>
+            <dt>Preço:</dt>
+                <dd><?php echo $this->demand->priceStr() ?></dd>
+            <dt>Pedido em:</dt>
+                <dd><?php echo $this->Format()->date($this->demand->date_created) ?></dd>
+            <dt>Prazo até:</dt>
+                <dd><?php echo $this->Format()->date($this->demand->date_deadline) ?></dd>
+        </dl>
+    </div>
+    <div class="description">
+        <h2 class="h_title h_blue h_small">Descrição do pedido</h2>
+        <div class="text">
+            <?php echo nl2br($this->demand->description) ?>
+        </div>
+    </div>
+</div>
+
+<div class="demand_user">
+    <h2 class="h_title h_blue h_large">Pedido pelo usuário</h2>
+    <div class="user_thumb">
+        <a onclick="<?php echo $this->Tracker()->userEvent('seller: view demand contact', null, true) ?>" target="_top">
+        <?php
+            if ($this->demand->user_id != NULL)
+                echo $this->demand->user->image(120);
+            else
+                echo '<img src="images/ui/no_user_thumb.gif" width="120" height="120" />';
+        ?>
+        </a></div>
+    <div class="user_name">
+        <?php 
+            if ($this->demand->user_id != NULL)
+                echo $this->demand->user->fullName();
+            else
+                echo $this->demand->name;
+        ?>
+        
+    </div>
+    <div class="form_message_demand form">
+        <?php
+	    if(isset($this->user_id)){
+                $form = new Ee_Form_MessageDemand(array('demand'=>$this->demand));
+                echo $form;
+	    }
+	    else{
+	        echo "Voce precisa estar logado para enviar mensagem.";
+	    }
+        ?>
+    </div>
+    <script>
+    $('form').submit(function(){
+        Tracker.ga.userEvent("demmand contact send: <?php $this->demand->slug?>");
+	return true;
+    })
+    </script>
+</div>

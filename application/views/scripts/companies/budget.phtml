@@ -1,0 +1,48 @@
+<?php
+/**
+ * budget.php
+ * Pedido de orçamento para uma empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-09
+ */
+?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headLink()->appendStylesheet('css/elements/budget.css'); ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+<?php $this->headScript()->appendFile('js/forms/locations.js') ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Usuário acabou de abrir a página
+// -----------------------------------------------------------------------------
+?>
+<?php if (!$this->sent) : ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 640 ?>
+<?php $this->modal->height = 580 ?>
+
+<div class="form_budget">
+    <?php echo $this->form ?>
+</div>
+
+<?php
+// -----------------------------------------------------------------------------
+// Dados enviados
+// -----------------------------------------------------------------------------
+?>
+<?php else : ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 400 ?>
+<?php $this->modal->height = 140 ?>
+
+<div class="plaintext">
+    <h1 class="h_title h_blue h_xlarge">Pedido de orçamento enviado com sucesso!</h1>
+    <p>Seu pedido de orçamento foi enviado com sucesso para <a href="<?php echo $this->company->url() ?>" target="_top"><?php echo $this->company->name ?></a></p>
+    <p>Você receberá a resposta pelo seu email <strong><?php echo $this->budget->user->email ?></strong> assim que algum membro da empresa responder.</p>
+</div>
+
+<?php endif ?>

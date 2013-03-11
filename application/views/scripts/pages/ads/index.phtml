@@ -1,0 +1,400 @@
+<?php $this->layout()->title = 'Publicidade no Empreendemia'; ?>
+<script type="text/javascript">
+
+function showTab(tabname) {
+    if (tabname != '') {
+        $('.showtab').hide();
+        $('.tabs li').removeClass('selected');
+        $('.tabs li.tab_'+tabname).addClass('selected');
+        $('.showtab_'+tabname).fadeIn();
+    }
+    if (tabname == 'descricao') {
+        <?php echo $this->Tracker()->userEvent('ads: viewed description', null, true) ?>
+    }
+    else if (tabname == 'depoimentos') {
+        <?php echo $this->Tracker()->userEvent('ads: viewed testimonials', null, true) ?>
+    }
+    else if (tabname == 'tabela-de-precos') {
+        <?php echo $this->Tracker()->userEvent('ads: viewed pricing', null, true) ?>
+    }
+    else if (tabname == 'duvidas-comuns') {
+        <?php echo $this->Tracker()->userEvent('ads: viewed faq', null, true) ?>
+    }
+    else {
+        <?php echo $this->Tracker()->userEvent('ads: viewed description', null, true) ?>
+    }
+ }
+
+$(function() {
+    showTab(window.location.hash.substring(1));
+});
+</script>
+
+<?php
+$userData = new Zend_Session_Namespace('UserData');
+
+if ($userData->user) {
+    $company_mapper = new Ee_Model_Companies();
+    $company = $company_mapper->find($userData->user->company_id);
+
+    $product_mapper = new Ee_Model_Products();
+    $products = $product_mapper->findByCompany($company);
+}
+?>
+<style type="text/css">
+.page_ad {
+    position: relative;
+}
+
+.page_ad .cols {
+}
+
+.page_ad .cols .col_left {
+    float: left;
+    width: 200px;
+}
+
+.page_ad .cols .col_right {
+    float: right;
+    width: 680px;
+}
+
+.page_ad .title {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 18pt;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.page_ad .subtitle {
+    color: #0C478B;
+    font-size: 14pt;
+    margin-bottom: 20px;
+}
+
+.page_ad .description {
+    margin: 20px 0;
+    font-size: 10pt;
+    color: #666;
+    line-height: 1.6em;
+}
+
+.tabs {
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    margin-top: 50px;
+}
+
+.tabs ul {
+    position: absolute;
+    bottom: -1px;
+}
+
+.tabs li {
+    float: left;
+    margin-right: 1px;
+    border: 1px solid #ccc;
+    background-color: #ccc;
+}
+.tabs li.selected {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+}
+
+.tabs li a {
+    display: inline-block;
+    width: 140px;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #888;
+    text-shadow: 1px 1px 0 #eee;
+    font-size: 9pt;
+}
+
+.tabs li.selected a {
+    color: #0C478B;
+}
+
+.box {
+    position: relative;
+    padding: 20px;
+}
+
+.benefits {
+
+}
+
+.benefits .benefit {
+    position: relative;
+    padding: 20px;
+    clear: both;
+}
+
+.benefits .benefit .image {
+    float: left;
+    padding-right: 40px;
+}
+
+.benefits .benefit h3 {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-bottom: 10px;
+}
+
+.benefits .benefit p {
+    font-size: 9pt;
+    margin: 10px 0;
+    line-height: 1.4em;
+}
+
+.testimonial {
+    padding: 40px;
+    position: relative;
+}
+
+.testimonial .user_thumb {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.testimonial .company_thumb {
+    position: absolute;
+    top: 160px;
+    left: 90px;
+}
+
+.testimonial .text {
+    margin-left: 120px;
+    font-size: 14pt;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    line-height: 1.4em;
+    margin-bottom: 15px;
+}
+
+.testimonial .user_name {
+    margin-left: 120px;
+    font-size: 10pt;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.testimonial .company_name {
+    margin-left: 120px;
+    font-size: 10pt;
+}
+
+.box p {
+    margin: 20px 0;
+    line-height: 1.6em;
+    font-size: 9pt;
+}
+
+.box ol {
+    list-style: decimal;
+    margin: 20px 0;
+    line-height: 1.6em;
+    font-size: 9pt;
+    padding-left: 25px;
+}
+
+.prices {
+    margin: 20px auto;
+    font-size: 10pt;
+    background-color: #ffc;
+}
+
+
+.prices th {
+    font-weight: bold;
+    padding: 10px 20px;
+    border-bottom: 1px dotted #ccc;
+    color: #0C478B
+}
+
+.prices td{
+    padding: 10px 20px;
+}
+
+.prices td.range{
+    text-align: left;
+    color: #0C478B
+}
+
+.prices td.price{
+    text-align: left;
+}
+
+.questions h3 {
+    margin: 40px 0 20px 0;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #0C478B;
+}
+</style>
+
+<div class="page_ad">
+
+    <div class="cols">
+        <h1 class="title">Anúncios no Empreendemia</h1>
+        <h2 class="subtitle">Publicidade sem enrolação</h2>
+
+        <div class="col_left">
+            <p class="description">Divulgue sua empresa de forma extremamente fácil e meça o retorno dos seus anúncios com um grau de precisão que só é possível encontrar em uma rede social.</p>
+ 
+		<?php if(isset($products) || !$userData->user) :?>
+                    <div class="config_button_left"><a href="publicidade/configurar-campanha"><img src="images/pages/ads/config_campaign_button.png" /></a></div>
+		<?php else :?>
+                    <div class="config_button_bottom" style="text-align:center;margin-top:40px"><a href="painel/empresa/produtos/adicionar?action=campanha" class="modal_iframe"><img src="images/pages/ads/config_campaign_button.png" /></a></div>
+		<?php endif;?>           
+        </div>
+
+        <div class="col_right">
+            <div class="tabs">
+                <div class="line"></div>
+                <ul>
+                    <li class="tab_descricao selected"><a href="<?php echo $this->url() ?>#descricao" onclick="showTab('descricao')">Descrição</a></li>
+                    <li class="tab_depoimentos"><a href="<?php echo $this->url() ?>#depoimentos" onclick="showTab('depoimentos')">Depoimentos</a></li>
+                    <li class="tab_tabela-de-precos"><a href="<?php echo $this->url() ?>#tabela-de-precos" onclick="showTab('tabela-de-precos')">Tabela de preços</a></li>
+                    <li class="tab_duvidas-comuns"><a href="<?php echo $this->url() ?>#duvidas-comuns" onclick="showTab('duvidas-comuns')">Dúvidas comuns</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="box">
+                <div class="showtab showtab_descricao">
+                    <div class="benefits">
+                        <div class="benefit">
+                            <div class="image"><img src="images/pages/ads/ads_fig2.png" width="120" height="120" /></div>
+                            <h3>Divulgação focada</h3>
+                            <p>Selecione exatamente para quem seu anúncio aparecerá.</p>
+                            <p>O público-alvo pode ser escolhido de acordo com a cidade e setor de atuação.</p>
+                        </div>
+                        <div class="benefit">
+                            <div class="image"><img src="images/pages/ads/ads_fig3.png" width="120" height="120" /></div>
+                            <h3>É fácil criar seu anúncio</h3>
+                            <p>O anúncio é exibido com a foto e descrição de um produto da sua vitrine.</p>
+                            <p>Escolha o produto que queira dar destaque e o anúncio já está pronto para ir ao ar.</p>
+                        </div>
+                        <div class="benefit">
+                            <div class="image"><img src="images/pages/ads/ads_fig1.png" width="120" height="120" /></div>
+                            <h3>Relatórios altamente precisos</h3>
+                            <p>Ao final da campanha você receberá um relatório indicando quantas visualizações e cliques seu anúncio teve.</p>
+                            <p>Esses dados são organizados de acordo com o público-alvo (cidade e setor de atuação) que você define no início da campanha.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="showtab showtab_depoimentos" style="display:none">
+                    <div class="testimonial">
+                        <?php $user_mapper = new Ee_Model_Users(); ?>
+                        <?php $carlos = $user_mapper->find(19112679); ?>
+                        <?php if ($carlos) : ?>
+                            <div class="user_thumb"><?php echo $carlos->imageLink(100) ?></div>
+                            <div class="company_thumb"><?php echo $carlos->company->imageLink(50) ?></div>
+                            <div class="text">" A publicidade aqui no Empreendemia se mostrou uma grata surpresa. Em poucos dias, diversas empresas entraram em contato conosco pedindo por mais informações e pedindo propostas. Realmente está valendo a pena. Recomendo. "</div>
+                            <div class="user_name"><a href="<?php echo $carlos->url() ?>"><?php echo $carlos->fullName() ?></a></div>
+                            <div class="company_name"><a href="<?php echo $carlos->company->url() ?>"><?php echo $carlos->company->name ?></a></div>
+                        <?php endif ?>
+                    </div>
+                </div>
+                <div class="showtab showtab_tabela-de-precos" style="display:none">
+                    <div>
+                        <p>Os pacotes variam de acordo com a visibilidade do anúncio. Ao definir seu público-alvo faremos uma análise de quantas pessoas seu anúncio possui potencial de atingir. </p>
+                        <p>O levantamento do público-alvo é feito durante a configuração do anúncio, feita em conjunto com um consultor de negócios da Empreendemia.</p>
+                        <table class="prices">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tamanho do público-alvo (empresas)</th>
+                                    <th scope="col">Valor mensal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="range">Até 2.000 pessoas</td>
+                                    <td class="price">R$ 70</td>
+                                </tr>
+                                <tr>
+                                    <td class="range">Entre 2.000 e 5.000 pessoas</td>
+                                    <td class="price">R$ 150</td>
+                                </tr>
+                                <tr>
+                                    <td class="range">Entre 5.000 e 10.000 pessoas</td>
+                                    <td class="price">R$ 250</td>
+                                </tr>
+                                <tr>
+                                    <td class="range">Acima de 10.000 pessoas</td>
+                                    <td class="price">R$ 450</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>Se o público-alvo escolhido crescer durante o mês e ultrapassar o valor do seu pacote, não há problema algum. Sua divulgação será mantida para o mesmo segmento sem nenhuma cobrança adicional.</p>
+                    </div>
+                </div>
+                <div class="showtab showtab_duvidas-comuns" style="display:none">
+                    <div class="questions">
+                        <h3>Como funciona o sistema de publicidade da rede?</h3>
+
+                            <p>A criação do seu anúncio funciona em 3 passos, você precisa definir: </p>
+
+
+                            <ol class="lista">
+                            <li>O produto/serviço a ser anunciado - pra isso, ele deve estar na sua Vitrine do perfil da sua empresa</li>
+                            <li>Os Setores para os quais você tem interesse em vender (veja quais são os setores no diretório de empresas)</li>
+                            <li>As cidades em que estão seus clientes em potencial</li>
+                            </ol>
+
+                            <p>
+                            Com isso, sua divulgação é extremamente focada: no Empreendemia você define exatamente quem você quer que veja o seu anúncio, enquanto em outros formatos de publicidade online você tem apenas uma estimativa de quem será o público.
+                            </p>
+
+                        <h3>Eu recebo relatórios?</h3>
+
+                            <p>Sim, mensalmente.</p>
+
+                            <p>Nosso sistema possui uma alta precisão nos relatórios.</p>
+
+                            <p>Pelo fato de possuirmos todas as informações de navegação da rede, conseguimos um grau de precisão sobre quem viu e clicou nos seus anúncios que é inalcançável em outras mídias.</p>
+
+
+
+                        <h3>Todos os usuários da rede verão meu anúncio?</h3>
+
+                            <p>Não necessariamente. Seu anúncio aparecerá para quem você quiser que ele aparece.</p>
+
+                            <p>Se você definir que todos os usuários do Empreendemia são potenciais clientes, então todos verão sua Publicidade.</p>
+
+                            <p>Se você definir, por exemplo, que apenas as empresas de Comércio, TI e Engenharia que ficam em São Paulo e Belo Horizonte são seus potenciais clientes, então seu anúncio só aparecerá para essas empresas.</p>
+
+                            <p>Os anúncios no Empreendemia são 100% segmentados, o que significa que você escolhe exatamente qual seu público-alvo para cada campanha.</p>
+
+                        <h3>O custo varia de acordo com impressões ou cliques?</h3>
+
+                            <p>A publicidade tem um valor mensal fixo, que depende apenas do tamanho do seu público-alvo.</p>
+
+                            <p>Ao escolher seu público-alvo, faremos uma análise de quantas pessoas seu anúncio possui potencial de atingir e mesmo que esse número ultrapasse as expectativas, não haverá cobrança adicional.</p>
+
+                            <p>Confira a <a a href="<?php echo $this->url() ?>#tabela-de-precos" onclick="showTab('tabela-de-precos')">tabela de preços</a>.</p>
+
+
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+		<?php if(isset($products) || !$userData->user) :?>
+                    <div class="config_button_bottom" style="text-align:center;margin-top:40px"><a href="publicidade/configurar-campanha"><img src="images/pages/ads/config_campaign_button_2.png" /></a></div>
+		<?php else :?>
+                    <div class="config_button_bottom" style="text-align:center;margin-top:40px"><a href="painel/empresa/produtos/adicionar?action=campanha" class="modal_iframe"><img src="images/pages/ads/config_campaign_button_2.png" /></a></div>
+		<?php endif;?>
+
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

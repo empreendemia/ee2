@@ -1,0 +1,22 @@
+<?php
+/**
+ * select-cities.phtml
+ * Seletor atualizado de cidades quando usuário escolhe os estados
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-12
+ */
+?>
+<?php $this->layout()->setLayout('clean') ?>
+
+<ul>
+<?php foreach ($this->cities as $city) : ?>
+    <li>
+        <input type="checkbox" id="city_<?php echo $city->id ?>" name="city_<?php echo $city->id ?>" />
+        <label for="city_<?php echo $city->id ?>">
+            <span class="city"><?php echo $city->name ?></span>
+            <span class="count">(<?php echo $city->count_companies ?>)</span>
+        </label>
+    </li>
+<?php endforeach ?>
+</ul>

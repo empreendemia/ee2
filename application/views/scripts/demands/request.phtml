@@ -1,0 +1,109 @@
+<?php
+/**
+ * request.phtml
+ * Solicitar um serviço
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-29
+ */
+?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->layout()->title = 'Pedido de Serviço' ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headLink()->appendStylesheet('css/ui/datepicker.css'); ?>
+<?php $this->headScript()->appendFile('js/jquery/jquery-ui-1.8.14.full.min.js') ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 800 ?>
+<?php $this->modal->height = 440 ?>
+
+<?php if (!$this->sent) : ?>
+<script type="text/javascript">
+$(function() {
+    $('.datepicker').datepicker({
+        dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        prevText: "<<",
+        nextText: ">>"
+    });
+/*
+    $('.form form').submit(function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var submit = form.find('input[type=submit]');
+        submit.parent().append(' <img src="images/ui/ajax-loader-small.gif" />')
+        submit.attr('disabled', 'disabled');
+        $.ajax({
+           url: 'quero-comprar/pedir-servico',
+           type: 'POST',
+           cache: false,
+           data: {
+                title:          form.find('input[name=title]').val(),
+                description:    form.find('textarea[name=description]').val(),
+                sector_id:      form.find('select[name=sector_id]').val(),
+                price:          form.find('select[name=price]').val(),
+                date_deadline:  form.find('input[name=date_deadline]').val()
+           },
+           success: function(html) {
+               $('.modal_content').replaceWith(html);
+           },
+           error: function() {
+               alert('Erro ao enviar pedido');
+               submit.parent().find('img').remove();
+                submit.removeAttr('disabled');
+           }
+        });
+    });*/
+});
+</script>
+<?php endif ?>
+
+<div class="cols_small_large">
+    <div class="col_1">
+        <div class="plaintext">
+            <h1 class="h_title h_blue h_medium">Encontre fornecedores</h1>
+            <p>Nos diga o que você está precisando e enviaremos seu pedido para nossa base de fornecedores.</p>
+            <p>Sua requisição será enviada para avaliação por nossa equipe antes de ser publicada.</p>
+            <p>Você receberá um email comprovando ou recusando o seu pedido.</p>
+            <p>
+                Abraços,<br />
+                Equipe empreendemia
+            </p>
+        </div>
+    </div>
+    <div class="col_2">
+        <?php
+        // ---------------------------------------------------------------------
+        // Formulário para pedir um serviço
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if (!$this->sent) : ?>
+        <br />
+        <br />
+        <div class="form">
+        <?php echo $this->form; ?>
+        </div>
+        <?php
+        // ---------------------------------------------------------------------
+        // Pedido cadastrado
+        // ---------------------------------------------------------------------
+        ?>
+        <?php else : ?>
+            <div class="plaintext">
+                <h1 class="h_title h_blue h_xxlarge">Pedido de serviço enviado!</h1>
+                <p>Seu pedido de serviço foi enviado para nossa equipe.</p>
+                <p>Em pouco tempo seu pedido será avaliado pela nossa equipe e em breve entraremos em contato por email.</p>
+                <p>
+                    Abraços,<br />
+                    Equipe empreendemia
+                </p>
+
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="clear"></div>
+</div>

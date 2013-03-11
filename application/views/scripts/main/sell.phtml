@@ -1,0 +1,81 @@
+<?php
+/**
+ * seller.phtml
+ * Página do usuário querendo vender
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-11
+ */
+?><?php $this->layout()->setLayout('main') ?>
+<?php $this->layout()->title = $this->user->name ?>
+
+
+<div class="sub_col_1">
+    
+    <?php
+    // -------------------------------------------------------------------------
+    // Busca
+    // -------------------------------------------------------------------------
+    ?>
+    <div class="widget search">
+        <h1 class="h_title h_blue h_small">Consiga novos clientes</h1>
+        <p>Entre em contato com empresas que tenham potencial de comprar seus produtos/serviços</p>
+        <div class="search_form">
+            <?php
+            $form_search = new Ee_Form_Search();
+            $userdata = new Zend_Session_Namespace('UserData');
+            $form_search->setAction('lista-de-empresas/'.$userdata->user->company->city->region->slug.'/'.$userdata->user->company->city->slug);
+            echo $form_search;
+            ?>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <?php
+    // -------------------------------------------------------------------------
+    // Lista de setores
+    // -------------------------------------------------------------------------
+    ?>
+    <div class="widget sectors_list">
+        <?php if ($this->city_count) : ?>
+        <h1 class="h_title h_blue h_small">Empresas localizadas em<br /><?php echo $this->user->company->city->name ?>, <?php echo $this->user->company->city->region->symbol ?> (<?php echo $this->city_count ?>)</h1>
+        <ul class="sectors">
+        <?php foreach ($this->sectors as $sector) : ?>
+            <li class="sector"><a href="lista-de-empresas/<?php echo $userdata->user->company->city->region->slug ?>/<?php echo $userdata->user->company->city->slug ?>/<?php echo $sector->slug ?>"><?php echo $sector->name ?> (<?php echo $sector->count_companies ?>)</a></li>
+        <?php endforeach ?>
+        </ul>
+        <?php endif ?>
+        <p>Para conhecer todas as empresas presentes na rede, acesse nossa <a href="lista-de-empresas">Lista de Empresas</a></p>
+    </div>
+</div>
+<div class="sub_col_2">
+    <?php
+    // -------------------------------------------------------------------------
+    // Links para ferramentas
+    // -------------------------------------------------------------------------
+    ?>
+    <div class="widget tools">
+        <h1 class="h_title h_blue h_small">Ferramentas para aumentar suas vendas</h1>
+        <div class="tool">
+            <div class="icon"><a href="quero-vender/servicos"><img src="images/icons/demands_80.gif" /></a></div>
+            <h2><a href="quero-vender/servicos">Mural de Serviços</a></h2>
+            <p>Confira nosso mural de pedidos de serviço e veja se tem alguém precisando dos seus serviços</p>
+            <div class="view_more"><a href="quero-vender/servicos">Veja mais</a></div>
+        </div>
+        <div class="tool">
+            <div class="icon"><a href="publicidade"><img src="images/icons/ads_80.gif" /></a></div>
+            <h2><a href="publicidade">Publicidade</a></h2>
+            <p>Aumente o número de visitas da página da sua empresa com pacotes a partir de R$ 70 mensais.</p>
+            <div class="view_more"><a href="publicidade">Veja mais</a></div>
+        </div>
+        <script>/*
+        <div class="tool">
+            <div class="icon"><a href="planos/premium"><img src="images/icons/premium_80.gif" /></a></div>
+            <h2><a href="planos/premium">Empreendemia Premium</a></h2>
+            <p>Deixe sua página bonitaça, coloque mais informações na sua vitrine de produtos e apareça em destaque na rede.</p>
+            <div class="view_more"><a href="planos/premium">Veja mais</a></div>
+        </div>*/</script>
+    </div>
+</div>
+
+
+<div class="clear"></div>

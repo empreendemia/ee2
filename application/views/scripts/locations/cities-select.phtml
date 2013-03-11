@@ -1,0 +1,613 @@
+<?php
+/**
+ * cities-select.phtml
+ * Atualização da lista de cidades
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-20
+ */
+?>
+<?php $this->layout()->setLayout('clean') ?>
+
+<option value="">- escolha uma cidade</option>
+
+<?php /* ACRE */ ?>
+
+<?php /* com slug */ ?>    
+<?php if ($this->region_id == 'acre') : ?>
+    <option value='rio-branco'><?php echo 'Rio Branco' ?></option>
+    <option value='cruzeiro-do-sul'><?php echo 'Cruzeiro do Sul' ?></option>
+    <option value='feijo'><?php echo 'Feijo' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 1) : ?>
+    <option value='16'><?php echo 'Rio Branco' ?></option>
+    <option value='6'><?php echo 'Cruzeiro do Sul' ?></option>
+    <option value='8'><?php echo 'Feijo' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* ALAGOAS */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'alagoas') : ?>
+    <option value='maceio'><?php echo 'Maceio' ?></option>
+    <option value='arapiraca'><?php echo 'Arapiraca' ?></option>
+    <option value='batalha'><?php echo 'Batalha' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 2) : ?>
+     <option value='107'><?php echo 'Maceio' ?></option>
+     <option value='30'><?php echo 'Arapiraca' ?></option>
+     <option value='40'><?php echo 'Batalha' ?></option>
+     <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+        
+<?php /* AMAZONAS */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'amazonas') : ?>
+    <option value='manaus'><?php echo 'Manaus' ?></option>
+    <option value='anori'><?php echo 'Anori' ?></option>
+    <option value='manacapuru'><?php echo 'Manacapuru' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 3) : ?>
+     <option value='240'><?php echo 'Manaus' ?></option>
+     <option value='192'><?php echo 'Anori' ?></option>
+     <option value='238'><?php echo 'Manacapuru' ?></option>
+     <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* AMAPÁ */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'amapa') : ?>
+    <option value='macapa'><?php echo 'Macapa' ?></option>
+    <option value='amapari'><?php echo 'Amapari' ?></option>
+    <option value='santana'><?php echo 'Santana' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 4) : ?>
+    <option value='304'><?php echo 'Macapa' ?></option>
+    <option value='278'><?php echo 'Amapari' ?></option>
+    <option value='313'><?php echo 'Santana' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* BAHIA */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'bahia') : ?>
+    <option value='salvador'><?php echo 'Salvador' ?></option>
+    <option value='feira-de-santana'><?php echo 'Feira de Santana' ?></option>
+    <option value='lauro-de-freitas'><?php echo 'Lauro de Freitas' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 5) : ?>
+     <option value='981'><?php echo 'Salvador' ?></option>
+     <option value='576'><?php echo 'Feira de Santana' ?></option>
+     <option value='782'><?php echo 'Lauro de Freitas' ?></option>
+     <option disabled="disabled" value='null'><?php echo '--' ?></option>
+     <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* CEARÁ */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'ceara') : ?>
+    <option value='fortaleza-ce'><?php echo 'Fortaleza' ?></option>
+    <option value='juazeiro-do-norte'><?php echo 'Juazeiro do Norte' ?></option>
+    <option value='sobral'><?php echo 'Sobral' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 6) : ?>
+    <option value='1320'><?php echo 'Fortaleza' ?></option>
+    <option value='1422'><?php echo 'Juazeiro do Norte' ?></option>
+    <option value='1669'><?php echo 'Sobral' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+        
+<?php /* DISTRITO FEDERAL */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'distrito-federal') : ?>
+    <option value='brasilia'><?php echo 'Brasilia' ?></option>
+    <option value='guara'><?php echo 'Guara' ?></option>
+    <option value='taguatinga'><?php echo 'Taguatinga' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 7) : ?>
+    <option value='1724'><?php echo 'Brasilia' ?></option>
+    <option value='1730'><?php echo 'Guara' ?></option>
+    <option value='1742'><?php echo 'Taguatinga' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* ESPÍRITO SANTO */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'espirito-santo') : ?>
+    <option value='vitoria'><?php echo 'Vitoria' ?></option>
+    <option value='serra'><?php echo 'Serra' ?></option>
+    <option value='vila-velha'><?php echo 'Vila Velha' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 8) : ?>
+    <option value='1994'><?php echo 'Vitoria' ?></option>
+    <option value='1974'><?php echo 'Serra' ?></option>
+    <option value='1990'><?php echo 'Vila Velha' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* GOIÁS */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'goias') : ?>
+    <option value='goiania'><?php echo 'Goiana' ?></option>
+    <option value='anapolis'><?php echo 'Anapolis' ?></option>
+    <option value='aparecida-de-goiania'><?php echo 'Aparecida de Goiania' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 9) : ?>
+    <option value='2120'><?php echo 'Goiania' ?></option>
+    <option value='2011'><?php echo 'Anapolis' ?></option>
+    <option value='2015'><?php echo 'Aparecida de Goiania' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* MARANHÃO */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'maranhao') : ?>
+    <option value='sao-luis'><?php echo 'Sao Luis' ?></option>
+    <option value='coelho-neto'><?php echo 'Coelho Neto' ?></option>
+    <option value='imperatriz'><?php echo 'Imperatriz' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 10) : ?>
+    <option value='2533'><?php echo 'Sao Luis' ?></option>
+    <option value='2385'><?php echo 'Coelho Neto' ?></option>
+    <option value='2421'><?php echo 'Imperatriz' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* MINAS GERAIS */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'minas-gerais') : ?>
+    <option value='belo-horizonte'><?php echo 'Belo Horizonte' ?></option>
+    <option value='uberlandia'><?php echo 'Uberlandia' ?></option>
+    <option value='juiz-de-fora'><?php echo 'Juiz de Fora' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 11) : ?>
+    <option value='2700'><?php echo 'Belo Horizonte' ?></option>
+    <option value='3988'><?php echo 'Uberlandia' ?></option>
+    <option value='3257'><?php echo 'Juiz de Fora' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* MATO GROSSO DO SUL */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'mato-grosso-do-sul') : ?>
+    <option value='campo-grande-ms'><?php echo 'Campo Grande' ?></option>
+    <option value='dourados-ms'><?php echo 'Dourados' ?></option>
+    <option value='tres-lagoas'><?php echo 'Tres Lagoas' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 12) : ?>
+    <option value='4079'><?php echo 'Campo Grande' ?></option>
+    <option value='4101'><?php echo 'Dourados' ?></option>
+    <option value='4199'><?php echo 'Tres Lagoas' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* MATO GROSSO */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'mato-grosso') : ?>
+    <option value='cuiaba'><?php echo 'Cuiaba' ?></option>
+    <option value='rondonopolis'><?php echo 'Rondonopolis' ?></option>
+    <option value='tangara-da-serra'><?php echo 'Tangara da Serra' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 13) : ?>
+    <option value='4282'><?php echo 'Cuiaba' ?></option>
+    <option value='4397'><?php echo 'Rondonopolis' ?></option>
+    <option value='4433'><?php echo 'Tangara da Serra' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* PARÁ */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'para') : ?>
+    <option value='belem-pa'><?php echo 'Belem' ?></option>
+    <option value='ananindeua'><?php echo 'Ananindeua' ?></option>
+    <option value='maraba'><?php echo 'Maraba' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 14) : ?>
+    <option value='4499'><?php echo 'Belem' ?></option>
+    <option value='4474'><?php echo 'Ananindeua' ?></option>
+    <option value='4610'><?php echo 'Maraba' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* PARAÍBA */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'paraiba') : ?>
+    <option value='joao-pessoa'><?php echo 'Joao Pessoa' ?></option>
+    <option value='campina-grande'><?php echo 'Campina Grande' ?></option>
+    <option value='inca'><?php echo 'Inca' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 15) : ?>
+    <option value='4895'><?php echo 'Joao Pessoa' ?></option>
+    <option value='4835'><?php echo 'Campina Grande' ?></option>
+    <option value='4887'><?php echo 'Inca' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* PERNAMBUCO */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'pernambuco') : ?>
+    <option value='recife-pe'><?php echo 'Recife' ?></option>
+    <option value='caruaru'><?php echo 'Caruaru' ?></option>
+    <option value='olinda'><?php echo 'Olinda' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 16) : ?>
+    <option value='5333'><?php echo 'Recife' ?></option>
+    <option value='5144'><?php echo 'Caruaru' ?></option>
+    <option value='5289'><?php echo 'Olinda' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* PIAUÍ */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'piaui') : ?>
+    <option value='teresina'><?php echo 'Teresina' ?></option>
+    <option value='floriano'><?php echo 'Floriano' ?></option>
+    <option value='parnaiba'><?php echo 'Parnaiba' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 17) : ?>
+    <option value='5647'><?php echo 'Teresina' ?></option>
+    <option value='5515'><?php echo 'Floriano' ?></option>
+    <option value='5584'><?php echo 'Parnaiba' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* PARANÁ */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'parana') : ?>
+    <option value='curitiba'><?php echo 'Curitiba' ?></option>
+    <option value='cascavel'><?php echo 'Cascavel' ?></option>
+    <option value='maringa'><?php echo 'Maringa' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 18) : ?>
+    <option value='5915'><?php echo 'Curitiba' ?></option>
+    <option value='5843'><?php echo 'Cascavel' ?></option>
+    <option value='6190'><?php echo 'Maringa' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* RIO DE JANEIRO */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'rio-de-janeiro') : ?>
+    <option value='rio-de-janeiro'><?php echo 'Rio de Janeiro' ?></option>
+    <option value='niteroi'><?php echo 'Niteroi' ?></option>
+    <option value='sao-goncalo-rj'><?php echo 'Sao Goncalo' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 19) : ?>
+    <option value='6861'><?php echo 'Rio de Janeiro' ?></option>
+    <option value='6807'><?php echo 'Niteroi' ?></option>
+    <option value='6885'><?php echo 'Sao Goncalo' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* RIO GRANDE DO NORTE */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'rio-grande-do-norte') : ?>
+    <option value='natal'><?php echo 'Natal' ?></option>
+    <option value='mossoro'><?php echo 'Mossoro' ?></option>
+    <option value='parnamirim-rn'><?php echo 'Parnamirim' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 20) : ?>
+    <option value='7039'><?php echo 'Natal' ?></option>
+    <option value='7038'><?php echo 'Mossoro' ?></option>
+    <option value='7047'><?php echo 'Parnamirim' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* RONDÔNIA */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'rondonia') : ?>
+    <option value='porto-velho'><?php echo 'Porto Velho' ?></option>
+    <option value='ariquemes'><?php echo 'Ariquemes' ?></option>
+    <option value='ji-parana'><?php echo 'Ji-parana' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 21) : ?>
+    <option value='7170'><?php echo 'Porto Velho' ?></option>
+    <option value='7133'><?php echo 'Ariquemes' ?></option>
+    <option value='7154'><?php echo 'Ji-parana' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* RORAIMA */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'roraima') : ?>
+    <option value='boa-vista-rr'><?php echo 'Boa Vista' ?></option>
+    <option value='caracarai'><?php echo 'Caracarai' ?></option>
+    <option value='rorainopolis'><?php echo 'Rorainopolis' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 22) : ?>
+    <option value='7193'><?php echo 'Boa Vista' ?></option>
+    <option value='7196'><?php echo 'Caracarai' ?></option>
+    <option value='7202'><?php echo 'Rorainopolis' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* RIO GRANDE DO SUL */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'rio-grande-do-sul') : ?>
+    <option value='porto-alegre'><?php echo 'Porto Alegre' ?></option>
+    <option value='caxias-do-sul'><?php echo 'Caxias do Sul' ?></option>
+    <option value='santa-maria-rs'><?php echo 'Santa Maria' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 23) : ?>
+    <option value='7777'><?php echo 'Porto Alegre' ?></option>
+    <option value='7371'><?php echo 'Caxias do Sul' ?></option>
+    <option value='7864'><?php echo 'Santa Maria' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* SANTA CATARINA */ ?>
+
+<?php /* com slug */ ?>    
+<?php elseif ($this->region_id == 'santa-catarina') : ?>
+    <option value='florianopolis'><?php echo 'Florianopolis' ?></option>
+    <option value='blumenau'><?php echo 'Blumenau' ?></option>
+    <option value='joinville'><?php echo 'Joinville' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 24) : ?>
+    <option value='8213'><?php echo 'Florianopolis' ?></option>
+    <option value='8138'><?php echo 'Blumenau' ?></option>
+    <option value='8282'><?php echo 'Joinville' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* SERGIPE */ ?>
+
+<?php /* com slug */ ?>
+<?php elseif ($this->region_id == 'sergipe') : ?>
+    <option value='aracaju'><?php echo 'Aracaju' ?></option>
+    <option value='japaratuba'><?php echo 'Japaratuba' ?></option>
+    <option value='propria'><?php echo 'Propria' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 25) : ?>
+    <option value='8528'><?php echo 'Aracaju' ?></option>
+    <option value='8557'><?php echo 'Japaratuba' ?></option>
+    <option value='8587'><?php echo 'Propria' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* SAO PAULO */ ?>
+
+<?php /* com slug */ ?>
+<?php elseif ($this->region_id == 'sao-paulo') : ?>
+    <option value='sao-paulo-sp'><?php echo 'Sao Paulo' ?></option>
+    <option value='campinas-sp'><?php echo 'Campinas' ?></option>
+    <option value='sao-bernardo-do-campo'><?php echo 'Sao Bernardo do Campo' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 26) : ?>
+    <option value='9422'><?php echo 'Sao Paulo' ?></option>
+    <option value='8781'><?php echo 'Campinas' ?></option>
+    <option value='9394'><?php echo 'Sao Bernardo do Campo' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* TOCANTINS */ ?>
+
+<?php /* com slug */ ?>
+<?php elseif ($this->region_id == 'tocantins') : ?>
+    <option value='palmas-to'><?php echo 'Palmas' ?></option>
+    <option value='araguaina'><?php echo 'Araguaina' ?></option>
+    <option value='gurupi'><?php echo 'Gurupi' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php /* com id */ ?>    
+<?php elseif ($this->region_id == 27) : ?>
+    <option value='9653'><?php echo 'Palmas' ?></option>
+    <option value='9559'><?php echo 'Araguaina' ?></option>
+    <option value='9616'><?php echo 'Gurupi' ?></option>
+    <option disabled="disabled" value='null'><?php echo '--' ?></option>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php else : ?>
+    <?php foreach ($this->cities as $id => $city) : ?>
+        <option value="<?php echo $id ?>"><?php echo $city ?></option>
+    <?php endforeach ?>
+
+<?php endif ?>

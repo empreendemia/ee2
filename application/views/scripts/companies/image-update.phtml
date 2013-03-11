@@ -1,0 +1,55 @@
+<?php
+/**
+ * image-update.php
+ * Atualização do logotipo da empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-01
+ */
+?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Dados enviados
+// -----------------------------------------------------------------------------
+?>
+<?php if ($this->sent) : ?>
+
+<div class="plaintext" style="text-align:center;">
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 640 ?>
+<?php $this->modal->height = 260 ?>
+<br />
+
+<h1 class="h_title h_blue h_medium">O logo da sua empresa foi atualizado com sucesso!</h1>
+<p><?php echo $this->company->imageLink(120) ?></p>
+<p><a href="<?php echo $this->company->url() ?>" target="_top">Ver perfil da minha empresa</a></p>
+
+</div>
+
+<?php
+// -----------------------------------------------------------------------------
+// Usuário acabou de abrir a página
+// -----------------------------------------------------------------------------
+?>
+<?php else : ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 640 ?>
+<?php $this->modal->height = 240 ?>
+
+<div class="plaintext">
+<h1 class="h_title h_blue h_medium">Alterar logotipo da empresa</h1>
+<p style="font-size:8pt">Você pode enviar arquivos JPG, GIF ou PNG (tamanho máximo de 2MB). Não envie fotos que contenham imagens de personagens de desenho animado, pessoas famosas, nudez, trabalho artístico ou material protegido por direitos autorais. A imagem será recortada automaticamente.</p>
+</div>
+
+<div class="form">
+<?php echo $this->form ?>
+</div>
+
+<div class="clear"></div>
+
+<?php endif ?>

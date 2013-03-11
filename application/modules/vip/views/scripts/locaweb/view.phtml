@@ -1,0 +1,196 @@
+<?php
+/**
+ * view.phtml
+ * Perfil da Locaweb
+ * 
+ * @package views
+ * @subpackage locaweb
+ * @author Mauro Ribeiro
+ * @since 2011-10-31
+ */
+?>
+<?php $this->layout()->og_title = $this->company->name ?>
+<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_description = $this->company->description ?>
+
+<?php $this->headScript()->appendFile('js/jquery/plugins/jcarousellite_1.0.1.min.js') ?>
+
+<?php $this->layout()->title = 'Locaweb' ?>
+
+<script type="text/javascript">//<![CDATA[
+
+/*var x;*/
+    
+$(function() {
+/*
+    var y = window.setInterval;
+    window.setInterval = function() {
+        x = y(arguments[0],arguments[1]);
+        return x;
+    }
+*/
+
+    var autoTime = 5000;
+
+    $(".slide_show").jCarouselLite({
+        speed: 300,
+        visible: 1,
+        btnNext: '.nextbt',
+        btnGo: [
+            '#button_show_slide_1',
+            '#button_show_slide_2',
+            '#button_show_slide_3',
+            '#button_show_slide_4'
+        ],
+        beforeStart: function(a) {
+
+        },
+        afterEnd: function(a) {
+            var id = $(a[0]).attr('id');
+            $('.slide_show_buttons li').removeClass('selected');
+            $('#button_'+id).addClass('selected');
+        }
+    });
+    /*
+    window.setInterval = y;
+    
+    $('#show_slide_1').mouseover(function() {
+        clearInterval(x);
+    });*/
+
+    var x = setInterval("$('.nextbt').trigger('click');", autoTime);
+    $('.slide_show_buttons li').click(function() {
+        clearInterval(x);
+    });
+});
+</script>
+
+<?php
+// ---------------------------------------------------------------------
+// Slides
+// ---------------------------------------------------------------------
+?>
+<div id="company_slide_show">
+    <div class="slide_show">
+        <ul class="slides">
+            <li id="show_slide_1">
+                <a href="http://www.locaweb.com.br/produtos/erp-flex.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_content=solucoes&utm_term=ERPFlex">
+                    <img src="images/vip/locaweb/slide_erpflex2.jpg" />
+                </a>
+            </li>
+            <li id="show_slide_2">
+                <img src="images/vip/locaweb/slide_hospedagem.jpg" />
+                <div class="item item_left">
+                    <p class="locaweb_button"><a href="http://www.locaweb.com.br/produtos/hospedagem-de-sites/planos.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_term=Hospedagem"  target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: slide hospede seu site', 'Locaweb', null, true) ?>">Acesse já</a></p>
+                </div>
+                <div class="item item_right">
+                    <p class="locaweb_button"><a href="http://www.locaweb.com.br/produtos/revenda-de-hospedagem/planos.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_term=Revenda" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: slide revenda', 'Locaweb', null, true) ?>">Conheça a Revenda</a></p>
+                </div>
+            </li>
+            <li id="show_slide_3">
+                <a href="http://www.locaweb.com.br/produtos/loja-virtual/planos.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_content=solucoes&utm_term=WebStore">
+                    <img src="images/vip/locaweb/slide_webstore2.jpg" />
+                </a>
+            </li>
+            <li id="show_slide_4">
+                <a href="http://www.locaweb.com.br/solucoes/marketplace.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_content=solucoes&utm_term=Marketplace">
+                    <img src="images/vip/locaweb/slide_marketplace.jpg" />
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="slide_show_buttons">
+        <ul>
+            <li id="button_show_slide_1" class="selected">
+                <h3>ERPFlex</h3>
+                <p>A melhor solução integrada para informatizar as principais atividades administrativas e financeiras da sua empresa.</p>
+                <div class="arrow"></div>
+            </li>
+            <li id="button_show_slide_2">
+                <h3>Hospedagem de Sites</h3>
+                <p>Novos planos de Hospedagem sob medida para suas necessidades.</p>
+                <div class="arrow"></div>
+            </li>
+            <li id="button_show_slide_3">
+                <h3>WebStore</h3>
+                <p>Em poucos cliques, você cria sua loja na Internet. É rápido, fácil e econômico.</p>
+                <div class="arrow"></div>
+            </li>
+            <li id="button_show_slide_4">
+                <h3>Market Place</h3>
+                <p>O lugar perfeito para você encontrar o aplicativo ideal para ajudá-lo a otimizar o seu dia-a-dia em poucos cliques.</p>
+                <div class="arrow"></div>
+            </li>
+        </ul>
+        <div class="nextbt"></div>
+    </div>
+</div>
+
+<div class="plaintext main">
+    <div class="sub_cols">
+
+        <div class="sub_col_1" style="width:370px;padding-left:10px;">
+            
+            <?php
+            // ---------------------------------------------------------------------
+            // Benefícios
+            // ---------------------------------------------------------------------
+            ?>
+            <div class="main_benefits">
+                <h2>Por que escolher a Locaweb?</h2>
+                <ul>
+                    <li>Líder em Hosting no Brasil e na América Latina, segundo o IDC LA IT Services 2010.</li>
+                    <li>Suporte técnico especializado em português com atendimento 24h por dia, 7 dias por semana, via telefone, chat, e-mail ou helpdesk.</li>
+                    <li>Foco no sucesso do cliente, oferecendo soluções completas e práticas para otimizar o dia a dia.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sub_col_2" style="width:280px;padding-left:40px">
+            
+            <?php
+            // ---------------------------------------------------------------------
+            // Feed de notícias
+            // ---------------------------------------------------------------------
+            ?>
+            <div class="main_feeds">
+                <h2>Feed de notícias</h2>
+                <ul class="updates">
+                    <?php foreach ($this->updates as $update) : ?>
+                        <?php
+
+                        $text = $update->text;
+
+                        // splitting process to substring
+                        $break = explode(' ', $text);
+                        $count = 0;
+
+                        // replacing process
+                        for ($i = 0; $i < count($break); $i++) {
+                            if ((substr($break[$i], 0, 7) == 'http://')) {
+                                $break[$i] = '<a href="'.$break[$i].'" target="_blank" onclick="'.$this->Tracker()->userEvent('interaction: clicked update link', null, true).'">'.$break[$i].'</a>';
+                                $count++;
+                            }
+                            else if ((substr($break[$i], 0, 8) == 'https://')) {
+                                $break[$i] = '<a href="'.$break[$i].'" target="_blank" onclick="'.$this->Tracker()->userEvent('interaction: clicked update link', null, true).'">'.$break[$i].'</a>';
+                                $count++;
+                            }
+                            else if ((substr($break[$i], 0, 4) == 'www.')) {
+                                $break[$i] = '<a href="http://'.$break[$i].'" target="_blank" onclick="'.$this->Tracker()->userEvent('interaction: clicked update link', null, true).'">'.$break[$i].'</a>';
+                                $count++;
+                            }
+                        }
+
+                        $text = implode(' ', $break);
+                        ?>
+                        <li class="update"><?php echo $text ?></li>
+                    <?php endforeach ?>
+                </ul>
+                <p>Quer receber mais notícias? <br /><a href="e/locaweb/seguir">Siga-nos no Empreendemia!</a></p>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+

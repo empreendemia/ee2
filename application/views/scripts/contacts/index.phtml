@@ -1,0 +1,206 @@
+<?php
+/**
+ * index.php
+ * Lista os contatos de um usuário
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-18
+ */
+?>
+<?php $this->layout()->setLayout('contacts') ?>
+<?php $this->layout()->title = 'Meus contatos' ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headScript()->appendFile('js/forms/message.js') ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+
+<script type="text/javascript">
+    function compose() {
+        var compose = $('#compose');
+        var form = $('#compose .form_message');
+
+        if (form.hasClass('empty')) {
+            form.removeClass('empty');
+            form.addClass('reading');
+        }
+        else if (form.hasClass('hidden')) {
+            form.show();
+            form.removeClass('hidden');
+            form.addClass('reading');
+        }
+        else  {
+            form.hide();
+            form.addClass('hidden');
+            form.removeClass('reading');
+        }
+    }
+
+    function showThread(id) {
+        var thread_div = $('#thread_'+id);
+        var messages_div = $('#thread_'+id+' .messages');
+        if (messages_div.hasClass('empty')) {
+            messages_div.html('<div class="ajax_loading"><p>carregando mensagens</p></div>')
+            url = $('#thread_'+id+' input.thread_url').val();
+            messages_div.load(url);
+            messages_div.removeClass('empty');
+            thread_div.addClass('reading');
+        }
+        else if (messages_div.hasClass('hidden')) {
+            messages_div.show();
+            messages_div.removeClass('hidden');
+            thread_div.addClass('reading');
+        }
+        else  {
+            messages_div.hide();
+            messages_div.addClass('hidden');
+            thread_div.removeClass('reading');
+        }
+    }
+</script>
+
+
+<div class="sub_cols shadow">
+    <div class="sub_col_1">
+
+        
+        <?php
+        // ---------------------------------------------------------------------
+        // Lista de contatos
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($this->contacts) : ?>
+        <menu class="lateral_tabs <?php if (isset($this->contact)) echo 'transparent' ?>">
+            <?php foreach ($this->contacts as $user) : ?>
+            <li <?php if (isset($this->contact) && $user->id == $this->contact->id) echo 'class="selected"'; ?>>
+                <a href="<?php echo $this->url(array('user_id'=>$user->id), 'contacts_contact')?>">
+                    <span class="thumb"><?php echo $user->image(40) ?></span>
+                    <span class="user_name"><?php echo $user->fullName() ?></span>
+                    <span class="job"><?php echo $user->job ?></span>
+                    <span class="company_name"><?php echo $user->company->name ?></span>
+                </a>
+            </li>
+            <?php endforeach; ?>
+            <?php /* contatos que me enviaram mensagem mas não tenho cartão */ ?>
+            <li class="message_contacts_title">Pessoas que não tenho cartão mas me enviaram mensagem</li>
+
+            <?php
+            // ---------------------------------------------------------------------
+            // Pessoas que mandaram mensagem mas o cara nao tem o contato
+            // ---------------------------------------------------------------------
+            ?>
+            <?php if ($this->message_contacts) : ?>
+            <?php foreach ($this->message_contacts as $user) : ?>
+            <li <?php if (isset($this->contact) && $user->id == $this->contact->id) echo 'class="selected"'; ?>>
+                <a href="<?php echo $this->url(array('user_id'=>$user->id), 'contacts_contact')?>">
+                    <span class="thumb"><?php echo $user->image(40) ?></span>
+                    <span class="user_name"><?php echo $user->fullName() ?></span>
+                    <span class="job"><?php echo $user->job ?></span>
+                    <span class="company_name"><?php echo $user->company->name ?></span>
+                </a>
+            </li>
+            <?php endforeach; ?>
+            <?php endif // if message_contacts ?>
+        </menu>
+        
+        <?php
+        // ---------------------------------------------------------------------
+        // Se o cara não tem contatos
+        // ---------------------------------------------------------------------
+        ?>
+        <?php else : ?>
+        <div class="plaintext no_contacts">
+            <p>Você ainda não tem nenhum contato na rede.</p>
+            <p><a href="painel/usuario/convidar">Convide seus contatos</a> para o Empreendemia!</p>
+            <p>Para fortalecer sua reputação na rede, você pode convidar seus clientes, fornecedores e parceiros para deixar depoimentos sobre sua empresa.</p>
+            <p>Para saber mais, <a href="painel/usuario/convidar">clique aqui</a>.</p>
+        </div>
+        <?php endif ?>
+
+    </div>
+
+    <div class="sub_col_2">
+        <?php
+        /*
+         * ------------------------------------------------------------
+         * Mensagens não lidas
+         * ------------------------------------------------------------
+         */
+        ?>
+        <?php if (!isset($this->contact)) : ?>
+        <div class="threads">
+            <h2 class="h_title h_grey h_xsmall">Mensagens não lidas</h2>
+        <?php if ($this->unread) : ?>
+            <?php foreach ($this->unread as $thread) : ?>
+            <div id="thread_<?php echo $thread->id ?>" class="thread">
+                <h3 class="thread_title">
+                    <a href="javascript: showThread(<?php echo $thread->id ?>)"><?php echo $thread->title ?></a>
+                    <div class="from">por <?php echo $thread->user->fullName() ?> (<?php echo $thread->user->company->name ?>)</div>
+                </h3>
+                <input class="thread_url" type="hidden" value="<?php echo $this->url(array('thread_id'=>$thread->id), 'messages_thread')?>" />
+                <div class="date"><?php echo $this->Format()->date($thread->date) ?></div>
+                <div class="messages empty"></div>
+            </div>
+            <?php endforeach ?>
+        <?php else : ?>
+            <br />
+            <p>Você não tem nenhuma mensagem nova</p>
+        <?php endif ?>
+        </div>
+        <?php
+        /*
+         * ------------------------------------------------------------
+         * Detalhes e mensagens de um contato
+         * ------------------------------------------------------------
+         */
+        ?>
+        <?php else : ?>
+        <div class="single_contact">
+            <div class="thumb"><?php echo $this->contact->imageLink(140) ?></div>
+            <h1 class="h_title h_blue h_xxlarge"><a href="<?php echo $this->contact->url() ?>"><?php echo $this->contact->fullName() ?></a></h1>
+            <p class="job"><?php echo $this->contact->job ?></p>
+
+            <ul class="contact">
+                <?php if ($this->contact->phone): ?> <li class="phone"><img src="images/ui/card_phone.png" /><?php echo $this->Format()->phone($this->contact->phone) ?></li><?php endif ?>
+                <?php if ($this->contact->email): ?> <li class="email"><img src="images/ui/card_email.png" /><?php echo $this->contact->email ?></li><?php endif ?>
+            </ul>
+
+            <div class="clear"></div>
+
+            <div class="company_thumb"><?php echo $this->contact->company->imageLink(50) ?> </div>
+            <h2 class="company_name"><a href="<?php echo $this->contact->company->url() ?>"><?php echo $this->contact->company->name ?></a></h2>
+
+            <div class="clear"></div>
+        </div>
+        <div class="threads">
+            <h2 class="h_title h_grey h_xsmall">Mensagens</h2>
+            <div id="compose" class="thread compose">
+                <h3 class="thread_title">
+                    <a href="javascript: compose()"><img src="images/icons/company_actions_message.gif" width="16" height="16" /> Nova mensagem</a>
+                </h3>
+                <div class="form_message hidden" style="display:none">
+                    <br />
+                    <?php
+                        $form = new Ee_Form_Message(array('to_user'=>$this->contact));
+                        echo $form;
+                    ?>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        <?php if ($this->threads) : ?>
+            <?php foreach ($this->threads as $thread) : ?>
+            <div id="thread_<?php echo $thread->id ?>" class="thread">
+                <h3 class="thread_title">
+                    <a href="javascript: showThread(<?php echo $thread->id ?>)"><?php echo $thread->title ?></a>
+                </h3>
+                <input class="thread_url" type="hidden" value="<?php echo $this->url(array('thread_id'=>$thread->id), 'messages_thread')?>" />
+                <div class="date"><?php echo $this->Format()->date($thread->date) ?></div>
+                <div class="messages empty"></div>
+            </div>
+            <?php endforeach ?>
+        <?php endif ?>
+        </div>
+
+        <?php endif // single contact ?>
+    </div>
+    <div class="clear"></div>
+</div>
+

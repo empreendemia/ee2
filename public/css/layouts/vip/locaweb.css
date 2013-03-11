@@ -1,0 +1,643 @@
+#page {
+    background-image: url(../../../images/vip/locaweb/bg.gif);
+    background-repeat: repeat-x;
+}
+
+/*
+--------------------------------------------------------------------------------
+Company Menu
+--------------------------------------------------------------------------------
+*/
+
+#company_menu li a {
+    width: 175px;
+}
+
+#company_menu li.selected a {
+    width: 182px;
+    color: #800;
+}
+
+/*
+--------------------------------------------------------------------------------
+Company Header
+--------------------------------------------------------------------------------
+*/
+.company_header {
+    background-image: url(../../../images/vip/locaweb/headerbg.jpg);
+    background-repeat: repeat-x;
+}
+
+#company_logo {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+}
+
+#company_subscribe {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+}
+
+#company_subscribe a {
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.company_side_header {
+    background-image: url(../../../images/vip/locaweb/headerbg.jpg);
+    background-repeat: repeat-x;
+}
+
+.company_side_header h2 {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 14px;
+    line-height: 1.2em;
+}
+
+.company_side_header h2 a {
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
+}
+
+.company_side_header p {
+    display: block;
+    position: absolute;
+    top: 65px;
+    left: 20px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.4em;
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
+}
+
+.company_side_header .links {
+    display: block;
+    position: absolute;
+    top: 136px;
+    left: 20px;
+}
+
+.company_side_header .links a {
+    margin-right: 5px;
+}
+
+.company_side_banner {
+    padding: 20px;
+    color: #666;
+}
+
+
+
+.company_side_banner .magazine img {
+    float: left;
+}
+
+.company_side_banner .questions h3,
+.company_side_banner .magazine h3 {
+    color: #800;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin-bottom: 10px;
+}
+
+.company_side_banner .questions p,
+.company_side_banner .magazine p {
+    font-size: 11px;
+    margin: 10px 0;
+    line-height: 1.2em;
+}
+
+.company_side_banner .questions ul,
+.company_side_banner .magazine ul {
+    list-style: disc;
+    padding-left: 14px;
+}
+
+
+.company_side_banner .questions ul li,
+.company_side_banner .magazine ul li {
+    font-size: 11px;
+    margin: 10px 0;
+    line-height: 1.2em;
+}
+.company_side_banner .magazine ul li,
+.company_side_banner .magazine .link {
+    margin-left: 90px;
+}
+
+.company_side_banner .magazine h4 {
+    margin-left: 90px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.4em;
+}
+
+.company_side_banner .magazine .link {
+    padding-top: 10px;
+}
+
+.company_side_banner .magazine .link a {
+    color: #800;
+}
+
+
+.company_side_banner .questions hr {
+    border: none;
+    border-top: 1px dashed #ccc;
+    margin: 20px 0;
+}
+
+.company_side_banner .testimonial {
+    height: 170px;
+    width: 210px;
+    background-image: url(../../../images/vip/locaweb/testimonial.png);
+    background-repeat: no-repeat;
+    padding: 15px;
+    margin-top: 40px;
+}
+
+.company_side_banner .testimonial .quote {
+    font-style: italic;
+    font-size: 11px;
+    color: #666;
+    text-shadow: 1px 1px 0 #fff;
+    margin-top: 30px;
+    line-height: 1.2em;
+}
+
+.company_side_banner .testimonial .author {
+    font-weight: bold;
+    font-size: 11px;
+    color: #666;
+    text-shadow: 1px 1px 0 #fff;
+    margin-top: 15px;
+}
+
+.company_side_banner .testimonial .job {
+    font-size: 11px;
+    color: #666;
+    text-shadow: 1px 1px 0 #fff;
+    margin-top: 5px;
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Slide Show
+--------------------------------------------------------------------------------
+*/
+
+#company_slide_show {
+    position: relative;
+    width: 700px;
+    height: 294px;
+    margin-top: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+}
+
+#company_slide_show .slide_show,
+#company_slide_show .slide_show ul,
+#company_slide_show .slide_show ul li{
+    width: 420px;
+    height: 294px;
+}
+
+#company_slide_show .slide_show_buttons {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 420px;
+    width: 290px;
+    height: 294px;
+}
+
+#company_slide_show .slide_show_buttons li {
+    position: relative;
+    display: block;
+    clear: both;
+    float: none;
+    height: 53px;
+    width: 260px;
+    padding: 10px;
+    background-color: #eee;
+    border: none;
+    text-align: left;
+    text-shadow: 1px 1px 0 #fff;
+    color: #888;
+    opacity: 1;
+    background-image: url(../../../images/vip/locaweb/gradient.gif);
+}
+
+#company_slide_show .slide_show_buttons li.selected,
+#company_slide_show .slide_show_buttons li.selected:hover {
+    height: 55px;
+    padding: 10px;
+    background-color: #dbdbdb;
+    border: none;
+    color: #444;
+    font-weight: normal;
+    text-shadow: 1px 1px 0 #fff;
+    background-image: none;
+}
+
+#company_slide_show .slide_show_buttons li:hover {
+    background-color: #eee;
+    background-image: none;
+    color: #444;
+}
+
+#company_slide_show .slide_show_buttons li.selected .arrow {
+    background-image: url(../../../images/vip/locaweb/arrow.gif);
+    width: 16px;
+    height: 31px;
+    position: absolute;
+    top: 10px;
+    left: -16px;
+}
+
+
+#company_slide_show .slide_show_buttons li h3 {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#company_slide_show .slide_show_buttons li p {
+    font-size: 10px;
+    line-height: 1.2em;
+}
+
+
+
+.locaweb_button {
+}
+
+.locaweb_button a {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #e4800a;
+    color: #fff;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    background-repeat: no-repeat;
+    background-position: right center;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.locaweb_button a:hover {
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Slides
+--------------------------------------------------------------------------------
+*/
+
+#show_slide_1,
+#show_slide_2,
+#show_slide_3,
+#show_slide_4 {
+    position: relative;
+}
+
+#show_slide_1 h2 {
+    padding-top: 16px;
+    padding-left: 10px;
+    height: 35px;
+    background-color: #333;
+    color: #fff;
+    font-size: 20px;
+}
+#show_slide_2 h2 {
+    position: absolute;
+    top: 12px;
+    text-align: center;
+    width: 420px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+}
+
+#show_slide_2 .item {
+    width: 160px;
+    position: absolute;
+    top: 135px;
+    line-height: 1.2em;
+}
+
+#show_slide_2 .item h3 {
+    color: #e4800a;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#show_slide_2 .item p {
+    color: #666;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+#show_slide_2 .item_left {
+    top: 240px;
+    left: 25px;
+}
+
+#show_slide_2 .item_right {
+    top: 240px;
+    left: 225px;
+}
+
+
+#show_slide_2 .locaweb_button a {
+    display: block;
+    text-align: center;
+}
+
+
+
+#show_slide_3 h2{
+    color: #417299;
+    font-size: 24px;
+    font-weight: bold;
+    margin: -250px 20px 10px 20px;
+}
+
+#show_slide_3 .locaweb_button{
+    position: absolute;
+    right: 20px;
+    top: 250px;
+}
+
+#show_slide_4 h2{
+    color: #ae352a;
+    font-size: 24px;
+    font-weight: bold;
+    margin: -280px 20px 10px 20px;
+}
+
+#show_slide_4 .locaweb_button{
+    position: absolute;
+    right: 20px;
+    top: 208px;
+}
+
+#show_slide_3 p,
+#show_slide_4 p {
+    color: #666;
+    font-size: 11px;
+    margin: 0 20px 10px 20px;
+    line-height: 1.3em;
+}
+
+.video_mouse_over {
+    display:block;
+    position:absolute;
+    left:0;
+    top:0;
+    height:294px;
+    width:420px;
+}
+
+/*
+--------------------------------------------------------------------------------
+Footer
+--------------------------------------------------------------------------------
+*/
+.locaweb_footer {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 10px;
+}
+
+.locaweb_footer a {
+    display: block;
+    float: left;
+    text-align: center;
+    border-left: 1px solid #ccc;
+    width: 178px;
+    color: #888;
+    font-size: 11px;
+}
+
+.locaweb_footer a.first {
+    border-left: none
+}
+
+
+.plaintext h2 {
+    color: #800;
+}
+
+
+.main_benefits ul {
+    list-style: disc;
+    padding-left: 40px;
+}
+
+.main_benefits ul li {
+    color: #666;
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+.main_benefits .locaweb_button {
+    text-align: right;
+}
+
+.main_feeds {
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 20px 20px 1px 20px;
+    margin-top: 25px;
+    box-shadow: inset 0 0 20px #ccc;
+    border: 1px solid #e8e8e8;
+}
+
+.main_feeds h2 {
+    color: #888;
+    font-size: 14px;
+    margin: 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+
+.main_feeds .updates {
+    list-style-image: url(../../../images/vip/locaweb/list_arrow.gif);
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.main_feeds .updates .update {
+    margin: 10px 0;
+    line-height: 1.2em;
+    font-size: 11px;
+    color: #111;
+    line-height: 1.4em;
+}
+
+.main_feeds .updates .update a {
+    color: #800;
+}
+
+.main_feeds p {
+    line-height: 1.4em;
+    font-size: 11px;
+    text-align: right;
+}
+
+
+.benefits {
+    padding: 0 10px;
+}
+
+.benefits h2 {
+    margin: 20px 0;
+}
+
+.benefits .box {
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 20px 20px 1px 20px;
+    margin-top: 0;
+    box-shadow: inset 0 0 20px #ccc;
+    border: 1px solid #e8e8e8;
+    min-height: 345px;
+    margin-bottom: 10px;
+}
+
+.benefits .box h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+}
+
+.benefits .box h4 {
+    font-size: 11px;
+    color: #666;
+    border-bottom: 1px dashed #aaa;
+    padding-bottom: 10px;
+}
+
+.benefits .box p {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.4em;
+}
+
+.benefits .box p.obs {
+    font-size: 10px;
+    color: #888;
+}
+
+.benefits .box p strong {
+    color: #e4800a;
+    font-weight: strong;
+}
+
+.benefits .box ul {
+    padding-left: 20px;
+    list-style: disc;
+    margin: 10px 0 20px 0;
+}
+
+.benefits .box ul li {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.4em;
+    margin: 10px 0;
+}
+
+.benefits .testimonial_mix {
+    height: 140px;
+    width: 680px;
+    background-image: url(../../../images/vip/locaweb/testimonial_mix.png);
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.benefits .testimonial_mix p {
+    font-size: 11px;
+    color: #666;
+    font-style: italic;
+    padding: 30px 180px 30px 30px;
+    line-height: 1.4em;
+}
+
+.benefits .testimonial_mix .author {
+    position: absolute;
+    font-size: 11px;
+    color: #666;
+    font-weight: bold;
+    left: 560px;
+    top: 64px;
+}
+
+.benefits .testimonial_mix .job {
+    position: absolute;
+    font-size: 11px;
+    color: #666;
+    left: 560px;
+    top: 76px;
+}
+
+.benefits .sales {
+    margin: 20px 0;
+    width: 680px;
+}
+
+.benefits .sales p {
+    font-size: 11px;
+    line-height: 1.2em;
+}
+
+.articles {
+    padding: 0 20px 0 10px;
+}
+
+.articles h2 {
+    margin: 20px 0;
+}
+
+.articles_post_list {
+    padding: 20px 20px 0 20px;
+}
+
+.articles_post_list h2 {
+    color: #800;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.articles_post_list ul li {
+    font-size: 11px;
+    margin: 10px 0;
+    line-height: 1.3em;
+}
+
+.articles_post_list.papers ul {
+    list-style-image: url(../../../images/vip/locaweb/pdf.png);
+    padding-left: 2em;
+}
+
+.products .company_product .short_description {
+    height: 80px;
+}

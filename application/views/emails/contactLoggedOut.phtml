@@ -1,0 +1,16 @@
+<?php
+/**
+ * contactLoggedOut.phtml
+ * Email quando usuário recebe uma mensagem de usuário deslogado
+ * 
+ * @author Lucas Gaspar (via Mauro Ribeiro)
+ * @since 2011-08-10
+ */
+?>
+<body>
+    <h1 style="display:block; margin:10px; padding-top:20px; color:#0C478B; font-size:18px;"><?php echo $this->from_user.' viu seu perfil no Empreendemia e te enviou uma mensagem' ?></h1><br>
+    
+    <div style="display:block; margin:10px;"><?php echo nl2br($this->message->body) ?></div>
+    
+    <br><div style="display:block; margin:10px; color:gray;"><?php echo 'Para retornar este contato, responda este e-mail.' ?></div>
+</body>

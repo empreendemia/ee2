@@ -1,0 +1,39 @@
+<?php
+/**
+ * ad_payment.phtml
+ * Email quando usuário configura uma campanha
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-15
+ */
+?>
+<body>
+    <h1 style="display:block;margin:10px;padding-top:10px;">Olá, <?php echo $this->user->fullName() ?>!</h1>
+
+    <h2 style="display:block;margin:10px;padding-top:20px;">Sua campanha foi configurada!</h2>
+    <div style="display:block;margin:10px;">
+        <p>Você configurou uma campanha de <strong><?php echo $this->months ?></strong> meses com alcance para <strong><?php echo $this->companies_count ?></strong> empresas, distribuídas entre <strong><?php echo count($this->ad->sectors) ?></strong> setores e <strong><?php echo count($this->ad->cities) ?></strong> cidades.</p>
+        <p>Para a campanha começar, é preciso efetuar o pagamento:</p>
+
+        <div style="margin:40px;text-align:center;">
+            <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+            <form target="pagseguro" action="https://pagseguro.uol.com.br/v2/checkout/cart.html?action=add" method="post">
+            <input type="hidden" name="receiverEmail" value="luiz@empreendemia.com.br" />
+            <input type="hidden" name="currency" value="BRL" />
+            <input type="hidden" name="itemId" value="ee publicidade" />
+            <input type="hidden" name="itemDescription" value="Publicidade Empreendemia" />
+            <input type="hidden" name="itemQuantity" value="1" />
+            <input type="hidden" name="itemAmount" value="<?php echo number_format($this->price, 2, '.', '') ?>" />
+            <input type="hidden" name="itemWeight" value="" />
+            <input type="hidden" name="itemShippingCost" value="0.00" />
+            <input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/209x48-pagar-laranja-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+            </form>
+            <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+        </div>
+
+        <p>Se você já fez o pagamento desta campanha, não é preciso fazê-lo novamente.</p>
+        <p>Assim que sua campanha entrar no ar, você receberá um email de um de nossos atendentes.</p>
+        <p>Em caso de dúvidas, entre em contato com <a href="mailto:atendimento@empreendemia.com.br">atendimento@empreendemia.com.br</a></p>
+        <p>Abraços,<br />Equipe Empreendemia</p>
+    </div>
+</body>

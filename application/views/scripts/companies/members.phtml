@@ -1,0 +1,187 @@
+<?php
+/**
+ * members.php
+ * Página de membros de uma empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-06-20
+ */
+?>
+
+<?php $this->headScript()->appendFile('js/Form/Message.js') ?>
+
+<?php $this->layout()->setLayout('company') ?>
+<?php $this->layout()->title = 'Pessoas de '.$this->company->name ?>
+<?php
+    if (isset($this->user)) {
+        $this->layout()->og_title = $this->user->fullName();
+        $this->layout()->og_image = $this->serverUrl().'/'.$this->user->imagePath(200);
+        $this->layout()->og_description = $this->user->description;
+    }
+    else {
+        $this->layout()->og_title = $this->company->name;
+        $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200);
+        $this->layout()->og_description = 'Nossa equipe!';
+    }
+?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headScript()->appendFile('js/forms/message.js') ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+
+
+<div class="sub_cols shadow <?php if (isset($this->user)) echo 'transparent' ?>">
+    <div class="sub_col_1">
+
+        <?php
+        // ---------------------------------------------------------------------
+        // Lista de membros da empresa
+        // ---------------------------------------------------------------------
+        ?>
+        <menu class="lateral_tabs">
+            <?php foreach ($this->users as $user) : ?>
+            <li <?php if (isset($this->user) && $user->id == $this->user->id) echo 'class="selected"'; ?>>
+                <a href="<?php echo $user->url()?>">
+                    <span class="thumb"><?php echo $user->image(40) ?></span>
+                    <span class="text"><?php echo $user->name . " " . $user->family_name; ?></span>
+                    <span class="subtitle"><?php echo $user->job ?></span>
+                </a>
+            </li>
+            <?php endforeach; ?>
+        </menu>
+
+    </div>
+
+    <div class="sub_col_2 company_member">
+    <?php
+    // ---------------------------------------------------------------------
+    // Detalhes do membro selecionado
+    // ---------------------------------------------------------------------
+    ?>
+    <?php if (isset($this->user)) : ?>
+        <div class="short_description">
+            <div class="thumb"><?php echo $this->user->image(140) ?></div>
+            <h1><?php echo $this->user->name . " " . $this->user->family_name; ?></h1>
+            <p class="job"><?php echo $this->user->job ?></p>
+
+
+        <ul class="contact">
+            <?php if ($this->Access()->checkAuth() || $this->company->slug == 19112668) : ?>
+                <?php $contact_status = $this->user->contactStatus($this->Access()->user()->id); ?>
+                <?php if ($contact_status == 'contact' || $contact_status == 'sender' || $contact_status == 'self' || $this->company->slug == 19112668) : ?>
+                    <?php if ($this->user->phone): ?> <li class="phone"> <img src="images/ui/card_phone.png" /><?php echo  $this->Format()->phone($this->user->phone); ?></li><?php endif ?>
+                    <?php if ($this->user->cell_phone): ?> <li class="phone"> <img src="images/ui/card_cellphone.png" /><?php echo $this->Format()->phone($this->user->cell_phone); ?></li><?php endif ?>
+                    <?php if ($this->user->email): ?> <li class="email"><img src="images/ui/card_email.png" /><?php echo $this->user->email ?></li><?php endif ?>
+                <?php elseif ($contact_status == 'receiver') : ?>
+                    <?php if ($this->user->phone): ?> <li class="phone"><img src="images/ui/card_phone.png" /> acesso restrito a contatos</li><?php endif ?>
+                    <?php if ($this->user->cell_phone): ?> <li class="phone"><img src="images/ui/card_cellphone.png" /> acesso restrito a contatos</li><?php endif ?>
+                    <?php if ($this->user->email): ?> <li class="email"><img src="images/ui/card_email.png" /> acesso restrito a contatos</li><?php endif ?>
+                <?php else : ?>
+                    <li class="phone"><img src="images/ui/card_phone.png" /><a href="trocar-cartoes/<?php echo $this->user->id ?>" class="modal_iframe" title="Trocar cartões">acesso restrito a contatos</a></li>
+                    <li class="phone"><img src="images/ui/card_cellphone.png" /><a href="trocar-cartoes/<?php echo $this->user->id ?>" class="modal_iframe" title="Trocar cartões">acesso restrito a contatos</a></li>
+                    <li class="email"><img src="images/ui/card_email.png" /><a href="trocar-cartoes/<?php echo $this->user->id ?>" class="modal_iframe" title="Trocar cartões">acesso restrito a contatos</a></li>
+                <?php endif ?>
+            <?php else :?>
+	        <li class="phone"><a href="autenticar" class="modal_inline_phone"><img src="images/ui/card_phone.png" /> acesso restrito a contatos</a></li>
+                <li class="phone"><a href="autenticar" class="modal_inline_phone"><img src="images/ui/card_cellphone.png" /> acesso restrito a contatos</a></li>
+                <li class="email"><a href="autenticar" class="modal_inline_email"><img src="images/ui/card_email.png" /> acesso restrito a contatos</a></li>
+                <div style='display:none'>
+                    <div id="inline_logout" class="company_logout">
+                        <div class="plaintext">
+                            <p>Oi, tudo bem?</p>
+		            <p>Apenas usuários cadastrados podem ver essas informações.</p>
+		            <p>Porém mesmo sem se cadastrar, você pode entrar em<br /> contato com <?php echo $this->company->name?></p>
+		            <ul class="options">
+                                <li>
+                                    <a href="<?php echo $this->company->url() ?>/pessoas" onclick="Tracker.ga.userEvent('interruption message click');">
+                                        <img src="images/icons/message_50.gif" />enviar mensagem
+                                    </a> 
+			        </li>
+
+			        <li> 
+                                    <a href="<?php echo $this->company->url() ?>/pedir-orcamento" class="modal_iframe" onclick="Tracker.ga.userEvent('interruption budget click');">
+                                        <img src="images/icons/budget_50.gif " />pedir orçamento
+                                    </a>
+			        </li>
+			    </ul>
+	                </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+               $(function(){
+                    $(".modal_inline_phone").colorbox({
+                        scrolling:false, 
+                        inline:true, 
+                        href:"#inline_logout",
+                        onOpen: function() {
+			    Tracker.ga.userEvent('interruption person phone view');
+                        }
+                    });
+                    $(".modal_inline_email").colorbox({
+                        scrolling:false, 
+                        inline:true, 
+                        href:"#inline_logout",
+                        onOpen: function() {
+			    Tracker.ga.userEvent('interruption person email view');
+                        }
+                    });
+                });
+            </script>
+            <?php endif;?>
+        </ul>
+
+
+        </div>
+
+
+        <?php
+            if ($this->Access()->checkAuth()) :
+            $userData = new Zend_Session_Namespace('UserData');
+            if (!$this->user->contactStatus($this->Access()->user()->id)) :
+        ?>
+        <div class="request_card" id="request_<?php echo $this->user->id ?>">
+            <div class="rbroundbox">
+                <div class="rbtop"><div></div></div>
+                    <div class="rbcontent">
+            <p><a href="trocar-cartoes/<?php echo $this->user->id ?>" class="modal_iframe" title="Trocar cartões"><img src="images/ui/card_icon.png" style="float:left;margin-right:20px;" /></a>Voce ainda não trocou cartões com essa pessoa.<BR /> <a href="trocar-cartoes/<?php echo $this->user->id ?>" class="modal_iframe" title="Trocar cartões">Clique aqui</a> para trocar seus cartões.</p>
+                    </div><!-- /rbcontent -->
+                <div class="rbbot"><div></div></div>
+            </div>
+        </div>
+        <?php endif ?>
+        <?php endif;?>
+        <?php if ($this->user->description != ''): ?>
+        <div class="about">
+            <h2 class="h_title h_blue h_medium">Sobre mim</h2>
+            <p class="description"><?php echo $this->user->description ?></p>
+        </div>
+        <?php endif ?>
+
+        <?php if ($this->Access()->checkAuth()) : ?>
+        <div class="message">
+            <h2 class="h_title h_blue h_medium"><img src="images/icons/company_actions_message.gif" /> Enviar uma mensagem</h2>
+            <div class="form_message">
+                <?php
+                    $form = new Ee_Form_Message(array('to_user'=>$this->user, 'return_url'=>$this->url()));
+                    echo $form;
+                ?>
+            </div>
+        </div>
+        <?php endif ?>
+
+        <?php if (!$this->Access()->checkAuth()) : ?>
+        <div class="message">
+            <h2 class="h_title h_blue h_medium"><img src="images/icons/company_actions_message.gif" /> Enviar uma mensagem</h2>
+            <div class="form_message_loggedout">
+                <?php
+                    $form = new Ee_Form_MessageLoggedOut(array('to_user'=>$this->user, 'return_url'=>$this->url()));
+                    echo $form;
+                ?>
+            </div>
+        </div>
+        <?php endif ?>
+
+    <?php endif; // if member is selected ?>
+
+    </div>
+    <div class="clear"></div>
+</div>

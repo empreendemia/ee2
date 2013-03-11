@@ -1,0 +1,109 @@
+<?php
+/**
+ * company.phtml
+ * Layout do painel de controle do usuário
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-22
+ */
+?>
+<?php
+
+    $this->headLink()->appendStylesheet('css/cols/large.css');
+    $this->headLink()->appendStylesheet('css/layouts/panel.css');
+
+    $this->layout()->title = 'Painel de Controle';
+
+    $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+?>
+
+<?php include("elements/head.phtml") ?>
+
+<div id="body">
+
+    <?php include("elements/user_header.phtml"); ?>
+
+    <?php include("elements/header.phtml"); ?>
+
+    <div id="page">
+        <div class="container">
+            <div class="col">
+                <div class="panel_header page_header">
+
+                    <h1 class="h_title h_blue h_xxxlarge">Painel de Controle</h1>
+
+                    <menu id="panel_menu">
+                        <li class="selected">
+                            <a href="painel/usuario">
+                                Usuário
+                            </a>
+                        </li>
+                        <li>
+                            <a href="painel/empresa">
+                                Empresa
+                            </a>
+                        </li>
+                    </menu>
+
+                </div> <!-- .page_header .panel_header -->
+
+            <?php
+            // -----------------------------------------------------------------
+            // Uma coluna só
+            // -----------------------------------------------------------------
+            ?>
+                <div class="col_1">
+                    <div class="panel">
+                        <h3 class="h_title h_grey h_medium">Dados do Usuário</h3>
+                        <menu class="lateral_tabs">
+                            <li <?php if($action=="user-profile") echo'class="selected"' ?>><a href="painel/usuario/dados-pessoais" class="tip_tool_right" title="Editar meus dados pessoais"><img src="images/panel/profile_data.png" />dados pessoais</a></li>
+                            <li <?php if($action=="user-image") echo'class="selected"' ?>><a href="painel/usuario/imagem" class="tip_tool_right" title="Alterar minha foto de exibição"><img src="images/panel/image.png" />foto</a></li>
+                        </menu>
+                        <hr />
+                        <h3 class="h_title h_grey h_medium">Minha rede</h3>
+                        <menu class="lateral_tabs">
+                            <li <?php if ($action=='notifies') echo 'class="selected"' ?>><a href="painel/usuario/notificacoes" class="tip_tool_right" title="Listar as notificações da minha rede"><img src="images/panel/notifies.png" />notificações do sistema</a></li>
+                            <li><a href="meus-contatos" class="tip_tool_right" title="Listar meus contatos e minhas mensagens"><img src="images/panel/my_contacts.png" />meus contatos</a></li>
+                            <li <?php if ($action=='user-invite') echo 'class="selected"' ?>><a href="painel/usuario/convidar" class="tip_tool_right" title="Convidar pessoas de fora da rede"><img src="images/panel/my_contacts.png" />convidar contatos</a></li>
+                        </menu>
+                        <hr />
+                        <h3 class="h_title h_grey h_medium">Conta</h3>
+                        <menu class="lateral_tabs">
+                        <?php /*
+                            <li><a href="#" class="tip_tool_right" title="Configurar minha conta na rede"><img src="images/panel/settings.png" />configurar</a></li>
+                         */?>
+                            <li <?php if ($action=='change-password') echo 'class="selected"' ?>><a href="painel/usuario/alterar-senha" class="tip_tool_right" title="Mudar minha senha do login"><img src="images/panel/password.png" />alterar senha</a></li>
+                            <li <?php if ($action=='change-password') echo 'class="selected"' ?>><a href="painel/usuario/excluir-conta" class="tip_tool_right modal_iframe" title="Excluir a minha conta no Empreendemia"><img src="images/panel/_cone_exclus_o.png" />excluir conta</a></li>
+                        </menu>
+                    </div><!-- .panel -->
+
+
+                    <div class="content">
+                        <?php echo $this->layout()->content ?>
+                    </div><!-- .content -->
+
+                    <div class="clear"></div>
+                </div><!-- col_1 -->
+            </div><!-- col -->
+
+            <div class="clear"></div>
+        </div><!-- .container -->
+    </div> <!-- #page -->
+
+    <?php include("elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footer do layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include("elements/foot.phtml") ?>

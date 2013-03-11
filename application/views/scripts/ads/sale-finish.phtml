@@ -1,0 +1,43 @@
+<?php
+/**
+ * finish.phtml
+ * Termina a configuração da campanha, mostra pagamento
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-15
+ */
+?>
+<?php $this->layout()->setLayout('clean') ?>
+
+<script type="text/javascript">
+    <?php echo $this->Tracker()->pageView('/campanha-cadastrada', true) ?>
+    <?php echo $this->Tracker()->userEvent('ads sale: finished setup', null, true) ?>
+</script>
+
+<div class="plaintext">
+    <h2 class="h_title h_blue h_xlarge">Sua campanha foi configurada com sucesso!</h2>
+    <p>Você configurou uma campanha de <strong>3</strong> meses com alcance para <strong><?php echo $this->companies_count ?></strong> empresas.
+    <p>Para a campanha começar, é preciso efetuar o pagamento: </p>
+    <div class="payment_button">
+        <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+        <form target="pagseguro" action="https://pagseguro.uol.com.br/v2/checkout/cart.html?action=add" method="post">
+        <input type="hidden" name="receiverEmail" value="luiz@empreendemia.com.br" />
+        <input type="hidden" name="currency" value="BRL" />
+        <input type="hidden" name="itemId" value="ee publicidade" />
+        <input type="hidden" name="itemDescription" value="Promocao Publicidade + Premium por 3 meses" />
+        <input type="hidden" name="itemQuantity" value="1" />
+        <input type="hidden" name="itemAmount" value="<?php echo number_format($this->price, 2, '.', '') ?>" />
+        <input type="hidden" name="itemWeight" value="" />
+        <input type="hidden" name="itemShippingCost" value="0.00" />
+        <input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/209x48-pagar-laranja-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!"  onclick="<?php echo $this->Tracker()->userEvent('ads sale: clicked payment button', null, true) ?>" />
+        </form>
+        <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+    </div>
+    <p>Caso prefira efetuar o pagamento mais tarde, uma cópia deste botão foi enviada para seu email.</p>
+    <p>Assim que sua campanha entrar no ar, você receberá um email de um de nossos atendentes.</p>
+    <br />
+    <h3>Configure já o seu premium!</h3>
+    <p>Você já pode começar a testar seu premium, mesmo sem ter efetuado o pagamento. <a href="painel/empresa">Clique aqui</a>!</p>
+    <br />
+    <p>Em caso de dúvidas, entre em contato com atendimento@empreendemia.com.br</p>
+</div>

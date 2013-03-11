@@ -1,0 +1,135 @@
+<?php
+/**
+ * rate.php
+ * Avaliar uma empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-03
+ */
+?>
+
+<?php if($this->template == 'modal_iframe'): ?>
+    <?php $this->layout()->setLayout('modal_iframe') ?>
+    <?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+    <?php $this->headLink()->appendStylesheet('css/elements/rate.css'); ?>
+    <?php $this->headScript()->appendFile('js/forms/wordcount.js'); ?>
+<?php else :?>
+    <?php $this->layout()->setLayout('2_cols_large_small') ?>
+    <?php $this->headLink()->appendStylesheet('css/ui/forms.css') ?>
+    <?php $this->headLink()->appendStylesheet('css/layouts/auth.css') ?>
+    <?php $this->headScript()->appendFile('js/forms/locations.js') ?>
+<?php endif;?>
+
+
+<?php
+/*
+ * ------------------------------------------------------------
+ * Avaliar empresa
+ * ------------------------------------------------------------
+ */
+?>
+<?php if (!$this->testimonial) : ?>
+
+    <?php if($this->template == 'modal_iframe'): ?>
+        <?php $this->modal = null ?>
+        <?php $this->modal->width = 320 ?>
+        <?php $this->modal->height = 220 ?>
+
+        <div class="plaintext">
+        <h1 class="h_title h_blue h_large">Como você avalia<br /><?php echo $this->company->name ?>?</h1>
+        </div>
+    <?php else :?>
+       <h1 class="h_title h_blue h_xxxlarge h_border">Cadastre-se</h1>
+
+       <div class="plaintext">
+        Agora voce pode ajudar <?php echo $this->company->name ?> a melhorar sua reputacao no empreendemia.<br /> Deixe sua avaliacao sobre sua experiencia ao fazer negocios com a <?php echo $this->company->name ?><br /><br />
+        </div>
+
+        <div class="plaintext" style="text-align:center">
+        <h1 class="h_title h_blue h_large">Como voce avalia <?php echo $this->company->name ?>?</h1>
+        </div>
+    <?php endif;?>
+
+    <?php if($this->template == 'modal_iframe'): ?>
+        <div class="rate_options">
+            <div class="rate_up"><a href="<?php echo $this->company->url() ?>/avaliar/positivo" ><img src="images/icons/rate_up.png" /></a></div>
+            <div class="rate_down"><a href="<?php echo $this->company->url() ?>/avaliar/negativo" ><img src="images/icons/rate_down.png" /></a></div>
+        </div>
+    <?php else :?>
+        <div style="text-align:center">
+            <a href="<?php echo $this->company->url() ?>/avaliar/positivo?action=convite" ><img src="images/icons/rate_up.png" /></a>
+            <a href="<?php echo $this->company->url() ?>/avaliar/negativo?action=convite" ><img src="images/icons/rate_down.png" /></a>
+        </div>
+
+	<div style="text-align:right"><a href="passo-a-passo/?ustatus=registered">Nao gostaria de fazer isso agora</a>&nbsp;</div>
+    <?php endif;?>
+
+<?php
+/*
+ * ------------------------------------------------------------
+ * Enviar depoimento
+ * ------------------------------------------------------------
+ */
+?>
+<?php elseif (!$this->sent) : ?>
+    <?php if($this->template == 'modal_iframe'): ?>
+        <?php $this->modal = null ?>
+        <?php $this->modal->width = 540 ?>
+        <?php $this->modal->height = 250 ?>
+     <?php else :?>
+       <h1 class="h_title h_blue h_xxxlarge h_border">Cadastre-se</h1>
+       <div class="plaintext">
+        Agora voce pode ajudar <?php echo $this->company->name ?> a melhorar sua reputacao no empreendemia.<br /> Deixe sua avaliacao sobre sua experiencia ao fazer negocios com a <?php echo $this->company->name ?><br /><br />
+        </div>
+    <?php endif;?>
+
+    <?php
+    $testimonial = $this->testimonial;
+    if ($testimonial == 'up') $rate = '<span style="color:#360">positiva</span>';
+    else $rate = '<span style="color:#800">negativa</span>';
+    ?>
+    <div class="plaintext">
+    <h1 class="h_title h_blue h_large">Deixar depoimento para <?php echo $this->company->name ?>?</h1>
+    <p>Gostaria de deixar um depoimento para sua avaliação <?php echo $rate ?>?</p>
+    </div>
+    <div class="form">
+        <?php echo $this->form ?>
+    </div>
+
+    <?php if($this->template != 'modal_iframe'): ?><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+	<div style="text-align:right"><a href="passo-a-passo/?ustatus=registered">Nao gostaria de fazer isso agora</a>&nbsp;</div>
+    <?php endif;?>
+<?php
+/*
+ * ------------------------------------------------------------
+ * Avaliação enviada
+ * ------------------------------------------------------------
+ */
+?>
+<?php else : ?>
+    <?php if($this->template == 'modal_iframe'): ?>
+        <?php $this->modal = null ?>
+        <?php $this->modal->width = 540 ?>
+        <?php $this->modal->height = 90 ?>
+    <?php endif;?>
+
+    <div class="plaintext">
+    <h1 class="h_title h_blue h_large">Deixar depoimento para <?php echo $this->company->name ?>?</h1>
+    <p>Seu depoimento foi enviado com sucesso!</p>
+    <p><a href="<?php echo $this->company->url()?>/avaliacoes" target="_top">Clique aqui</a> para atualizar página de avaliações.</p>
+    </div>
+<?php endif ?>
+
+<?php if($this->template != 'modal_iframe'): ?>
+    <?php
+    /*
+     * ------------------------------------------------------------
+     * Aqui começa o conteúdo lateral
+     * ------------------------------------------------------------
+     */
+    ob_start()
+    ?>
+
+   <?php $this->layout()->side = ob_get_clean() ?>
+<?php endif; ?>
+

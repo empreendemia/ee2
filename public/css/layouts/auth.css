@@ -1,0 +1,133 @@
+/*
+--------------------------------------------------------------------------------
+Message
+--------------------------------------------------------------------------------
+*/
+#must_auth_message {
+    padding: 20px 20px 20px 70px;
+    background-color: #ffd;
+    border-bottom: 1px solid #888;
+    text-shadow: 1px 1px 0 #fff;
+    background-image: url(../../images/ui/locked.png);
+    background-repeat: no-repeat;
+    background-position: 16px 18px;
+}
+#must_auth_message h1 {
+    font-size: 12pt;
+    font-weight: bold;
+    color: #0C478B;
+    margin-bottom: 5px;
+}
+#must_auth_message h2 {
+    font-size: 10pt;
+    color: #333;
+}
+#must_auth_message h2 strong {
+    font-weight: bold;
+}
+
+/*
+--------------------------------------------------------------------------------
+Login
+--------------------------------------------------------------------------------
+*/
+.col_2 .login {
+    padding: 20px;
+    background-color: #eee;
+    border-bottom: 1px dotted #888;
+    background-image: url(../../images/layout/shadow-left-to-right.png);
+    background-repeat: repeat-y;
+}
+
+.col_2 .login h2 {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 9pt;
+    margin: 5px 0 15px 0;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+.col_2 .login form dl dt {
+    clear: both;
+    float: left;
+    width: 50px;
+    font-size: 8pt;
+    text-align: right;
+    margin: 4px 6px 4px 4px;
+}
+
+.col_2 .login form dl dt label {
+    color: #666;
+    font-size: 8pt;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+.col_2 .login form dl dd {
+    margin: 4px;
+}
+
+.col_2 .login form dl dd input[type=text],
+.col_2 .login form dl dd input[type=password] {
+    width: 150px;
+}
+
+/*
+--------------------------------------------------------------------------------
+FAQ
+--------------------------------------------------------------------------------
+*/
+.col_2 .faq {
+    padding: 20px;
+    line-height: 1.1em;
+    background-color: #fff;
+    background-image: url(../../images/layout/shadow-left-to-right.png);
+    background-repeat: repeat-y;
+}
+.col_2 .faq h2 {
+    color: #0C478B;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    font-size: 10pt;
+    border-bottom: 1px dotted #ccc;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+
+.col_2 .faq .questions ul {
+    margin: 10px 0;
+}
+
+.col_2 .faq .questions .question {
+    font-weight: bold;
+    font-size: 8pt;
+    margin-bottom: 5px;
+}
+.col_2 .faq .questions .answer {
+    font-size: 8pt;
+    margin: 10px 0;
+}
+/*
+--------------------------------------------------------------------------------
+Inviter
+--------------------------------------------------------------------------------
+*/
+.inviter h2 {
+    padding: 40px 10px 15px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    color: #888;
+    font-weight: bold;
+    font-size: 11pt;
+    text-align: center;
+}
+.inviter .thumb {
+    text-align: center;
+    margin: 10px;
+}
+.inviter .name {
+    text-align: center;
+    margin: 10px;
+    font-size: 11pt;
+}

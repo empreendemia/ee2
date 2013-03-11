@@ -1,0 +1,81 @@
+<?php
+/**
+ * contacts.phtml
+ * Layout da lista de contatos
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-18
+ */
+
+    $this->headLink()->appendStylesheet('css/cols/large-small.css');
+    $this->headLink()->appendStylesheet('css/layouts/contacts.css');
+
+?>
+
+<?php include("elements/head.phtml") ?>
+
+<div id="body">
+
+    <?php include("elements/user_header.phtml"); ?>
+
+    <?php include("elements/header.phtml"); ?>
+
+    <div id="page">
+        <div class="container">
+            <?php
+            // -----------------------------------------------------------------
+            // Primeira coluna (larga)
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_1">
+                <div class="contacts_header page_header">
+
+                    <h1 class="h_title h_blue h_xxlarge">
+                        Meus contatos
+                    </h1>
+
+                </div> <!-- .page_header .company_header -->
+
+                <?php
+                // -------------------------------------------------------------
+                // Conteúdo da view
+                // -------------------------------------------------------------
+                ?>
+                <div class="content">
+                    <?php echo $this->layout()->content ?>
+                </div>
+
+                <div class="clear"></div>
+            </div><!-- col_1 -->
+
+            <?php
+            // -----------------------------------------------------------------
+            // Segunda coluna - espaço para anúncios
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_2">
+		<div id="quiz"> </div>
+                <div class="ads_display ads_display_lateral ads_display_4"></div>
+            </div><!-- .col_2 -->
+
+            <div class="clear"></div>
+        </div><!-- .container -->
+    </div> <!-- #page -->
+
+    <?php include("elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footer do layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include("elements/foot.phtml") ?>

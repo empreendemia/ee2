@@ -1,0 +1,56 @@
+<?php
+/**
+ * error.phtml
+ * Página de erro
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-09
+ */
+?>
+<style type="text/css">
+.error_page {
+        padding: 40px;
+}
+.error_page h1 {
+    color:#0C478B;
+    font-weight: bold;
+    font-size: 16pt;
+    margin-bottom: 10px;
+}
+.error_page h2 {
+    color:#888;
+    font-size: 12pt;
+    margin-bottom: 20px;
+}
+p {
+    color:#333;
+    font-size: 12pt;
+}
+
+</style>
+
+<div class="error_page">
+  <h1>Ops! Não foi possível acessar esta página!</h1>
+  <h2><?php if (isset($this->message)) echo $this->message ?></h2>
+
+  <p><?php if (isset($this->exception)) echo $this->exception->getMessage() ?></p>
+
+
+  <?php if (isset($this->exception)): ?>
+  <div>
+  <h3>Exception information:</h3>
+  <p>
+      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+  </p>
+
+  <h3>Stack trace:</h3>
+  <pre><?php echo $this->exception->getTraceAsString() ?>
+  </pre>
+
+  <h3>Request Parameters:</h3>
+  <pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?>
+  </pre>
+  </div>
+
+  <?php endif ?>
+</div>

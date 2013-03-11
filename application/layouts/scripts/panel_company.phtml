@@ -1,0 +1,119 @@
+<?php
+/**
+ * panel_company.phtml
+ * Layout do painel de controle da empresa
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-22
+ */
+?>
+<?php
+
+    $this->headLink()->appendStylesheet('css/cols/large.css');
+    $this->headLink()->appendStylesheet('css/layouts/panel.css');
+
+    $this->layout()->title = 'Painel de Controle';
+
+    $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+?>
+
+<?php include("elements/head.phtml") ?>
+
+<div id="body">
+
+    <?php include("elements/user_header.phtml"); ?>
+
+    <?php include("elements/header.phtml"); ?>
+
+    <div id="page">
+        <div class="container">
+            <div class="col">
+                <div class="panel_header page_header">
+
+                    <h1 class="h_title h_blue h_xxxlarge">Painel de Controle</h1>
+
+                    <menu id="panel_menu">
+                        <li>
+                            <a href="painel/usuario">
+                                Usuário
+                            </a>
+                        </li>
+                        <li class="selected">
+                            <a href="painel/empresa">
+                                Empresa
+                            </a>
+                        </li>
+                    </menu>
+
+                </div> <!-- .page_header .panel_header -->
+
+            <?php
+            // -----------------------------------------------------------------
+            // Uma coluna só
+            // -----------------------------------------------------------------
+            ?>
+                <div class="col_1">
+                    <div class="panel">
+                        <h3 class="h_title h_grey h_medium">Perfil da Empresa</h3>
+                        <menu class="lateral_tabs">
+                            <li <?php if ($action=="company-about") echo 'class="selected"'?>><a href="painel/empresa/sobre" class="tip_tool_right" title="Editar informações sobre minha empresa"><img src="images/panel/about.png" />sobre</a></li>
+                            <li <?php if ($action=="company-profile") echo 'class="selected"'?>><a href="painel/empresa/dados-para-contato" class="tip_tool_right" title="Editar dados de contato da minha empresa"><img src="images/panel/company_contact.png" />contato</a></li>
+                            <li <?php if ($action=="company-image") echo 'class="selected"'?>><a href="painel/empresa/imagem" class="tip_tool_right" title="Alterar imagem da minha empresa"><img src="images/panel/image.png" />logotipo</a></li>
+                            <li <?php if ($action=="company-members") echo 'class="selected"'?>><a href="painel/empresa/pessoas" class="tip_tool_right" title="Adicionar pessoas que trabalham na minha empresa"><img src="images/panel/members.png" />pessoas</a></li>
+                            <?php /*
+                             <li><a href="#" class="tip_tool_right" title="Administrar pessoas da minha empresa"><img src="images/panel/members.png" />pessoas</a></li>
+                            <li><a href="#" class="tip_tool_right" title="Configurar avaliações para minha empresa"><img src="images/panel/testimonials.png" />avaliações</a></li>
+                             */?>
+                        </menu>
+                        <hr />
+                        <h3 class="h_title h_grey h_medium">Produtos</h3>
+                        <menu class="lateral_tabs">
+                            <li <?php if ($action=="company-products") echo 'class="selected"'?>><a href="painel/empresa/produtos" class="tip_tool_right" title="Listar todos os produtos da minha empresa"><img src="images/panel/products.png" />ver produtos</a></li>
+                            <li <?php if ($action=="company-add-product") echo 'class="selected"'?>><a href="painel/empresa/produtos/adicionar" class="tip_tool_right" title="Adicionar novo produto"><img src="images/panel/add_product.png" />adicionar produto</a></li>
+                        </menu>
+                        <?php if ($this->Access()->company(true)->isPlan('premium')) : ?>
+                        <hr />
+                        <h3 class="h_title h_grey h_medium">Personalização</h3>
+                            <menu class="lateral_tabs">
+                                <li <?php if ($action=="company-premium-custom") echo 'class="selected"'?>><a href="painel/empresa/premium/personalizar" class="tip_tool_right" title="Personalizar minha página premium"><img src="images/panel/custom_template.png" />personalizar</a></li>
+                                <?php //<li><a href="#" class="tip_tool_right" title="Escolher um template pronto para minha página premium"><img src="images/panel/templates.png" />templates prontos</a></li> ?>
+                            </menu>
+                        <?php endif ?>
+                    </div><!-- .panel -->
+
+
+                    <?php
+                    // ---------------------------------------------------------
+                    // Inclusão da view
+                    // ---------------------------------------------------------
+                    ?>
+                    <div class="content">
+                        <?php echo $this->layout()->content ?>
+                    </div><!-- .content -->
+
+                    <div class="clear"></div>
+                </div><!-- col_1 -->
+            </div><!-- col -->
+
+            <div class="clear"></div>
+        </div><!-- .container -->
+    </div> <!-- #page -->
+
+    <?php include("elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footer do layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include("elements/foot.phtml") ?>

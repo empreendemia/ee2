@@ -1,0 +1,62 @@
+<?php
+/**
+ * home.phtml
+ * Layout da home
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+<?php $this->headLink()->appendStylesheet('css/layouts/home.css') ?>
+<?php include("elements/head.phtml") ?>
+
+
+<div id="body">
+
+    <?php include("elements/user_header.phtml"); ?>
+
+    <div id="home_header">
+        <div class="spacer"></div>
+        <div class="container">
+            <h1 class="empreendemia_title">Empreendemia</h1>
+            <div class="home_logo"><img src="images/home/logo.png" /></div>
+            <?php if (!$this->Access()->checkAuth()) : ?>
+            <div class="login">
+                <?php $form = new Ee_Form_Login() ?>
+                <?php $form->setAction('login') ?>
+                <?php $form->return->setValue('novidades') ?>
+                <?php echo $form; ?>
+            </div>
+            <div class="sign_up">
+                faça seu <a href="cadastre-se">cadastro <strong>gratuito</strong></a>
+            </div>
+            <?php endif ?>
+        </div>
+    </div><!-- #home_header -->
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Conteúdo da view
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="home">
+        <?php echo $this->layout()->content ?>
+    </div> <!-- #home -->
+
+    <?php include("elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footer do layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include("elements/foot.phtml") ?>

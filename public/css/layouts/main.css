@@ -1,0 +1,515 @@
+/*
+--------------------------------------------------------------------------------
+Main Header
+--------------------------------------------------------------------------------
+*/
+.main_header {
+    height: 100px;
+    border-bottom: 1px solid #888;
+    margin-right: 1px;
+    position: relative;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Main Thumb
+--------------------------------------------------------------------------------
+*/
+#user_thumb {
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Main Name
+--------------------------------------------------------------------------------
+*/
+#user_name {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 20px;
+    left: 90px;
+    color: #333;
+    font-size: 16pt;
+    font-weight: bold;
+}
+#user_name strong {
+    color: #0C478B;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Main Menu
+--------------------------------------------------------------------------------
+*/
+#user_menu {
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    list-style: none;
+}
+
+#user_menu li {
+    float: left;
+    margin-left: 1px;
+    display: block;
+    border: 1px solid #aaa;
+    border-bottom: 1px solid #888;
+    background-color: #ddd;
+}
+
+#user_menu li.selected {
+    border: 1px solid #888;
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+}
+
+#user_menu li a {
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 154px;
+    text-align: center;
+    font-size: 9pt;
+    color: #888;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+    text-transform: uppercase;
+}
+
+#user_menu li.selected a {
+    color: #0C478B;
+}
+
+#user_menu li:hover {
+    background-color: #fff;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+UI elements
+--------------------------------------------------------------------------------
+*/
+
+.user_thumb,
+.company_thumb {
+    width: 160px;
+    border: 1px solid #888;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.user_thumb p,
+.company_thumb p {
+    color: #888;
+    font-size: 10pt;
+    text-align: center;
+    padding-top: 8px;
+    font-weight: bold;
+}
+
+/*
+--------------------------------------------------------------------------------
+Get-started
+--------------------------------------------------------------------------------
+*/
+
+
+#getstarted {
+
+    font: bold 4em;
+    margin-bottom:0px;
+    margin-left:10px;
+    margin-top:30px
+
+}
+
+.getstartednested {
+
+    font: bold 4em;
+    margin-left:80px;
+    margin-top:20px;
+    margin-bottom:20px;
+    list-style-image:url(../../images/ui/bullet_yellow.png);
+
+}
+
+
+#getstarted .getstartednested li {
+    margin-bottom:10px
+     
+}
+
+
+#getstarted li {
+    margin-bottom:25px;
+}
+
+
+#getstarted p {
+    color: #000000;
+    margin:0px;
+}
+
+
+#getstarted .bullet {
+    color:#FFFFFF;
+    width:36px;
+    height:36px;
+    background:  url(../../images/ui/getstarted_button.png) center center no-repeat;
+    padding:17px;
+    margin-right:10px;
+}
+
+#getstarted .steptext {
+    color: #000000;
+
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Updates
+--------------------------------------------------------------------------------
+*/
+
+#update_news {
+
+}
+
+#update_news h2 {
+    margin: 20px 0 10px 0;
+}
+
+#update_news p {
+    margin: 10px 0;
+    font-size: 8pt;
+}
+
+#write_message_update {
+    padding: 10px;
+    background-color: #eee;
+    border-bottom: 1px solid #ccc;
+}
+
+
+#write_message_update h1 {
+    color: #888;
+    font-size: 9pt;
+}
+
+#send_message_update {
+    margin-top: 10px;
+    position: relative;
+}
+
+#send_message_update #char_counter {
+    position: absolute;
+    right: 0;
+    top: -26px;
+    font-size: 8pt;
+    color: #888;
+}
+
+#send_message_update #char_counter .counter {
+    font-weight: bold;
+}
+
+#send_message_update #message_update_field {
+    height: 24px;
+    width: 320px;
+}
+
+#send_message_update #message_update_submit {
+    position: absolute;
+    right: 0;
+    top: 3px;
+    padding: 3px;
+    font-size: 9pt;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #d80;
+    color: #fff;
+    background-color: #fa0;
+    border: 1px solid #d80;
+}
+
+#companies_updates_list {
+    min-height: 200px;
+}
+
+#companies_updates_list .ajax_loading,
+#updates_list .ajax_loading {
+    position: relative;
+    height: 200px;
+    background: url(../../images/ui/ajax-loader.gif) no-repeat center center;
+}
+
+#companies_updates_list .ajax_loading p,
+#updates_list .ajax_loading p {
+    color: #888;
+    padding-top: 70px;
+    text-align: center;
+}
+
+#companies_updates_list .more_updates a,
+#updates_list .more_updates a {
+    display: block;
+    text-align: right;
+    font-size: 8pt;
+}
+
+#updates_list .no_results {
+    position: relative;
+    height: 200px;
+}
+
+#updates_list .no_results p {
+    color: #888;
+    padding-top: 80px;
+    text-align: center;
+}
+
+.update {
+    position: relative;
+    padding: 10px 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+.update .thumbs {
+    float: left;
+}
+
+.update .thumbs .rate_icon {
+    margin: 0 10px;
+}
+
+.update .author {
+    float: left;
+    padding-left: 10px;
+    line-height: 1.2em;
+}
+
+.update .action {
+    float: left;
+    width: 300px;
+    padding-top: 5px;
+    padding-left: 10px;
+    line-height: 1.2em;
+    font-size: 8pt;
+}
+
+.update .large_action {
+    clear: both;
+    font-size: 9pt;
+    line-height: 1.4em;
+    padding-top: 5px;
+}
+
+.update .large_action strong {
+    font-weight: bold;
+}
+
+.update .author .company {
+    font-weight: bold;
+    font-size: 9pt;
+}
+
+.update .author .user {
+    font-weight: bold;
+    font-size: 9pt;
+}
+
+.update .message {
+    font-size: 8pt;
+    line-height: 1.3em;
+    overflow: hidden;
+    float: left;
+    padding-left: 10px;
+    padding-top: 5px;
+    width: 310px;
+}
+
+.update .message strong {
+    color: #666;
+}
+
+.update .date {
+    font-size: 8pt;
+    color: #888;
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+
+
+.last_businesses {
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.last_products h1,
+.last_businesses h1{
+    margin-bottom: 20px;
+}
+
+.last_products ul li,
+.last_businesses ul li{
+    height: 60px;
+    margin-left: 25px;
+    float: left;
+}
+
+.last_products ul li.first,
+.last_businesses ul li.first{
+    margin-left: 0 !important;
+}
+
+.last_products {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+/*
+--------------------------------------------------------------------------------
+Quero comprar
+--------------------------------------------------------------------------------
+*/
+
+.sub_col_2 .widget {
+    margin-left: 20px;
+}
+
+.widget {
+    margin-bottom: 20px;
+}
+
+.widget p {
+    font-size: 9pt;
+    line-height: 1.2em;
+    margin: 5px 0;
+}
+
+.search_form {
+    margin: 10px 0;
+}
+
+.search_form .search_field {
+    width: 130px;
+    padding: 3px;
+    font-size: 9pt;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #888;
+}
+
+.search_form .search_submit {
+    padding: 2px;
+    font-size: 9pt;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #d80;
+    color: #fff;
+    background-color: #fa0;
+    border: 1px solid #d80;
+
+}
+
+.request_service a {
+    color: #d80;
+}
+
+.offers .more {
+    font-size: 9pt;
+}
+
+.offers_list {
+    margin: 20px 0;
+}
+
+.offers_list .offer {
+    float: left;
+    width: 130px;
+    height: 180px;
+    margin: 10px;
+    text-align: center;
+    font-size: 8pt;
+    line-height: 1.2em;
+}
+.offers_list .offer .product_thumb {
+    margin-bottom: 10px;
+}
+
+.offers_list .offer .product_name {
+    margin-bottom: 2px;
+}
+
+.offers_list .offer .product_name a {
+    font-weight: bold;
+}
+
+.offers_list .offer .company_name a {
+    color: #d80;
+}
+
+/*
+--------------------------------------------------------------------------------
+Quero vender
+--------------------------------------------------------------------------------
+*/
+
+.tools .tool {
+    margin: 40px 0;
+    position: relative;
+}
+
+.tools .tool .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.tools .tool h2 {
+    font-weight: bold;
+    margin-left: 100px;
+}
+
+.tools .tool p {
+    margin-left: 100px;
+    line-height: 1.4em;
+}
+
+.tools .tool .view_more {
+    font-size: 8pt;
+    margin-left: 100px;
+}
+
+.sectors_list {
+
+}
+
+.sectors_list .sectors {
+    list-style: disc;
+    padding-left: 12px;
+    margin: 10px 0;
+    color: #ccc;
+}
+
+.sectors_list .sectors .sector{
+    font-size: 8pt;
+    line-height: 1.1em;
+    margin: 4px 0;
+}
+
+.sectors_list .sectors .sector a{
+    color: #666;
+}
+
+.sectors_list .sectors .sector a:hover{
+    color: #e80;
+}

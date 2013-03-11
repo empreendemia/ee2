@@ -1,0 +1,51 @@
+<?php
+/**
+ * request.php
+ * Requisição de troca de cartão
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-02
+ */
+?><?php $this->layout()->title = 'Trocar cartões' ?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 800 ?>
+<?php $this->modal->height = 250 ?>
+
+<div class="cols_small_large">
+    <div class="col_1">
+        <?php echo $this->user->image() ?>
+    </div>
+    <div class="col_2">
+        <?php
+        // ---------------------------------------------------------------------
+        // Pediu o cartão
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($this->sent) : ?>
+        <script type="text/javascript">
+        $(function() {
+           parent.$('#request_'+<?php echo $this->user->id ?>).remove();
+        });
+        </script>
+        <h1 class="h_title h_blue h_xlarge">Você pediu o cartão de <?php echo $this->user->fullName() ?></h1>
+
+        <?php
+        // ---------------------------------------------------------------------
+        // Pergunta se quer mesmo trocar cartões
+        // ---------------------------------------------------------------------
+        ?>
+        <?php else : ?>
+        <?php $userData = new Zend_Session_Namespace('UserData'); ?>
+        <h1 class="h_title h_blue h_xlarge">Pedir o cartão de <?php echo $this->user->fullName() ?></h1>
+        <br />
+        <div class="form">
+            <?php $this->form->message->setValue("Olá ".$this->user->name."! \n\nGostaria de trocar cartões com você. \n\nAbraços,\n".$userData->user->name) ?>
+            <?php echo $this->form ?>
+        </div>
+        <?php endif ?>
+    </div>
+</div>

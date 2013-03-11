@@ -1,0 +1,28 @@
+<?php
+/**
+ * logout.php
+ * Página quando usuário faz logout
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-31
+ */
+?>
+<div style="text-align:center;margin:20px 0;">
+
+<?php if($this->deleteaccount ) : ?>
+    Sua conta foi desativada com sucesso. Para reativa-la basta logar-se novamente.
+<?php endif;?>
+
+
+<script type="text/javascript">
+$(function() {
+    <?php echo $this->Tracker()->event('User', 'viewed logout ad: ebook', $this->user->login, null, true); ?>
+})
+</script>
+
+<a href="http://www.saiadolugar.com.br/arquivos/2011/12/Ebook-5-passos-para-vender-mais-pela-internet.pdf" onclick="<?php echo $this->Tracker()->event('User', 'clicked logout ad: ebook', $this->user->login, null, true); ?>">
+    <img src="images/ads/logout/ebook.jpg" />
+</a>
+
+
+</div>

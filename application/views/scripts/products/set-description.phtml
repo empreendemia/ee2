@@ -1,0 +1,45 @@
+<?php
+/**
+ * set-description.phtml
+ * Adiciona descrição para o produto premium
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headScript()->appendFile('js/forms/ckeditor/ckeditor.js'); ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Formulário
+// -----------------------------------------------------------------------------
+?>
+<?php if ($this->sent == false) : ?>
+
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 600 ?>
+<?php $this->modal->height = 600 ?>
+
+<h1 class="h_title h_blue h_medium h_margin h_border"><?php echo $this->product->image(80) ?>  Editar descrição de <?php echo $this->product->name ?> </h1>
+
+<div class="form">
+    <?php echo $this->form ?>
+</div>
+
+<?php
+// -----------------------------------------------------------------------------
+// Descrição salva
+// -----------------------------------------------------------------------------
+?>
+<?php else : ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 600 ?>
+<?php $this->modal->height = 160 ?>
+<div class="plaintext">
+<h1 class="h_title h_blue h_medium h_margin h_border"><?php echo $this->product->image(80) ?> Descrição de <?php echo $this->product->name ?>  salvo com sucesso!</h1>
+<p><a href="<?php echo $this->product->url() ?>" target="_top">Clique aqui</a> para visualizar o produto.</p>
+</div>
+<?php endif ?>

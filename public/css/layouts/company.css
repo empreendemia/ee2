@@ -1,0 +1,830 @@
+/*
+--------------------------------------------------------------------------------
+Company Header
+--------------------------------------------------------------------------------
+*/
+.company_header {
+    height: 170px;
+    border-bottom: 1px solid #888;
+    margin-right: 1px;
+    position: relative;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Company Thumb
+--------------------------------------------------------------------------------
+*/
+#company_thumb {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Company Name
+--------------------------------------------------------------------------------
+*/
+#company_name {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 32px;
+    left: 170px;
+    color: #0C478B;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Company Sector
+--------------------------------------------------------------------------------
+*/
+#company_sector {
+    position: absolute;
+    top: 60px;
+    left: 170px;
+    color: #0C478B;
+    font-size: 9pt;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Company Menu
+--------------------------------------------------------------------------------
+*/
+#company_menu {
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    list-style: none;
+}
+
+#company_menu li {
+    float: left;
+    margin-left: 1px;
+    display: block;
+    border: 1px solid #aaa;
+    border-bottom: 1px solid #888;
+    background-color: #ddd;
+    border-radius: 8px 8px 0 0;
+    opacity: 0.8;
+}
+
+#company_menu li.selected {
+    border: 1px solid #888;
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+    opacity: 1;
+}
+
+#company_menu li a {
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 135px;
+    text-align: center;
+    font-size: 9pt;
+    color: #888;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+    text-transform: uppercase;
+}
+
+#company_menu li a.counter {
+    width: 115px;
+    padding-right: 20px;
+}
+
+#company_menu li.selected a {
+    color: #0C478B;
+}
+
+#company_menu li:hover {
+    background-color: #fff;
+}
+
+#company_menu .count {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+    display: block;
+    width: 24px;
+    height: 21px;
+    padding-top:7px;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    background-image: url(../../images/layout/blue_circle_24.gif);
+    background-repeat: no-repeat;
+}
+
+/*
+--------------------------------------------------------------------------------
+Company Menu
+--------------------------------------------------------------------------------
+*/
+#company_actions_menu {
+    position: absolute;
+    top: 90px;
+    right: 0px;
+    list-style: none;
+}
+
+#company_actions_menu li {
+    display: block;
+    float: left;
+    margin-right: 15px;
+}
+
+#company_actions_menu li a {
+    font-size: 8pt;
+    color: #222;
+}
+
+#company_actions_menu li a img {
+    margin-right: 4px;
+}
+/*
+--------------------------------------------------------------------------------
+View Company
+--------------------------------------------------------------------------------
+*/
+
+.company_name {
+    text-indent: -3000px;
+    position: absolute;
+}
+
+.card {
+    position: relative;
+    height: 255px;
+    border-left: 1px solid #888;
+    border-bottom: 1px solid #888;
+    margin-top: -20px;
+    overflow: hidden;
+}
+
+.card .card_image {
+    float: right;
+}
+
+.card .card_gradient {
+    position: absolute;
+    background-image: url(../../images/ui/card_gradient.png);
+    background-repeat: repeat-y;
+    width: 100%;
+    height: 255px;
+}
+
+.card .contact {
+    position: absolute;
+    left: 80px;
+    top: 65px;
+    color: #666;
+    font-size: 11pt;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+.card .contact li {
+    margin-bottom: 10px;
+}
+
+.card .contact img {
+    position: absolute;
+    left: -28px;
+}
+
+.card .contact li.phone,
+.card .contact li.phone2 {
+    font-weight: bold;
+}
+.card .contact li.phone2 {
+    margin-bottom: 20px;
+}
+.card .contact li.email {
+    margin-top: 20px;
+}
+.card .contact li a {
+    color: #666;
+}
+
+.address {
+    margin-top: 20px;
+    font-size: 8pt;
+    margin-right: 20px;
+}
+
+.address .city {
+    margin: 10px 0;
+    font-size: 9pt;
+    font-weight: bold;
+}
+
+.address .complement {
+    margin: 10px 0;
+    color: #888;
+}
+
+.address .map {
+    margin: 10px 0;
+}
+
+.more_contacts {
+    padding-top: 10px;
+    font-size: 7pt;
+}
+
+.more_contacts li {
+    margin: 2px 0;
+}
+
+.share {
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.share h3 {
+    color: #666;
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+.share li {
+    margin: 5px 0;
+}
+
+.company_logout {
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+.company_logout p {
+    margin-bottom: 20px;
+}
+
+.company_logout .options li:first-child {
+   left : 40px;
+   position: relative;
+   display: inline-block;
+} 
+
+.company_logout .options li:last-child {
+   left : 120px;
+   position: relative;
+   display:inline-block;
+} 
+
+.company_logout .options li:first-child img{
+    display:block;
+    position:relative;
+    left:35px;
+    margin-bottom:10px;
+}
+
+.company_logout .options li:last-child img{
+    display:block;
+    position:relative;
+    left:30px;
+    margin-bottom:10px;
+}
+
+.company_description {
+    margin-top: 20px;
+}
+
+.company_description h2 {
+    margin-top: 20px;
+    font-size: 11pt;
+    color: #666;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.company_description .more_info {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.company_description .more_info li {
+    margin: 5px 0;
+    font-size: 9pt;
+}
+
+
+
+.company_products  {
+    margin-bottom: 20px;
+}
+
+
+.company_products h2 {
+    margin-top: 20px;
+    font-size: 11pt;
+    color: #666;
+    font-weight: bold;
+}
+
+.company_products .all_products {
+    font-size: 8pt;
+    margin-bottom: 10px;
+}
+
+.company_products ul {
+    position: relative;
+    margin: 20px 0;
+}
+
+.company_products ul li {
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+    width: 105px;
+}
+
+.company_products ul li .name {
+    padding-top: 5px;
+    display: block;
+    font-size: 8pt;
+    line-height: 1.2em;
+}
+
+.company_description .text {
+    font-size: 9pt;
+}
+
+.company_about {
+    overflow: auto;
+    display: block;
+    width: 680px;
+    height: 400px;
+}
+
+.company_about .about_text {
+    margin: 0 20px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Member
+--------------------------------------------------------------------------------
+*/
+
+.company_member {
+    position: relative;
+}
+
+.company_member .short_description {
+    height: auto;
+    overflow:auto;
+    display:block;
+}
+
+.company_member .thumb {
+    float: left;
+}
+
+.company_member .contact {
+    float: left;
+    height:auto;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+
+.company_member .contact li {
+    margin-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+    color: #888;
+}
+
+.company_member .contact li img {
+    position: absolute;
+    left: -28px;
+}
+
+.company_member h1 {
+    margin-left: 150px;
+    margin-top: 10px;
+    color: #0C478B;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.company_member .job {
+    font-size: 10pt;
+    margin-left: 150px;
+    margin-top: 5px;
+}
+
+.company_member .short_description .description {
+    padding-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 160px;
+}
+
+.company_member .short_description .budget {
+    margin-bottom: 20px;
+    margin-left: 160px;
+}
+
+.company_member .short_description .budget a {
+    text-decoration: none;
+    color: #d80;
+    font-weight: bold;
+    font-size: 9pt;
+}
+
+.company_member .short_description .budget a img {
+    margin-right: 5px;
+}
+
+.company_member .offer {
+    clear: both;
+    background-color: #ff8;
+    font-size: 8pt;
+    text-shadow: 1px 1px 0 #fff;
+    padding: 10px 50px 10px 20px;
+    margin: 20px 0;
+}
+
+.company_member .offer .deadline {
+    color: #840;
+}
+
+.company_member .about {
+    clear: both;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+.rbroundbox { background: url(../../images/ui/nt.gif) repeat; }
+.rbtop div { background: url(../../images/ui/tl.gif) no-repeat top left; }
+.rbtop { background: url(../../images/ui/tr.gif) no-repeat top right; }
+.rbbot div { background: url(../../images/ui/bl.gif) no-repeat bottom left; }
+.rbbot { background: url(../../images/ui/br.gif) no-repeat bottom right; }
+
+/* height and width stuff, width not really nessisary. */
+.rbtop div, .rbtop, .rbbot div, .rbbot {
+width: 100%;
+height: 7px;
+font-size: 1px;
+}
+.rbcontent { margin: 0 7px; height: 50px; }
+.rbcontent p { margin-top:5px;font-size: 10pt;line-height:170%; }
+.rbroundbox { width: 100%; margin: 1em auto; }
+
+/*
+--------------------------------------------------------------------------------
+Message
+--------------------------------------------------------------------------------
+*/
+.message {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    height: 320px;
+}
+.message .h_title {
+    margin-bottom: 20px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Products
+--------------------------------------------------------------------------------
+*/
+.company_product {
+    position: relative;
+}
+
+.company_product .short_description {
+    height: 140px;
+}
+
+.company_product .thumb {
+    float: left;
+}
+
+
+.company_product .short_description h1 {
+    font-size: 14pt;
+    color: #0C478B;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-left: 160px;
+    padding-top: 15px;
+}
+
+.company_product .short_description .description {
+    margin-bottom: 10px;
+    margin-left: 160px;
+}
+
+.company_product .short_description .budget {
+    margin-bottom: 20px;
+    margin-left: 160px;
+}
+
+.company_product .short_description .budget a {
+    color: #d80;
+    font-weight: bold;
+    font-size: 9pt;
+}
+
+.company_product .short_description .budget a img {
+    margin-right: 5px;
+}
+
+.company_product .offer {
+    clear: both;
+    background-color: #ff8;
+    font-size: 8pt;
+    text-shadow: 1px 1px 0 #fff;
+    padding: 10px 50px 10px 20px;
+    margin: 20px 0;
+}
+
+.company_product .offer .deadline {
+    color: #840;
+}
+
+.company_product .about {
+    clear: both;
+    margin: 20px 0;
+}
+
+.company_product .website {
+    color: #888;
+    font-size: 10pt;
+    margin: 20px 0;
+}
+
+
+.company_product .share{
+    position: relative;
+    left: 0px;
+    padding-top: 2px;
+    margin-top: 20px;
+    border-top: 1px dotted #ccc;
+    height: 60px;
+}
+
+.company_product .share .title h3{
+    color: #888;
+    font-size: 8px;
+    font-weight: normal;
+}
+
+.company_product .share .button{
+    float: left;
+}
+/*
+--------------------------------------------------------------------------------
+Products images
+--------------------------------------------------------------------------------
+*/
+.premium_images {
+    background-color: #eee;
+    font-size: 8pt;
+    margin: 20px 0;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.premium_images .label {
+    color: #888;
+    margin-bottom: 5px;
+}
+.premium_images .label strong {
+    font-weight: bold;
+    margin-right: 4px;
+}
+.premium_images ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Lateral tabs
+--------------------------------------------------------------------------------
+*/
+.add_product {
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    font-size: 9pt;
+    border-bottom: 1px solid #ccc;
+}
+
+.lateral_tabs {
+
+}
+.lateral_tabs {
+    list-style: none;
+}
+
+.lateral_tabs li {
+    clear: both;
+}
+
+.lateral_tabs.transparent li a {
+    opacity: 0.5;
+    color: #234;
+}
+
+.lateral_tabs li.selected {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-image: none;
+    background-color: #fff;
+}
+
+.lateral_tabs.transparent li.selected a,
+.lateral_tabs.transparent li a:hover {
+    opacity: 1;
+    color: #0C478B;
+}
+
+.lateral_tabs li .thumb {
+    display: block;
+    float: left;
+}
+
+.lateral_tabs li .text {
+    display: block;
+    padding-left: 50px;
+    padding-top: 15px;
+    font-weight: bold;
+
+}
+
+.lateral_tabs li .subtitle {
+    display: block;
+    padding-left: 50px;
+    text-decoration: none;
+    font-size: 7pt;
+    color: #000000;
+    font-weight: none;
+}
+
+.lateral_tabs li a {
+    display: block;
+    padding: 10px;
+    width: 180px;
+    height: 40px;
+    vertical-align: middle;
+    color: #0C478B;
+    font-size: 8pt;
+    font-weight: none;
+    line-height: 1.1em;
+}
+
+.lateral_tabs li span {
+
+}
+
+
+
+/*
+--------------------------------------------------------------------------------
+Premium Side Image
+--------------------------------------------------------------------------------
+*/
+.premium_side_image {
+    position: relative;
+    background-color: #fff;
+    width: 260px;
+    overflow: hidden;
+}
+
+.premium_side_image .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 10px;
+    background-image: url(../../images/layout/shadow-left-to-right.png);
+    background-repeat: repeat-y;
+}
+
+/*
+--------------------------------------------------------------------------------
+Business
+--------------------------------------------------------------------------------
+*/
+
+.all_rates_title {
+    font-size: 12pt;
+    color: #0C478B;
+    margin-bottom: 10px;
+}
+
+.all_rates_title strong {
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.rates_title {
+    font-size: 9pt;
+}
+
+
+.rates_title strong {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.rates_title.rate_positive_title {
+    color: #680;
+}
+
+.rates_title.rate_negative_title {
+    color: #b00;
+}
+
+.rate_companies {
+    font-size: 1px;
+    margin: 10px 0;
+}
+
+.rate_companies li {
+    display: inline-block;
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+.businesses_list {
+
+}
+
+.businesses_list li {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.businesses_list li .user_name {
+    padding-left: 100px;
+    padding-top: 52px;
+    margin-bottom: 2px;
+}
+
+.businesses_list li .user_name a {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.businesses_list li .user_thumb {
+    position: absolute;
+    top: 28px;
+}
+
+.businesses_list li .company {
+    color: #888;
+    font-size: 9pt;
+    padding-left: 100px;
+    margin-bottom: 10px;
+    line-height: 1.2em;
+}
+
+.businesses_list li .company a {
+    color: #0C478B;
+}
+
+.businesses_list li .company_thumb {
+    position: absolute;
+    top: 110px;
+    left: 40px;
+}
+
+.businesses_list li .testimonial {
+    padding-left: 100px;
+    margin-bottom: 4px;
+    font-size: 10pt;
+}
+
+.businesses_list li .date {
+    padding-left: 100px;
+    font-size: 8pt;
+    color: #888;
+}
+
+.businesses_list li .rate {
+    position: absolute;
+    top: 0;
+    left: 50px;
+}

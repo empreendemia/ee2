@@ -1,0 +1,67 @@
+<?php
+/**
+ * benefits.phtml
+ * Benefícios da Locaweb
+ * 
+ * @package views
+ * @subpackage locaweb
+ * @author Mauro Ribeiro
+ * @since 2011-10-31
+ */
+?>
+<?php $this->layout()->og_title = $this->company->name ?>
+<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_description = 'Veja nossos benefícios para usuários Empreendemia!' ?>
+
+<?php $this->layout()->title = 'Benefícios Locaweb no Empreendemia' ?>
+
+
+<div class="plaintext benefits">
+    <h2>Veja os benefícios de quem segue a Locaweb no Empreendemia:</h2>
+    <div class="sub_cols">
+
+        <div class="sub_col_1" style="width:320px;">
+            <div class="box">
+                <h3>Hospedagem de sites</h3>
+                <h4>Planos sob medida para suas necessidades.</h4>
+                <p>Você tem <strong>R$ 10,00 em créditos</strong>* para criar seu site. Se já tiver um site, traga para Locaweb e conte com uma Hospedagem completa.</p>
+                <ul>
+                    <li>Ideal para ter uma presença online efetiva</li>
+                    <li>Hospeda até 10 sites</li>
+                    <li>Planos a partir de 10 caixas postais</li>
+                    <li>Pacote com soluções de divulgação, atendimento e loja virtual</li>
+                </ul>
+                <div class="locaweb_button"><a href="http://www.locaweb.com.br/landing-hp/?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_content=beneficios&utm_term=Landing+Hospedagem" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: hospedagem', 'Locaweb', null, true) ?>">Encontre o plano certo para você</a></div>
+                <p class="obs">* Utilize o cupom promocional HOSPF59B82 na contratação para utilizar seus créditos.</p>
+            </div>
+        </div>
+
+        <div class="sub_col_2" style="width:320px;padding-left:40px;">
+            <div class="box">
+                <h3>WebChat</h3>
+                <h4>Solução de atendimento online.</h4>
+                <p>Experimente o WebChat I por <strong>30 dias grátis</strong>* e aumente suas chances de venda.</p>
+                <ul>
+                    <li>Atendimento em tempo real</li>
+                    <li>Monitoração do status da fila</li>
+                    <li>Histórico da conversa</li>
+                    <li>Relatório de atendimento</li>
+                </ul>
+                <div class="locaweb_button"><a href="http://www.locaweb.com.br/produtos/webchat/precos.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_content=beneficios&utm_term=WebChat" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: webchat', 'Locaweb', null, true) ?>">Aproveite o benefício</a></div>
+                <p class="obs">* Utilize o cupom promocional CHAT03BFCB na contratação para obter o benefício.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <h2>Veja a opinião de quem já usa o WebChat:</h2>
+    <div class="testimonial_mix">
+        <p>"As vendas aumentaram significativamente após a instalação do WebChat, pois agora os clientes conseguem sanar suas dúvidas de forma simples e rápida no momento da compra."</p>
+        <div class="author">Juliana Alves</div>
+        <div class="job">Proprietária</div>
+    </div>
+    <div class="sales">
+        <a href="http://www.locaweb.com.br/vendamais/?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_content=beneficios&utm_term=Venda+Mais+Pela+Internet" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: campanha venda mais pela internet', 'Locaweb', null, true) ?>"><img src="images/vip/locaweb/banner_vendamais.jpg" /></a>
+        <p>* Condições válidas até 31/12/2012 para contratações realizadas através deste site. Os benefícios vigentes não são cumulativos. Após a utilização dos benefícios, seu serviço será renovado automaticamente. A primeira cobrança está sujeita à pro-rata (valor proporcional da data de contratação do plano até o vencimento da fatura seguinte). Caso opte pelo cancelamento, você deverá solicitá-lo através de nossos canais de atendimento.</p>
+    </div>
+</div>
+

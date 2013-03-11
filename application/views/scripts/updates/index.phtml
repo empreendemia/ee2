@@ -1,0 +1,266 @@
+<?php
+/**
+ * index.phtml
+ * Lista de updates da rede do usuário
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-15
+ */
+?>
+<?php $this->layout()->setLayout('clean') ?>
+
+<?php if ($this->updates) : ?>
+<?php foreach ($this->updates as $update) : ?>
+<div id="update_<?php echo $update->id ?>" class="update type_<?php echo $update->type ?>">
+    <?php
+    /* 
+    ------------------------------------------------------------
+    mensagem
+    ------------------------------------------------------------
+    */
+    if ($update->type == 'message') :
+    ?>
+    <div class="thumbs">
+        <?php echo $update->user->imageLink(60); ?>
+    </div>
+    <div class="author">
+        <div class="user"><a href="<?php echo $update->user->url() ?>"><?php echo $update->user->fullName() ?></a></div>
+    </div>
+    <div class="message">
+
+		<?php
+
+		$text = $update->text;
+
+        // splitting process to substring
+        $break = explode(' ', $text);
+		$count = 0;
+
+        // replacing process
+        for ($i = 0; $i < count($break); $i++) {
+	        if ((substr($break[$i], 0, 7) == 'http://')) {
+    	    	$break[$i] = '<a href="'.$break[$i].'" target="_blank" onclick="'.$this->Tracker()->userEvent('interaction: clicked update link', null, true).'">'.$break[$i].'</a>';
+				$count++;
+			}
+	        else if ((substr($break[$i], 0, 8) == 'https://')) {
+    	    	$break[$i] = '<a href="'.$break[$i].'" target="_blank" onclick="'.$this->Tracker()->userEvent('interaction: clicked update link', null, true).'">'.$break[$i].'</a>';
+				$count++;
+			}
+	        else if ((substr($break[$i], 0, 4) == 'www.')) {
+    	    	$break[$i] = '<a href="http://'.$break[$i].'" target="_blank" onclick="'.$this->Tracker()->userEvent('interaction: clicked update link', null, true).'">'.$break[$i].'</a>';
+				$count++;
+			}
+        }
+
+		$text = implode(' ', $break);
+        ?>
+        <?php echo $text ?>
+    </div>
+    <div class="date">
+        <?php echo $this->Format()->date($update->date) ?>
+    </div>
+    
+    <?php
+    /* 
+    ------------------------------------------------------------
+    mensagem
+    ------------------------------------------------------------
+    */
+    elseif ($update->type == 'companyMessage') :
+    ?>
+    <div class="thumbs">
+        <?php echo $update->company->imageLink(60); ?>
+    </div>
+    <div class="author">
+        <div class="user"><a href="<?php echo $update->company->url() ?>"><?php echo $update->company->name ?></a></div>
+    </div>
+    <div class="message">
+
+		<?php
+
+		$text = $update->text;
+
+        // splitting process to substring
+        $break = explode(' ', $text);
+		$count = 0;
+
+        // replacing process
+        for ($i = 0; $i < count($break); $i++) {
+	        if ((substr($break[$i], 0, 7) == 'http://')) {
+    	    	$break[$i] = '<a href="'.$break[$i].'" target="_blank" onclick="'.$this->Tracker()->userEvent('interaction: clicked update link', null, true).'">'.$break[$i].'</a>';
+				$count++;
+			}
+	        else if ((substr($break[$i], 0, 8) == 'https://')) {
+    	    	$break[$i] = '<a href="'.$break[$i].'" target="_blank" onclick="'.$this->Tracker()->userEvent('interaction: clicked update link', null, true).'">'.$break[$i].'</a>';
+				$count++;
+			}
+	        else if ((substr($break[$i], 0, 4) == 'www.')) {
+    	    	$break[$i] = '<a href="http://'.$break[$i].'" target="_blank" onclick="'.$this->Tracker()->userEvent('interaction: clicked update link', null, true).'">'.$break[$i].'</a>';
+				$count++;
+			}
+        }
+
+		$text = implode(' ', $break);
+        ?>
+        <?php echo $text ?>
+    </div>
+    <div class="date">
+        <?php echo $this->Format()->date($update->date) ?>
+    </div>
+    <?php
+    /*
+    ------------------------------------------------------------
+    novo produto
+    ------------------------------------------------------------
+    */
+    elseif ($update->type == 'newProduct') :
+    ?>
+    <div class="thumbs">
+        <?php echo $update->company->imageLink(40); ?>
+    </div>
+    <div class="author">
+        <div class="company"><a href="<?php echo $update->company->url() ?>"><?php echo $update->company->name ?></a></div>
+    </div>
+    <div class="action">
+        adicionou um novo produto
+    </div>
+    <div class="message">
+        <?php echo $update->text ?>
+    </div>
+    <div class="date">
+        <?php echo $this->Format()->date($update->date) ?>
+    </div>
+
+
+    <?php
+    /*
+    ------------------------------------------------------------
+    dados da empresa
+    ------------------------------------------------------------
+    */
+    elseif ($update->type == 'companyDataUpdate') :
+    ?>
+    <div class="thumbs">
+        <?php echo $update->company->imageLink(40); ?>
+    </div>
+    <div class="author">
+        <div class="company"><a href="<?php echo $update->company->url() ?>"><?php echo $update->company->name ?></a></div>
+    </div>
+    <div class="action">
+        atualizou os dados da empresa
+    </div>
+    <div class="message">
+        <?php echo $update->text ?>
+    </div>
+    <div class="date">
+        <?php echo $this->Format()->date($update->date) ?>
+    </div>
+
+    <?php
+    /*
+    ------------------------------------------------------------
+    dados do usuário
+    ------------------------------------------------------------
+    */
+    elseif ($update->type == 'userDataUpdate') :
+    ?>
+    <div class="thumbs">
+        <?php echo $update->user->imageLink(40); ?>
+    </div>
+    <div class="author">
+        <div class="user"><a href="<?php echo $update->user->url() ?>"><?php echo $update->user->fullName() ?></a></div>
+    </div>
+    <div class="action">
+        atualizou os dados de contato
+    </div>
+    <div class="message">
+        <?php echo $update->text ?>
+    </div>
+    <div class="date">
+        <?php echo $this->Format()->date($update->date) ?>
+    </div>
+
+    <?php
+    /*
+    ------------------------------------------------------------
+    enviou avaliacao positiva
+    ------------------------------------------------------------
+    */
+    elseif ($update->type == 'sentPositiveTestimonial') :
+    ?>
+    <div class="thumbs">
+        <?php echo $update->user->imageLink(40); ?>
+        <?php echo $update->user->company->imageLink(40); ?>
+        <span class="rate_icon"><img src="images/ui/rate_up_update.gif" /></span>
+        <?php echo $update->company->imageLink(40); ?>
+    </div>
+    <div class="large_action">
+        <strong><a href="<?php echo $update->user->url() ?>"><?php echo $update->user->fullName() ?></a></strong>
+        (<a href="<?php echo $update->user->company->url() ?>"><?php echo $update->user->company->name ?></a>)
+        avaliou
+        <a href="<?php echo $update->company->url() ?>"><?php echo $update->company->name ?></a>
+    </div>
+    <div class="message">
+        <?php echo $update->text ?>
+    </div>
+    <div class="date">
+        <?php echo $this->Format()->date($update->date) ?>
+    </div>
+
+    <?php
+    /*
+    ------------------------------------------------------------
+    enviou avaliacao negativa
+    ------------------------------------------------------------
+    */
+    elseif ($update->type == 'sentDownTestimonial') :
+    ?>
+    <div class="thumbs">
+        <?php echo $update->user->imageLink(40); ?>
+        <?php echo $update->user->company->imageLink(40); ?>
+        <span class="rate_icon"><img src="images/ui/rate_down_update.gif" /></span>
+        <?php echo $update->company->imageLink(40); ?>
+    </div>
+    <div class="large_action">
+        <strong><a href="<?php echo $update->user->url() ?>"><?php echo $update->user->fullName() ?></a></strong>
+        (<a href="<?php echo $update->user->company->url() ?>"><?php echo $update->user->company->name ?></a>)
+        avaliou
+        <a href="<?php echo $update->company->url() ?>"><?php echo $update->company->name ?></a>
+    </div>
+    <div class="message">
+        <?php echo $update->text ?>
+    </div>
+    <div class="date">
+        <?php echo $this->Format()->date($update->date) ?>
+    </div>
+
+    <?php
+    /*
+    ------------------------------------------------------------
+    enviou recomendacao
+    ------------------------------------------------------------
+    */
+    elseif ($update->type == 'sentRecommendation') :
+    ?>
+    <div class="thumbs">
+
+    </div>
+    <div class="author">
+
+    </div>
+    <div class="message">
+        <?php echo $update->text ?>
+    </div>
+    <div class="date">
+        <?php echo $this->Format()->date($update->date) ?>
+    </div>
+    <?php endif ?>
+    
+    <div class="clear"></div>
+</div>
+<?php endforeach ?>
+    
+<div id="updates_list_<?php echo $this->next_page ?>"><div class="more_updates"><a href="javascript: updatesPage(<?php echo $this->next_page ?>)">ver mais atualizações</a></div></div>
+<?php else : ?>
+<div class="no_results"><p>Nenhuma atualização encontrada</p></div>
+<?php endif ?>

@@ -1,0 +1,86 @@
+<?php
+/**
+ * company-products.phtml
+ * Lista de produtos da empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+<?php $this->layout()->setLayout('panel_company') ?>
+<?php $this->headScript()->appendFile('js/jquery/jquery-ui-1.8.14.full.min.js') ?>
+
+
+<script type="text/javascript">
+$(function() {
+    $('.products_matrix').sortable({
+        update: function() {
+            $('.save_order_button').fadeIn();
+        },
+        refreshPositions: true,
+        scroll:true,
+        placeholder: 'placeholder'
+    });
+    $('.products_matrix').disableSelection();
+    <?php if ($this->added_product) : ?>
+        $('#product_<?php echo $this->added_product ?>').delay(100).fadeTo(2000, 1);
+    <?php endif ?>
+});
+function saveOrder() {
+    $('.save_order_button').hide();
+    $('.saving_order_text').fadeIn();
+    var ids = {};
+    $('.products_matrix input.product_id').each(function(i) {
+        var input = $(this);
+        ids[input.val()] = i+1;
+    });
+    $.ajax({
+       url: 'minha-empresa/produtos/ordenar',
+       type: 'POST',
+       cache: false,
+       data: {
+            products_ids: ids
+       },
+       success: function() {
+            $('.saving_order_text').fadeOut();
+       },
+       error: function() {
+           alert('Erro ao salvar ordem dos produtos. Tente novamente.');
+            $('.saving_order_text').hide();
+            $('.save_order_button').fadeIn();
+       }
+    });
+}
+</script>
+
+<div class="plaintext">
+    <h1 class="h_title h_blue h_medium h_margin">Produtos da minha empresa</h1>
+
+<?php if (count($this->products) > 1) : ?>
+    <p>Arraste os produtos para ordená-los.
+        <a href="javascript: saveOrder()" class="save_order_button"  style="display:none">Salvar ordem dos produtos</a>
+        <span class="saving_order_text"  style="display:none;color:#888;font-style:italic;"><img src="images/ui/ajax-loader-small.gif" /> Salvando...</span>
+    </p>
+<?php endif ?>
+</div>
+
+<?php if ($this->products) : ?>
+    <ul class="products_matrix">
+    <?php foreach ($this->products as $product) : ?>
+        <li id="product_<?php echo $product->id ?>" class="product" <?php if ($this->added_product == $product->id) echo 'style="opacity:0.01"' ?>>
+            <div class="thumb"><?php echo $product->image(120) ?></div>
+            <div class="name"><?php echo $product->name ?></div>
+            <ul class="options">
+                <li><a href="<?php echo $product->url() ?>">visualizar</a></li>
+                <li><a href="minha-empresa/produtos/editar/<?php echo $product->id ?>" class="modal_iframe" title="Editar produto">editar</a></li>
+                <?php if ($this->Access()->company(true)->isPlan('premium')) : ?>
+                <li><a href="minha-empresa/produtos/imagens/<?php echo $product->id ?>" class="modal_iframe" title="Imagens do produto">imagens</a></li>
+                <li><a href="minha-empresa/produtos/descricao/<?php echo $product->id ?>" class="modal_iframe" title="Descrição do produto">descrição</a></li>
+                <?php endif ?>
+                <li><a href="minha-empresa/produtos/excluir/<?php echo $product->id ?>" class="modal_iframe" title="Remover produto">excluir</a></li>
+            </ul>
+            <input type="hidden" class="product_id" value="<?php echo $product->id ?>" />
+        </li>
+    <?php endforeach ?>
+    </ul>
+<?php endif ?>

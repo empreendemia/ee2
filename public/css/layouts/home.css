@@ -1,0 +1,582 @@
+
+/*
+--------------------------------------------------------------------------------
+Header
+--------------------------------------------------------------------------------
+*/
+#home_header {
+    height: 120px;
+    background-color: #0C478B;
+    border-bottom: 1px solid #236;
+    background-image: url(../../images/home/header_bg.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+    #home_header .spacer {
+        padding-top: 20px;
+        border-bottom: 1px solid #259;
+    }
+
+    #home_header .empreendemia_title {
+        display: none;
+    }
+
+    #home_header .home_logo {
+        position: absolute;
+        left: 10px;
+        top: 21px;
+    }
+
+#home_header .login {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#home_header .login #login-label,
+#home_header .login #password-label  {
+    float: left;
+    color: #cdf;
+    width: 60px;
+    font-size: 8pt;
+    padding-top: 6px;
+    padding-right: 6px;
+    text-align: left;
+    z-index: 1000;
+}
+
+#home_header .login #login-element,
+#home_header .login #password-element  {
+    float: left;
+    margin-left: -70px;
+    margin-right: 5px;
+    z-index: 100;
+    padding-top: 20px;
+}
+
+#home_header .login #login-element input[type=text],
+#home_header .login #password-element input[type=password] {
+    width: 120px;
+}
+
+#home_header #submit-label {
+    float: left;
+    width: 0px;
+}
+
+#home_header #submit-element {
+    float: left;
+    padding-top: 20px;
+}
+
+#home_header .sign_up {
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    color: #fff;
+    font-size:10pt;
+}
+
+#home_header .sign_up a {
+    font-weight: bold;
+    color: #fff;
+    font-size:12pt;
+}
+
+
+#home_header .sign_up a strong {
+    color: #fa0;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Slideshow
+--------------------------------------------------------------------------------
+*/
+#home_slide_show {
+    height: 260px;
+    background-color: #236;
+    border-top: 1px solid #359;
+    border-bottom: 1px solid #182044;
+    background-image: url(../../images/home/slides_bg.gif);
+    background-repeat: repeat-x;
+    overflow: hidden;
+    position: relative;
+}
+
+#home_slide_show  .slide_show {
+    width: 1000px;
+}
+
+#home_slide_show  .slide_show ul li {
+    position: relative;
+    width: 1000px;
+    height: 260px;
+}
+
+#home_slide_show  .slide_show ul li h2 {
+    font-size: 20pt;
+    padding: 30px 0 10px 30px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #000;
+    line-height: 1.4em;
+}
+
+#home_slide_show  .slide_show ul li h2 strong {
+    font-weight: bold;
+}
+
+#home_slide_show  .slide_show ul li p {
+    font-size: 10pt;
+    padding: 5px 0 5px 30px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #000;
+    line-height: 1.4em;
+    width: 400px;
+}
+
+#home_slide_show  .slide_show ul li .image {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#home_slide_show  .slide_show ul li p a{
+    color: #fa0;
+    font-weight: bold;
+}
+
+#home_slide_show  .slide_show_buttons {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+#home_slide_show  .slide_show_buttons ul li {
+    float: left;
+    margin: 4px;
+    padding: 8px;
+    width: 1em;
+    cursor: pointer;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    font-weight: bold;
+    border: 1px solid #000;
+    opacity: 0.5;
+}
+#home_slide_show  .slide_show_buttons ul li.selected {
+    background-color: #333;
+    opacity: 1;
+}
+#home_slide_show  .slide_show_buttons ul li:hover {
+    background-color: #0C478B;
+    opacity: 1;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Search
+--------------------------------------------------------------------------------
+*/
+#home_search {
+    height: 100px;
+    background-color: #ddd;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #888;
+    background-image: url(../../images/home/grey_bg.gif);
+    background-repeat: repeat-x;
+}
+
+#home_search .companies_stats {
+    position: absolute;
+    right: 510px;
+    text-shadow: 1px 1px 0 #fff;
+    font-size: 12pt;
+    color: #666;
+    top: 24px;
+}
+
+#home_search .companies_stats strong {
+    color: #d80;
+    font-weight: bold;
+    font-size: 20pt;
+}
+
+#home_search .companies_list {
+    position: absolute;
+    left: 510px;
+    top: 60px;
+    color: #666;
+    font-size: 12pt;
+    text-shadow: 1px 1px 0 #eee;
+}
+
+#home_search .companies_list a {
+    color: #d80;
+    font-weight: bold;
+}
+
+#home_search .search_form {
+    position: absolute;
+    left: 510px;
+    top: 18px;
+    width: 410px;
+    height: 40px;
+    background-image: url(../../images/home/search_form_bg.png);
+}
+
+#home_search .search_form input[type=text] {
+    font-size: 12pt;
+    color: #333;
+    width: 270px;
+    padding: 8px 5px 8px 32px;
+    background-color: transparent;
+    border: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+#home_search .search_form .fake_search {
+    font-size: 10pt;
+    color: #aaa;
+    font-style: italic;
+    position: absolute;
+    left: 32px;
+    top: 12px;
+    z-index: 100;
+}
+
+
+#home_search .search_form .search_submit {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 40px;
+    width: 90px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1pt;
+    color: #fa0;
+}
+
+/*
+--------------------------------------------------------------------------------
+Content
+--------------------------------------------------------------------------------
+*/
+#home_content {
+    background-color: #fff;
+}
+
+.cols {
+
+}
+
+.cols .col_left {
+    float: left;
+    width: 680px;
+}
+
+.cols .col_right {
+    float: right;
+    width: 310px;
+}
+
+/*
+--------------------------------------------------------------------------------
+Companies
+--------------------------------------------------------------------------------
+*/
+.last_companies {
+    width: 660px;
+    padding: 20px 0;
+    padding-left: 10px;
+}
+.last_companies h3 {
+    color: #888;
+    font-size: 10pt;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.last_companies .companies {
+    height: 70px;
+    overflow: hidden;
+}
+
+.last_companies .companies .company {
+    margin: 0 12px 0 0;
+    float: left;
+}
+
+/*
+--------------------------------------------------------------------------------
+Businesses
+--------------------------------------------------------------------------------
+*/
+.last_businesses {
+    width: 660px;
+    padding: 20px 0 0 0;
+    border-top: 1px solid #ccc;
+    background-color: #fdfdfd;
+    background-image: url(../../images/home/softgrey_bg.gif);
+    background-repeat: repeat-x;
+    background-position: 0 10px;
+}
+.last_businesses h3 {
+    color: #888;
+    font-size: 10pt;
+    font-weight: bold;
+    margin-bottom: 40px;
+    padding-left: 10px;
+    text-shadow: 1px 1px 0 #fff;
+}
+.last_businesses .businesses {
+    height: 70px;
+    padding-left: 20px;
+}
+
+.last_businesses .businesses .business {
+    position: relative;
+    float: left;
+    height: 50px;
+    width: 80px;
+}
+
+.last_businesses .businesses .business .rate {
+    position: absolute;
+    top: -25px;
+    left: 30px;
+}
+
+.last_businesses .businesses .business .arrow_up {
+    position: absolute;
+    bottom: -21px;
+    left: 17px;
+    z-index: 1000;
+}
+
+.last_businesses .testimonials {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.last_businesses .testimonials .testimonial .details {
+    float: left;
+    width: 200px;
+    border-right: 1px solid #ccc;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.last_businesses .testimonials .testimonial .details .user_name {
+    margin-bottom: 5px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.last_businesses .testimonials .testimonial .details .user_action {
+    margin-bottom: 15px;
+    font-size: 9pt;
+    color: #888;
+}
+
+.last_businesses .testimonials .testimonial .details .to_company_name {
+    font-size: 10pt;
+    margin-bottom: 10px;
+}
+
+.last_businesses .testimonials .testimonial .text {
+    float: left;
+    width: 400px;
+    padding-left: 10px;
+    font-size: 12pt;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    line-height: 1.4em;
+    color: #333;
+}
+
+/*
+--------------------------------------------------------------------------------
+Offers
+--------------------------------------------------------------------------------
+*/
+.last_offers {
+    width: 660px;
+    padding: 20px 0;
+    border-top: 1px solid #ccc;
+}
+.last_offers h3 {
+    color: #888;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+
+.last_offers .offers .offer {
+    width: 310px;
+    padding: 20px 0 40px 0;
+}
+
+.last_offers .offers .offer.even {
+    clear: both;
+    float: left;
+}
+
+.last_offers .offers .offer.odd {
+    clear: right;
+    float: right;
+}
+
+.last_offers .offers .offer .thumb {
+    float: left;
+}
+
+.last_offers .offers .offer  .name {
+    float: right;
+    width: 200px;
+    font-weight: bold;
+    padding: 0 0 6px 0;
+    font-size: 10pt;
+    line-height: 1.2em;
+}
+
+.last_offers .offers .offer .description {
+    float: right;
+    width: 200px;
+    font-size: 9pt;
+    line-height: 1.3em;
+    margin-bottom: 8px;
+}
+
+.last_offers .offers .offer .description a {
+    color: #333;
+}
+
+.last_offers .offers .offer .city {
+    float: right;
+    width: 200px;
+    font-size: 8pt;
+    color: #888;
+}
+
+/*
+--------------------------------------------------------------------------------
+Stats
+--------------------------------------------------------------------------------
+*/
+#stats {
+    background-color: #ccc;
+    padding: 20px;
+    text-align: right;
+    background-image: url(../../images/home/grey_bg.gif);
+    background-repeat: repeat-x;
+}
+#stats ul li {
+    font-size: 9pt;
+    color: #666;
+    text-shadow: 1px 1px 0 #eee;
+    margin: 4px 0;
+    font-weight: bold;
+}
+#stats ul li strong {
+    color: #0C478B;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+/*
+--------------------------------------------------------------------------------
+Informations
+--------------------------------------------------------------------------------
+*/
+#informations {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    background-image: url(../../images/home/white_bg.gif);
+    background-repeat: repeat-x;
+}
+
+#informations .tabs {
+    position: absolute;
+    width: 400px;
+    top: 0;
+    background-color: #ccc;
+}
+
+#informations .tabs a {
+    font-size: 10pt;
+    float: left;
+    display: block;
+    width: 103px;
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    color: #888;
+}
+
+#informations .tabs a.selected {
+    background-color: #eee;
+    color: #333;
+}
+
+#informations .information {
+    padding: 40px 20px 20px 20px;
+    font-size: 9pt;
+}
+
+#informations .information h3 {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 10pt;
+    margin: 40px 0 20px 0;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+#informations .information p {
+    line-height: 1.4em;
+    margin: 20px 0;
+    color: #666;
+    text-shadow: 1px 1px 1px #fff;
+}
+/*
+--------------------------------------------------------------------------------
+Facebook
+--------------------------------------------------------------------------------
+*/
+.facebook_likes {
+    padding-left: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dotted #ccc;
+}
+
+/*
+--------------------------------------------------------------------------------
+Media
+--------------------------------------------------------------------------------
+*/
+#home_media {
+    background-color: #fff;
+    padding: 20px 0;
+    border-top: 1px solid #ccc;
+}
+#home_media h3 {
+    color: #888;
+    font-size: 10pt;
+}
+#home_media li {
+    float: left;
+    margin: 20px;
+}

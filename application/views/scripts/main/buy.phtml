@@ -1,0 +1,65 @@
+<?php
+/**
+ * buy.phtml
+ * Página do usuário querendo comprar
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-25
+ */
+?>
+<?php $this->layout()->setLayout('main') ?>
+<?php $this->layout()->title = $this->user->name ?>
+
+
+<div class="sub_col_1">
+    <?php
+    // -------------------------------------------------------------------------
+    // Busca
+    // -------------------------------------------------------------------------
+    ?>
+    <div class="widget search">
+        <h1 class="h_title h_blue h_small">O que você procura?</h1>
+        <div class="search_form">
+                <?php
+                $form_search = new Ee_Form_Search();
+                $userdata = new Zend_Session_Namespace('UserData');
+                $form_search->setAction('lista-de-empresas/'.$userdata->user->company->city->region->slug.'/'.$userdata->user->company->city->slug);
+                echo $form_search;
+                ?>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <?php
+    // -------------------------------------------------------------------------
+    // Mural de serviços
+    // -------------------------------------------------------------------------
+    ?>
+    <div class="widget request_service">
+        <h1 class="h_title h_blue h_small">Mural de Serviços</h1>
+        <p>Aqui você cadastra seu pedido do que você precisa e as empresas te encontram.</p>
+        <p><a href="quero-comprar/pedir-servico" class="modal_iframe" title="Pedido de Serviço">Clique aqui para fazer pedido.</a></p>
+    </div>
+</div>
+<div class="sub_col_2">
+    <?php
+    // -------------------------------------------------------------------------
+    // Ofertas mais recente em destaque
+    // -------------------------------------------------------------------------
+    ?>
+    <div class="widget offers">
+        <h1 class="h_title h_blue h_small">Ofertas do momento</h1>
+        <p class="more">Veja se alguma te interessa (<a href="quero-comprar/ofertas">ver mural de ofertas</a>)</p>
+        <ul class="offers_list">
+            <?php foreach ($this->offers as $offer) : ?>
+            <ul class="offer">
+                <li class="product_thumb"><?php echo $offer->imageLink(100) ?></li>
+                <li class="product_name"><a href="<?php echo $offer->url() ?>"  onclick="<?php echo $this->Tracker()->userEvent('buyer: clicked featured offer', null, true) ?>" ><?php echo $offer->name ?></a></li>
+                <li class="company_name">por <a href="<?php echo $offer->company->url() ?>"><?php echo $offer->company->name ?></a></li>
+            </ul>
+            <?php endforeach ?>
+        </ul>
+    </div>
+</div>
+
+
+<div class="clear"></div>

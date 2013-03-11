@@ -1,0 +1,22 @@
+<?php
+/**
+ * company-premium-custom.phtml
+ * Customiza o layout da empresa premium
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-17
+ */
+?><?php $this->layout()->setLayout('panel_company') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+
+<div class="plaintext">
+    <h2 class="h_title h_blue">Personalizar perfil da minha empresa</h2>
+    <p>Você pode personalizar a arte do seu perfil. São duas opções de personalização:</p>
+    <p>Imagem do cartão: é a imagem que vai atrás do cartão da sua empresa. 720px de largura 255px de altura.</p>
+    <p>Imagem lateral: é a imagem que vai na lateral da página. 260px de largura 1024px de altura.</p>
+    <p>Tamanho máximo de 1MB por aquivo</p>
+</div>
+<br />
+<div class="form">
+    <?php echo $this->form ?>
+</div>

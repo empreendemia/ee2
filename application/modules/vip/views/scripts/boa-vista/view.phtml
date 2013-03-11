@@ -1,0 +1,54 @@
+<?php
+/**
+ * view.phtml
+ * Perfil da NET
+ * 
+ * @package views
+ * @subpackage net
+ * @author Mauro Ribeiro
+ * @since 2012-10-24
+ */
+?>
+<?php $this->layout()->og_title = $this->company->name ?>
+<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_description = $this->company->description ?>
+
+<?php $this->layout()->title = 'NET' ?>
+<div class="home">
+
+    <h1 class="title">Soluções para Pequenas e Médias empresas</h1>
+    <h2 class="subtitle">Confira os planos abaixo, escolha qual atende a necessidade do seu negócio e assine agora mesmo.</h2>
+
+    <div class="products">
+        <div class="product product-1">
+            <p class="para">Empresa prestadora de serviços e iniciantes</p>
+            <p class="ideal">Ideal para empresas que não precisam muito de telefone</p>
+            <h3 class="nome">NET Empresas Econômico</h3>
+            <p class="produtos">2 linhas de telefone, <br />banda larga 10 mega, <br />roteador wi-fi grátis</p>
+            <p class="preco">R$122,90/mês</p>
+            <p class="mais"><a href="e/net/produtos/servicos">Saiba mais</a></p>
+        </div>
+        <div class="product product-2">
+            <p class="para">Empresas com +5 pessoas e vendedores por telefone</p>
+            <p class="ideal">Ideal para empresas que usam muito o telefone</p>
+            <h3 class="nome">NET Empresas <br />Fixo Ilimitado</h3>
+            <p class="produtos">2 linhas telefone locais para fixos ilimitadas, <br />banda larga 10 mega, <br />roteador wi-fi grátis</p>
+            <p class="preco">R$152,90/mês</p>
+            <p class="mais"><a href="e/net/produtos/fixo-ilimitado">Saiba mais</a></p>
+        </div>
+        <div class="product product-3">
+            <p class="para">Comércio</p>
+            <p class="ideal">Ideal para empresas que precisam de tudo, até TV</p>
+            <h3 class="nome">NET Empresas Econômico</h3>
+            <p class="produtos">2 linhas telefone, <br />banda larga 10 mega, <br />roteador wi-fi grátis <br />e TV compacto</p>
+            <p class="preco">R$154,90/mês</p>
+            <p class="mais"><a href="e/net/produtos/comercio">Saiba mais</a></p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="custom-link"><a href="e/net/monte-seu-pacote">Não sabe escolher o melhor pacote de internet e telefone para a sua empresa?<br /><strong>Nós te ajudamos, clique aqui!</strong></a></div>
+
+    <div class="clear"></div>
+</div>
+

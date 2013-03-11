@@ -1,0 +1,193 @@
+#company_logo {
+    position: absolute;
+    top: 35px;
+}
+
+.company_header {
+    height: 160px;
+}
+
+.more a {
+    display: inline-block;
+    background-color: #007E60;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+/*
+--------------------------------------------------------------------------------
+Natal
+--------------------------------------------------------------------------------
+*/
+
+.natal {
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 20px;
+}
+
+.natal_header {
+    background-image: url('../../../images/vip/alelo/natal_header.jpg');
+    width: 700px;
+    height: 230px;
+}
+
+.natal h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin: 20px 10px;
+    font-size: 18px;
+    color: #921C9F;
+}
+
+.natal h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px 10px 10px 10px;
+    font-size: 12px;
+    color: #921C9F;
+}
+
+.natal ul {
+    margin: 10px 0;
+    color: #921C9F;
+    list-style: disc;
+}
+
+.natal ul li {
+    margin: 5px 0 5px 25px;
+    color: #333;
+    font-size: 11px;
+}
+
+.natal .more a {
+    background-color: #921C9F;
+}
+
+/*
+--------------------------------------------------------------------------------
+Produtos
+--------------------------------------------------------------------------------
+*/
+
+.other_products {
+    
+}
+
+.other_products h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 10px;
+}
+
+.other_products p {
+    margin: 20px 10px;
+    line-height: 1.6em;
+    height: 6.4em;
+}
+
+/*
+--------------------------------------------------------------------------------
+Refeicao
+--------------------------------------------------------------------------------
+*/
+
+.refeicao {
+    width: 350px;
+    float: left;
+    margin-right: 20px;
+}
+
+.refeicao_header {
+    width: 300px;
+    height: 160px;
+    margin: 10px;
+    background-image: url('../../../images/vip/alelo/refeicao.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+    
+.refeicao .more a {
+    background-color: #FECB09;
+}
+
+.refeicao h2 {
+    color: #FECB09;
+}
+
+/*
+--------------------------------------------------------------------------------
+Alimentação
+--------------------------------------------------------------------------------
+*/
+
+.alimentacao {
+    width: 320px;
+    float: left;
+}
+
+.alimentacao_header {
+    width: 300px;
+    height: 160px;
+    margin: 10px;
+    background-image: url('../../../images/vip/alelo/alimentacao.jpg');
+    background-repeat: no-repeat;
+}
+
+.alimentacao .more a {
+    background-color: #119DD7;
+}
+
+.alimentacao h2 {
+    color: #119DD7;
+}
+
+/*
+--------------------------------------------------------------------------------
+Lateral
+--------------------------------------------------------------------------------
+*/
+
+.company_side_header {
+    font-size: 20px;
+    color: #007E60;
+    line-height: 24px;
+    padding: 80px 0 0 10px;
+    height: 80px;
+    overflow: hidden;
+}
+
+.company_side_header strong {
+    font-weight: bold;
+}
+
+
+.company_side_banner {
+    background-color: #007E60;
+    padding: 10px 0 20px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.company_side_banner h3 {
+    padding: 10px 10px 10px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #BDD753;
+    font-weight: bold;
+    line-height: 1.4em;
+}
+
+.company_side_banner p {
+    margin: 0 10px;
+    font-size: 11px;
+    color: #fff;
+    line-height: 1.6em;
+}
+
+.company_side_banner .more a {
+    color: #007E60;
+    background-color: #BDD753;
+}

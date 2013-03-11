@@ -1,0 +1,365 @@
+<?php
+/**
+ * index.phtml
+ * Home da Empreendemia
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-09-07
+ */
+?>
+<?php $this->layout()->setLayout('clean') ?>
+
+<?php
+$company_mapper = new Ee_Model_Companies();
+$companies_count = $company_mapper->count();
+$companies_count = substr($companies_count, 0, 2).'.'.substr($companies_count, 2, 5);
+?>
+
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml" itemtype="http://schema.org/LocalBusiness">
+   
+<head>
+<?php
+// -----------------------------------------------------------------------------
+// Titles e definições
+// -----------------------------------------------------------------------------
+?>
+    <title>Cadastre-se no Empreendemia</title>
+    <base href="<?php echo $this->serverUrl().$this->baseUrl();?>/" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+<?php
+// -----------------------------------------------------------------------------
+// Links
+// -----------------------------------------------------------------------------
+?>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link href="css/global.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/layout.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/cols/large.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/layouts/home.css" media="screen" rel="stylesheet" type="text/css" />
+    
+<?php
+// -----------------------------------------------------------------------------
+// Google Analytics
+// -----------------------------------------------------------------------------
+?>
+    <style type="text/css">
+        body {
+            background-color: #fff;
+        }
+        #home_header {
+            height: 82px;
+        }
+        
+        .home_logo img {
+            width: 202px;
+            height: 42px;
+        }
+        
+        #home_slide_show {
+            height: 220px;
+            border-bottom: none;
+        }
+        
+        #home_slide_show h1 {
+            font-size: 32px;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 550px;
+            padding-top: 25px;
+            padding-bottom: 10px;
+            line-height: 1.2em;
+        }
+        
+        #home_slide_show p {
+            font-size: 12px;
+            color: #fff;
+            margin-left: 550px;
+            line-height: 2em;
+        }
+        
+        #home_slide_show img {
+            position: absolute;
+            top: 10px;
+        }
+        
+        #testimonial_signup {
+            height: 160px;
+            padding: 30px 20px;
+        }
+        
+        #testimonial {
+            float: left;
+            width: 500px;
+            position: relative;
+        }
+        
+        #testimonial .userthumb {
+            position: absolute;
+            left: 0;
+        }
+        
+        #testimonial .companythumb {
+            position: absolute;
+            top: 100px;
+            left: 50px;
+        }
+        
+        #testimonial .thumbsup {
+            position: absolute;
+            top: -46px;
+            left: 80px;
+        }
+        
+        #testimonial .username {
+            color: #0C478B;
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.4em;
+            margin-left: 120px;
+        }
+        
+        #testimonial .job {
+            color: #888;
+            font-size: 12px;
+            line-height: 1.4em;
+            margin-left: 120px;
+        }
+        
+        #testimonial .text {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.5em;
+            margin-left: 145px;
+            text-align: justify;
+            width: 350px;
+            padding: 15px 0;
+        }
+        
+        #testimonial .quote {
+            color: #666;
+            font-size: 40px;
+            left: 120px;
+            top: 56px;
+            position: absolute;
+            font-family: Georgia, serif;
+        }
+        
+        #signup {
+            float: right;
+            width: 450px;
+            margin-top: -10px;
+        }
+        
+        #signup a {
+            display: block;
+            padding: 20px 0;
+            background-color: #b20;
+            text-align: center;
+            width: 420px;
+            color: #fff;
+            border-radius: 10px;
+        }
+        
+        #signup a:hover {
+            background-color: #e80;
+        }
+        
+        #signup a strong {
+            font-weight: bold;
+        }
+        
+        #signup a span.call {
+            display: block;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        #signup a span.facebook {
+            display: block;
+            font-size: 14px;
+            padding-top: 10px;
+        }
+        
+        #signup p {
+            color: #b20;
+            font-size: 20px;
+            text-align: center;
+            padding: 10px 10px 10px 10px;
+            width: 420px;
+        }
+        
+        #benefits {
+            padding: 0 20px;
+        }
+        
+        .benefit {
+            width: 300px;
+            float: left;
+            display:block;
+            padding-top: 20px;
+        }
+        
+        .benefit_2 {
+            margin: 0 40px;
+        }
+        
+        .benefit .icon {
+            float: left;
+        }
+        
+        .benefit h3 {
+            margin-left: 90px;
+            color: #222;
+            line-height: 1.6em;
+        }
+        
+        .benefit p {
+            margin-left: 90px;
+            font-size: 11px;
+            line-height: 1.4em;
+            color: #666;
+        }
+    </style>
+    
+    
+<?php
+// -----------------------------------------------------------------------------
+// Scripts
+// -----------------------------------------------------------------------------
+?>
+    <script type="text/javascript" src="js/jquery/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js/Utils/Tracker.js"></script>
+    <script type="text/javascript" src="js/Utils/Facebook.js"></script>
+
+
+<?php
+// -----------------------------------------------------------------------------
+// Google Analytics
+// -----------------------------------------------------------------------------
+?>
+    <script type="text/javascript">
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '/*' ?>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7274902-2']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_trackPageLoadTime']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    <?php 
+        // include dos eventos
+        //echo $this->Tracker()->eventsScript()
+    ?>
+
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '*/' ?>
+    </script>
+    
+    
+<?php
+// -----------------------------------------------------------------------------
+// Loads 
+// -----------------------------------------------------------------------------
+?>
+    <script type="text/javascript">
+        $(function() {
+            Tracker.ga.pushEvents();
+            Tracker.ga.userEvent('fb signup landing page view');
+            
+            $('.facebook-signup a').click(function() {
+                Tracker.ga.userEvent('fb signup landing page button click');
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+
+
+
+<div id="body">
+
+    <div id="home_header">
+        <div class="container">
+            <h1 class="empreendemia_title">Empreendemia</h1>
+            <div class="home_logo"><img src="images/home/logo.png" /></div>
+        </div>
+    </div><!-- #home_header -->
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Conteúdo da view
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="home">
+
+
+        <div id="home_slide_show">
+            <div class="container">
+                <img src="images/pages/landingpage/silhuetas.png" />
+                <h1>Faça negócios com <br /><?php echo $companies_count ?> empresas</h1>
+                <p>No Empreendemia você cria a página da sua empresa, <br />entra em contato com possíveis clientes e fornecedores <br />e fecha novos negócios.</p>
+            </div>
+        </div>
+        
+        <div id="testimonial_signup">
+            <div class="container">
+                <div id="testimonial">
+                    <div class="userthumb"><img src="http://empreendemia.com.br/userfiles/users/19112/19112679a40f1cb8e7119e4de8042efab7e2d5c7a5bf2085/100_thumbnail.jpg" /></div>
+                    <div class="companythumb"><img src="http://empreendemia.com.br/userfiles/companies/19112/191124472516cd7afe19d236695d783cbe9ec633c07c1378/50_thumbnail.png" /></div>
+                    <div class="thumbsup"><img src="images/ui/rate_up.png" /></div>
+                    <div class="username">Carlos Eduardo Moura</div>
+                    <div class="job">Diretor da Happy Hour Comunicação</div>
+                    <div class="quote">“</div>
+                    <div class="text">A divulgação aqui no Empreendemia se mostrou uma grata surpresa. Em poucos dias, diversas empresas entraram em contato conosco pedindo por mais informações e pedindo propostas. Realmente está valendo a pena. Recomendo.</div>
+                </div>
+                <div id="signup" class="facebook-signup">
+                    <a href="javascript: facebookSignup()">
+                        <span class="call">Quero fazer negócios!</span>
+                        <span class="facebook"><img src="images/icons/facebook.png" /> Conecte-se gratuitamente com seu Facebook</span>
+                    </a>
+                    <p><iframe src="//www.facebook.com/plugins/facepile.php?href=http%3A%2F%2Fwww.facebook.com%2FEmpreendemia&amp;action&amp;size=large&amp;max_rows=1&amp;width=380&amp;colorscheme=light" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:380px; height:80px;" allowTransparency="true"></iframe></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <img src="images/pages/landingpage/separator.gif" />
+        </div>
+        
+        <div id="benefits">
+            <div class="container">
+                <div class="benefit benefit_1">
+                    <div class="icon"><img src="images/pages/landingpage/chat_72.gif" /></div>
+                    <h3>Conheça novas empresas</h3>
+                    <p>Tenha acesso ao nosso diretório e conheça clientes e fornecedores da sua cidade</p>
+                </div>
+                <div class="benefit benefit_2">
+                    <div class="icon"><img src="images/pages/landingpage/show_72.gif" /></div>
+                    <h3>Crie sua vitrine virtual</h3>
+                    <p>No Empreendemia você cria rapidamente sua vitrine de produtos e serviços e pode usá-la para divulgar o seu trabalho</p>
+                </div>
+                <div class="benefit benefit_3">
+                    <div class="icon"><img src="images/pages/landingpage/offer_72.gif" /></div>
+                    <h3>Acesso a descontos exclusivos</h3>
+                    <p>Através do Mural de Ofertas você pode contratar diversos serviços com desconto exclusivo para usuários Empreendemia</p>
+                </div>
+            </div>
+        </div>
+        
+    </div> <!-- #home -->
+
+
+</div> <!-- #body -->
+
+
+
+</body>
+</html>

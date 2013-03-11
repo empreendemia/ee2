@@ -1,0 +1,17 @@
+<?php
+/**
+ * company-about.phtml
+ * Informações sobre a empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-03
+ */
+?>
+<?php $this->layout()->setLayout('panel_company') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headScript()->appendFile('js/forms/ckeditor/ckeditor.js'); ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+
+<div class="form">
+    <?php echo $this->form ?>
+</div>

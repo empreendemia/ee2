@@ -1,0 +1,154 @@
+.title label {
+    display: block;
+    color: #0C478B !important;
+    font-weight: bold !important;
+    margin: 10px 0 !important;
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid #ccc !important;
+}
+
+.observation {
+    display: block;
+    color: #333;
+    font-size: 8pt;
+    clear: both;
+    padding: 10px 0 10px 120px;
+}
+
+.errors {
+    font-size: 8pt;
+    color: #800;
+    margin-bottom: 5px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Quantidades
+--------------------------------------------------------------------------------
+*/
+#quantities_group-element {
+    position: absolute;
+}
+#quantities_group-label {
+    position: absolute;
+}
+
+#quantities_group-element label {
+    float: left;
+    font-size: 10px;
+    width: 210px;
+    clear: both;
+    padding-bottom: 4px;
+    color: #888;
+}
+
+#quantities_group-element label img {
+    margin-right: 4px;
+}
+
+#quantities_group-element dd {
+    float: left;
+    padding-top: 3px;
+    padding-left: 4px;
+}
+
+#quantities_group-element input {
+    width: 20px;
+}
+
+#quantities_group-element h3.title label{
+    font-size: 14px;
+}
+
+/*
+--------------------------------------------------------------------------------
+Contato
+--------------------------------------------------------------------------------
+*/
+
+#contact_group-element {
+    position: relative;
+    margin-left: 281px;
+}
+#contact_group-label {
+    position: absolute;
+}
+
+#contact_group-element dt {
+    position: relative;
+    float: left;
+    clear: both;
+    width: 120px;
+    font-size: 8pt;
+    color: #888;
+    text-align: right;
+    padding-right: 5px;
+    padding-top: 8px;
+    margin: 2px 0;
+}
+
+#contact_group-element dd {
+    position: relative;
+    float: left;
+    margin: 2px 0;
+}
+
+/*
+--------------------------------------------------------------------------------
+Mensagem
+--------------------------------------------------------------------------------
+*/
+#message_group-element {
+    position: relative;
+    margin-left: 281px;
+}
+#message_group-label {
+    position: absolute;
+}
+
+#message_group-element textarea {
+    width: 354px;
+    height: 120px;
+}
+
+#message_group-element dt {
+    color: #fff;
+    width: 1px;
+    height: 1px;
+    display: none;
+}
+/*
+--------------------------------------------------------------------------------
+Submit
+--------------------------------------------------------------------------------
+*/
+#submit-element {
+    position: relative;
+    margin-left: 385px;
+}
+
+#submit-element input {
+    background-color: #0C478B;
+    border-top: 1px solid #259;
+    border-left: 1px solid #259;
+    border-right: 1px solid #236;
+    border-bottom: 1px solid #236;
+    padding: 5px 20px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #236;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+/*
+--------------------------------------------------------------------------------
+Honey Honey
+--------------------------------------------------------------------------------
+*/
+
+#captcha-label, #captcha-element,
+#hp_name-label, #hp_name-element,
+#id_hp-label, #id_hp-element {
+    display: none !important;
+}

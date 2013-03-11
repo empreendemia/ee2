@@ -1,0 +1,66 @@
+<?php
+/**
+ * header.phtml
+ * Cabeçalho do layout
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-06
+ */
+?>
+    <div id="header">
+        <div class="spacer"></div>
+        <div class="container">
+            
+            <?php
+            // -----------------------------------------------------------------
+            // Logotipo
+            // -----------------------------------------------------------------
+            ?>
+            <div class="logo">
+                <?php if ($this->Access()->checkAuth()) : ?>
+                <a href="passo-a-passo"><img src="images/layout/header-logo.png" /></a>
+                <?php else : ?>
+                <a href="<?php echo $this->baseUrl() ?>"><img src="images/layout/header-logo.png" /></a>
+                <?php endif ?>
+            </div>
+            
+            <?php
+            // -----------------------------------------------------------------
+            // Mensagens
+            // -----------------------------------------------------------------
+            ?>
+            <div id="flash_messages" class="flash_messages" style="display:none">
+                <?php echo $this->flashMessages(); ?>
+            </div>
+            
+            <?php
+            // -----------------------------------------------------------------
+            // Busca
+            // -----------------------------------------------------------------
+            ?>
+            <div class="search">
+                <?php 
+                $form_search = new Ee_Form_Search();
+                if (Zend_Auth::getInstance()->hasIdentity()) {
+                    $userdata = new Zend_Session_Namespace('UserData');
+                    $form_search->setAction('lista-de-empresas/'.$userdata->user->company->city->region->slug.'/'.$userdata->user->company->city->slug);
+                }
+                echo $form_search;
+                ?>
+            </div>
+
+            <?php
+            // -----------------------------------------------------------------
+            // Botão de feedback (apenas para quem está logado)
+            // -----------------------------------------------------------------
+            ?>
+            <?php if (Zend_Auth::getInstance()->hasIdentity()) : ?>
+            <div id="feedback_button">
+                <a href="feedback" class="modal" title="Feedback">
+                    <img src="images/ui/feedback.png" />
+                </a>
+            </div>
+            <?php endif ?>
+        </div>
+    </div><!-- #header -->

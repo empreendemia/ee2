@@ -1,0 +1,337 @@
+<?php $this->layout()->title = 'Promoção Publicidade'; ?>
+<script type="text/javascript">
+
+function showTab(tabname) {
+    if (tabname != '') {
+        $('.showtab').hide();
+        $('.tabs li').removeClass('selected');
+        $('.tabs li.tab_'+tabname).addClass('selected');
+        $('.showtab_'+tabname).fadeIn();
+    }
+    if (tabname == 'promocao') {
+        <?php echo $this->Tracker()->userEvent('ads: promocao', null, true) ?>
+    }
+    else {
+        <?php echo $this->Tracker()->userEvent('ads: promocao faq', null, true) ?>
+    }
+ }
+
+$(function() {
+    showTab(window.location.hash.substring(1));
+});
+</script>
+
+<?php
+$userData = new Zend_Session_Namespace('UserData');
+
+if ($userData->user) {
+    $company_mapper = new Ee_Model_Companies();
+    $company = $company_mapper->find($userData->user->company_id);
+
+    $product_mapper = new Ee_Model_Products();
+    $products = $product_mapper->findByCompany($company);
+}
+?>
+<style type="text/css">
+.page_ad {
+    position: relative;
+}
+
+.page_ad .cols {
+}
+
+.page_ad .cols .col_left {
+    float: left;
+    width: 600px;
+}
+
+.page_ad .cols .col_right {
+    float: right;
+    width: 340px;
+}
+
+.page_ad .title {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 18pt;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.page_ad .subtitle {
+    color: #0C478B;
+    font-size: 14pt;
+    margin-bottom: 20px;
+}
+
+.page_ad .description {
+    margin: 20px 0;
+    font-size: 10pt;
+    color: #666;
+    line-height: 1.6em;
+}
+
+.tabs {
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    margin-top: 50px;
+}
+
+.tabs ul {
+    position: absolute;
+    bottom: -1px;
+}
+
+.tabs li {
+    float: left;
+    margin-right: 1px;
+    border: 1px solid #ccc;
+    background-color: #ccc;
+}
+.tabs li.selected {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+}
+
+.tabs li a {
+    display: inline-block;
+    width: 140px;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #888;
+    text-shadow: 1px 1px 0 #eee;
+    font-size: 9pt;
+}
+
+.tabs li.selected a {
+    color: #0C478B;
+}
+
+.box {
+    position: relative;
+    padding: 20px;
+}
+
+.testimonial {
+    margin-top: 50px;
+    position: relative;
+    padding-left: 20px;
+    padding: 40px 20px 100px 20px;
+    border-left: 1px solid #ccc;
+    background-color: #eee;
+    border-radius: 0 10px 10px 0;
+}
+
+.testimonial .user_thumb {
+    float: left;
+}
+
+.testimonial .text {
+    font-size: 15px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    line-height: 1.6em;
+    margin-bottom: 15px;
+}
+
+.testimonial .user_name {
+    margin-left: 120px;
+    font-size: 10pt;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.testimonial .company_name {
+    margin-left: 120px;
+    font-size: 10pt;
+}
+
+.box p {
+    margin: 20px 0;
+    line-height: 1.6em;
+    font-size: 9pt;
+}
+
+.box ol {
+    list-style: decimal;
+    margin: 20px 0;
+    line-height: 1.6em;
+    font-size: 9pt;
+    padding-left: 25px;
+}
+
+.offers {
+    padding-top: 20px;
+}
+
+.offers a {
+    display: block;
+}
+
+.offers .offer5k {
+    float: left;
+    width: 220px;
+    padding: 0 30px 0 20px;
+    border-right: 1px dotted #ccc;
+}
+.offers .offer10k {
+    float: right;
+    width: 220px;
+    padding: 0 20px;
+}
+
+.offers h3 {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 40px 0 5px 0;
+}
+
+.offers p {
+    font-size: 12px;
+    color: #333;
+    margin: 5px 0 10px 0;
+}
+
+.offers .old-price {
+    text-decoration: line-through;
+    color: #d80;
+}
+
+.offers .new-price {
+    color: #d80;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.simulate {
+    padding-top: 30px;
+}
+
+.simulate p {
+    font-size: 14px;
+    margin: 5px 0;
+    text-align: center;
+}
+
+.simulate .button {
+    display: block;
+    clear: both;
+    margin: 10px 0;
+}
+
+.simulate .button a {
+    display: block;
+    padding: 20px;
+    color: #fff;
+    background-color: #fa0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    border-radius: 10px;
+}
+
+.questions h3 {
+    margin: 20px 0 10px 0;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #0C478B;
+}
+
+.questions p {
+    margin: 10px 0;
+}
+</style>
+
+<div class="page_ad">
+
+    <div class="cols">
+        <h1 class="title">Promoção de Aniversário de 4 anos do Empreendemia!</h1>
+        <h2 class="subtitle">Divulgue a sua empresa!</h2>
+
+        <div class="col_left">
+            <div class="tabs">
+                <div class="line"></div>
+                <ul>
+                    <li class="tab_promocao selected"><a href="<?php echo $this->url() ?>#promocao" onclick="showTab('promocao')">Promoção</a></li>
+                    <li class="tab_duvidas-comuns"><a href="<?php echo $this->url() ?>#duvidas-comuns" onclick="showTab('duvidas-comuns')">Dúvidas comuns</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="box">
+                <div class="showtab showtab_promocao">
+                    <div class="offers">
+                        <div class="offer5k">
+                            <a href="publicidade/promocao/configurar-campanha">
+                                <img src="images/pages/ads/promocao5k.png" />
+                                <h3>Premium mais Publicidade<br />para 5 mil empresas</h3>
+                                <p class="date">por 3 meses</p>
+                                <p class="price">de <span class="old-price">R$ 570,00</span> por <span class="new-price">R$ 300,00</span></p>
+                            </a>
+                        </div>
+                        <div class="offer10k">
+                            <a href="publicidade/promocao/configurar-campanha">
+                                <img src="images/pages/ads/promocao10k.png" />
+                                <h3>Premium mais Publicidade<br />para 10 mil empresas</h3>
+                                <p class="date">por 3 meses</p>
+                                <p class="price">de <span class="old-price">R$ 870,00</span> por <span class="new-price">R$ 400,00</span></p>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="showtab showtab_duvidas-comuns" style="display:none">
+                    <div class="questions">
+                        
+                        <h3>O que é o Premium?</h3>
+                        <p>O pacote Premium é feito para aumentar suas vendas, permitindo que você personalize mais sua página com mais texto, fotos, víceos, apresentações e a customização do layout principal e lateral. Com ele, você também ganha destaque no mural de ofertas e pode aparecer na home do Empreendemia.</p>
+                        
+                        <h3>Como vou definir o público do meu anúncio?</h3>
+                        <p>O público-alvo pode ser escolhido de acordo com a cidade e setor de atuação.</p>
+                        
+                        <h3>Como criar o meu anúncio?</h3>
+                        <p>É super simples! Ao configurar o anúncio no <a href="publicidade/promocao/configurar-campanha">simulador</a> escolha o produto/serviço do seu perfil no Empreendemia, e a sua divulgação está pronto para ir ao ar. O anúncio é exibido com a foto e descrição que está na sua página de produto.</p>
+                        
+                        <h3>Onde meu anúncio vai aparecer?</h3>
+                        <p>O anúncio aparece como um “banner” à direita, quando os usuários que estiverem dentro da segmentação escolhida estiverem navegando no Empreendemia.</p>
+                        
+                        <h3>Como vou saber o resultado da minha campanha?</h3>
+                        <p>Mensalmente você receberá um relatório indicando quantas visualizações e cliques seu anúncio teve e os setores e cidades com maior destaque.</p>
+                        
+                        <h3>Todas as 5.000 ou 10.000 pessoas vão ver a minha divulgação?</h3>
+                        <p>O alcance da divulgação é relativo ao número de empresas que podem ver a sua publicidade ao entrarem no Empreendemia.</p>
+                        <p>Isso quer dizer que o número pode variar, sendo que não é cobrado um centavo a mais caso o número de visualizações ultrapasse o tamanho da divulgação (e isso quase sempre acontece, já que as pessoas entram várias vezes na rede!).</p>
+                        
+                        <h3>Não tenho PagSeguro, como posso pagar a minha publicidade?</h3>
+                        <p>Envie um email para atendimento@empreendemia.com.br que vamos achar a melhor forma de realizar seu pagamento.</p>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            
+            <div class="simulate">
+                <p>Quer ver o alcance ou configurar a sua divulgação?</p>
+                <p>Use o nosso simulador.</p>
+                <div class="button"><a href="publicidade/promocao/configurar-campanha">Simular agora!</a></div>
+            </div>
+
+        </div>
+
+        <div class="col_right">
+            <div class="testimonial">
+                <?php $user_mapper = new Ee_Model_Users(); ?>
+                <?php $carlos = $user_mapper->find(19112679); ?>
+                <?php if ($carlos) : ?>
+                    <div class="text">" A publicidade aqui no Empreendemia se mostrou uma grata surpresa. Em poucos dias, diversas empresas entraram em contato conosco pedindo por mais informações e pedindo propostas. Realmente está valendo a pena. Recomendo. "</div>
+                    <div class="user_thumb"><?php echo $carlos->imageLink(100) ?></div>
+                    <div class="user_name"><a href="<?php echo $carlos->url() ?>"><?php echo $carlos->fullName() ?></a></div>
+                    <div class="company_name"><a href="<?php echo $carlos->company->url() ?>"><?php echo $carlos->company->name ?></a></div>
+                <?php endif ?>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

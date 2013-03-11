@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.ckeditor {
+	line-height: 1.4em;
+	font-family: Verdana, Geneva, sans-serif;
+    font-size: 9pt;
+    text-align: justify;
+}
+
+.ckeditor  p {
+	padding: 0;
+	margin: 1em 0;
+}
+
+.ckeditor  ul {
+	padding-left: 40px;
+}
+.ckeditor  ul li {
+	list-style: disc;
+	padding: 4px;
+	margin: 0;
+}
+.ckeditor  ol {
+	padding-left: 40px;
+}
+.ckeditor  ol li {
+	list-style:decimal;
+	padding: 4px;
+	margin: 0;
+}
+
+
+.ckeditor h1 {
+	background-image: none;
+	padding: 20px 0;
+	margin: 0;
+	height: auto;
+	border: none;
+	background-color: transparent;
+	font-size: 12pt;
+    font-weight: bold;
+    color: #333;
+}
+
+.ckeditor h2 {
+	background-image: none;
+	padding: 20px 0;
+	margin: 0;
+	height: auto;
+	border: none;
+	background-color: transparent;
+	font-size: 11pt;
+    font-weight: bold;
+	color: #333;
+}
+
+.ckeditor h3 {
+	background-image: none;
+	padding: 20px 0;
+	margin: 0;
+	height: auto;
+	border: none;
+	background-color: transparent;
+	font-size: 10pt;
+    font-weight: bold;
+	color: #333;
+}
+
+
+.ckeditor h4 {
+	color: #333;
+}
+
+
+
+.ckeditor h5 {
+	color: #333;
+}

@@ -1,0 +1,50 @@
+<?php
+/**
+ * index.phtml
+ * Mural de requisição de serviços
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-29
+ */
+?>
+
+<?php $this->layout()->setLayout('2_cols_large_small') ?>
+<?php $this->layout()->header_title = 'Mural de Serviços' ?>
+<?php $this->headLink()->appendStylesheet('css/layouts/demands.css') ?>
+
+<script>
+    Tracker.ga.userEvent('demmand list demmands');
+</script>
+
+<div class="demands_board">
+    <div class="icon"><img src="images/icons/demands_80.gif" /></div>
+    <div class="description plaintext">
+        <p>Confira o que outras empresas do Empreendemia estão precisando e veja se alguma delas é seu cliente em potencial.</p>
+        <p>Caso esteja buscando fornecedores e queira fazer seu pedido, <a href="quero-comprar">clique aqui</a>.</p>
+    </div>
+    <ul class="demands">
+    <?php foreach ($this->demands as $demand) : ?>
+        <li class="demand">
+            <ul>
+                <li class="title"><a href="quero-vender/servicos/<?php echo $demand->slug ?>" onclick="Tracker.ga.userEvent('demmand request view: <?php echo($demand->slug)?>');"  class="modal_iframe" title="Ver pedido"><?php echo $demand->title ?></a></li>
+                <li class="city"><strong>Cidade:</strong> 
+                <?php 
+                if ($demand->user_id != NULL){
+                    echo $demand->user->company->city->name, ', ', $demand->user->company->city->region->symbol; 
+                }
+                else
+                    echo $demand->city_state;
+                ?>
+                </li>
+                <li class="category"><strong>Descrição:</strong> <?php echo $demand->description ?></li>
+                <li class="demand_button">
+                    <a href="quero-vender/servicos/<?php echo $demand->slug ?>" onclick="Tracker.ga.userEvent('demmand request view: <?php echo($demand->slug)?>');"  class="modal_iframe" title="Ver pedido">entre em contato<a>
+                </li>
+            </ul>
+        </li>
+    <?php endforeach ?>
+    </ul>
+</div>
+
+
+<?php $this->layout()->side = '<div class="ads_display ads_display_lateral ads_display_4"></div>'; ?>

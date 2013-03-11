@@ -1,0 +1,57 @@
+<?php
+/**
+ * invite.php
+ * Cadastro de usuário que foi convidado para rede
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-09-23
+ */
+?>
+<?php $this->layout()->setLayout('2_cols_large_small') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css') ?>
+<?php $this->headLink()->appendStylesheet('css/layouts/auth.css') ?>
+<?php $this->headScript()->appendFile('js/forms/locations.js') ?>
+
+<?php if ($this->interruption) : ?>
+<script type="text/javascript">
+var throw_event = false;
+$(function() {
+    $('#page .container').prepend('<div id="must_auth_message" style="display:none"><h1>Você precisa estar logado para realizar essa ação.</h1><h2>Se você ainda não faz parte da rede, <strong>cadastre-se gratuitamente</strong>!</h2></div>');
+    $('#must_auth_message').slideDown(500);
+    $('.signup_form input, .faq').hover(function() {
+        if (throw_event == false) {
+           <?php echo $this->Tracker()->userEvent('started sign up', null, true) ?>
+           throw_event = true;
+        }
+    });
+});
+</script>
+<?php endif ?>
+<?if(isset($this->registred) && $this->registred) :?>
+
+<?php else :?>
+    <h1 class="h_title h_blue h_xxxlarge h_border">Cadastre-se</h1>
+
+    <div class="form signup_form">
+        <?php $this->form->setAction($this->url()) ?>
+        <?php if ($this->interruption == false) $this->form->return->setValue('passo-a-passo') ?>
+        <?php echo $this->form ?>
+    </div>
+<?php endif;?>
+
+
+<?php
+/*
+ * ------------------------------------------------------------
+ * Aqui começa o conteúdo lateral
+ * ------------------------------------------------------------
+ */
+ob_start()
+?>
+
+<div class="inviter">
+    <h2>Você foi convidado por</h2>
+    <div class="thumb"><?php echo $this->inviter->image(200) ?></div>
+    <div class="name"><?php echo $this->inviter->fullName() ?></div>
+</div>
+<?php $this->layout()->side = ob_get_clean() ?>

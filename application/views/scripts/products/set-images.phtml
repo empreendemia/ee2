@@ -1,0 +1,94 @@
+<?php
+/**
+ * set-images.phtml
+ * Altera imagens de um produto premium
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headLink()->appendStylesheet('css/elements/products/set_images.css'); ?>
+
+<?php if ($this->index == false || $this->sent) : ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 680 ?>
+<?php $this->modal->height = 280 ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Imagem enviada
+// -----------------------------------------------------------------------------
+?>
+<?php if ($this->sent) : ?>
+<script type="text/javascript">
+    $(function() {
+       parent.$('#product_<?php echo $this->product->id ?> .thumb').html('<?php echo $this->product->image(120) ?>');
+    });
+</script>
+<?php endif ?>
+
+<div class="plaintext">
+<h1 class="h_title h_blue h_medium h_margin h_border">Atualizar imagem de <?php echo $this->product->name ?> </h1>
+<p>Selecione qual imagem você quer atualizar</p>
+</div>
+
+<ul class="images">
+    <ul class="image showcase">
+        <li class="thumb"><a href="minha-empresa/produtos/imagens/<?php echo $this->product->id ?>/showcase"><?php echo $this->product->image(80) ?></a></li>
+        <li class="label">vitrine</li>
+    </ul>
+    <ul class="image">
+        <li class="thumb"><a href="minha-empresa/produtos/imagens/<?php echo $this->product->id ?>/1"><?php echo $this->product->image(80, 1) ?></a></li>
+        <li class="label">premium #1</li>
+    </ul>
+    <ul class="image">
+        <li class="thumb"><a href="minha-empresa/produtos/imagens/<?php echo $this->product->id ?>/2"><?php echo $this->product->image(80, 2) ?></a></li>
+        <li class="label">premium #2</li>
+    </ul>
+    <ul class="image">
+        <li class="thumb"><a href="minha-empresa/produtos/imagens/<?php echo $this->product->id ?>/3"><?php echo $this->product->image(80, 3) ?></a></li>
+        <li class="label">premium #3</li>
+    </ul>
+    <ul class="image">
+        <li class="thumb"><a href="minha-empresa/produtos/imagens/<?php echo $this->product->id ?>/4"><?php echo $this->product->image(80, 4) ?></a></li>
+        <li class="label">premium #4</li>
+    </ul>
+    <ul class="image">
+        <li class="thumb"><a href="minha-empresa/produtos/imagens/<?php echo $this->product->id ?>/5"><?php echo $this->product->image(80, 5) ?></a></li>
+        <li class="label">premium #5</li>
+    </ul>
+</ul>
+
+<?php
+// -----------------------------------------------------------------------------
+// Formulário
+// -----------------------------------------------------------------------------
+?>
+<?php else : ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 550 ?>
+<?php $this->modal->height = 220 ?>
+
+
+<div class="product_thumb" style="float:left;padding-right:20px;">
+    <?php 
+        if ($this->index == 'showcase') echo $this->product->image(100);
+        else  echo $this->product->image(100, $this->index);
+    ?>
+</div>
+
+<div class="plaintext">
+<h1 class="h_title h_blue h_medium">Alterar imagem do produto</h1>
+<p style="font-size:8pt">Você pode enviar arquivos JPG, GIF ou PNG (tamanho máximo de 2MB). Não envie fotos que contenham imagens de personagens de desenho animado, pessoas famosas, nudez, trabalho artístico ou material protegido por direitos autorais. A imagem será recortada automaticamente.</p>
+</div>
+
+<div class="form">
+<?php $this->form->submit->setLabel('Atualizar imagem') ?>
+<?php echo $this->form ?>
+</div>
+
+<?php endif ?>

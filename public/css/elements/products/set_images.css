@@ -1,0 +1,49 @@
+.images {
+
+}
+
+.images .image {
+    display: inline-block;
+    width: 100px;
+    margin: 1px;
+}
+
+.images .image.showcase {
+    margin-left: 0;
+    margin-right: 20px;
+}
+
+.images .thumb {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+.images .thumb a {
+    display: block;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+}
+
+.images .thumb a:hover {
+    padding: 9px;
+    border: 2px solid #ddd;
+    background-color: #fa0;
+}
+
+.images .label {
+    color: #888;
+    font-size: 8pt;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.images .name {
+    display: block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}

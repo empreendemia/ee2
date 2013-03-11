@@ -1,0 +1,24 @@
+<?php
+/**
+ * user-profile.phtml
+ * Usuário altera dados do seu perfil
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-03
+ */
+?>
+<?php $this->layout()->setLayout('panel_user') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+<?php $this->headScript()->appendFile('js/jquery/plugins/jquery.maskedinput-1.3.min.js') ?>
+
+<script type="text/javascript">
+$(function($){
+   $("#phone").mask("55 99 9?99999999");
+   $("#cell_phone").mask("55 99 9?99999999");
+});
+</script>
+
+<div class="form">
+    <?php echo $this->form ?>
+</div>

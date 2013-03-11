@@ -1,0 +1,75 @@
+<?php
+/**
+ * start-premium.php
+ * Empresa do cara foi ativada como premium
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-26
+ */
+?>
+<style type="text/css">
+.confirmation {
+   margin: 50px;
+}
+.confirmation h1 {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 20pt;
+    margin: 20px 0;
+}
+.confirmation .expiration {
+    margin: 20px 0 40px 0;
+    line-height: 1.6em;
+    color: #333;
+}
+.confirmation .expiration p {
+    font-size: 12pt;
+}
+.confirmation p {
+    margin: 10px 0;
+    font-size: 9pt;
+}
+.confirmation p strong {
+    font-weight: bold;
+}
+</style>
+
+<div class="confirmation">
+    <?php if ($this->period == 'test-drive') : ?>
+
+    <?php if ($this->save) : ?>
+    <h1>Seu Premium foi ativado!</h1>
+    <div class="expiration">
+        <p>Seu test-drive Premium foi ativado até<br/>
+            <strong><?php echo $this->Format()->date($this->expirations['new'], 'full') ?></strong></p>
+    </div>
+    <?php else : ?>
+    <h1>Você já ativou seu test-drive</h1>
+    <div class="expiration">
+        <p>Seu test-drive Premium é válido até<br/>
+            <strong><?php echo $this->Format()->date($this->expirations['new'], 'full') ?></strong></p>
+    </div>
+    <?php endif ?>
+
+    <?php elseif ($this->updated) : ?>
+    
+    <h1>Seu Premium foi extendido!</h1>
+    <div class="expiration">
+        <p>Seu Premium será extendido até <br/>
+            <strong><?php echo $this->Format()->date($this->expirations['new'], 'full') ?></strong><br />
+        após a confirmação do pagamento.</p>
+    </div>
+
+    <?php else : ?>
+    
+    <h1>Seu Premium foi ativado!</h1>
+    <div class="expiration">
+        <p>Seu Premium será ativado até</p>
+        <p><strong><?php echo $this->Format()->date($this->expirations['new'], 'full') ?></strong><br />
+        após a confirmação do pagamento.</p>
+    </div>
+
+    <?php endif ?>
+    
+    <p><a href="painel/empresa" onlick="<?php echo $this->Tracker()->userEvent('premium: started using', null, true) ?>">Clique aqui</a> para usar o seu Premium!</p>
+</div>

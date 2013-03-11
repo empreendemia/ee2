@@ -1,0 +1,212 @@
+<?php
+/**
+ * itautec.phtml
+ * Layout personalizado da Locaweb
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-10-31
+ */
+?>
+<?php
+    if(!isset($this->company)) {
+        throw new Exception('VIEW::company not set');
+    }
+
+    $this->headLink()->appendStylesheet('css/cols/large-small.css');
+    $this->headLink()->appendStylesheet('css/layouts/vip/default.css');
+    $this->headLink()->appendStylesheet('css/layouts/vip/locaweb.css');
+    
+    $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+    $selected['home'] = '';
+    $selected['benefits'] = '';
+    $selected['products'] = '';
+    $selected['articles'] = '';
+
+    if ($action == 'view') $selected['home'] = 'class="selected"';
+    if ($action == 'benefits') $selected['benefits'] = 'class="selected"';
+    if ($action == 'products') $selected['products'] = 'class="selected"';
+    if ($action == 'articles') $selected['articles'] = 'class="selected"';
+
+?>
+
+<?php include(APPLICATION_PATH."/layouts/scripts/elements/head.phtml") ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Google Analytics da Locaweb
+// -----------------------------------------------------------------------------
+?>
+<script type="text/javascript">
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '/*' ?>
+        _gaq.push(function() {
+            _gaq._createAsyncTracker('UA-8258404-11','locaweb');
+        })
+        _gaq.push(['locaweb._setDomainName','empreendemia.com.br']);
+        _gaq.push(['locaweb._trackPageview']);
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '*/' ?>
+</script>
+
+<div id="body">
+
+    <?php include(APPLICATION_PATH."/layouts/scripts/elements/user_header.phtml"); ?>
+
+    <?php include(APPLICATION_PATH."/layouts/scripts/elements/header.phtml"); ?>
+
+    <div id="page">
+        <div class="container">
+            <?php
+            // -----------------------------------------------------------------
+            // Primeira coluna
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_1">
+                <?php
+                // -------------------------------------------------------------
+                // Header da Locaweb
+                // -------------------------------------------------------------
+                ?>
+                <div class="company_header page_header">
+
+                    <div id="company_logo"><a href="e/locaweb"><img src="images/vip/locaweb/logo.png" /></a></div>
+
+                    <h1 id="company_name"><a href="e/locaweb"><?php echo $this->company->name ?></a></h1>
+
+                    <div id="company_thumb"><?php echo $this->company->image(140) ?></div>
+
+                    <div id="company_sector"><a href="lista-de-empresas/<?php echo $this->company->city->region->slug ?>/<?php echo $this->company->city->slug ?>/<?php echo $this->company->sector->slug ?> "><?php echo $this->company->sector->name ?></a> - <a href="lista-de-empresas/<?php echo $this->company->city->region->slug ?>/<?php echo $this->company->city->slug ?>/<?php echo $this->company->sector->slug ?>?s=<?php echo urlencode($this->company->activity) ?>"><?php echo $this->company->activity ?></a></div>
+
+                    <div id="company_subscribe"><a href="e/locaweb/seguir">seguir a Locaweb! <img src="images/icons/follow.png"></a></div>
+                    
+                    <menu id="company_menu">
+                        <li <?php echo $selected['home'] ?>>
+                            <a href="e/locaweb">
+                                Principal
+                            </a>
+                        </li>
+                        <li <?php echo $selected['benefits'] ?>>
+                            <a href="e/locaweb/beneficios">
+                                Benefícios
+                            </a>
+                        </li>
+                        <li <?php echo $selected['products'] ?>>
+                            <a href="e/locaweb/solucoes">
+                                Soluções
+                            </a>
+                        </li>
+                        <li <?php echo $selected['articles'] ?>>
+                            <a href="e/locaweb/artigos">
+                                Artigos
+                            </a>
+                        </li>
+                    </menu>
+                </div> <!-- .page_header .company_header -->
+                
+                
+                <?php
+                // -------------------------------------------------------------
+                // View
+                // -------------------------------------------------------------
+                ?>
+                <div class="content">
+                    <?php echo $this->layout()->content ?>
+                </div>
+
+                <div class="clear"></div>
+                
+                
+                <?php
+                // -------------------------------------------------------------
+                // Footer adicional da Locaweb
+                // -------------------------------------------------------------
+                ?>
+                <div class="locaweb_footer">
+                    <a href="http://www.locaweb.com.br/solucoes/empresa-online.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_term=Sua+empresa+online" class="first" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: footer sua empresa online', 'Locaweb', null, true) ?>">Sua empresa online</a>
+                    <a href="http://www.locaweb.com.br/solucoes/solucoes-para-blogueiros.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_term=Monte+seu+Blog" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: footer monte seu blog', 'Locaweb', null, true) ?>">Monte seu Blog</a>
+                    <a href="http://www.locaweb.com.br/solucoes/venda-pela-internet.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_term=Venda+pela+internet" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: footer venda pela internet', 'Locaweb', null, true) ?>">Venda pela Internet</a>
+                    <a href="http://www.locaweb.com.br/produtos/webdesk.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_term=Solucao+de+atendimento" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: footer solucoes de atendimento', 'Locaweb', null, true) ?>">Soluções de atendimento</a>
+                </div>
+            </div><!-- col_1 -->
+
+
+            <?php
+            // -----------------------------------------------------------------
+            // Segunda coluna
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_2">
+                <?php
+                // -------------------------------------------------------------
+                // Header lateral da Locaweb
+                // -------------------------------------------------------------
+                ?>
+                <div class="company_side_header">
+                    <div class="follow">
+                        <h2><a href="e/locaweb/seguir">Siga a Locaweb <br />na Empreendemia!</a></h2>
+                        <p>
+                            Fique por dentro de dicas <br />e novidades para otimizar <br />seus projetos.
+                        </p>
+                        <div class="links">
+                            <a href="http://www.facebook.com/locaweb?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=?&utm_term=facebook+lw" target="_blank"><img src="images/vip/locaweb/icon_fb.png" /></a>
+                            <a href="http://twitter.com/#!/locaweb?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=?&utm_term=twitter+lw" target="_blank"><img src="images/vip/locaweb/icon_tw.png" /></a>
+                            <a href="http://feeds.feedburner.com/BlogOficialDaLocawebPme" target="_blank"><img src="images/vip/locaweb/icon_rss.png" /></a>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                // -------------------------------------------------------------
+                // Banner lateral da Locaweb
+                // -------------------------------------------------------------
+                ?>
+                <?php if (isset($this->layout()->side)) : ?>
+                    <?php echo $this->layout()->side ?>
+                <?php else : ?>
+                    <div class="company_side_banner">
+                        <div class="questions">
+                            <h3>Precisa de ajuda para fazer seu site?</h3>
+                            <p>Conheça profissionais, agências e outras empresas que oferecem o melhor serviço de criação de sites. <a href="http://www.profissionaisdeinternet.com.br/?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=?&utm_term=Rede+de+Profissionais" target="_blank">Acesse nossa Rede de Profissionais.</a></p>
+                            <hr />
+                        </div>
+                        <div class="magazine">
+                            <h3>Revista Locaweb</h3>
+                            <a href="http://www.locaweb.com.br/sobre-locaweb/revista.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_term=Revista+Locaweb" onclick="<?php echo $this->Tracker()->vipEvent('view link: revista locaweb', 'Locaweb', null, true) ?>">
+                                <img src="images/vip/locaweb/revista.gif" />
+                            </a>
+                            <h4>Nas bancas: <br />Edição 31</h4>
+                            <ul>
+                                <li>Facebook</li>
+                                <li>Rubens Barrichello</li>
+                                <li>Valorize sua imagem</li>
+                            </ul>
+                            <div class="link"><a href="http://www.locaweb.com.br/sobre-locaweb/revista.html?utm_campaign=empreendemia&utm_source=empreendemia&utm_medium=&utm_term=Revista+Locaweb" onclick="<?php echo $this->Tracker()->vipEvent('view link: revista locaweb', 'Locaweb', null, true) ?>">&raquo; Outras edições</a></div>
+                        </div>
+                        <div class="testimonial">
+                            <p class="quote">"A Locaweb sempre nos atendeu de forma ágil e profissional. Utilizamos seus serviços há mais de 5 anos e pretendemos continuar juntos por muito mais."</p>
+                            <p class="author">Paulo Loeb</p>
+                            <p class="job">Sócio</p>
+                        </div>
+                    </div>
+                <?php endif ?>
+            </div><!-- .col_2 -->
+
+            <div class="clear"></div>
+        </div><!-- .container -->
+    </div> <!-- #page -->
+
+    <?php include(APPLICATION_PATH."/layouts/scripts/elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footerdo layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include(APPLICATION_PATH."/layouts/scripts/elements/foot.phtml") ?>

@@ -1,0 +1,110 @@
+<?php
+/**
+ * view.phtml
+ * Perfil da NET
+ * 
+ * @package views
+ * @subpackage net
+ * @author Mauro Ribeiro
+ * @since 2012-10-24
+ */
+?>
+<?php $this->layout()->og_title = $this->company->name ?>
+<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_description = $this->company->description ?>
+
+<?php $this->layout()->title = 'NET' ?>
+<div class="product-page">
+    <div class="box">
+
+        <?php if ($this->product_id == 'servicos') : ?>
+            <h1>Net Empresas Econômico</h1>
+            <div class="details">
+                <p>2 linhas de telefone</p>
+                <ul>
+                    <li>Tarifa de ligações para outros fixos = R$ 0,12/min</li>
+                </ul>
+                <p>Banda larga 10 mega</p>
+                <ul>
+                    <li>Roteador wi-fi grátis</li>
+                </ul>
+            </div>
+        <?php elseif ($this->product_id == 'fixo-ilimitado') : ?>
+            <h1>Net Empresas Fixo Ilimitado</h1>
+            <div class="details">
+                <p>2 linhas de telefone</p>
+                <ul>
+                    <li>Ligações locais e net para net ilimitadas</li>
+                </ul>
+                <p>Banda larga 10 mega</p>
+                <ul>
+                    <li>Roteador wi-fi grátis</li>
+                </ul>
+            </div>
+        <?php elseif ($this->product_id == 'comercio') : ?>
+            <h1>Net Empresas Econômico</h1>
+            <div class="details">
+                <p>2 linhas de telefone</p>
+                <ul>
+                    <li>Tarifa de ligações para outros fixos = R$ 0,12/min</li>
+                </ul>
+                <p>Banda larga 10 mega</p>
+                <ul>
+                    <li>Roteador wi-fi grátis</li>
+                </ul>
+                <p>TV compacto</p>
+                <ul>
+                    <li>Pacote Notícias grátis por 12 meses</li>
+                </ul>
+            </div>
+        <?php endif ?>
+
+        <div class="clear"></div>
+    </div>
+
+
+    <div class="box">
+        <h1>Benefícios</h1>
+        <div class="benefits">
+            <div class="benefit">
+                <img src="" />
+                <h2>Instalação Grátis</h2>
+                <p>Promoção válida por tempo indeterminado.</p>
+            </div>
+            <div class="benefit">
+                <img src="" />
+                <h2>Serviços inteligentes Grátis</h2>
+                <p>Seu plano de telefone terá disponível vários serviços inteligentes gratuitamente por "tempo indeterminado".</p>
+            </div>
+            <div class="benefit">
+                <img src="" />
+                <h2>Extensões Grátis*</h2>
+                <p>Tenha até 4 extensões grátis por linha.</p>
+                <p class="obs">* Deverá ser solicitado no ato da compra</p>
+            </div>
+            <div class="benefit">
+                <img src="" />
+                <h2>Ligações locais Grátis</h2>
+                <p>As ligações locais entre telefones NET são grátis.</p>
+            </div>
+            <div class="benefit">
+                <img src="" />
+                <h2>Tarifas Únicas independente do dia e horário da ligação</h2>
+                <p>Uma só tarifa para cada tipo de ligação cobrada por minuto, independente do dia e horário.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="faq-link"><a href="e/net/duvidas">Clique aqui e tire suas dúvidas.</a></div>
+
+    <?php if ($this->product_id == 'servicos') : ?>
+        <div class="price">R$ 122,90/mês</div>
+    <?php elseif ($this->product_id == 'fixo-ilimitado') : ?>
+        <div class="price">R$ 152,90/mês</div>
+    <?php elseif ($this->product_id == 'comercio') : ?>
+        <div class="price">R$ 154,90/mês</div>
+    <?php endif ?>
+
+    <div class="signup"><a href="#">Assinar Plano</a></div>
+</div>

@@ -1,0 +1,474 @@
+<script type="text/javascript">
+
+function showTab(tabname) {
+    if (tabname != '') {
+        $('.showtab').hide();
+        $('.tabs li').removeClass('selected');
+        $('.tabs li.tab_'+tabname).addClass('selected');
+        $('.tabs li.tab_'+tabname+' a').blur();
+        $('.showtab_'+tabname).fadeIn();
+    }
+    if (tabname == 'beneficios') {
+        <?php echo $this->Tracker()->userEvent('premium: viewed description', null, true) ?>
+    }
+    else if (tabname == 'comparativo') {
+        <?php echo $this->Tracker()->userEvent('premium: viewed comparative table', null, true) ?>
+    }
+    else if (tabname == 'tabela-de-precos') {
+        <?php echo $this->Tracker()->userEvent('premium: viewed pricing', null, true) ?>
+    }
+    else if (tabname == 'duvidas-comuns') {
+        <?php echo $this->Tracker()->userEvent('premium: viewed faq', null, true) ?>
+    }
+    else {
+        <?php echo $this->Tracker()->userEvent('premium: viewed benefits', null, true) ?>
+    }
+}
+
+$(function() {
+    showTab(window.location.hash.substring(1));
+});
+</script>
+
+<style type="text/css">
+.page_premium {
+    position: relative;
+}
+
+.page_premium .cols {
+}
+
+.page_premium .cols .col_left {
+    float: left;
+    width: 200px;
+}
+
+.page_premium .cols .col_right {
+    float: right;
+    width: 680px;
+}
+
+.page_premium .title {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 18pt;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.page_premium .subtitle {
+    color: #0C478B;
+    font-size: 14pt;
+    margin-bottom: 20px;
+}
+
+.page_premium .description {
+    margin: 20px 0;
+    font-size: 10pt;
+    color: #666;
+    line-height: 1.6em;
+}
+
+.page_premium strong {
+    font-weight: bold;
+}
+
+.tabs {
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    margin-top: 50px;
+}
+
+.tabs ul {
+    position: absolute;
+    bottom: -1px;
+}
+
+.tabs li {
+    float: left;
+    margin-right: 1px;
+    border: 1px solid #ccc;
+    background-color: #ccc;
+}
+.tabs li.selected {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+}
+
+.tabs li a {
+    display: inline-block;
+    width: 140px;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #888;
+    text-shadow: 1px 1px 0 #eee;
+    font-size: 9pt;
+}
+
+.tabs li.selected a {
+    color: #0C478B;
+}
+
+.box {
+    position: relative;
+    padding: 20px;
+}
+
+.benefits {
+
+}
+
+.benefits .benefit {
+    position: relative;
+    padding: 20px;
+    clear: both;
+}
+
+.benefits .benefit .image {
+    float: left;
+    padding-right: 20px;
+}
+
+.benefits .benefit h3 {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.benefits .benefit p {
+    font-size: 9pt;
+    margin: 10px 0;
+    line-height: 1.4em;
+}
+
+.testimonial {
+    padding: 40px;
+    position: relative;
+}
+
+.testimonial .user_thumb {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.testimonial .company_thumb {
+    position: absolute;
+    top: 160px;
+    left: 90px;
+}
+
+.testimonial .text {
+    margin-left: 120px;
+    font-size: 14pt;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    line-height: 1.4em;
+    margin-bottom: 15px;
+}
+
+.testimonial .user_name {
+    margin-left: 120px;
+    font-size: 10pt;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.testimonial .company_name {
+    margin-left: 120px;
+    font-size: 10pt;
+}
+
+.box p {
+    margin: 20px 0;
+    line-height: 1.6em;
+    font-size: 9pt;
+}
+
+.box ol {
+    list-style: decimal;
+    margin: 20px 0;
+    line-height: 1.6em;
+    font-size: 9pt;
+    padding-left: 25px;
+}
+.compare {
+    margin: 20px auto;
+    font-size: 10pt;
+    background-color: #ffc;
+}
+
+
+.compare th {
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 1px dotted #ccc;
+    color: #0C478B
+}
+
+.compare td{
+    padding: 4px 10px;
+}
+
+.compare td.range{
+    text-align: left;
+    color: #0C478B
+}
+
+.compare td.price{
+    text-align: left;
+}
+
+.prices {
+    margin: 20px auto;
+    font-size: 10pt;
+    background-color: #ffc;
+}
+
+
+.prices th {
+    font-weight: bold;
+    padding: 10px 20px;
+    border-bottom: 1px dotted #ccc;
+    color: #0C478B
+}
+
+.prices td{
+    padding: 10px 20px;
+}
+
+.prices td.range{
+    text-align: left;
+    color: #0C478B
+}
+
+.prices td.price{
+    text-align: left;
+}
+
+.questions h3 {
+    margin: 40px 0 20px 0;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #0C478B;
+}
+</style>
+
+<div class="page_premium">
+
+    <div class="cols">
+        <h1 class="title">Empreendemia Premium</h1>
+        <h2 class="subtitle">Venda mais usando a Internet</h2>
+
+        <div class="col_left">
+            <p class="description">Venda mais usando a Internet. Com Empreendemia Premium sua página ganha destaque e chama a atenção de seu potencial cliente.</p>
+
+                <?php /*
+                 * <div class="start_premium_left">
+                <ul>
+                    <li><a href="planos/premium/test-drive/<?php echo $this->confirmation['test-drive'] ?>">Test Drive</a></li>
+                    <li><a href="planos/premium/month/<?php echo $this->confirmation['month'] ?>">Mensal</a></li>
+                    <li><a href="planos/premium/half/<?php echo $this->confirmation['half'] ?>">Semestral</a></li>
+                    <li><a href="planos/premium/year/<?php echo $this->confirmation['year'] ?>">Anual</a></li>
+                </ul>
+            </div>
+                 */ ?>
+            <div class="premium_button_left"><a href="planos/premium/test-drive/<?php echo $this->confirmation['test-drive'] ?>"><img src="images/pages/premium/left_testdrive.gif" /></a></div>
+        </div>
+
+        <div class="col_right">
+            <div class="tabs">
+                <div class="line"></div>
+                <ul>
+                    <li class="tab_beneficios selected"><a href="<?php echo $this->url() ?>#beneficios" onclick="showTab('beneficios')">Benefícios</a></li>
+                    <li class="tab_comparativo"><a href="<?php echo $this->url() ?>#comparativo" onclick="showTab('comparativo')">Comparativo</a></li>
+                    <li class="tab_tabela-de-precos"><a href="<?php echo $this->url() ?>#tabela-de-precos" onclick="showTab('tabela-de-precos')">Tabela de preços</a></li>
+                    <li class="tab_duvidas-comuns"><a href="<?php echo $this->url() ?>#duvidas-comuns" onclick="showTab('duvidas-comuns')">Dúvidas comuns</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="box">
+                <div class="showtab showtab_beneficios">
+                    <div class="benefits">
+                        <div class="benefit">
+                            <div class="image"><img src="images/pages/premium/layout.gif" width="120" height="120" /></div>
+                            <h3>Layout diferenciado</h3>
+                            <p>O Empreendemia Premium permite a personalização da sua página, deixando-a bonitaça e destacando sua empresa dos concorrentes.</p>
+                        </div>
+                        <div class="benefit">
+                            <div class="image"><img src="images/pages/premium/more_info.gif" width="120" height="120" /></div>
+                            <h3>Mais informações sobre sua empresa</h3>
+                            <p>Adicione mais informações sobre seu produto, incluindo fotos. Isso com certeza chamará a atenção do seu cliente caso ele queira saber mais sobre seus produtos e serviços.</p>
+                        </div>
+                        <div class="benefit">
+                            <div class="image"><img src="images/pages/premium/find.gif" width="120" height="120" /></div>
+                            <h3>Seja encontrado</h3>
+                            <p>Empresas Premium aparecem em destaque no Mural de Ofertas e possuem melhor posicionamento no Google.</p>
+                            <p>Além disso, anúncios de outras empresas serão removidos da sua página, prendendo mais ainda a atenção do seu cliente.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="showtab showtab_comparativo" style="display:none">
+                    <div class="compare">
+                        <table class="compareTable">
+                            <tbody><tr class="o">
+                                <th>Benefícios</th>
+                                <th>Gratuito</th>
+                                <th>Premium</th>
+                            </tr>
+                            <tr>
+                                <td class="param">Facilidade de uso e atualização</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr class="o">
+                                <td class="param">Integrado à rede de empresas</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr>
+                                <td class="param">Otimizado para mecanismos de busca (SEO)</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                                <td><img alt="" src="images/pages/premium/check.gif"> <img alt="" src="images/pages/premium/check.gif"> <img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr class="o">
+                                <td class="param">Recomendação de negócios pelos nossos analistas</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                                <td><img alt="" src="images/pages/premium/check.gif"> <img alt="" src="images/pages/premium/check.gif"> <img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr>
+                                <td class="param">Layout diferenciado</td>
+                                <td>-</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr class="o">
+                                <td class="param">Design personalizável</td>
+                                <td>-</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr>
+                                <td class="param">Página detalhada do produto/serviço</td>
+                                <td>-</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr class="o">
+                                <td class="param">Remoção de links para empresas concorrentes</td>
+                                <td>-</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr>
+                                <td class="param">Destaque para as avaliações positivas</td>
+                                <td>-</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr class="o">
+                                <td class="param">URL amigável (nomedaempresa.empreendemia.com.br)</td>
+                                <td>-</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr>
+                                <td class="param">Espaço para vídeo (youtube, videolog e vimeo)</td>
+                                <td>-</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr class="o">
+                                <td class="param">Espaço para apresentação em slides (slideshare)</td>
+                                <td>-</td>
+                                <td><img alt="" src="images/pages/premium/check.gif"></td>
+                            </tr>
+                            <tr>
+                                <td class="param">Álbum de fotos por produto</td>
+                                <td>-</td>
+                                <td>5 fotos por produto</td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                </div>
+                <div class="showtab showtab_tabela-de-precos" style="display:none">
+                    <div>
+                        <p>O Empreendemia Premium fica mais barato caso você fique mais tempo com ele.</p>
+                        <table class="prices">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Período</th>
+                                    <th scope="col">Equivalente mensal</th>
+                                    <th scope="col">Valor total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="range">Test-drive de 15 dias</td>
+                                    <td class="price">Grátis!</td>
+                                    <td class="price">Grátis!</td>
+                                </tr>
+                                <tr>
+                                    <td class="range">Mensal</td>
+                                    <td class="price">R$ 60 por mês</td>
+                                    <td class="price">R$ 60,00</td>
+                                </tr>
+                                <tr>
+                                    <td class="range">Semestral</td>
+                                    <td class="price">R$ 50 por mês</td>
+                                    <td class="price">R$ 300,00</td>
+                                </tr>
+                                <tr>
+                                    <td class="range">Anual</td>
+                                    <td class="price">R$ 40 por mês</td>
+                                    <td class="price">R$ 480,00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>Vale a pena ressaltar que para entender melhor como ele funciona e ver seus resultados, você pode fazer um <strong>test-drive gratuito de 15 dias</strong>.</p>
+                    </div>
+                </div>
+                <div class="showtab showtab_duvidas-comuns" style="display:none">
+                    <div class="questions">
+                        <h3>O que é o Empreendemia Premium?</h3>
+
+                            <p>O Empreendemia Premium é um pacote de serviços que destaca o perfil da sua empresa dentro da rede e também te auxilia a usar o máximo dos recursos da rede. Ou seja, vender mais. </p>
+                            <p>Ele pode ser testado <strong>gratuitamente por 15 dias</strong> e os valores variam de 40 a 60 reais mensais. Como cliente Empreendemia Premium, você usufrui do tempo de Consultoria dos nossos consultores de negócios para otimizar sua participação na rede.</p>
+
+
+
+                            <h3>Pra que serve?</h3>
+                            <p>O Empreendemia Premium é a melhor maneira de você fazer novos negócios. O perfil da sua empresa se transforma em um site, com mais informações sobre cada produto/serviço, imagens, vídeos e sua própria identidade visual. Além, claro, da consultoria fornecida pela Equipe Empreendemia para otimizar o seu uso da rede.</p>
+                            <p></p>
+                            <p></p>
+
+                            <h3>Qual a diferença entre o Premium e o gratuito?</h3>
+                            <p>O diferencial do Perfil Premium é o <strong>destaque</strong> da sua empresa dentro da rede. </p>
+                            <p>O Premium inclui ferramentas, consultoria e possibilidade de personalização do perfil, que torna sua página mais atraente, o que resulta em mais vendas.</p>
+                            <p></p>
+
+                            <h3>Para que tipo de empresas o Empreendemia Premium traz mais resultados?</h3>
+                            <p>Para empresas que tenham potenciais clientes dentro da rede e para empresas que precisem de uma página corporativa facilmente personalizável.</p>
+                            <p></p>
+                            <p></p>
+
+                            <h3>Quais são os benefícios do Premium para minha empresa?</h3>
+                            <p>a) Página destacada e personalizável: a página Premium não contém publicidade externa e ainda te dá a possibilidade de inserir sua própria identidade visual, mais informações e vídeos sobre produtos e serviços da sua empresa. Além disso, com o perfil Premium sua empresa é encontrada mais facilmente nas buscas do Google. </p>
+                            <p>b) Destaque no <a href="quero-comprar/ofertas">Mural de Ofertas</a>: O Mural de Ofertas é o espaço em que você pode promover seus produtos e serviços com descontos exclusivos para usuários do Empreendemia. Usuários Premium aparecem melhor colocados na listagem. </p>
+                            <p>c) Botão "Pedir Orçamento": cada um dos produtos e serviços cadastrados na sua Vitrine contém um botão "Pedir Orçamento", onde seus potenciais clientes poderão manifestar seu interesse por um orçamento e você recebe no seu e-mail os dados de contato do seu potencial cliente. </p>
+                            <p>d) Relatórios mensais: Receba relatórios de quem visitou seu perfil, segmentados por cidade. </p>
+                            <p>Além disso, com o perfil Premium, a página da sua empresa aparece com maior destaque nas buscas do Google. </p>
+
+                            <h3>Todos os usuários da rede podem visualizar minhas informações? E as pessoas não cadastradas?</h3>
+                            <p>Com o Empreendemia Premium, suas informações de contato também serão visíveis para clientes que ainda não fazem parte da rede.</p>
+                            <p>Pelo fato do perfil Premium ser otimizado para mecanismos de busca, o cliente Premium pode efetivamente utilizar seu perfil como site.</p>
+ 
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="premium_button_bottom" style="text-align:center;margin-top:40px"><a href="planos/premium/test-drive/<?php echo $this->confirmation['test-drive'] ?>"><img src="images/pages/premium/bottom_testdrive.gif" /></a></div>
+
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

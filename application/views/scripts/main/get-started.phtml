@@ -1,0 +1,88 @@
+<?php
+/**
+ * get-started.phtml
+ * Página incial do usuário logado
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-05
+ */
+?>
+<?php $this->layout()->setLayout('main') ?>
+<?php $this->layout()->title = $this->user->name ?>
+
+<script type="text/javascript">
+$(function() {
+    $('a').click(function() {
+        <?php echo $this->Tracker()->userEvent('did something', null, true); ?>
+    });
+});
+</script>
+
+<div class="sub_col_1">
+    <?php
+    // -------------------------------------------------------------------------
+    // Imagem do usuário
+    // -------------------------------------------------------------------------
+    ?>
+    <div class="user_thumb">
+        <a class="modal_iframe" href="usuario/atualizar-imagem" title="Alterar imagem de usuário">
+            <?php echo $this->user->image(160); ?>
+        </a>
+        <p>
+            sua foto 
+            (<a class="modal_iframe" href="usuario/atualizar-imagem" title="Alterar imagem de usuário">alterar</a>)
+        </p>
+    </div>
+    <?php
+    // -------------------------------------------------------------------------
+    // Logotipo da empresa
+    // -------------------------------------------------------------------------
+    ?>
+    <div class="company_thumb">
+        <a class="modal_iframe" href="minha-empresa/atualizar-imagem" title="Alterar logotipo da minha empresa">
+            <?php echo $this->company->image(160); ?>
+        </a>
+        <p>
+            logotipo de sua empresa 
+            (<a class="modal_iframe" href="minha-empresa/atualizar-imagem" title="Alterar logotipo da minha empresa">alterar</a>)
+        </p>
+    </div>
+</div>
+<div class="sub_col_2">
+
+
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Get Started
+    // -------------------------------------------------------------------------
+    ?>
+    <ul id="getstarted">
+        <li><span class="bullet">1</span> <span class="steptext">Adicione sua <a href="usuario/atualizar-imagem" class="modal_iframe tip_tool_right" title="Pelos ícones à esquerda você pode adicionar sua foto e logotipo da sua empresa para criar sua identidade dentro da rede.">foto</a> e <a href="minha-empresa/atualizar-imagem" class="modal_iframe tip_tool_right" title="Pelos ícones à esquerda você pode adicionar sua foto e logotipo da sua empresa para criar sua identidade dentro da rede.">logotipo</a> da sua empresa</span></li>
+        <li><span class="bullet">2</span> <span class="steptext">Crie sua <a href="painel/empresa/produtos" class="tip_tool_right" title="Adicione seus produtos e serviços à sua página para que as pessoas conheçam melhor sua empresa.">vitrine de produtos e serviços</a></span></li>
+        <li><span class="bullet">3</span> <span class="steptext">Atualize seus dados de contato</span>
+            <ul class="getstartednested">
+            <li><a href="painel/usuario/dados-pessoais" class="tip_tool_right" title="Esses dados aparecerão apenas para quem tiver trocado cartões com você">Seus dados</a></li>
+            <li><a href="painel/empresa" class="tip_tool_right" title="Esses dados são visíveis para todos usuários cadastrados no Empreendemia">Dados da sua empresa</a></li>
+            </ul>
+        </li>
+        <li><span class="bullet">4</span> <span class="steptext">Receba depoimentos de quem recomenda seu trabalho</span>
+            <ul class="getstartednested">
+            <li><a href="painel/usuario/convidar" class="tip_tool_right" title="Convide seus clientes">Clientes</a></li>
+            <li><a href="painel/usuario/convidar" class="tip_tool_right" title="Convide seus fornecedores">Fornecedores</a></li>
+            <li><a href="painel/usuario/convidar" class="tip_tool_right" title="Convide seus parceiros">Parceiros</a></li>
+            </ul>
+        </li>
+        <li><span class="bullet">5</span> <span class="steptext">Conheça novas empresas</span>
+            <ul class="getstartednested">
+            <li><a href="quero-comprar" class="tip_tool_right" title="Busque fornecedores de forma simples e organizada para conseguir o que você precisa">Encontre fornecedores</a></li>
+            <li><a href="quero-vender" class="tip_tool_right" title="Conheça nossas ferramentas que te ajudarão a vender mais pela rede">Consiga novos clientes</a></li>
+            </ul>
+        </li>
+
+    </ul>
+
+</div>
+
+
+<div class="clear"></div>

@@ -1,0 +1,171 @@
+<?php
+/**
+ * products.phtml
+ * Produtos da Locaweb
+ * 
+ * @package views
+ * @subpackage locaweb
+ * @author Mauro Ribeiro
+ * @since 2011-10-31
+ */
+?>
+<?php
+    if (isset($this->product)) {
+        $this->layout()->title = $this->product->name;
+
+        $this->layout()->og_title = $this->product->name;
+        $this->layout()->og_image = $this->serverUrl().'/'.$this->product->imagePath(200);
+        $this->layout()->og_description = $this->product->description;
+    }
+    else {
+        $this->layout()->title = 'Soluções Locaweb';
+
+        $this->layout()->og_title = $this->company->name;
+        $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200);
+        $this->layout()->og_description = 'Veja nossos produtos e/ou serviços!';
+    }
+?>
+<?php $this->headLink()->appendStylesheet('css/ui/ckeditor.css'); ?>
+
+
+<div class="sub_cols shadow products">
+    <div class="sub_col_1">
+
+        <?php if ($this->Access()->checkAuth() && $this->Access()->user()->id == $this->company->id) : ?>
+        <div class="add_product"><a href="painel/empresa/produtos/adicionar">Adicionar produto</a></div>
+        <?php endif ?>
+
+        <?php
+        // ---------------------------------------------------------------------
+        // Lista de produtos
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($this->products) : ?>
+        <menu class="lateral_tabs <?php if (isset($this->product)) echo 'transparent' ?>">
+            <?php foreach ($this->products as $product) : ?>
+            <li <?php if (isset($this->product) && $product->id == $this->product->id) echo 'class="selected"'; ?>>
+                <a href="<?php echo $product->url()?>">
+                    <span class="thumb"><?php echo $product->image(40) ?></span>
+                    <span class="text"><?php echo $product->name ?></span>
+                </a>
+            </li>
+            <?php endforeach; ?>
+        </menu>
+        <?php endif ?>
+
+    </div>
+
+    <div class="sub_col_2 company_product">
+
+    <?php
+    // ---------------------------------------------------------------------
+    // Detalhes do produto selecionado
+    // ---------------------------------------------------------------------
+    ?>
+    <?php if (isset($this->product)) : ?>
+        <div class="short_description">
+            <div class="thumb"><?php echo $this->product->image(140) ?></div> 
+            <h1><?php echo $this->product->name ?></h1>
+            <p class="description"><?php echo $this->product->description ?></p>
+        </div>
+        <?php if ($this->product->isOffer()) : ?>
+        <p class="offer"><?php echo $this->product->offer_description ?> <span class="deadline">Válido até <?php echo $this->Format()->date($this->product->offer_date_deadline, 'medium') ?></span></p>
+        <?php endif; ?>
+
+        <?php if ($this->company->isPlan('premium')) : ?>
+        <?php
+            $img_1 = $this->product->image(40, 1);
+            $img_2 = $this->product->image(40, 2);
+            $img_3 = $this->product->image(40, 3);
+            $img_4 = $this->product->image(40, 4);
+            $img_5 = $this->product->image(40, 5);
+        ?>
+        <?php if ($img_1 || $img_2 || $img_3 || $img_4 || $img_5) : ?>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("a[rel='modal_premium_images']").colorbox();
+            });
+        </script>
+        <div class="premium_images">
+            <div class="label"><strong>Galeria de imagens</strong> clique nas imagens para ampliá-las</div>
+            <ul>
+                <li><?php if ($img_1) : ?><a href="<?php echo $this->product->imagePath('full', 1); ?>" onclick="<?php echo $this->Tracker()->companyEvent('view product image: '.$this->product->id, $this->company->id, null, true) ?>" rel="modal_premium_images" title="<?php echo $this->product->subtitle_1 ?>"><?php echo $img_1 ?></a><?php endif; ?></li>
+                <li><?php if ($img_2) : ?><a href="<?php echo $this->product->imagePath('full', 2); ?>" onclick="<?php echo $this->Tracker()->companyEvent('view product image: '.$this->product->id, $this->company->id, null, true) ?>" rel="modal_premium_images" title="<?php echo $this->product->subtitle_2 ?>"><?php echo $img_2 ?></a><?php endif; ?></li>
+                <li><?php if ($img_3) : ?><a href="<?php echo $this->product->imagePath('full', 3); ?>" onclick="<?php echo $this->Tracker()->companyEvent('view product image: '.$this->product->id, $this->company->id, null, true) ?>" rel="modal_premium_images" title="<?php echo $this->product->subtitle_3 ?>"><?php echo $img_3 ?></a><?php endif; ?></li>
+                <li><?php if ($img_4) : ?><a href="<?php echo $this->product->imagePath('full', 4); ?>" onclick="<?php echo $this->Tracker()->companyEvent('view product image: '.$this->product->id, $this->company->id, null, true) ?>" rel="modal_premium_images" title="<?php echo $this->product->subtitle_4 ?>"><?php echo $img_4 ?></a><?php endif; ?></li>
+                <li><?php if ($img_5) : ?><a href="<?php echo $this->product->imagePath('full', 5); ?>" onclick="<?php echo $this->Tracker()->companyEvent('view product image: '.$this->product->id, $this->company->id, null, true) ?>" rel="modal_premium_images" title="<?php echo $this->product->subtitle_5 ?>"><?php echo $img_5 ?></a><?php endif; ?></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <?php endif; ?>
+        <div class="about ckeditor">
+            <?php
+                    $product_description = $this->product->about;
+                    preg_match_all('/\[video\](.*)\[\/video\]/', $product_description, $video_matches);
+                    $video_embed = array();
+                    for ($i = 0; $i < count($video_matches[0]); $i++) {
+                        $video = $video_matches[1][$i];
+                        $video_code = $video_matches[0][$i];
+                        preg_match('/[a-zA-Z]+[:\/\/]+[A-Za-z0-9\-_]+\\.+[A-Za-z0-9\.\/%&=\?\-_]+/', $video, $url_match);
+                        $url = $url_match[0];
+                        if (substr_count($video, 'youtube')) {
+                            $video_embed_index['code'] = $video_code;
+                            $parsed_url = parse_url($url);
+                            $parsed_vars = array();
+                            $get_vars = explode('&', $parsed_url['query']);
+                            foreach ($get_vars as $get_var) {
+                                $explode = explode('=', $get_var);
+                                $parsed_vars[$explode[0]] = $explode[1];
+                            }
+                            $video_id = $parsed_vars['v'];
+                            $video_embed_index['embed'] = '<object width="480" height="303"><param name="movie" value="http://www.youtube.com/v/<'.$video_id.'&hl=pt_BR&fs=1&"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/'.$video_id.'&hl=pt_BR&fs=1&" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="303"></embed></object>';
+                            $video_embed[] = $video_embed_index;
+                        }
+                        else if (substr_count($video, 'vimeo')) {
+                            $video_embed_index['code'] = $video_code;
+                            $parsed_url = parse_url($url);
+                            $explode = explode('/', $parsed_url['path']);
+                            $video_id = $explode[1];
+                            $video_embed_index['embed'] = '<object width="480" height="303"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id='.$video_id.'&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id='.$video_id.'&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="490" height="303"></embed></object>';
+                            $video_embed[] = $video_embed_index;
+                        }
+                        else if (substr_count($video, 'videolog')) {
+                            $video_embed_index['code'] = $video_code;
+                            $parsed_url = parse_url($url);
+                            $parsed_vars = array();
+                            $get_vars = explode('&', $parsed_url['query']);
+                            if (is_numeric($get_vars[0])) {
+                                $video_id = $get_vars[0];
+                            }
+                            else {
+                                foreach ($get_vars as $get_var) {
+                                        $explode = explode('=', $get_var);
+                                        $parsed_vars[$explode[0]] = $explode[1];
+                                }
+                                $video_id = $parsed_vars['id'];
+                            }
+                            $video_embed_index['embed'] = '<object id="playerFlash" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="480" height="303"><param name="movie" value="http://www.videolog.tv/ajax/codigoPlayer.php?id_video='.$video_id.'&relacionados=S&default=S&lang=PT_BR&cor_fundo=FFFFFF&cor_titulo=777777&hd=S&swf=1&width=480&height=303" /><param name="flashvars" value="id_video='.$video_id.'" /><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="true" /><param name="wmode" value="opaque" /><embed src="http://www.videolog.tv/ajax/codigoPlayer.php?id_video'.$video_id.'&relacionados=S&default=S&lang=PT_BR&cor_fundo=FFFFFF&cor_titulo=777777&hd=S&swf=1&width=480&height=303" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="303"></embed></object>';
+                            $video_embed[] = $video_embed_index;
+                        }
+                    }
+                    foreach ($video_embed as $video) {
+                        $product_description = str_replace($video['code'], $video['embed'], $product_description);
+                    }
+                    echo $product_description;
+                ?>
+        </div>
+        <?php endif; // is Premium? ?>
+
+        <?php if ($this->product->website != null && $this->product->website != '') : ?>
+        <?php
+            $website = $this->product->website;
+            if (strpos($website, 'http://') !== 0 && strpos($website, 'https://') !== 0) $website = 'http://'.$website;
+        ?>
+        <div class="website">Saiba mais em <a href="<?php echo $website ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view product link: '.$this->product->id, $this->company->id, null, true) ?>"><?php echo $website ?></a></div>
+        <?php endif ?>
+
+    <?php endif; // if product is selected ?>
+
+    </div>
+    <div class="clear"></div>
+</div>

@@ -1,0 +1,308 @@
+<?php
+/**
+ * index.phtml
+ * Home da Empreendemia
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-09-07
+ */
+?>
+<?php $this->layout()->setLayout('home') ?>
+<?php $this->layout()->title = 'Empreendemia' ?>
+<?php $this->headScript()->appendFile('js/jquery/plugins/jcarousellite_1.0.1.min.js') ?>
+
+<script type="text/javascript">//<![CDATA[
+$(function() {
+    $('.search_field').focus(function() {
+       $('.fake_search').fadeOut(100);
+    });
+    $('.fake_search').click(function() {
+       $('.fake_search').fadeOut(100);
+       $('.search_field').focus();
+    });
+    $(".last_companies").jCarouselLite({
+        auto: 5000,
+        speed: 1500,
+        visible: 8
+    });
+    $(".slide_show").jCarouselLite({
+        auto: 15000,
+        speed: 500,
+        visible: 1,
+        vertical: true,
+        btnGo: [
+            '#button_show_slide_1',
+            '#button_show_slide_2',
+            '#button_show_slide_3'
+        ],
+        afterEnd: function(a) {
+            var id = $(a[0]).attr('id');
+            $('.slide_show_buttons li').removeClass('selected');
+            $('#button_'+id).addClass('selected');
+        }
+    });
+
+    $('.businesses .business').hover(function(){
+       var business = $(this);
+       var business_id = business.attr('id');
+       $('.testimonials').fadeIn();
+       $('.testimonials .testimonial').hide();
+       $('.businesses .business').fadeTo(0, 0.5);
+       $('.businesses .business').find('.arrow_up').remove();
+       $('.businesses .business .rate').hide();
+       business.fadeTo(0, 1);
+       business.find('.rate').show();
+       business.append('<img src="images/ui/balloon_arrow_up.gif" class="arrow_up" />');
+       $('.testimonials #show_'+business_id).show();
+    });
+});
+
+function show(what) {
+    anchor = $('.tab_'+what);
+    anchor.blur();
+    $('.tabs a').removeClass('selected');
+    anchor.addClass('selected');
+    $('.information').hide();
+    $('.information_'+what).fadeIn();
+}
+//]]></script>
+
+<?php
+// -----------------------------------------------------------------------------
+// Slideshow
+// -----------------------------------------------------------------------------
+?>
+<div id="home_slide_show">
+    <div class="container">
+        <div class="slide_show">
+            <ul class="slides">
+                <li id="show_slide_1">
+                    <h2>Encontre <strong>clientes</strong> <br/>e <strong>fornecedores</strong></h2>
+                    <p>No Empreendemia você cria a página da sua empresa, entra em contato com possíveis clientes e fornecedores e fecha novos negócios.</p>
+                    <div class="image"><img src="images/home/slide_eggs.png" /></div>
+                </li>
+                <li id="show_slide_2">
+                    <h2><strong>Ofertas</strong> exclusivas</h2>
+                    <p>Ao fazer parte do Empreendemia você tem acesso a ofertas exclusivas para empresas da rede. <a href="quero-comprar/ofertas">Clique aqui</a> e visite o Mural de Ofertas.</p>
+                    <div class="image"><a href="quero-comprar/ofertas"><img src="images/home/slide_offers.png" /></a></div>
+                </li>
+            </ul>
+        </div>
+        <div class="slide_show_buttons">
+            <ul>
+                <li id="button_show_slide_1" class="selected">1</li>
+                <li id="button_show_slide_2">2</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<?php
+// -----------------------------------------------------------------------------
+// Busca
+// -----------------------------------------------------------------------------
+?>
+<div id="home_search">
+    <div class="container">
+        <h2 class="companies_stats">procure em nossas <strong><?php echo number_format($this->companies_count, 0, '', '.') ?></strong> empresas cadastradas</h2>
+        <div class="search_form">
+            <h1 class="fake_search">procure por empresas ou produtos</h1>
+            <?php
+            $form_search = new Ee_Form_Search();
+            if ($this->Access()->checkAuth()) {
+                $userdata = new Zend_Session_Namespace('UserData');
+                $form_search->setAction('lista-de-empresas/'.$this->Access()->user()->company->city->region->slug.'/'.$this->Access()->user()->company->city->slug);
+            }
+            echo $form_search;
+            ?>
+        </div>
+        <div class="companies_list">ou visite nossa <a href="lista-de-empresas">lista de empresas</a></div>
+    </div>
+</div>
+
+<div id="home_content">
+    <div class="container">
+        <div class="cols">
+            <div class="col_left">
+                <?php
+                // -----------------------------------------------------------------------------
+                // Últimas empresas cadastradas
+                // -----------------------------------------------------------------------------
+                ?>
+                <div class="last_companies">
+                    <h3>Últimas empresas cadastradas</h3>
+                    <ul class="companies">
+                        <?php foreach ($this->companies as $company) : ?>
+                        <li class="company">
+                            <a href="<?php echo $company->url() ?>" title="<?php echo $company->name ?>" class="tip_tool_top">
+                                <?php echo $company->image(70) ?>
+                            </a>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
+                </div>
+                <?php
+                // -----------------------------------------------------------------------------
+                // Últimas avaliações
+                // -----------------------------------------------------------------------------
+                ?>
+                <div class="last_businesses">
+                    <h3>Quem já fez negócio</h3>
+                    <ul class="businesses">
+                        <?php foreach ($this->businesses as $business) : ?>
+                        <li class="business" id="business_<?php echo $business->id?>">
+                            <a href="<?php echo $business->to_company->url() ?>/avaliacoes/#rate_<?php echo $business->id ?>">
+                                <?php echo $business->user->image(50) ?>
+                                <?php if ($business->rate == '+') : ?>
+                                    <span class="rate"><img src="images/home/rate_up.png" alt="positiva" /></span>
+                                <?php else : ?>
+                                    <span class="rate"><img src="images/home/rate_down.png" alt="negativa" /></span>
+                                <?php endif ?>
+                            </a>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
+                    <ul class="testimonials" style="display:none">
+                        <?php foreach ($this->businesses as $business) : ?>
+                        <li class="testimonial" id="show_business_<?php echo $business->id?>" style="display:none">
+                            <div class="details">
+                                <div class="user_name">
+                                    <a href="<?php echo $business->user->url() ?>">
+                                        <?php echo $business->user->fullName() ?>
+                                    </a>
+                                </div>
+                                <div class="user_action">
+                                    avaliou
+                                    <?php if ($business->rate == '+') : ?>
+                                        bem
+                                    <?php else : ?>
+                                        mal
+                                    <?php endif ?>
+                                    a empresa
+                                </div>
+                                <div class="to_company_name">
+                                    <a href="<?php echo $business->to_company->url() ?>">
+                                        <?php echo $business->to_company->name ?>
+                                    </a>
+                                </div>
+                                <div class="to_company_image"><?php echo $business->to_company->image(70) ?></div>
+                            </div>
+                            <div class="text">
+                                " <?php echo nl2br($business->testimonial) ?> "
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
+                </div>
+                <?php
+                // -----------------------------------------------------------------------------
+                // Últimas ofertas em destaque
+                // -----------------------------------------------------------------------------
+                ?>
+                <div class="last_offers">
+                    <h3>Ofertas exclusivas para empresas do Empreendemia</h3>
+                    <ul class="offers">
+                        <?php $i = 0 ?>
+                        <?php foreach ($this->products as $product) : ?>
+                        <li class="offer <?php if ($i++%2 == 0) echo 'even'; else echo 'odd'; ?>">
+                            <div class="thumb"><?php echo $product->imageLink(100) ?></div>
+                            <div class="name"><h4><a href="<?php echo $product->url() ?>"><?php echo $product->name ?></a></h4></div>
+                            <div class="description"><a href="<?php echo $product->url() ?>"><?php echo $product->offer_description ?></a></div>
+                            <div class="city"><?php echo $product->company->city->name ?>, <?php echo $product->company->city->region->symbol ?></div>
+                            <div class="clear"></div>
+                        </li>
+                        <?php endforeach ?>
+                        <div class="clear"></div>
+                    </ul>
+                    <a href="quero-comprar/ofertas">Confira todas as ofertas específicas para empresas do Empreendemia</a>
+                </div>
+
+            </div>
+            <div class="col_right">
+                <?php
+                // -----------------------------------------------------------------------------
+                // Estatísticas da rede
+                // -----------------------------------------------------------------------------
+                ?>
+                <div id="stats">
+                    <ul>
+                        <li>cartões trocados <strong><?php echo number_format($this->contacts_count, 0, '', '.') ?></strong></li>
+                        <li>negócios feitos <strong><?php echo number_format($this->businesses_count, 0, '', '.') ?></strong></li>
+                        <li>pedidos de orçamento <strong><?php echo number_format($this->budgets_count, 0, '', '.') ?></strong></li>
+                    </ul>
+                </div>
+                <?php
+                // -----------------------------------------------------------------------------
+                // Sobre a rede
+                // -----------------------------------------------------------------------------
+                ?>
+                <div id="informations">
+                    <div class="tabs">
+                        <a href="javascript: show('know')" class="selected tab_know">conheça</a>
+                        <a href="javascript: show('buy')" class="tab_buy">compre</a>
+                        <a href="javascript: show('sell')" class="tab_sell">venda</a>
+                    </div>
+                    <div class="information information_know">
+
+                        <h3>Faça mais negócios</h3>
+                        <p>No Empreendemia você pode criar sua vitrine de produtos e serviços, entrar em contato com possíveis clientes e fornecedores e fazer novos negócios. </p>
+                        <p>Cadastre sua empresa gratuitamente <a href="cadastre-se">clicando aqui</a>.</p>
+                        
+                    </div>
+                    <div class="information information_buy" style="display:none">
+
+                        <h3>Receba contato de fornecedores</h3>
+                        <p>Está precisando de um fornecedor? Nós podemos te ajudar! Descreva o que você precisa e divulgaremos para nossa base de fornecedores.</p>
+                        <p>Para fazer seu pedido, <a href="quero-comprar">clique aqui</a>.</p>
+
+                        <h3>Ofertas exclusivas</h3>
+                        <p>Ao fazer parte do Empreendemia você tem acesso a ofertas exclusivas para empresas da rede.</p>
+                        <p>Veja mais <a href="quero-comprar/ofertas">aqui</a>.</p>
+
+                    </div>
+                    <div class="information information_sell" style="display:none">
+
+                        <h3>Crie facilmente sua página corporativa</h3>
+                        <p>Pelo Empreendemia você pode criar uma página com seus produtos e serviços, colher avaliações de quem já fez negócios com sua empresa e ter o seu cartão de visitas virtual.</p>
+                        <p>Essa página será acessada pelo Google e você pode até usá-la como seu site.</p>
+                        <p>Cadastre gratuitamente a sua empresa <a href="cadastre-se">aqui</a>.</p>
+
+                        <h3>Confira o que as empresas da rede estão precisando</h3>
+                        <p>No Empreendemia clientes em potencial fazem pedidos sobre o que estão precisando. Pode ser que alguém esteja procurando pelos serviços que você oferece.</p>
+                        <p>Veja a lista completa dos pedidos <a href="quero-vender/servicos">aqui</a>.</p>
+                        
+                    </div>
+                </div>
+                <?php
+                // -----------------------------------------------------------------------------
+                // Facebook Likes
+                // -----------------------------------------------------------------------------
+                ?>
+                <div class="facebook_likes">
+                    <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FEmpreendemia&amp;width=310&amp;colorscheme=light&amp;show_faces=true&amp;border_color=%23ffffff&amp;stream=false&amp;header=false&amp;height=258" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:290px; height:258px;" allowTransparency="true"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div id="home_media">
+    <div class="container">
+        <?php
+        // -----------------------------------------------------------------------------
+        // Empreendemia na Rede
+        // -----------------------------------------------------------------------------
+        ?>
+        <h3>Empreendemia na mídia</h3>
+        <ul class="medias">
+            <li><a href="http://www.youtube.com/watch?v=5u6FxRg-d6I" class="tip_tool_top" title="SBT" target="_blank"><img src="images/home/media/sbt.gif"/></a></li>
+            <li><a href="http://economia.estadao.com.br/noticias/negocios,portais-para-empresarios-um-bom-negocio,54836,0.htm" class="tip_tool_top" title="O Estado de S. Paulo" target="_blank"><img src="images/home/media/estado_de_sp.gif" /></a></li>
+            <li><a href="http://revistapegn.globo.com/Revista/Common/0,,EMI176112-17202,00-PORTAIS+DE+NEGOCIOS+PARA+INICIANTES.html" class="tip_tool_top" title="Pequenas Empresas Grandes Negócios" target="_blank"><img src="images/home/media/pegn.gif" /></a></li>
+            <li><a href="http://epocanegocios.globo.com/Revista/Common/0,,EMI169229-16363,00-EMPRESAS+CONECTADAS+REDE+SOCIAL+DO+BRASIL+UNE+AS+MEDIAS+EMPRESAS.html" class="tip_tool_top" title="Época Negócios" target="_blank"><img src="images/home/media/epoca_negocios.gif" /></a></li>
+            <li><a href="http://exame.abril.com.br/pme/startups/noticias/10-jovens-empreendedores-da-internet-brasileira?p=10" class="tip_tool_top" title="Exame.com" target="_blank"><img src="images/home/media/examecom.gif" /></a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>

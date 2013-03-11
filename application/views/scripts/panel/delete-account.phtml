@@ -1,0 +1,14 @@
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headLink()->appendStylesheet('css/ui/datepicker.css'); ?>
+<?php $this->headScript()->appendFile('js/jquery/jquery-ui-1.8.14.full.min.js') ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+<?php $this->headScript()->appendFile('js/forms/ckeditor/ckeditor.js'); ?>
+<?php $this->modal = null ?>
+<?php $this->modal->width = 250 ?>
+<?php $this->modal->height = 80 ?>
+
+<div class="plaintext">
+    Voce tem certeza que deseja desativar a sua conta?<br />
+    <p style="text-align:center"><a href="painel/usuario/excluir-conta?confirm=true">Sim, remover já!</a></p>
+</div>

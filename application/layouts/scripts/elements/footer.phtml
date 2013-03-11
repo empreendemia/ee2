@@ -1,0 +1,182 @@
+<?php
+/**
+ * footer.phtml
+ * Rodapé do layout
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-06
+ */
+?>
+
+
+<?php $userData = new Zend_Session_Namespace('UserData');?>
+
+<div id="chat"> </div>
+
+<script>
+      
+  <?php if (isset($this->company)) : ?>
+    <?php
+    $user_mapper = new Ee_Model_Users();
+    $users = $user_mapper->findByCompany($this->company);
+    $user = $users[0];
+    $username = $user->name.$user->family_name;
+    ?>
+    var sent = false;
+    var receive = false;
+    Chat.connect({
+        companyId : '<?php echo (isset($userData->user->company_id)) ? $userData->user->company_id : '' ?>',
+
+        user: '<?php 
+            if(isset($userData->user)) {
+                echo $userData->user->name.$userData->user->family_name;
+            }
+            else {
+                echo 'IP'.str_replace(".", "", $_SERVER["REMOTE_ADDR"]);
+            }
+        ?>',
+
+        label: '<?php 
+            if(isset($userData->user)) {
+                echo $userData->user->name;
+            }
+            else {
+                echo 'Visitante';
+            }
+        ?>',
+
+        target: '#chat',
+        chatOpen : function(user, type) {
+            if ((type === undefined || type == 'buyer') && user == '<?php echo $username ?>') {
+                Tracker.ga.userEvent('chat view');
+            }   
+        },
+        messageSend : function(user, type) {
+            if ((type === undefined || type == 'buyer') && !sent && user == '<?php echo $username ?>') {
+                Tracker.ga.userEvent('chat start');
+                sent = true;
+            }
+        },
+        messageReceive : function(user, type) {
+            if ((type === undefined || type == 'buyer') && !receive && user == '<?php echo $username ?>') {
+                Tracker.ga.userEvent('chat receive reply');
+                receive = true;
+            }
+        },
+        chatClose : function(user, type) {
+
+        }
+
+    });
+
+    <?php else : ?>
+      
+    Chat.connect({
+        companyId : '<?php echo (isset($userData->user->company_id)) ? $userData->user->company_id : '' ?>',
+        user: '<?php 
+            if(isset($userData->user)) {
+                echo $userData->user->name.$userData->user->family_name;
+            }
+            else {
+                echo 'IP'.str_replace(".", "", $_SERVER["REMOTE_ADDR"]);
+            }
+        ?>',
+        label: '<?php 
+            if(isset($userData->user)) {
+                echo $userData->user->name;
+            }
+            else {
+                echo 'Visitante';
+            }
+        ?>',
+        target: '#chat'
+    });
+    <?php endif ?>
+    
+</script>
+<?php if(isset($userData->user)):?>
+    <script type="text/javascript">
+        quiz({
+            target : '#quiz', 
+            user : '<?php echo $userData->user->id?>', 
+            view: function(question) {
+                Tracker.ga.userEvent('poll view(' + question + ')');
+            },
+            change: function(question,option) { 
+                Tracker.ga.userEvent('poll select(' + question + '): ' + question);
+            },
+            submit: function(question,option) { 
+                Tracker.ga.userEvent('poll submit(' + question + '): ' + question);
+            },
+	    followup: function(question,option){
+	        Tracker.ga.userEvent('poll followup(' + question + '): ' + question);
+	    }
+        });
+    </script>
+<?endif;?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Menu de navegação
+// -----------------------------------------------------------------------------
+?>
+    <div id="navigation_footer">
+        <div class="container">
+            <menu>
+                <li>
+                    <a href="http://blog.empreendemia.com.br" target="_blank" class="tip_tool" title="blog da Empreendemia">
+                        blog
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.saiadolugar.com.br" target="_blank" class="tip_tool" title="blog Saia do Lugar">
+                        Saia do Lugar
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.twitter.com/empreendemia" target="_blank" class="tip_tool" title="twitter da @empreendemia">
+                        twitter
+                    </a>
+                </li>
+                <li>
+                    <a href="termos/privacidade" class="modal tip_tool" target="_blank" title="Políticas de Privacidade">
+                        privacidade
+                    </a>
+                </li>
+                <li>
+                    <a href="faq" class="tip_tool" title="perguntas frequentes">
+                        faq
+                    </a>
+                </li>
+                <li>
+                    <a href="contato" class="tip_tool" title="entre em contato com a Empreendemia">
+                        contato
+                    </a>
+                </li>
+                <li>
+                    <a href="sala-de-imprensa" class="tip_tool" title="sala de imprensa">
+                        sala de imprensa
+                    </a>
+                </li>
+            </menu>
+        </div>
+    </div><!-- #navigation_footer -->
+
+<?php
+// -----------------------------------------------------------------------------
+// Assinatura Empreendemia e copyright
+// -----------------------------------------------------------------------------
+?>
+    <div id="footer">
+        <div class="container">
+            <div class="copyright">&copy; Copyright 2009 - <?php echo date('Y') ?> - Empreendemia, direitos reservados</div>
+            <div class="logo"><img src="images/layout/footer-logo.png" /></div>
+        </div>
+    </div><!-- #footer -->
+    
+<div id="bottom_footer">
+    
+</div>
+    
+<div id="fb-root"></div>

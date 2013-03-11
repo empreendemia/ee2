@@ -1,0 +1,313 @@
+.form form {
+
+}
+
+.form form dl dt {
+    clear: both;
+    float: left;
+    width: 180px;
+    font-size: 8pt;
+    text-align: right;
+    margin: 4px 6px 4px 4px;
+}
+
+.form form dl dt label {
+    display: block;
+    color: #888;
+    padding-top: 3px;
+    text-align: left;
+}
+
+.form form dl dd {
+    margin: 4px;
+    font-size: 9pt;
+    float: left;
+}
+
+.form form .html_element.title {
+    width: 185px;
+    text-align: right;
+    padding-top: 20px;
+    margin: 20px 0;
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 10pt;
+    clear: both;
+}
+
+.form form .html_element.description {
+    margin: 10px 0 10px 195px;
+    color: #333;
+    font-size: 8pt;
+    clear: both;
+    width: 280px;
+    line-height: 1.2em;
+}
+
+.form form .errors {
+    font-size: 8pt;
+    color: #800;
+    margin-bottom: 5px;
+}
+
+.form form textarea {
+    width: 280px;
+    height: 100px;
+}
+
+.form form input[type=radio] {
+    margin-left: 5px;
+    vertical-align: sub;
+}
+
+.form form input[type=submit] {
+    background-color: #0C478B;
+    border-top: 1px solid #259;
+    border-left: 1px solid #259;
+    border-right: 1px solid #236;
+    border-bottom: 1px solid #236;
+    padding: 5px 20px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #236;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+/*
+--------------------------------------------------------------------------------
+Form message
+--------------------------------------------------------------------------------
+*/
+
+.form_message form {
+
+}
+
+.form_message form dl dt {
+    clear: both;
+    float: left;
+    width: 100px;
+    font-size: 8pt;
+    text-align: right;
+    margin: 4px 6px 4px 4px;
+}
+
+.form_message form dl dt label {
+    color: #888;
+}
+
+.form_message form dl dd {
+    margin: 4px;
+    float: left;
+}
+
+.form_message form .html_element.title {
+    width: 220px;
+    text-align: right;
+    margin: 20px 0;
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+.form_message form .errors {
+    font-size: 8pt;
+    color: #800;
+    margin-bottom: 5px;
+}
+
+.form_message form textarea {
+    width: 350px;
+    height: 180px;
+}
+
+.form_message form input[type=text] {
+    width: 350px;
+}
+
+.form_message form input[type=submit] {
+    background-color: #0C478B;
+    border-top: 1px solid #259;
+    border-left: 1px solid #259;
+    border-right: 1px solid #236;
+    border-bottom: 1px solid #236;
+    padding: 5px 20px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #236;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+.form_message .message_success {
+    padding: 120px;
+    text-align: center;
+}
+
+/*
+--------------------------------------------------------------------------------
+Form message logged out
+--------------------------------------------------------------------------------
+*/
+
+.form_message_loggedout form {
+
+}
+
+.form_message_loggedout form dl dt {
+    clear: both;
+    float: left;
+    width: 100px;
+    font-size: 8pt;
+    text-align: right;
+    margin: 4px 6px 4px 4px;
+}
+
+.form_message_loggedout form dl dt label {
+    color: #888;
+}
+
+.form_message_loggedout form dl dd {
+    margin: 4px;
+    float: left;
+}
+
+.form_message_loggedout form .html_element.title {
+    width: 220px;
+    text-align: right;
+    margin: 20px 0;
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+.form_message_loggedout form .errors {
+    font-size: 8pt;
+    color: #800;
+    margin-bottom: 5px;
+}
+
+.form_message_loggedout form textarea {
+    width: 350px;
+    height: 180px;
+}
+
+.form_message_loggedout form input[type=text] {
+    width: 350px;
+}
+
+.form_message_loggedout form input[type=submit] {
+    background-color: #0C478B;
+    border-top: 1px solid #259;
+    border-left: 1px solid #259;
+    border-right: 1px solid #236;
+    border-bottom: 1px solid #236;
+    padding: 5px 20px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #236;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+.form_message_loggedout .message_success {
+    padding: 120px;
+    text-align: center;
+}
+
+/*
+--------------------------------------------------------------------------------
+Form message reply
+--------------------------------------------------------------------------------
+*/
+
+.form_message.form_message_reply {
+    margin-top: 5px;
+}
+
+.form_message.form_message_reply dl dt {
+    width: 1px;
+    margin: 0;
+}
+
+.form_message.form_message_reply dl dt label {
+    color: #fff;
+}
+
+.form_message.form_message_reply dl dd {
+    margin: 0;
+    float: none;
+}
+
+.form_message.form_message_reply dl dd textarea {
+    width: 410px;
+}
+
+.form_message.form_message.form_message_reply .message_reply_success {
+    padding: 10px;
+    text-align: center;
+    background-color: #9B3;
+    color: #fff;
+    margin: 10px 0;
+}
+
+/*
+--------------------------------------------------------------------------------
+Form message demand
+--------------------------------------------------------------------------------
+*/
+
+.form_message_demand textarea{
+    display:inline-block;
+    width: 80px;
+    height: 100px;
+}
+
+.form_message_demand form dl dt label{
+    display:inline-block;
+    width: 220px;
+    margin-top: 15px;
+}
+
+.form_message_demand .word_counter{
+    text-align: left;
+}  
+
+.form_message_demand input{
+    margin-left: 127px;
+}
+
+.form_message_demand dl #Enviarmensagem-label{
+    display: none;
+}
+
+/*
+--------------------------------------------------------------------------------
+Word Counter
+--------------------------------------------------------------------------------
+*/
+
+.word_counter {
+    margin-left: 105px;
+    margin-bottom: 10px;
+    font-size: 8pt;
+    color: #aaa;
+}
+
+.word_counter {
+    margin-left: 2px;
+}
+
+.word_counter .count {
+    font-weight: bold;
+}
+
+/*
+--------------------------------------------------------------------------------
+Honey Honey
+--------------------------------------------------------------------------------
+*/
+
+#captcha-label, #captcha-element,
+#hp_name-label, #hp_name-element,
+#id_hp-label, #id_hp-element {
+    display: none !important;
+}

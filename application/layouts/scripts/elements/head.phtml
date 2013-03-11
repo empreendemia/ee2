@@ -1,0 +1,130 @@
+<?php
+/**
+ * head.phtml
+ * Cabeçalho do arquivo html
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-20
+ */
+
+$config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/ee.ini','production','production');
+?>
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml" itemtype="http://schema.org/LocalBusiness">
+   
+<head>
+<?php
+// -----------------------------------------------------------------------------
+// Metas
+// -----------------------------------------------------------------------------
+?>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Add the following three tags inside head -->
+    <meta itemprop="name" content="<?php if (isset($this->layout()->og_title)) echo $this->layout()->og_title; else echo $this->layout()->title ?>" />
+    <meta itemprop="description" content="<?php if (isset($this->layout()->og_description)) echo $this->layout()->og_description; else echo "Encontre clientes e fornecedores na Empreendemia!" ?>" />
+    <meta itemprop="image" content="<?php if (isset($this->layout()->og_image)) echo $this->layout()->og_image; else echo "http://www.empreendemia.com.br/images/icons/og_empreendemia.png" ?>" />
+    
+    <meta property="og:title" content="<?php if (isset($this->layout()->og_title)) echo $this->layout()->og_title; else echo $this->layout()->title ?>" />
+    <meta property="og:description" content="<?php if (isset($this->layout()->og_description)) echo $this->layout()->og_description; else echo "Encontre clientes e fornecedores na Empreendemia!" ?>" />
+    <meta property="og:image" content="<?php if (isset($this->layout()->og_image)) echo $this->layout()->og_image; else echo "http://www.empreendemia.com.br/images/icons/og_empreendemia.png" ?>" />
+
+    
+<?php
+// -----------------------------------------------------------------------------
+// Titles e definições
+// -----------------------------------------------------------------------------
+?>
+    <title><?php echo $this->layout()->title ?></title>
+    <base href="<?php echo $this->serverUrl().$this->baseUrl();?>/" />
+    
+<?php
+// -----------------------------------------------------------------------------
+// Links
+// -----------------------------------------------------------------------------
+?>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link href="css/global.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/layout.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/cols/large.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/ui/flash-messages.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/ui/modal.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/ui/tool-tip.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/elements/ads.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/elements/chat.css" media="screen" rel="stylesheet" type="text/css" />
+    
+    
+    
+<?php
+// -----------------------------------------------------------------------------
+// Scripts
+// -----------------------------------------------------------------------------
+?>
+    <script type="text/javascript" src="js/jquery/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery/plugins/jquery.colorbox-1.3.17.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery/plugins/jquery.tipTip.minified.js"></script>
+    <script type="text/javascript" src="js/ui.js"></script>
+    <script type="text/javascript" src="js/feedback.js"></script>
+    <script type="text/javascript" src="js/ads.js"></script>
+    <script type="text/javascript" src="js/Utils/Tracker.js"></script>
+    <script type="text/javascript" src="js/Utils/Facebook.js"></script>
+    <script type="text/javascript" src="js/Form/Input.js"></script>
+    
+    <?php if (isset($config->server->poll) && $config->server->poll) : ?>
+    <script type="text/javascript" src="<?php echo $config->server->poll ?>"></script>
+    <?php endif ?>
+    
+    <?php if (isset($config->server->talk) && $config->server->talk) : ?>
+    <script type="text/javascript" src="<?php echo $config->server->talk ?>"></script>
+    <?php endif ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Includes de links e scripts
+// -----------------------------------------------------------------------------
+?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headScript() ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Google Analytics
+// -----------------------------------------------------------------------------
+?>
+    <script type="text/javascript">
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '/*' ?>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7274902-2']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_trackPageLoadTime']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    <?php 
+        // include dos eventos
+        //echo $this->Tracker()->eventsScript()
+    ?>
+
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '*/' ?>
+    </script>
+    
+    
+<?php
+// -----------------------------------------------------------------------------
+// Loads 
+// -----------------------------------------------------------------------------
+?>
+    <script type="text/javascript">
+        $(function() {
+            Tracker.ga.pushEvents();
+            Input.load();
+        });
+    </script>
+
+</head>
+<body>

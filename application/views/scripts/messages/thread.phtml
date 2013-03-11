@@ -1,0 +1,70 @@
+<?php
+/**
+ * thread.phtml
+ * Exibe mensagens de uma thread entre dois usuários
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-18
+ */
+?>
+<?php $this->layout()->setLayout('clean') ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Lista de mensagens
+// -----------------------------------------------------------------------------
+?>
+<?php foreach ($this->messages as $message) : ?>
+<div class="message">
+    <div class="user_thumb">
+        <?php if ($message->user_id == $this->user->id): ?>
+            <?php echo $this->user->imageLink(40) ?>
+        <?php else: ?>
+            <?php echo $this->user_2->imageLink(40) ?>
+        <?php endif ?>
+    </div>
+    <div class="date"><?php echo $message->date ?></div>
+    <div class="text"><?php echo nl2br($message->body) ?></div>
+</div>
+<?php endforeach ?>
+
+<script type="text/javascript">
+    $(function() {
+      $("a.reply_link").click(function() {
+         var anchor = $(this);
+         anchor.hide();
+
+        var formContainer = anchor.parent().find('.form_message');
+         formContainer.fadeIn(200);
+         anchor.parent().parent().find('.user_thumb').fadeTo(200, 1);
+
+        var wordCountText = formContainer.find('textarea');
+        var maxLength = 1000;
+        wordCountText.parent().append('<div class="word_counter"><span class="count">'+maxLength+'</span> caracteres permitidos</div>');
+        wordCount(wordCountText, maxLength);
+
+      });
+    })
+</script>
+
+<?php
+// -----------------------------------------------------------------------------
+// Responder mensagem
+// -----------------------------------------------------------------------------
+?>
+<div class="message">
+    <div class="user_thumb" style="opacity: 0.5">
+        <?php echo $this->user->image(40) ?>
+    </div>
+    <div class="date">mandar mensagem agora</div>
+    <div class="text reply_message">
+        <a href="javascript: void(0);" class="reply_link">responder mensagem</a>
+        <div class="form_message form_message_reply" style="display:none">
+            <?php
+                $form = new Ee_Form_MessageReply(array('parent_id'=>$this->messages[0]->id, 'to_user'=>$this->user_2));
+                echo $form;
+            ?>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,191 @@
+/*
+--------------------------------------------------------------------------------
+Panel Header
+--------------------------------------------------------------------------------
+*/
+.page_header {
+    height: 100px;
+    border-bottom: 1px solid #888;
+    margin-right: 1px;
+    position: relative;
+}
+
+.page_header .h_title {
+    padding: 40px 0;
+}
+/*
+--------------------------------------------------------------------------------
+Demands Board
+--------------------------------------------------------------------------------
+*/
+.demands_board {
+    position: relative;
+}
+
+.demands_board .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.demands_board .description {
+    padding-left: 100px;
+    padding-bottom: 20px;
+}
+
+.demands_board .demands {
+    
+}
+
+.demands_board .demands .demand {
+    padding: 20px 0 20px 10px;
+    border-top: 1px dotted #ccc;
+}
+
+.demands_board .demands .demand .title {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.demands_board .demands .demand .category {
+    font-size: 9pt;
+}
+
+.demands_board .demands .demand .category strong {
+    color: #888;
+}
+
+.demands_board .demands .demand .city {
+    font-size: 9pt;
+}
+
+.demands_board .demands .demand .city strong {
+    color: #888;
+}
+
+/*
+--------------------------------------------------------------------------------
+View Demand
+--------------------------------------------------------------------------------
+*/
+.view_demand {
+    width: 455px;
+    float: left;
+    padding-right: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.view_demand h1 {
+    margin-bottom: 10px;
+}
+
+.view_demand .details {
+    font-size: 9pt;
+}
+
+.view_demand .details dt {
+    color: #888;
+    float: left;
+    clear: both;
+    width: 100px;
+    text-align: right;
+    margin: 8px 4px;
+}
+
+.view_demand .details dd {
+    float: left;
+    margin: 8px 4px;
+}
+
+.view_demand .description {
+    clear: both;
+    padding-top: 20px;
+}
+
+.view_demand .description h2 {
+    margin-bottom: 10px;
+}
+
+.view_demand .description .text {
+    height: 230px;
+    overflow: auto;
+    line-height: 1.2em;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.demand_user {
+    display: block;
+    float: left;
+    padding-left: 20px;
+    text-align: center;
+    width: 230px;
+}
+
+.demand_user h2 {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.demand_user .user_name {
+    margin: 10px;
+    margin-left: 66px;
+}
+
+.demand_user .user_thumb {
+    margin: 20px;
+    margin-left: 75px;
+}
+
+.demand_user .job {
+    margin: 10px 0;
+    color: #333;
+}
+
+.demand_user .company_name {
+    margin: 10px 0;
+}
+
+.demand_user .company_thumb {
+    margin: 20px 0;
+}
+
+.demand_user .button {
+    background-color: #0C478B;
+    border-top: 1px solid #259;
+    border-left: 1px solid #259;
+    border-right: 1px solid #236;
+    border-bottom: 1px solid #236;
+    padding: 10px 20px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #236;
+    font-weight: bold;
+    font-size: 10pt;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.demand_user .button a {
+    color: #fff;
+}
+
+.demand_button {
+    background-color: #0C478B;
+    display: inline-block;
+    margin-left: 520px;
+    margin-bottom: -10px;
+    border-top: 1px solid #259;
+    border-left: 1px solid #259;
+    border-right: 1px solid #236;
+    border-bottom: 1px solid #236;
+    padding: 5px 15px;
+    text-shadow: -1px -1px 0 #223366;
+    font-weight: bold;
+    font-size: 9pt;
+    text-align: right;
+    margin-top: 15px;
+}
+
+.demand_button a{
+    color: #FFFFFF;
+}

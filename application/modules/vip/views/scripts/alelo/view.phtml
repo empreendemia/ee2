@@ -1,0 +1,35 @@
+<?php $this->layout()->og_title = $this->company->name ?>
+<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_description = $this->company->description ?>
+
+<?php $this->layout()->title = 'Alelo' ?>
+
+<div class="natal">
+    <div class="natal_header"></div>
+    <h2>Alelo Natal Alimentação</h2>
+    <h3>Benefícios para seu colaborador:</h3>
+    <ul>
+        <li>Ampla rede credenciada Alelo de supermercados, mercearias e açougues.</li>
+        <li>Autonomia para compor a ceia com alimentos frescos, como frutas, carnes, legumes e verduras.</li>
+    </ul>
+    <h3>Benefícios para a sua empresa:</h3>
+    <ul>
+        <li>Valoriza o colaborador ao presenteá-lo com um cartão especial de Natal para a celebração com a família.</li>
+        <li>Autonomia para compor a ceia com alimentos frescos, como frutas, carnes, legumes e verduras.</li>
+    </ul>
+    <div class="more"><a href="http://www.campanhaalelo.com.br/natalalimentacao/?utm_source=Empreendemia&utm_medium=hotsite&utm_term=natal&utm_content=natal&utm_campaign=varejo" onclick="<?php echo $this->Tracker()->vipEvent('view link: natal', 'Alelo', null, true) ?>">> mais informações</a></div>
+</div>
+<div class="other_products">
+    <div class="refeicao">
+        <div class="refeicao_header"></div>
+        <h2>Alelo Refeição</h2>
+        <p>A melhor forma de pagar refeições em restaurantes, lanchonetes e similares. Também aceito em delivery.</p>
+        <div class="more"><a href="http://www.alelobeneficios.com.br/cartao-alelo-refeicao.jsp?utm_source=Empreendemia&utm_medium=hotsite&utm_term=refeicao&utm_content=refeicao&utm_campaign=varejo" onclick="<?php echo $this->Tracker()->vipEvent('view link: refeicao', 'Alelo', null, true) ?>">> mais informações</a></div>
+    </div>
+    <div class="alimentacao">
+        <div class="alimentacao_header"></div>
+        <h2>Alelo Alimentação</h2>
+        <p>Um mundo de opções para o seu colaborador escolher onde comprar os itens de sua preferência em supermercados, açougues, mercearias e similares.</p>
+        <div class="more"><a href="http://www.alelobeneficios.com.br/cartao-alelo-alimentacao.jsp?utm_source=Empreendemia&utm_medium=hotsite&utm_term=alimentacao&utm_content=alimentacao&utm_campaign=varejo" onclick="<?php echo $this->Tracker()->vipEvent('view link: alimentacao', 'Alelo', null, true) ?>">> mais informações</a></div>
+    </div>
+</div>

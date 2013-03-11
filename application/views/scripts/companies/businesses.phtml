@@ -1,0 +1,131 @@
+<?php
+/**
+ * businesses.php
+ * Página de avaliações que uma empresa recebeu
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-06-20
+ */
+?>
+<?php $this->layout()->setLayout('company') ?>
+<?php $this->layout()->title = 'Quem já fez negócio com '.$this->company->name ?>
+
+<?php
+    $positive = null;
+    $negative = null;
+    if ($this->businesses) {
+        foreach ($this->businesses as $business) {
+            if ($business->rate == '+') $positive[] = $business;
+            else $negative[] = $business;
+        }
+    }
+
+    $this->layout()->og_title = $this->company->name;
+    $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200);
+    if (count($positive) == 0) $this->layout()->og_description = 'Deixe-nos uma avaliação!';
+    else if (count($positive) == 1) $this->layout()->og_description = 'Temos apenas uma avaliação, deixe-nos mais uma!';
+    else $this->layout()->og_description = 'Já temos '.count($positive).' avaliações positivas! Que tal você nos escrever mais uma?';
+?>
+
+<div class="sub_cols">
+    <div class="sub_col_1">
+
+        <h2 class="all_rates_title"><strong><?php echo count($this->businesses)?></strong> avaliações</h2>
+
+        <?php
+        // ---------------------------------------------------------------------
+        // Lista de empresas que deixaram avaliação positiva
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($positive) : ?>
+            <h3 class="rates_title rate_positive_title"><strong><?php echo count($positive)?></strong> avaliações positivas</h3>
+
+            <ul class="rate_companies">
+            <?php foreach ($positive as $business) : ?>
+                <li>
+                    <?php if (strlen($business->testimonial) > 5) : ?>
+                        <a href="<?php echo $_SERVER["REQUEST_URI"] ?>#rate_<?php echo $business->id ?>"><?php echo $business->company->image(40); ?></a>
+                    <?php else: ?>
+                        <?php echo $business->company->image(40); ?>
+                    <?php endif ?>
+                </li>
+            <?php endforeach; ?>
+            </ul>
+        <?php endif ?>
+
+
+        <?php
+        // ---------------------------------------------------------------------
+        // Lista de empresas que deixaram avaliação negativa
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($negative) : ?>
+            <h3 class="rates_title rate_negative_title"><strong><?php echo count($negative)?></strong> avaliações negativas</h3>
+
+            <ul class="rate_companies">
+            <?php foreach ($negative as $business) : ?>
+                <li>
+                    <?php if (strlen($business->testimonial) > 5) : ?>
+                        <a href="<?php echo $_SERVER["REQUEST_URI"] ?>#rate_<?php echo $business->id ?>"><?php echo $business->company->image(40); ?></a>
+                    <?php else: ?>
+                        <?php echo $business->company->image(40); ?>
+                    <?php endif ?>
+                </li>
+            <?php endforeach; ?>
+            </ul>
+        <?php endif ?>
+
+
+
+    </div>
+    <div class="sub_col_2">
+	<?php $userdata = new Zend_Session_Namespace('UserData');?>
+        <?php if(isset($userdata->user) && $userdata->user->company_id != $this->company->id) :?>
+            <?php $contact_status = $this->company->contactStatus($userdata->user->id);?>
+            <?php if ($contact_status != false && $contact_status != 'sender') :?>
+	        <?php	
+                $business_mapper = new Ee_Model_Businesses();
+                
+		?>
+		<?php if(!$business_mapper->hasBusinesses($userdata->user->id, $this->company->id)): ?>
+                    <div style="border:solid 1px #FA0;background-color:#FD8; padding:5px; font-size:15px; text-align: center;">
+	                Para deixar sua avaliacao, clique
+	                <a href="<?php echo $this->company->url() ?>/avaliar" title="Avaliar esta empresa" class="modal_iframe tip_tool_top" style="font-weight:bold">
+                        aqui
+                        </a>
+	            </div>
+	        <?php endif; ?>
+	    <?php endif; ?>
+	<?php endif;?>
+        <?php
+        // ---------------------------------------------------------------------
+        // Lista de depoimentos que a empresa recebeu
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if (isset($this->businesses)) : ?>
+        <ul class="businesses_list">
+            <?php foreach ($this->businesses as $business) : ?>
+            <?php if (strlen($business->testimonial) > 5) : ?>
+            <li>
+                <a name="rate_<?php echo $business->id ?>"></a>
+                <div class="user_name"><a href="<?php echo $business->user->url() ?>"><?php echo $business->user->fullName() ?></a></div>
+                <div class="user_thumb"><a href="<?php echo $business->user->url() ?>"><?php echo $business->user->imageLink(80) ?></a></div>
+                <div class="company"><?php echo $business->user->job ?> <a href="<?php echo $business->company->url() ?>"><?php echo $business->company->name ?></a></div>
+                <div class="company_thumb"><?php echo $business->company->imageLink(40) ?></div>
+                <div class="testimonial"><?php echo $business->testimonial ?></div>
+                <div class="date"><?php echo $this->Format()->date($business->date, 'full') ?></div>
+
+                <div class="rate">
+                    <?php if ($business->rate == '+') : ?>
+                        <img src="images/ui/rate_up.png" alt="positiva" />
+                    <?php else : ?>
+                        <img src="images/ui/rate_down.png" alt="negativa" />
+                    <?php endif // rate + ou - ?>
+                </div>
+            <?php endif ?>
+            <?php endforeach ?>
+        </ul>
+        <?php endif ?>
+                    
+    </div>
+</div>

@@ -1,0 +1,26 @@
+body {
+    background-color: #fff;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10pt;
+}
+
+
+.cols_small_large {
+    width: 780px;
+}
+.cols_small_large .col_1 {
+    width: 220px;
+    padding-right: 18px;
+    border-right: 1px solid #ccc;
+    float: left;
+}
+.cols_small_large .col_2 {
+    padding-left: 20px;
+    width: 520px;
+    float: left;
+}
+
+
+.modal_content .form form dl dt {
+    width: 120px;
+}

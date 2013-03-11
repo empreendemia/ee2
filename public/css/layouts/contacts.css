@@ -1,0 +1,295 @@
+/*
+--------------------------------------------------------------------------------
+Contacts Header
+--------------------------------------------------------------------------------
+*/
+.contacts_header {
+    border-bottom: 1px solid #888;
+    margin-right: 1px;
+    position: relative;
+}
+.contacts_header .h_title {
+    padding: 20px 0;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Lateral tabs
+--------------------------------------------------------------------------------
+*/
+.lateral_tabs {
+
+}
+.lateral_tabs {
+    list-style: none;
+}
+
+.lateral_tabs li {
+    clear: both;
+    position: relative;
+    overflow: hidden;
+}
+
+.lateral_tabs .user_name {
+    position: absolute;
+    left: 45px;
+    display: block;
+    width: 600px;
+    padding-left: 10px;
+}
+
+.lateral_tabs .job {
+    position: absolute;
+    left: 45px;
+    top: 26px;
+    display: block;
+    width: 600px;
+    padding-left: 10px;
+    font-weight: normal;
+    color: #888;
+    font-size: 7pt;
+}
+
+.lateral_tabs .company_name {
+    position: absolute;
+    left: 45px;
+    top: 38px;
+    display: block;
+    width: 600px;
+    padding-left: 10px;
+    font-weight: normal;
+    font-size: 7pt;
+}
+
+.lateral_tabs.transparent li a {
+    opacity: 0.5;
+    color: #234;
+}
+
+.lateral_tabs li.selected {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-image: none;
+    background-color: #fff;
+}
+
+.lateral_tabs.transparent li.selected a,
+.lateral_tabs.transparent li a:hover {
+    opacity: 1;
+    color: #0C478B;
+}
+
+.lateral_tabs li .thumb {
+    display: block;
+    float: left;
+}
+
+.lateral_tabs li .text {
+    display: block;
+    padding-left: 50px;
+    padding-top: 15px;
+}
+.lateral_tabs li a {
+    display: block;
+    padding: 10px;
+    width: 180px;
+    height: 40px;
+    vertical-align: middle;
+    color: #0C478B;
+    font-size: 8pt;
+    font-weight: bold;
+    line-height: 1.1em;
+}
+
+.lateral_tabs li span {
+
+}
+
+.no_contacts {
+    padding-right: 20px;
+}
+
+.lateral_tabs .message_contacts_title {
+    padding: 20px 10px;
+    margin-top: 20px;
+    border-top: 1px dotted #ccc;
+    color: #333;
+    font-size: 10px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Contact
+--------------------------------------------------------------------------------
+*/
+
+
+.single_contact {
+    position: relative;
+    height: auto;
+    overflow:auto;
+    display:block;
+}
+
+.single_contact .thumb {
+    float: left;
+}
+
+.single_contact .contact {
+    float: left;
+    height:auto;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+
+}
+
+.single_contact .contact li {
+    margin-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+    color: #888;
+}
+
+.single_contact .contact li img {
+    position: absolute;
+    left: -28px;
+}
+
+.single_contact h1 {
+    margin-left: 150px;
+    margin-top: 10px;
+}
+
+.single_contact .job {
+    font-size: 10pt;
+    margin-left: 150px;
+    margin-top: 5px;
+}
+
+.single_contact .company_thumb {
+    float: left;
+    padding-left: 90px;
+    margin: 10px 0;
+}
+
+.single_contact .company_name {
+    float: left;
+    padding-left: 90px;
+    margin: 20px 0 10px 0;
+    padding-left: 10px;
+}
+
+.single_contact .company_name a {
+    font-weight: bold;
+    color: #d80;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Threads
+--------------------------------------------------------------------------------
+*/
+
+.threads {
+    border-top: 1px solid #888;
+}
+
+.threads .h_title {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ddd;
+}
+
+.threads .thread {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+    position: relative;
+}
+
+.threads .thread .thread_title {
+    font-size: 9pt;
+    color: #0C478B;
+}
+
+.threads .thread .thread_title a {
+    display: block;
+}
+
+.threads .thread .from {
+    font-size: 8pt;
+    color: #888;
+}
+
+.threads .thread.compose .thread_title {
+    font-size: 9pt;
+}
+
+.threads .thread.reading .thread_title a  {
+    color: #333;
+    font-weight: bold;
+}
+
+.threads .thread.compose .thread_title a {
+    color: #d80;
+    font-weight: bold;
+}
+
+.threads .thread .date {
+    position: absolute;
+    right: 0;
+    top: 6px;
+    color: #888;
+    font-size: 7pt;
+}
+
+
+
+.ajax_loading {
+    position: relative;
+    padding-top: 10px;
+    height: 60px;
+    background: url(../../images/ui/ajax-loader.gif) no-repeat center center;
+}
+
+.ajax_loading p {
+    color: #888;
+    text-align: center;
+    font-size: 8pt;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Messages
+--------------------------------------------------------------------------------
+*/
+
+.messages .message {
+    clear: both;
+    position: relative;
+    margin: 20px 0;
+}
+
+.messages .message .user_thumb {
+    float: left;
+    top: 0;
+    left: 0;
+}
+
+.messages .message .date {
+    top: 0;
+    left: 50px;
+    line-height: 1em;
+    color: #999;
+}
+
+.messages .message .text {
+    padding-left: 50px;
+    padding-top: 10px;
+    font-size: 9pt;
+}

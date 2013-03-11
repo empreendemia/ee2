@@ -1,0 +1,19 @@
+.rate_options {
+    position: relative;
+    width: 200px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.rate_options .rate_up {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.rate_options .rate_down {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+

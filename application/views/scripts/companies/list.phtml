@@ -1,0 +1,304 @@
+<?php
+/**
+ * list.php
+ * Lista de empresas
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-16
+ */
+?>
+<?php $this->layout()->setLayout('companies_list') ?>
+<?php $this->headScript()->appendFile('js/forms/locations.js') ?>
+<?php if ($this->directory->terms && $this->directory->search) 
+        $this->headScript()->appendFile('js/jquery/plugins/jquery.highlight-3.yui.js') ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// SEO da página
+// -----------------------------------------------------------------------------
+?>
+<?php
+
+    $title = '';
+    $sector = '';
+    $location = '';
+
+    if ($this->directory->sector) {
+        $sector = ' de '.$this->directory->sector->name;
+    }
+
+    if ($this->directory->region && $this->directory->city)
+        $location = ' em '.$this->directory->city->name.', '.$this->directory->region->symbol;
+    else if ($this->directory->region)
+        $location = ' em '.$this->directory->region->name;
+
+
+    if ($this->directory->search) {
+        $title = 'Buscar "'.$this->directory->search.'"';
+        $this->layout()->header_subtitle = $title.$sector.$location;
+    }
+    else {
+        if ($sector == '' && $location == ''){
+                $title = 'Lista de Empresas';
+                $this->layout()->header_subtitle = null;
+            }
+        else {
+            $title = 'Empresas';
+            $this->layout()->header_subtitle = $title.$sector.$location;
+        }
+    }
+
+    $this->layout()->title = $title.$sector.$location;
+?>
+
+<script type="text/javascript">
+<?php echo $this->Tracker()->userEvent('companies list: '.$title.$sector.$location, null, true) ?>
+</script>
+
+
+<div class="sub_cols">
+    <div class="sub_col_1">
+        <?php
+        // ---------------------------------------------------------------------
+        // Colori termos buscados
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($this->directory->terms && $this->directory->search) : ?>
+        <script type="text/javascript">
+            $(function() {
+            <?php foreach ($this->directory->terms as $term) : ?>
+                <?php if (strlen($term) > 1) : ?>
+                $('.companies_list .companies').highlight('<?php echo $term ?>');
+                <?php endif ?>
+            <?php endforeach ?>
+            });
+        </script>
+        <?php
+        // ---------------------------------------------------------------------
+        // Campo de busca
+        // ---------------------------------------------------------------------
+        ?>
+        <div class="search_form">
+            <h2>Buscar por</h2>
+            <?php
+            if ($this->region_id && $this->city_id) $url = 'lista-de-empresas/'.$this->region_id.'/'.$this->city_id;
+            else if ($this->region_id) $url = 'lista-de-empresas/'.$this->region_id;
+            else  $url = 'lista-de-empresas';
+            
+            $form_search = new Ee_Form_Search();
+            $userdata = new Zend_Session_Namespace('UserData');
+            $form_search->s->setValue($this->directory->search);
+            $form_search->setAction($url);
+            echo $form_search;
+            ?>
+            <div class="clear"></div>
+        </div>
+        <?php endif ?>
+
+        <?php
+        // ---------------------------------------------------------------------
+        // Filtro por cidades e estados
+        // ---------------------------------------------------------------------
+        ?>
+        <div class="location_filter">
+            <h2>Filtrar por cidade ou estado</h2>
+            <form id="location_filter" method="post" action="<?php echo $this->url() ?>">
+                <select name="region_id" class="select_region">
+                    <option value="">- estado</option>
+                    <?php foreach ($this->regions as $id => $region) : ?>
+                    <option value="<?php echo $id ?>" <?php if ($this->region_id == $id) echo 'selected="selected"'; ?>><?php echo $region ?></option>
+                    <?php endforeach ?>
+                </select>
+                <select name="city_id" class="select_city">
+                    <option>- cidade</option>
+                </select>
+                <input type="hidden" class="city_id_hidden" value="<?php echo $this->city_id ?>" />
+                <input type="hidden" class="sector_id" name="sector_id" value="<?php echo $this->sector_id ?>" />
+                <input type="hidden" class="search" name="search" value="<?php echo $this->search ?>" />
+                <input type="submit" class="submit" value="filtrar" />
+            </form>
+            <?php
+                $url = 'lista-de-empresas';
+                if ($this->sector_id) {
+                    $url .= '/todos-estados/todas-cidades/'.$this->sector_id;
+                }
+                if ($this->search) {
+                    $url .= '?s='.$this->search;
+                }
+                echo '<div class="all_cities"><a href="'.$url.'">todas as cidades do Brasil</a></div>';
+            ?>
+        </div>
+        
+        <?php
+        // ---------------------------------------------------------------------
+        // Filtro por setores
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($this->search == null) : ?>
+        <div class="sector_filter">
+            <ul class="sectors">
+                <?php
+                $count = 0;
+                if ($this->region_id && $this->city_id) $url = 'lista-de-empresas/'.$this->region_id.'/'.$this->city_id;
+                else if ($this->region_id) $url = 'lista-de-empresas/'.$this->region_id;
+                else  $url = 'lista-de-empresas';
+                foreach ($this->sectors as $sector) $count += $sector->count_companies;
+                ?>
+                <li class="all sector <?php if (!$this->sector_id) echo 'selected' ?>">
+                    <a href="<?php echo $url ?>" >Todos os setores <span class="count_companies">(<?php echo $count ?>)</span></a>
+                </li>
+                <?php foreach ($this->sectors as $sector) : ?>
+                <li class="sector <?php if ($sector->id == $this->sector_id || $sector->slug == $this->sector_id) echo 'selected' ?>">
+                    <?php
+                    if ($this->region_id && $this->city_id) $url = 'lista-de-empresas/'.$this->region_id.'/'.$this->city_id.'/'.$sector->slug;
+                    else if ($this->region_id) $url = 'lista-de-empresas/'.$this->region_id.'/todas-cidades/'.$sector->slug;
+                    else  $url = 'lista-de-empresas/todos-estados/todas-cidades/'.$sector->slug;
+                    ?>
+                    <a href="<?php echo $url ?>" ><?php echo $sector->name ?> <span class="count_companies">(<?php echo $sector->count_companies ?>)</span></a>
+                </li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+        <?php endif ?>
+    </div>
+
+    <div class="sub_col_2">
+        <?php
+        // ---------------------------------------------------------------------
+        // Lista das empresas encontradas
+        // ---------------------------------------------------------------------
+        ?>
+        <div class="companies_list">
+            <div class="results">Exibindo <strong><?php echo $this->directory->count ?></strong> resultados</div>
+
+            <?php if ($this->directory->count) : ?>
+            <ul class="companies">
+            <?php foreach ($this->directory->companies as $company) : ?>
+                <li class="company">
+                    <div class="thumb"><?php echo $company->imageLink(80) ?></div>
+                    <h3 class="name">
+		        <a href="<?php echo $company->url() ?>"><?php echo $company->name ?></a>
+		        <span style="color: green;" id="company_status_<?php echo $company->id?>">
+			    <script>
+			        Chat.showCompanyStatus(<?php echo $company->id?>);
+			    </script>
+			</span>
+		    </h3>
+                    <div class="sector">
+                        <?php echo $company->sector->name ?><?php if ($company->activity && $company->activity != '') : ?>, <?php echo $company->activity ?><?php endif ?>
+                    </div>
+                    <?php if ($company->description && $company->description != '') : ?>
+                    <div class="description">
+                        <?php echo $company->description ?>
+                    </div>
+                    <?php endif ?>
+                    <div class="city"><?php echo $company->city->name ?>, <?php echo $company->city->region->symbol ?></div>
+		    <div class="businesses">
+		        <?php $count = 0;?>
+                        <?php if($company->businesses):?>
+			    <?php if(count($company->businesses) > 4) : ?><h3><?php echo count($company->businesses) ?> avalicoes</h3><?php endif;?>
+		            <?php foreach($company->businesses as $business):?>
+			        <?php if($count<5) :?>
+				    <?php $count++;?>
+                                    <span class="business" id="business_<?php echo $business->id?>">
+                                        <a href="e/<?php echo $company->slug ?>/avaliacoes/#rate_<?php echo $business->id ?>" class="tip_tool" title="<?php echo $business->testimonial?>">
+                                            <?php if(isset($business->user)) :?>
+                                                <?php echo $business->user->image(50) ?>
+                                                <?php if ($business->rate == '+') : ?>
+                                                    <span class="rate"><img src="images/home/rate_up.png" alt="positiva" /></span>
+                                                <?php else : ?>
+                                                    <span class="rate"><img src="images/home/rate_down.png" alt="negativa" /></span>
+                                                <?php endif ?>
+                                            <?php endif ?>
+                                        </a>
+                                    </span>
+				<?php endif;?>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+			   <h3>Esta empresa nao possui avaliacoes</h3>
+                        <?php endif; ?>
+		    </div>
+                    <?php if (isset($company->products) && count($company->products) > 0) : ?>
+                    <div class="products_list">
+                        <ul class="products">
+                            <?php foreach ($company->products as $product) : ?>
+                            <li class="product"><a href="<?php echo $product->url() ?>"><?php echo $product->image(20) ?> <?php echo $product->name ?></a></li>
+                            <?php endforeach ?>
+                        </ul>
+                    </div>
+                    <?php endif ?>
+                    <div class="clear"></div>
+                </li>
+            <?php endforeach ?>
+            </ul>
+            <?php else : ?>
+            <div class="not_found">
+                <h2>Nenhuma empresa encontrada</h2>
+                <?php if ($this->city_id) : ?>
+                    <?php
+                        $url = 'lista-de-empresas/'.$this->directory->region->slug;
+                        if ($this->sector_id) {
+                            $url .= '/todas-cidades/'.$this->sector_id;
+                        }
+                        if ($this->search) {
+                            $url .= '?s='.$this->search;
+                        }
+                    ?>
+                    <p>Não foi encontrada nenhuma empresa relacionada ao que você procura na região de <?php echo $this->directory->city->name ?>, <?php echo $this->directory->region->symbol ?>.</p>
+                    <p>Que tal procurar pelas <a href="<?php echo $url ?>">empresas no estado de <?php echo $this->directory->region->name ?></a>?</p>
+                <?php elseif ($this->region_id) : ?>
+                    <?php
+                        $url = 'lista-de-empresas';
+                        if ($this->sector_id) {
+                            $url .= '/todos-estados/todas-cidades/'.$this->sector_id;
+                        }
+                        if ($this->search) {
+                            $url .= '?s='.$this->search;
+                        }
+                    ?>
+                    <p>Não foi encontrada nenhuma empresa relacionada ao que você procura na região do estado de <?php echo $this->region_id ?>.</p>
+                    <p>Que tal procurar pelas <a href="<?php echo $url ?>">empresas no Brasil inteiro</a>?</p>
+                <?php elseif ($this->search) : ?>
+                    <p>Não foi encontrada nenhuma empresa relacionada à busca <br /><div class="search_query">"<?php echo $this->search ?>".</div></p>
+                <?php endif ?>
+            </div>
+            <?php endif ?>
+        </div>
+
+        <?php
+        // ---------------------------------------------------------------------
+        // Paginação
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($this->directory->count) : ?>
+        <div class="pagination">
+            <?php
+                $params = '';
+                if ($this->search) $params = '?s='.$this->search;
+                $page = $this->directory->page;
+                $pages = $this->directory->pages;
+                $glue = strpos($params, '?') === FALSE ? '?' : '&';
+
+                $minnum = 3;
+                $maxnum = 3;
+                $delta = 3;
+
+                echo '<div class="pagination">';
+
+                for ($i = 1; $i <= $pages; $i++) {
+                    if ($page == $i) {
+                        echo ' <a class="selected">'.$i.'</a> ';
+                    }
+                    else if ($i <= $minnum || $i > $pages - $maxnum || ($i >= $page - $delta && $i <= $page + $delta)) {
+                        if ($i == $pages - $maxnum + 1 && $page + $delta < $pages - $maxnum) echo ' ... ';
+                        echo '<a href="'.$this->url().$params.$glue.'p='.$i.'">'.$i.'</a>';
+                        if ($i == $minnum && $page - $delta > $minnum + 1) echo ' ... ';
+                    }
+                }
+
+                echo '</div>';
+            ?>
+        </div>
+        <?php endif ?>
+    </div>
+</div>

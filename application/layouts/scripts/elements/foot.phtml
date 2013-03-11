@@ -1,0 +1,33 @@
+<?php
+/**
+ * foot.phtml
+ * Rodapé do arquivo html
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-20
+ */
+?>
+
+<!-- Google Code for Visitantes -->
+<!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
+<?php if(strpos($_SERVER["SERVER_NAME"], '.com')) : ?>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 980932965;
+var google_conversion_label = "MTpTCMPkhQQQ5bLf0wM";
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/980932965/?value=0&amp;label=MTpTCMPkhQQQ5bLf0wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+<?php endif ?>
+
+</body>
+</html>

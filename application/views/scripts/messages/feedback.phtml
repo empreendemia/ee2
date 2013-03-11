@@ -1,0 +1,35 @@
+<?php
+/**
+ * feedback.phtml
+ * Envio de feedback
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-26
+ */
+?>
+<?php $this->layout()->setLayout('modal') ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Formulário para enviar feedback
+// -----------------------------------------------------------------------------
+?>
+<?php if ($this->sent == false) : ?>
+
+<div id="feedback">
+    <h1>Deixe-nos um feedback!</h1>
+    <h2>Diga-nos o que achou do sistema!</h2>
+    <p>Envie-nos elogios, reporte de erros ou sugestões de melhorias do sistema. Sua opinião é importante!</p>
+    <?php echo $this->form ?>
+</div>
+<?php
+// -----------------------------------------------------------------------------
+// Feedback enviado!
+// -----------------------------------------------------------------------------
+?>
+<?php else : ?>
+    <h1>Feedback enviado!</h1>
+    <p>Obrigado pela sua mensagem!</p>
+    <p>Se necessário, iremos respondê-lo em seu email assim que possível.</p>
+    <p>Caso queira entrar em contato diretamente conosco, envie um email para contato@empreendemia.com.br</p>
+<?php endif ?>

@@ -1,0 +1,110 @@
+<?php
+/**
+ * articles.phtml
+ * Artigos da Locaweb
+ * 
+ * @package views
+ * @subpackage locaweb
+ * @author Mauro Ribeiro
+ * @since 2011-10-31
+ */
+?>
+<?php $this->layout()->og_title = $this->company->name ?>
+<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_description = 'Veja os artigos preparado pela Locaweb' ?>
+
+<?php $this->layout()->title = 'Artigos de Marketing Digital' ?>
+
+
+<div class="plaintext articles">
+    
+    <?php
+        $found = false;
+        if ($this->post_title == null) {
+            foreach ($this->rss_locaweb as $post_locaweb) break;
+            foreach ($this->rss_sdl as $post_sdl) break;
+            if (strtotime($post_locaweb->pubDate()) >= strtotime($post_sdl->pubDate())) {
+                $title = $post_locaweb->title();
+                $content = $post_locaweb->content();
+            }
+            else {
+                $title = $post_sdl->title();
+                $content = $post_sdl->content();
+            }
+            $this->post_title = urlencode($title);
+            
+        }
+        else {
+            $found = false;
+            foreach ($this->rss_locaweb as $post) {
+                $post_title = $post->title();
+                if ($post_title == urldecode($this->post_title)) {
+                    $title = $post_title;
+                    $content = $post->content();
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                foreach ($this->rss_sdl as $post) {
+                    $post_title = $post->title();
+                    if ($post_title == urldecode($this->post_title)) {
+                        $title = $post_title;
+                        $content = $post->content();
+                        break;
+                    }
+                }
+            }
+        }
+    ?>
+            
+    <h2><?php echo $title; ?></h2>
+    <div class="post">
+        <?php echo $content; ?>
+    </div>
+</div>
+
+
+
+<?php
+/*
+ * ------------------------------------------------------------
+ * Aqui começa o conteúdo lateral
+ * ------------------------------------------------------------
+ */
+ob_start()
+?>
+
+
+    <div class="articles_post_list">
+        <h2>Mais artigos</h2>
+        <ul>
+        <?php foreach ($this->rss_locaweb as $post) : ?>
+            <?php $title = $post->title() ?>
+            <?php if ($title != urldecode($this->post_title)) : ?>
+                <li><a href="e/locaweb/artigos/<?php echo urlencode($title) ?>"><?php echo $title ?></a></li>
+            <?php else : ?>
+                <li><?php echo $title ?></li>
+            <?php endif ?>
+        <?php endforeach; ?>
+        <?php foreach ($this->rss_sdl as $post) : ?>
+            <?php $title = $post->title() ?>
+            <?php if ($title != urldecode($this->post_title)) : ?>
+                <li><a href="e/locaweb/artigos/<?php echo urlencode($title) ?>"><?php echo $title ?></a></li>
+            <?php else : ?>
+                <li><?php echo $title ?></li>
+            <?php endif ?>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="articles_post_list papers">
+        <h2>Confira outros artigos</h2>
+        <ul>
+            <li><a href="http://assets.locaweb.com.br/site/downloads/Datas_Comemorativas_para_Comercio_Eletronico.pdf" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: Datas_Comemorativas_para_Comercio_Eletronico.pdf', 'Locaweb', null, true) ?>">Saiba como explorar as datas comemorativas.</a></li>
+            <li><a href="http://assets.locaweb.com.br/site/downloads/wp_emm_por_onde_comecar.pdf" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: wp_emm_por_onde_comecar.pdf', 'Locaweb', null, true) ?>">Por onde começar uma campanha de e-mail marketing?</a></li>
+            <li><a href="http://assets.locaweb.com.br/site/downloads/wp_emm_boas_praticas.pdf" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: wp_emm_boas_praticas.pdf', 'Locaweb', null, true) ?>">Boas práticas de campanha de e-mail marketing.</a></li>
+            <li><a href="http://assets.locaweb.com.br/site/downloads/como_aumentar_desempenho_de_campanhas_email_marketing.pdf" target="_blank" onclick="<?php echo $this->Tracker()->vipEvent('view link: como_aumentar_desempenho_de_campanhas_email_marketing.pdf', 'Locaweb', null, true) ?>">Como aumentar o desempenho das suas campanhas de Email Marketing.</a></li>
+        </ul>
+    </div>
+
+<?php $this->layout()->side = ob_get_clean() ?>

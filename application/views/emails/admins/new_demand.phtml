@@ -1,0 +1,22 @@
+<?php
+/**
+ * new_demand.phtml
+ * Email para admins quando usuário pede um serviço
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-06-09
+ */
+?>
+<body>
+    <h1>Novo serviço cadastrado</h1>
+    <p>Usuário: <a href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->url() ?>"><?php echo $this->user->fullName() ?></a></p>
+    <p>Email: <?php echo $this->user->login ?></p>
+    <p>Empresa: <a href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->company->url() ?>"><?php echo $this->user->company->name ?></a></p>
+
+    <h2>Serviço</h2>
+    <p>ID: <?php echo $this->demand->id ?></p>
+    <p>Titulo: <?php echo $this->demand->title ?></p>
+    <p>Preço: <?php echo $this->demand->price ?></p>
+    <p>Descrição: <?php echo $this->demand->description ?></p>
+    <p>Prazo: <?php echo $this->demand->date_deadline ?></p>
+</body>

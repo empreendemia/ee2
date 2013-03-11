@@ -1,0 +1,80 @@
+<?php
+/**
+ * company-add-product.phtml
+ * Adiciona produto à empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+
+
+<?php if($this->template == 'modal_iframe'): ?>
+    <?php $this->layout()->setLayout('modal_iframe') ?>
+    <?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+    <?php $this->headLink()->appendStylesheet('css/ui/datepicker.css'); ?>
+    <?php $this->headScript()->appendFile('js/jquery/jquery-ui-1.8.14.full.min.js') ?>
+    <?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+    <?php $this->headScript()->appendFile('js/forms/ckeditor/ckeditor.js'); ?>
+    <?php $this->modal = null ?>
+    <?php $this->modal->width = 450 ?>
+    <?php $this->modal->height = 400 ?>
+<?php else :?>
+    <?php $this->layout()->setLayout('panel_company') ?>
+    <?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+    <?php $this->headLink()->appendStylesheet('css/ui/datepicker.css'); ?>
+    <?php $this->headScript()->appendFile('js/jquery/jquery-ui-1.8.14.full.min.js') ?>
+    <?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+    <?php $this->headScript()->appendFile('js/forms/ckeditor/ckeditor.js'); ?>
+<?php endif;?>
+
+
+
+
+<script type="text/javascript">
+$(function() {
+    $('.datepicker').datepicker({
+        dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        prevText: "<<",
+        nextText: ">>"
+    });
+
+    $('.add_offer').change(function() {
+        var checkbox = $(this);
+        if (checkbox.is(':checked')) {
+            $('.display_offer').slideDown(100);
+        }
+        else {
+            $('.display_offer').slideUp(100);
+        }
+    });
+
+    $('.add_offer').each(function() {
+        var checkbox = $(this);
+        if (checkbox.is(':checked')) {
+            $('.display_offer').slideDown(100);
+        }
+        else {
+            $('.display_offer').slideUp(100);
+        }
+    });
+});
+</script>
+
+<div class="plaintext">
+<h1 class="h_title h_blue h_medium h_margin">Adicionar produto</h1>
+<?php if($this->template == 'modal_iframe'): ?>
+    <p>Para configurar sua campanha, cadastre o produto/servico que voce quer anunciar:</p>
+<?php else :?>
+    <p>Ao cadastrar um produto para a sua vitrine você facilita para que seu potencial comprador encontre mais fácil sua empresa dentro da Empreendemia e por meio de ferramentas de busca.</p>
+<?php endif;?>
+</div>
+
+<div class="form">
+    <?php echo $this->form ?>
+</div>

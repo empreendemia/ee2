@@ -1,0 +1,69 @@
+<style type="text/css">
+ul, ol {
+    font-size: 9pt;
+    margin: 20px 10px;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+.company {
+    height: 100px;
+    position: relative;
+}
+
+.company .thumb{
+    height: 100px;
+    width: 100px;
+    float: left;
+}
+
+.company .name {
+    font-size: 16px;
+    margin-left: 120px;
+    padding-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.company .description {
+    font-size: 14px;
+    margin-left: 120px;
+    width: 520px;
+}
+
+.company .button {
+    position:relative;
+    right:-765px;
+    top:-80px;
+}
+</style>
+
+<script type="text/javascript">
+    function toggleDiv(divid){
+        var div = document.getElementById(divid);
+        div.style.display = div.style.display == 'block' ? 'none' : 'block';
+    }
+</script>
+
+<div class="Content" id="ContentDiv">
+	<h1 class="h_title h_xxlarge h_border h_blue">Empresas de Contabilidade</h1>
+
+    
+        <div class="companies_list">
+            <h3 style="font-size:16px;font-weight:bold;color:#280;padding:20px 10px;border-bottom:1px solid #ccc;"><img src="images/icons/user_online.gif" /> Online</h3>
+            <ul class="companies">
+                <li class="company">
+                    <div class="thumb"><a href="http://empreendemia.com.br/e/capital-prime-assessoria-contbil-ss-ltda-19119439" onclick="<?php echo $this->Tracker()->userEvent('exp. brother online v1: comprador escolhe capital-prime-assessoria-contbil-ss-ltda-19119439 online', null, true) ?>"><img src="http://empreendemia.com.br/userfiles/companies/19119/19119439cf1a4cf4cae3d8f0bc28d4afd917e336b429261a/100_thumbnail.jpg" /></a></div>
+                    <h3 class="name"><a href="http://empreendemia.com.br/e/capital-prime-assessoria-contbil-ss-ltda-19119439" onclick="<?php echo $this->Tracker()->userEvent('exp. brother online v1: comprador escolhe capital-prime-assessoria-contbil-ss-ltda-19119439 online', null, true) ?>">Capital Prime Assessoria Contábil SS Ltda</a> </h3>
+                    <div class="description">Escritorio de Assessoria e Contabil situado em Campinas, SP. </div>
+                    <div class="clear"></div>
+                    <div class="button"><script src='//d1nu2rn22elx8m.cloudfront.net/buttons/fcdJX/399VW-AdmTakxwAG4T.js'></script></div>
+                </li>
+            </ul>
+            <div style="font-size:16px;font-weight:bold;color:#888;padding:0 10px;border-bottom:1px solid #ccc;postion:relative;"></div>
+            <h3 style="padding: 10px">Para ver a lista de empresas que estão offline, clique <a href="http://www.empreendemia.com.br/lista-de-empresas/sao-paulo/campinas-sp?s=contabilidade">aqui</a>.</h3>
+        </div>
+    
+</div>

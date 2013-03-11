@@ -1,0 +1,23 @@
+<?php
+/**
+ * select-sectors.phtml
+ * Seletor atualizado de setores quando usuário escolhe cidades
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-12
+ */
+?>
+<?php $this->layout()->setLayout('clean') ?>
+
+<ul>
+<?php foreach ($this->sectors as $sector) : ?>
+    <li>
+        <input type="hidden" id="count_sector_<?php echo $sector->id ?>" class="companies_count" name="count_sector_<?php echo $sector->id ?>" value="<?php echo $sector->count_companies ?>" />
+        <input type="checkbox" id="sector_<?php echo $sector->id ?>" name="sector_<?php echo $sector->id ?>" />
+        <label for="sector_<?php echo $sector->id ?>">
+            <?php echo $sector->name ?>
+            <span class="count">(<?php echo $sector->count_companies ?>)</span>
+        </label>
+    </li>
+<?php endforeach ?>
+</ul>

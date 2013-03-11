@@ -1,0 +1,57 @@
+<?php
+/**
+ * remove.phtml
+ * Remove produto
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Pergunta se realmente quer remover
+// -----------------------------------------------------------------------------
+?>
+<?php if ($this->removed == false) : ?>
+
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 480 ?>
+<?php $this->modal->height = 300 ?>
+
+<div class="plaintext">
+    <h1 class="h_title h_blue h_medium h_margin h_border"><?php echo $this->product->image(80) ?>  Editar <?php echo $this->product->name ?> </h1>
+    <p>Os dados deste produto, incluindo informações e imagens, serão removidas do sistema para sempre!</p>
+    <p>Deseja realmente remover o produto <strong><?php echo $this->product->name ?></strong>?</p>
+    <br />
+    <p style="text-align:center"><a href="minha-empresa/produtos/excluir/<?php echo $this->product->id ?>?confirm=<?php echo $this->confirmation ?>">Sim, remover já!</a></p>
+</div>
+
+<div class="form">
+    <?php echo $this->form ?>
+</div>
+
+<?php
+// -----------------------------------------------------------------------------
+// Produto removido
+// -----------------------------------------------------------------------------
+?>
+<?php else : ?>
+
+<script type="text/javascript">
+    $(function() {
+       parent.$('#product_<?php echo $this->product->id ?>').fadeOut(2000);
+    });
+</script>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 400 ?>
+<?php $this->modal->height = 200 ?>
+<div class="plaintext">
+    <h1 class="h_title h_blue h_medium h_margin h_border"><?php echo $this->product->image(80) ?>  Editar <?php echo $this->product->name ?> </h1>
+    <p>O produto <strong><?php echo $this->product->name ?></strong> <br/>foi removido de sua vitrine com sucesso!</p>
+</div>
+<?php endif ?>

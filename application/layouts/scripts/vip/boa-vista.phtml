@@ -1,0 +1,147 @@
+<?php
+/**
+ * net.phtml
+ * Layout personalizado da Net
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2012-10-24
+ */
+?>
+<?php
+    if(!isset($this->company)) {
+        throw new Exception('VIEW::company not set');
+    }
+    
+    $this->headLink()->appendStylesheet('css/cols/large-small.css');
+    $this->headLink()->appendStylesheet('css/layouts/vip/default.css');
+    $this->headLink()->appendStylesheet('css/layouts/vip/boa-vista.css');
+    
+    $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+    $selected['home'] = '';
+    $selected['custom'] = '';
+    $selected['faq'] = '';
+
+    if ($action == 'view' || $action == 'product') $selected['home'] = 'class="selected"';
+    if ($action == 'custom') $selected['custom'] = 'class="selected"';
+    if ($action == 'faq') $selected['faq'] = 'class="selected"';
+
+?>
+
+<?php include(APPLICATION_PATH."/layouts/scripts/elements/head.phtml") ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Google Analytics da Locaweb
+// -----------------------------------------------------------------------------
+?>
+<script type="text/javascript">
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '/*' ?>
+        _gaq.push(function() {
+            _gaq._createAsyncTracker('UA-8258404-11','net');
+        })
+        _gaq.push(['net._setDomainName','empreendemia.com.br']);
+        _gaq.push(['net._trackPageview']);
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '*/' ?>
+</script>
+
+<div id="body">
+
+    <?php include(APPLICATION_PATH."/layouts/scripts/elements/user_header.phtml"); ?>
+
+    <?php include(APPLICATION_PATH."/layouts/scripts/elements/header.phtml"); ?>
+
+    <div id="page">
+        <div class="container">
+            <?php
+            // -----------------------------------------------------------------
+            // Primeira coluna
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_1">
+                <?php
+                // -------------------------------------------------------------
+                // Header da Locaweb
+                // -------------------------------------------------------------
+                ?>
+                <div class="company_header page_header">
+
+                    <div id="company_logo"><a href="e/net"><img src="images/vip/net/logo.png" /></a></div>
+
+                    <h1 id="company_name"><a href="e/net">Net</a></h1>
+                    
+                    <div class="slogan">O MUNDO É DOS NETS</div>
+
+                    <div id="company_sector"><a href="lista-de-empresas/<?php echo $this->company->city->region->slug ?>/<?php echo $this->company->city->slug ?>/<?php echo $this->company->sector->slug ?> "><?php echo $this->company->sector->name ?></a> - <a href="lista-de-empresas/<?php echo $this->company->city->region->slug ?>/<?php echo $this->company->city->slug ?>/<?php echo $this->company->sector->slug ?>?s=<?php echo urlencode($this->company->activity) ?>"><?php echo $this->company->activity ?></a></div>
+                    
+                    <menu id="company_menu">
+                        <li <?php echo $selected['home'] ?>>
+                            <a href="e/net">
+                                Pacotes Recomendados
+                            </a>
+                        </li>
+                        <li <?php echo $selected['custom'] ?>>
+                            <a href="e/net/monte-seu-pacote">
+                                Monte seu Pacote
+                            </a>
+                        </li>
+                        <li <?php echo $selected['faq'] ?>>
+                            <a href="e/net/duvidas">
+                                Dúvidas
+                            </a>
+                        </li>
+                    </menu>
+                </div> <!-- .page_header .company_header -->
+                
+                
+                <?php
+                // -------------------------------------------------------------
+                // View
+                // -------------------------------------------------------------
+                ?>
+                <div class="content">
+                    <?php echo $this->layout()->content ?>
+                </div>
+
+                <div class="clear"></div>
+                
+            </div><!-- col_1 -->
+
+
+            <?php
+            // -----------------------------------------------------------------
+            // Segunda coluna
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_2">
+                <div class="company_side_banner">
+                    <h2>Compromisso<br /><strong>NET EMPRESAS</strong></h2>
+                    <div class="image"><img src="images/vip/net/manutencao.png" /></div>
+                    <h3>NET do jeito da sua empresa</h3>
+                    <p>A melhor combinação de telefone, banda larga com Wi-Fi e TV por assinatura, feita sob medida para o seu negócio;</p>
+                    <p>São várias opções para sua empresa gerar ainda mais negóicos e conquistar mais clientes;</p>
+                    <p>Conheça mais sobre nossos serviços e fale com um consultor NET Empresas.</p>
+                </div>
+            </div><!-- .col_2 -->
+
+            <div class="clear"></div>
+        </div><!-- .container -->
+    </div> <!-- #page -->
+
+    <?php include(APPLICATION_PATH."/layouts/scripts/elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footerdo layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include(APPLICATION_PATH."/layouts/scripts/elements/foot.phtml") ?>

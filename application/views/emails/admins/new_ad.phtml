@@ -1,0 +1,28 @@
+<?php
+/**
+ * new_ad.phtml
+ * Email para admins quando usuário cria nova campanha
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-15
+ */
+?>
+<body>
+    <h1>Nova campanha cadastrada</h1>
+    <p>Usuário: <a href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->url() ?>"><?php echo $this->user->fullName() ?></a></p>
+    <p>Email: <?php echo $this->user->login ?></p>
+    <p>Empresa: <a href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->company->url() ?>"><?php echo $this->user->company->name ?></a></p>
+    <p>Produto: <?php echo $this->ad->product_id ?></p>
+
+    <h2>Campanha</h2>
+    <p>Número de empresas: <?php echo $this->companies_count ?></p>
+    <p>Período: <?php echo $this->months ?> meses</p>
+    <p>Setores: <?php echo count($this->ad->sectors) ?></p>
+    <p>Cidades: <?php echo count($this->ad->cities) ?></p>
+
+    <h3>Setores</h3>
+    <p><?php echo implode(',', $this->ad->sectors) ?></p>
+
+    <h3>Cidades</h3>
+    <p><?php echo implode(',', $this->ad->cities) ?></p>
+</body>

@@ -1,0 +1,88 @@
+<?php
+/**
+ * login.php
+ * Página de login
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-06-14
+ */
+?>
+<script type="text/javascript">
+function password() {
+    $('#forgot_password_link').attr('href', 'esqueci-a-senha/'+$('.user_login input#login').val());
+}
+
+$(function() {
+    $('#forgot_password_link').hover(function() { password() });
+    $('.user_login input#login').keyDown(function() { password() });
+    $('.user_login input#login').change(function() { password() });
+})
+</script>
+
+<style type="text/css">
+
+.user_login {
+    width: 320px;
+    margin: 80px auto;
+}
+
+.user_login .h_title {
+    margin-bottom: 20px;
+    font-size: 14pt;
+    color: #0C478B;
+    font-weight: bold;
+}
+
+.user_login dt {
+    float: left;
+    clear: left;
+    margin: 5px;
+    padding-top: 4px;
+    text-align: right;
+    width: 60px;
+    font-weight: bold;
+    color: #888;
+    font-size: 9pt;
+}
+
+.user_login dd {
+    float: left;
+    margin: 5px;
+}
+
+
+.user_login input[type=submit] {
+    background-color: #0C478B;
+    border-top: 1px solid #259;
+    border-left: 1px solid #259;
+    border-right: 1px solid #236;
+    border-bottom: 1px solid #236;
+    padding: 5px 20px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #236;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+
+.user_login .errors {
+    color: #800;
+    font-size: 8pt;
+}
+
+.user_login .forgot_password {
+    margin: 20px 0;
+    padding: 20px 0 0 80px;
+    border-top: 1px dotted #ccc;
+}
+
+</style>
+
+<div class="user_login">
+<h2 class="h_title">Efetuar Login</h2>
+<?php echo $this->form; ?>
+<div class="clear"></div>
+<?php if ($this->form->login->getValue() && $this->form->login->getValue() != '') : ?>
+<div class="forgot_password"><a id="forgot_password_link" href="esqueci-a-senha/<?php echo $this->form->login->getValue() ?>">Esqueci minha senha</a></div>
+<?php endif ?>
+</div>

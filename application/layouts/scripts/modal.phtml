@@ -1,0 +1,16 @@
+<?php
+/**
+ * modal.phtml
+ * Layout de um modal
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-05
+ */
+?>
+<div class="modal_content">
+    <div id="modal_flash_messages" class="modal_flash_messages">
+        <?php echo $this->flashMessages(); ?>
+    </div>
+    <?php echo $this->layout()->content ?>
+</div>

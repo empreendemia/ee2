@@ -1,0 +1,79 @@
+<?php
+/**
+ * faq.phtml
+ * Dúvidas
+ * 
+ * @package views
+ * @subpackage net
+ * @author Mauro Ribeiro
+ * @since 2012-10-25
+ */
+?>
+<?php $this->layout()->og_title = 'NET - dúvidas' ?>
+<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_description = 'NET - dúvidas' ?>
+
+<?php $this->layout()->title = 'NET - tire suas dúvidas' ?>
+
+<script type="text/javascript">
+$(function() {
+    $('#request-contact').submit(function() {
+        var data = {
+            nome : $('#request-contact input[name=nome]').val(),
+            email : $('#request-contact input[name=email]').val(),
+            address : $('#request-contact input[name=address]').val(),
+            phone : $('#request-contact input[name=phone]').val()
+        }
+            
+            $.ajax({
+                type: "POST",
+                url: "e/net/solicitar-contato",
+                data: data,
+                success: function(html) {
+                    $('.box.b').fadeOut(400, function() {
+                        $('.box.b').addClass('success').html('<h1 class="success">Dados enviados</h1><p>Seus dados foram enviados com sucesso. Aguarde um consultor NET entrar em contato com você.</p>');
+                        $('.box.b').fadeIn(400);
+                    })
+                },
+                error: function() {
+                    alert('Erro ao enviar formulário. Por favor, tente novamente.');
+                }
+            });
+        return false;
+    })
+});
+</script>
+
+<div class="faq">
+    <div class="box a">
+        <h1>Tire suas dúvidas</h1>
+        <h2>Qual a vantagem de assinar o NET Empresas?</h2>
+        <p>O NET Empresas oferece planos exclusivos feitos sob medida para sua empresa, com benefícios que não seriam encontrados nos planos de pessoa física Os planos também oferecem manutenção exclusiva, com técnico no local em até 4 horas. Além disso, ao comprar um pacote empresarial, você também ganha sem custo adicional um modem Wi-Fi para acessar a internet de vários pontos da sua empresa.</p>
+
+        <h2>Após adquirir o meu pacote, posso cancelar algum dos produtos?</h2>
+        <p>Os serviços de TV por assinatura e banda larga possuem fidelidade de 12 meses. Após este período você pode cancelar os serviços desejados. Porém, para os demais serviços contratados será cobrado o valor de tabela vigente, sem os descontos e benefícios exclusivos para assinatura do pacote.</p>
+
+        <h2>Depois de contratar o meu pacote, posso alterar minha combinação?</h2>
+        <p>Você pode alterar a sua combinação sempre que desejar, desde que permaneça com a fidelidade de 12 meses.</p>
+
+        <h2>Quais as tarifas de cada plano de telefonia?</h2>
+        <p>Todas as tarifas dos planos para empresas podem ser conferidas aqui. (Abrir pop-up com essa tabela)</p>
+
+        <h2>Tenho que pagar pelo modem Wi-fi?</h2>
+        <p>O modem Wi-Fi é um benefício concedido aos contratantes de um pacote NET Empresas e não tem nenhum custo adicional.</p>
+
+        <h2>Existe um tempo mínimo de contrato?</h2>
+        <p>A oferta está condicionada a permanência mínima de 12 meses para Banda Larga e TV por assinatura.</p>
+    </div>
+    <div class="box b">
+        <h1>Deixe suas informações e nossos consultores vão entrar em contato.</h1>
+        <form id="request-contact" action="e/net/faq/solicitar-contato">
+            <div class="input"><legend>Nome</legend><input name="nome" type="text" /></div>
+            <div class="input"><legend>Email</legend><input name="email" type="text" /></div>
+            <div class="input"><legend>Endereço</legend><input name="address" type="text" /></div>
+            <div class="input"><legend>Telefone</legend><input name="phone" type="text" /></div>
+            <div class="submit"><input type="submit" value="Enviar" /></div>
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>

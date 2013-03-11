@@ -1,0 +1,86 @@
+<?php
+/**
+ * companies_list.phtml
+ * Layout da lista de empresas
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-08-16
+ */
+?><?php
+    $this->headLink()->appendStylesheet('css/cols/large-small.css');
+    $this->headLink()->appendStylesheet('css/layouts/companies-list.css');
+?>
+
+<?php include("elements/head.phtml") ?>
+
+<div id="body">
+
+    <?php include("elements/user_header.phtml"); ?>
+
+    <?php include("elements/header.phtml"); ?>
+
+    <div id="page">
+        <div class="container">
+            <div class="col">
+
+            <?php
+            // -----------------------------------------------------------------
+            // Primeira coluna (larga)
+            // -----------------------------------------------------------------
+            ?>
+                <div class="col_1">
+
+                    <div class="companies_list_header page_header">
+                        <?php if (isset($this->layout()->header_subtitle) && $this->layout()->header_subtitle) : ?>
+                            <h2 class="h_title h_blue h_xxxlarge title">Lista de Empresas</h2>
+                            <h1 class="h_title h_blue h_xlarge subtitle"><?php echo $this->layout()->header_subtitle ?></h1>
+                        <?php else : ?>
+                            <h1 class="h_title h_blue h_xxxlarge title">Lista de Empresas</h1>
+                        <?php endif ?>
+                    </div> <!-- .companies_list_header .panel_header -->
+
+                    <?php
+                    // ---------------------------------------------------------
+                    // Conteúdo da view
+                    // ---------------------------------------------------------
+                    ?>
+                    <div class="content">
+                        <?php echo $this->layout()->content ?>
+                    </div><!-- .content -->
+                </div><!-- col_1 -->
+                
+            <?php
+            // -----------------------------------------------------------------
+            // Segunda coluna - espaço para anúncios
+            // -----------------------------------------------------------------
+            ?>
+                <div class="col_2">
+                    <div id="quiz"> </div>
+                    <div class="ads_display ads_display_lateral ads_display_4"></div>
+                </div><!-- .col_2 -->
+
+
+                    <div class="clear"></div>
+            </div><!-- col -->
+
+            <div class="clear"></div>
+        </div><!-- .container -->
+    </div> <!-- #page -->
+
+    <?php include("elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footerdo layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include("elements/foot.phtml") ?>

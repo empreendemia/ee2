@@ -1,0 +1,21 @@
+<?php
+/**
+ * new_offer.phtml
+ * Email para admins quando usuário adiciona uma nova oferta
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+<body>
+    <h1>Nova oferta cadastrada</h1>
+    <p>Usuário: <a href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->url() ?>"><?php echo $this->user->fullName() ?></a></p>
+    <p>Email: <?php echo $this->user->login ?></p>
+    <p>Empresa: <a href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->company->url() ?>"><?php echo $this->user->company->name ?></a></p>
+
+    <h2>Produto</h2>
+    <p>Produto: <a href="<?php echo $this->serverUrl().$this->baseUrl().$this->product->url() ?>"><?php echo $this->product->name ?></a></p>
+    <p>ID: <?php echo $this->product->id ?></p>
+    <p>Oferta: <?php echo $this->product->offer_description ?></p>
+    <p>Deadline: <?php echo $this->product->offer_date_deadline ?></p>
+</body>

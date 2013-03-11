@@ -1,0 +1,22 @@
+<?php
+/**
+ * contact.phtml
+ * Email quando usuário recebe uma mensagem
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-10
+ */
+require_once APPLICATION_PATH."/views/helpers/Access.php";
+?>
+<body>
+    <div style="display:block;margin:10px;">
+        <p>Olá <?php echo $this->user->name ?>,
+
+        <p>Vi seu perfil no Empreendemia e te enviei uma mensagem por lá.</p>
+        
+        <p>Para vê-la, clique <a href="<?php echo Zend_View_Helper_Access::autoLoginLink($this->user, 'meus-contatos') ?> ">aqui</a>.</p>
+
+        <p>Abraços,<br/><br/>
+        <?php echo $this->from_user->fullName() ?><br/></p>
+    </div>
+</body>

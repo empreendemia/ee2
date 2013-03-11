@@ -1,0 +1,76 @@
+<?php
+/**
+ * set-offer.phtml
+ * Seta uma oferta para um produto
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headLink()->appendStylesheet('css/ui/datepicker.css'); ?>
+<?php $this->headScript()->appendFile('js/jquery/jquery-ui-1.8.14.full.min.js') ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Formulário
+// -----------------------------------------------------------------------------
+?>
+<?php if ($this->sent == false) : ?>
+
+
+<script type="text/javascript">
+$(function() {
+    $('.datepicker').datepicker({
+        dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        prevText: "<<",
+        nextText: ">>"
+    });
+});
+</script>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 600 ?>
+<?php $this->modal->height = 480 ?>
+
+<div class="plaintext">
+<h1 class="h_title h_blue h_medium h_margin h_border"><?php echo $this->product->image(80) ?>  Editar oferta de <?php echo $this->product->name ?> </h1>
+<?php if ($this->product->offer_status == 'inactive') : ?>
+    <p>Esta oferta será enviada para avaliação de nossos administradores.
+        <br />Após a aprovação, ela será publicada.</p>
+<?php else : ?>
+    <p>Esta oferta já está <strong>publicada</strong>!
+        <br />Se você enviar uma nova oferta, a antiga será substituída.
+        <br />Você deverá aguardar nossos administradores autorizarem a nova oferta.
+    </p>
+<?php endif ?>
+</div>
+<br />
+<div class="form">
+    <?php echo $this->form ?>
+</div>
+
+<?php
+// -----------------------------------------------------------------------------
+// Oferta salva
+// -----------------------------------------------------------------------------
+?>
+<?php else : ?>
+
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 600 ?>
+<?php $this->modal->height = 200 ?>
+<div class="plaintext">
+<h1 class="h_title h_blue h_medium h_margin">Oferta salva com sucesso!</h1>
+<p>Sua oferta será avaliada por nossos administradores. <br/>Assim que ela for aprovada, ela será publicada.</p>
+<p><a href="<?php echo $this->product->url() ?>" target="_top">Clique aqui</a> para visualizar o produto.</p>
+</div>
+<?php endif ?>

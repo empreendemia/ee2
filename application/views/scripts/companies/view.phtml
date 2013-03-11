@@ -1,0 +1,327 @@
+<?php
+/**
+ * view.php
+ * Página do perfil de uma empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-06-15
+ */
+?>
+<?php $this->layout()->setLayout('company') ?>
+
+<?php $this->layout()->og_title = $this->company->name ?>
+<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_description = $this->company->description ?>
+
+<?php
+    $card_image = '';
+    if ($this->company->isPlan('premium')) {
+        $card_image = $this->company->premiumCardImage();
+    }
+    else {
+        $card_image = '<img src="images/ui/card_image.jpg" />';
+    }
+?>
+
+<h1 class="company_name"><?php echo $this->company->name ?></h1>
+
+<?php
+// ------------------------------------------------------------
+// Cartão de visita da empresa
+// ------------------------------------------------------------
+?>
+<div class="card">
+    <div class="card_image"><?php echo $card_image ?></div>
+    <div class="card_gradient"></div>
+    <ul class="contact">
+        <?php if ($this->Access()->checkAuth() || $this->company->id == 19112668) : ?>
+            <?php if ($this->company->phone): ?> <li class="phone"><img src="images/ui/card_phone.png" /><?php echo $this->Format()->phone($this->company->phone) ?></li><?php endif ?>
+            <?php if ($this->company->phone2): ?> <li class="phone2"><?php echo $this->Format()->phone($this->company->phone2) ?></li><?php endif ?>
+            <?php if ($this->company->email): ?> <li class="email"><img src="images/ui/card_email.png" /><?php echo $this->company->email ?></li><?php endif ?>
+        <?php else : ?>
+
+            <li class="phone"><a href="autenticar" class="modal_inline_phone"><img src="images/ui/card_phone.png" />acesso restrito a usuários</a></li>
+            <li class="email"><a href="autenticar" class="modal_inline_email"><img src="images/ui/card_email.png" />acesso restrito a usuários</a></li>
+
+            <div style='display:none'>
+                <div id="inline_logout" class="company_logout">
+                    <div class="plaintext">
+                        <p>Oi, tudo bem?</p>
+		        <p>Apenas usuários cadastrados podem ver essas informações.</p>
+		        <p>Porém mesmo sem se cadastrar, você pode entrar em<br /> contato com <?php echo $this->company->name?></p>
+			<ul class="options">
+			    <li>
+                                <a href="<?php echo $this->company->url() ?>/pessoas" onclick="Tracker.ga.userEvent('interruption message click');">
+                                    <img src="images/icons/message_50.gif" />enviar mensagem
+                                </a> 
+			    </li>
+
+			    <li> 
+                                <a href="<?php echo $this->company->url() ?>/pedir-orcamento" class="modal_iframe" onclick="Tracker.ga.userEvent('interruption budget click');">
+                                    <img src="images/icons/budget_50.gif " />pedir orçamento
+                                </a>
+			    </li>
+			</ul>
+	            </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+               $(function(){
+                    $(".modal_inline_phone").colorbox({
+                        scrolling:false, 
+                        inline:true, 
+                        href:"#inline_logout",
+                        onOpen: function() {
+                            Tracker.ga.userEvent('interruption company phone view');
+                        }
+                    });
+                    $(".modal_inline_email").colorbox({
+                        scrolling:false, 
+                        inline:true, 
+                        href:"#inline_logout",
+                        onOpen: function() {
+                            Tracker.ga.userEvent('interruption company email view');
+                        }
+                    });
+                });
+            </script>
+
+        <?php endif ?>
+        <?php if ($this->company->website): ?> <li class="website"><a href="<?php if(strpos($this->company->website,'http://') !== 0 && strpos($this->company->website,'https://') !== 0) echo 'http://' ?><?php echo $this->company->website ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view link: website', $this->company->id, null, true) ?>"><img src="images/ui/card_website.png" /><?php echo $this->company->website ?></a></li><?php endif ?>
+    </ul>
+</div>
+
+<div class="sub_cols">
+    
+    <div class="sub_col_1">
+        <?php
+        // ------------------------------------------------------------
+        // Endereço da empresa
+        // ------------------------------------------------------------
+        ?>
+        <div class="address">
+            <div class="city"><h3><?php echo $this->company->city->name ?>, <?php echo $this->company->city->region->symbol ?></h3></div>
+            <?php /* Liberação das informações da CTECH (id: 19112668) nas próximas 2 condições 'if' */ ?>
+            <?php if ($this->company->id == 19112668 || $this->Access()->checkAuth()) : ?>
+                <?php if ($this->company->id == 19112668 || ($this->company->contactStatus($this->Access()->user()->id, $this->Access()->user()->company_id))) : ?>
+                <div class="street"><?php echo $this->company->address_street ?>, <?php echo $this->company->address_number ?></div>
+                <div class="complement"><?php echo $this->company->address_complement ?></div>
+                <div class="map"><a href="http://maps.google.com.br/maps?q=<?php echo urlencode($this->company->address_street.', '.$this->company->address_number.' - '.$this->company->city->name.' - '.$this->company->city->region->name) ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view map', $this->company->id, null, true) ?>"><img src="images/icons/maps_marker.png" width="20" height="20" /> ver no mapa</a></div>
+                <?php else : ?>
+                <div class="street"><a href="<?php echo $this->company->url() ?>/pessoas">endereço restrito a contatos</a></div>
+                <div class="map"><a href="http://maps.google.com.br/maps?q=<?php echo urlencode($this->company->city->name.' - '.$this->company->city->region->name) ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view map', $this->company->id, null, true) ?>"><img src="images/icons/maps_marker.png" width="20" height="20" /> ver no mapa</a></div>
+                <?php endif ?>
+            <?php else : ?>
+                <div class="street"><a href="autenticar">endereço restrito a usuários</a></div>
+                <div class="map"><a href="http://maps.google.com.br/maps?q=<?php echo urlencode($this->company->city->name.' - '.$this->company->city->region->name) ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view map', $this->company->id, null, true) ?>"><img src="images/icons/maps_marker.png" width="20" height="20" /> ver no mapa</a></div>
+            <?php endif ?>
+        </div>
+        <?php
+        // ------------------------------------------------------------
+        // Mais dados para contato
+        // ------------------------------------------------------------
+        ?>
+        <ul class="more_contacts">
+            <?php if ($this->company->link_blog != null && $this->company->link_blog != '') : ?><li><img src="images/icons/3rd/16_blog.png" /> <a href="<?php if(strpos($this->company->link_blog,'http://') !== 0 && strpos($this->company->link_blog,'https://') !== 0) echo 'http://' ?><?php echo $this->company->link_blog ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view link: blog', $this->company->id, null, true) ?>">blog</a></li><?php endif ?>
+            <?php if ($this->company->link_youtube != null && $this->company->link_youtube != '') : ?><li><img src="images/icons/3rd/16_youtube.png" /> <a href="<?php if(strpos($this->company->link_youtube,'http://') !== 0 && strpos($this->company->link_youtube,'https://') !== 0) echo 'http://' ?><?php echo $this->company->link_youtube ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view link: youtube', $this->company->id, null, true) ?>">youtube</a></li><?php endif ?>
+            <?php if ($this->company->link_vimeo != null && $this->company->link_vimeo != '') : ?><li><img src="images/icons/3rd/16_vimeo.png" /> <a href="<?php if(strpos($this->company->link_vimeo,'http://') !== 0 && strpos($this->company->link_vimeo,'https://') !== 0) echo 'http://' ?><?php echo $this->company->link_vimeo ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view link: vimeo', $this->company->id, null, true) ?>">vimeo</a></li><?php endif ?>
+            <?php if ($this->company->link_slideshare != null && $this->company->link_slideshare != '') : ?><li><img src="images/icons/3rd/16_slideshare.png" /> <a href="<?php if(strpos($this->company->link_slideshare,'http://') !== 0 && strpos($this->company->link_slideshare,'http://s') !== 0) echo 'http://' ?><?php echo $this->company->link_slideshare ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view link: slideshare', $this->company->id, null, true) ?>">slideshare</a></li><?php endif ?>
+            <?php if ($this->company->link_facebook != null && $this->company->link_facebook != '') : ?><li><img src="images/icons/3rd/16_facebook.png" /> <a href="<?php if(strpos($this->company->link_facebook,'http://') !== 0 && strpos($this->company->link_facebook,'https://') !== 0) echo 'http://' ?><?php echo $this->company->link_facebook ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view link: facebook', $this->company->id, null, true) ?>">facebook</a></li><?php endif ?>
+            <?php if ($this->company->contact_twitter != null && $this->company->contact_twitter != '') : ?><li><img src="images/icons/3rd/16_twitter.png" /> <a href="http://www.twitter.com/<?php echo substr($this->company->contact_twitter, 1) ?>" target="_blank" onclick="<?php echo $this->Tracker()->companyEvent('view link: twitter', $this->company->id, null, true) ?>"><?php echo $this->company->contact_twitter ?></a></li><?php endif ?>
+            <?php if ($this->company->contact_skype != null && $this->company->contact_skype != '') : ?><li><img src="images/icons/3rd/16_skype.png" /> <?php echo $this->company->contact_skype ?></li><?php endif ?>
+            <?php if ($this->company->contact_msn != null && $this->company->contact_msn != '') : ?><li><img src="images/icons/3rd/16_msn.png" /> <?php echo $this->company->contact_msn ?></li><?php endif ?>
+            <?php if ($this->company->contact_gtalk != null && $this->company->contact_gtalk != '') : ?><li><img src="images/icons/3rd/16_gtalk.png" /> <?php echo $this->company->contact_gtalk ?></li><?php endif ?>
+        </ul>
+        <?php
+        // ------------------------------------------------------------
+        // Compartilhamento em mídias sociais
+        // ------------------------------------------------------------
+        ?>
+        <ul class="share">
+            <li>
+                <h3>Compartilhar</h3>
+            </li>
+            <li>
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) {return;}
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/all.js#appId=285597901457818&xfbml=1";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+
+                <div class="fb-like" data-href="<?php echo $this->serverUrl().'/'.$this->company->url() ?>" data-send="true" data-layout="button_count" data-width="180" data-show-faces="false"></div>
+            </li>
+            <li>
+                <a href="http://twitter.com/share" class="twitter-share-button" data-url="<?php echo $this->company->name ?> na Empreendemia" data-count="horizontal" data-via="empreendemia">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            </li>
+            <li>
+                <!-- Place this tag where you want the +1 button to render -->
+                <g:plusone size="small"></g:plusone>
+
+                <!-- Place this render call where appropriate -->
+                <script type="text/javascript">
+                  (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                  })();
+                </script>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sub_col_2">
+        <?php
+        // ------------------------------------------------------------
+        // Descrição da empresa
+        // ------------------------------------------------------------
+        ?>
+        <div class="company_description">
+            <h2>Sobre a empresa</h2>
+            <div class="text">
+                <?php echo $this->company->description ?>
+            </div>
+
+            <?php if ($this->company->isPlan('premium')) : ?>
+            <ul class="more_info">
+                <?php $this->headLink()->appendStylesheet('css/ui/ckeditor.css'); ?>
+                <script type="text/javascript">
+                    $(function(){
+                        $(".modal_inline_about").colorbox({inline:true, href:"#inline_about"});
+                        $(".modal_inline_video").colorbox({scrolling:false, inline:true, href:"#inline_video"});
+                        $(".modal_inline_slides").colorbox({scrolling:false, inline:true, href:"#inline_slides"});
+                    });
+                </script>
+
+                <?php if ($this->company->about && $this->company->about != '') : ?>
+                <li>
+                    <a href="<?php echo $this->url() ?>" class="modal_inline_about" title="Mais informações sobre <?php echo $this->company->name ?>" onclick="<?php echo $this->Tracker()->companyEvent('view premium: about', $this->company->id, null, true) ?>"><img src="images/panel/about.png" width="16" height="16" />  veja mais informações</a>
+                    <div style='display:none'>
+                        <div id="inline_about" class="company_about">
+                            <div class="ckeditor about_text"><?php echo $this->company->about ?></div>
+                        </div>
+                    </div>
+                </li>
+                <?php endif ?>
+
+                <?php if ($this->company->video_url && $this->company->video_url != '') : ?>
+                <li>
+                    <a href="<?php echo $this->url() ?>" class="modal_inline_video" title="Vídeo de <?php echo $this->company->name ?>" onclick="<?php echo $this->Tracker()->companyEvent('view premium: video', $this->company->id, null, true) ?>"><img src="images/icons/video_16.gif" /> assista ao vídeo</a>
+                    <div style='display:none'>
+                        <div id="inline_video" class="company_video">
+                            <?php $video_url = $this->company->video_url ?>
+                            <?php
+                            // --------------------------------------------------------------------------------
+                            // Youtube
+                            // --------------------------------------------------------------------------------
+                            ?>
+
+                            <?php if (substr_count($video_url, 'youtube') > 0) :?>
+                            <?php
+                            $parsed_url = parse_url($video_url);
+                            $parsed_vars = array();
+                            $get_vars = explode('&', $parsed_url['query']);
+                            foreach ($get_vars as $get_var) {
+                                $explode = explode('=', $get_var);
+                                $parsed_vars[$explode[0]] = $explode[1];
+                            }
+                            $video_id = $parsed_vars['v'];
+                            ?>
+
+                            <object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/<?php echo $video_id ?>&hl=pt_BR&fs=1&"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/<?php echo $video_id ?>&hl=pt_BR&fs=1&" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+
+
+
+                            <?php
+                            // --------------------------------------------------------------------------------
+                            // Vimeo
+                            // --------------------------------------------------------------------------------
+                            ?>
+
+                            <?php elseif (substr_count($video_url, 'vimeo') > 0) : ?>
+
+                            <?php
+                            $parsed_url = parse_url($video_url);
+                            $explode = explode('/', $parsed_url['path']);
+                            $video_id = $explode[1];
+                            ?>
+
+                            <object width="640" height="360"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=<?php echo $video_id ?>&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=<?php echo $video_id ?>&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="640" height="360"></embed></object>
+
+
+                            <?php
+                            // --------------------------------------------------------------------------------
+                            // Videolog
+                            // --------------------------------------------------------------------------------
+                            ?>
+
+                            <?php elseif (substr_count($video_url, 'videolog') > 0) : ?>
+
+                            <?php
+                            $parsed_url = parse_url($video_url);
+                            $parsed_vars = array();
+                            $get_vars = explode('&', $parsed_url['query']);
+                                    if (is_numeric($get_vars[0])) {
+                                        $video_id = $get_vars[0];
+                                    }
+                                    else {
+                                        foreach ($get_vars as $get_var) {
+                                                $explode = explode('=', $get_var);
+                                                $parsed_vars[$explode[0]] = $explode[1];
+                                        }
+                                        $video_id = $parsed_vars['id'];
+                                    }
+                            ?>
+
+                            <object id='playerFlash' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' width='640' height='360'><param name='movie' value='http://www.videolog.tv/ajax/codigoPlayer.php?id_video=<?php echo $video_id ?>&relacionados=S&default=S&lang=PT_BR&cor_fundo=FFFFFF&cor_titulo=777777&hd=S&swf=1&width=640&height=360' /><param name='flashvars' value='id_video=<?php echo $video_id ?>' /><param name='allowScriptAccess' value='always' /><param name='allowFullScreen' value='true' /><param name='wmode' value='opaque' /><embed src="http://www.videolog.tv/ajax/codigoPlayer.php?id_video=<?php echo $video_id ?>&relacionados=S&default=S&lang=PT_BR&cor_fundo=FFFFFF&cor_titulo=777777&hd=S&swf=1&width=640&height=360" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="360"></embed></object>
+
+
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </li>
+                <?php endif ?>
+
+
+                <?php if ($this->company->slides_url  && $this->company->slides_url  != '') : ?>
+                <li>
+                    <a href="<?php echo $this->url() ?>" class="modal_inline_slides" title="Slides de <?php echo $this->company->name ?>"onclick="<?php echo $this->Tracker()->companyEvent('view premium: slides', $this->company->id, null, true) ?>"><img src="images/icons/slides_16.gif" /> veja os slides</a>
+                    <div style="display:none">
+                        <div id="inline_slides" class="company_slides">
+                            <?php echo htmlspecialchars_decode($this->company->slides_embed) ?>
+                        </div>
+                    </div>
+                </li>
+                <?php endif ?>
+            </ul>
+            <?php endif ?>
+            
+        </div>
+        
+        <?php
+        // ------------------------------------------------------------
+        // Lista de produtos no topo da vitrine
+        // ------------------------------------------------------------
+        ?>
+        <?php if ($this->products) : ?>
+        <div class="company_products">
+            <h2>Produtos</h2>
+            <p class="all_products"><a href="<?php echo $this->url(array('company_id'=>$this->company->slug), 'company_products')?>">ver todos os produtos</a>
+
+            <ul>
+            <?php foreach ($this->products as $product) : ?>
+                <li>
+                    <a href="<?php echo $product->url() ?>">
+                        <span class="thumb"><?php echo $product->image(80) ?></span>
+                        <span class="name"><?php echo $product->name ?></span>
+                    </a>
+                </li>
+            <?php endforeach ?>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <?php endif ?>
+    </div>
+</div>

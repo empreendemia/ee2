@@ -1,0 +1,59 @@
+<?php
+/**
+ * accept.php
+ * Usuário aceitou uma troca de cartão
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-02
+ */
+?>
+<?php $this->layout()->title = 'Trocar cartões' ?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 800 ?>
+<?php $this->modal->height = 250 ?>
+
+<div class="cols_small_large">
+    <div class="col_1">
+        <?php echo $this->user->image() ?>
+    </div>
+    <div class="col_2">
+        <?php
+        // ---------------------------------------------------------------------
+        // Aceitou o cartão
+        // ---------------------------------------------------------------------
+        ?>
+        <?php if ($this->sent) : ?>
+        <script type="text/javascript">
+        $(function() {
+           parent.$('#request_'+<?php echo $this->user->id ?>+' .actions').html('<div class="action_made">aceito</div>');
+        });
+        </script>
+        <div class="plaintext">
+        <h1 class="h_title h_blue h_xlarge">Você trocou cartões com <?php echo $this->user->fullName() ?>!</h1>
+        <p>Gostaria de <a href="meus-contatos/<?php echo $this->user->id ?>" target="_top">mandar uma mensagem</a> para <?php echo $this->user->fullName() ?>?</p>
+        </div>
+
+        <?php
+        // ---------------------------------------------------------------------
+        // Pergunta se quer mesmo maceitar
+        // ---------------------------------------------------------------------
+        ?>
+        <?php else : ?>
+        <?php $userData = new Zend_Session_Namespace('UserData'); ?>
+        <div class="plaintext">
+            <h1 class="h_title h_blue h_xlarge">Trocar cartões com <?php echo $this->user->fullName() ?></h1>
+            <p>Você deseja aceitar a troca de cartões?</p>
+            <p>Ao aceitar a troca de cartões, seus dados para contato ficarão disponíveis para <?php echo $this->user->fullName() ?></p>
+        </div>
+        <div class="form">
+            <form action="<?php echo $this->url() ?>" method="POST">
+                <input type="submit" value="Aceitar troca de cartões" />
+            </form>
+        </div>
+        <?php endif ?>
+    </div>
+</div>

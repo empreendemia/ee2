@@ -1,0 +1,52 @@
+<?php
+/**
+ * budget.phtml
+ * Email de pedido orçamento
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-10
+ */
+require_once APPLICATION_PATH."/views/helpers/Access.php";
+?>
+<body>
+    <?php if (isset($this->user) && $this->user != null) : ?>
+    <div style="display:block;float:left"><a href="<?php echo Zend_View_Helper_Access::autoLoginLink($this->user, 'e/'.$this->user->company->slug.'/pessoas/'.$this->user->id) ?>"><img src="<?php echo $this->serverUrl().$this->baseUrl().'/'.$this->user->imagePath(120) ?>" width="120" height="120" /></a></div>
+
+    <h1 style="display:block;margin:10px 140px;padding-top:10px;"><a href="<?php echo Zend_View_Helper_Access::autoLoginLink($this->user, 'e/'.$this->user->company->slug.'/pessoas/'.$this->user->id) ?>" style="text-decoration:none"><?php echo $this->user->fullName() ?></a></h1>
+    <h3 style="display:block;margin:10px 140px;"><a href="<?php echo Zend_View_Helper_Access::autoLoginLink($this->user, 'e/'.$this->user->company->slug) ?>" style="text-decoration:none"><?php echo $this->user->company->name ?></a></h3>
+    <?php else: ?>
+    <h1 style="display:block;margin:10px 140px;padding-top:10px;"><?php echo $this->budget->user->name ?></h1>
+    <h3 style="display:block;margin:10px 140px;"><?php if (isset($this->budget->company->name)) echo $this->budget->company->name; else echo 'Empresa não informada' ?></h3>
+    <?php endif ?>
+
+
+
+    <h2 style="display:block;margin:10px 140px;padding-top:20px;">Pedido de Orçamento</h2>
+    <div style="display:block;margin:10px 140px;">
+        <h4>Quantidades:</h4>
+        <ul>
+        <?php if (isset ($this->products)) :?>
+            <?php foreach ($this->products as $product) : ?>
+                <?php if ($this->budget->products_list[$product->id] > 0) : ?>
+                    <li><?php echo $product->name ?> x <?php echo $this->budget->products_list[$product->id] ?></li>
+                <?php endif ?>
+            <?php endforeach ?>
+        <?php endif ?>
+        </ul>
+    </div>
+    <div style="display:block;margin:10px 140px;padding: 20px 0;">
+        <?php echo nl2br($this->budget->budget->message) ?>
+    </div>
+    <div style="display:block;margin:10px 140px;">
+        <h4>Pedido por</h4>
+        <p>Nome: <?php echo $this->budget->user->name ?></p>
+        <p>Email: <?php echo $this->budget->user->email ?></p>
+        <?php if (isset($this->budget->company->name)) : ?><p>Empresa: <?php echo $this->budget->company->name ?></p><?php endif ?>
+        <?php if ($this->city) : ?><p>Cidade: <?php echo $this->city->name ?>, <?php echo $this->city->region->symbol ?></p><?php endif ?>
+        <?php if (isset($this->budget->company->phone)) : ?><p>Telefone: <?php echo $this->budget->company->phone ?></p><?php endif ?>
+    </div>
+
+    <br />
+    <br />
+    
+</body>

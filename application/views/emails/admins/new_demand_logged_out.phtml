@@ -1,0 +1,21 @@
+<?php
+/**
+ * new_demand_logged_out.phtml
+ * Email para admins quando usuário deslogado pede um serviço
+ * 
+ * @author Lucas Gaspar
+ * @since 2012-05-10
+ */
+?>
+<body>
+    <h1>Novo serviço cadastrado</h1>
+    <p>Usuário: <?php echo $this->demand->name ?> </p>
+    <p>Email: <?php echo $this->demand->email ?></p>
+
+    <h2>Serviço</h2>
+    <p>ID: <?php echo $this->demand->id ?></p>
+    <p>Titulo: <?php echo $this->demand->title ?></p>
+    <p>Preço: <?php echo $this->demand->price ?></p>
+    <p>Descrição: <?php echo $this->demand->description ?></p>
+    <p>Prazo: <?php echo $this->demand->date_deadline ?></p>
+</body>

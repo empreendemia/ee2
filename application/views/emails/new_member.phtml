@@ -1,0 +1,30 @@
+<?php
+/**
+ * new_member.phtml
+ * Email quando novo usuário foi adicionado como membro de uma empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-09-19
+ */
+?>
+<body>
+    <div style="display:block;float:left"><a href="<?php echo $this->serverUrl().$this->company->url() ?>"><img src="<?php echo $this->serverUrl().$this->baseUrl().'/'.$this->company->imagePath(120) ?>" width="120" height="120" /></a></div>
+
+    <h1 style="display:block;margin:10px 140px;padding-top:10px;"><a href="<?php echo $this->serverUrl().$this->company->url() ?>" style="text-decoration:none"><?php echo $this->company->name ?></a></h1>
+    <h3 style="display:block;margin:10px 140px;">Você foi adicionado na Empreendemia!</h3>
+
+    <h2 style="display:block;margin:10px 140px;padding-top:20px;">Olá, <?php echo $this->user->name ?>!</h2>
+    <div style="display:block;margin:10px 140px;">
+        <p>Você foi adicionado como membro da empresa <?php echo $this->company->name ?> na rede <a href="<?php echo $this->serverUrl().$this->baseUrl() ?>">Empreendemia</a>!</p>
+        <p>Os seus dados para login são:<p>
+        <ul>
+            <li>login: <strong><?php echo $this->user->login ?></strong></li>
+            <li>senha: <strong><?php echo $this->password ?></strong></li>
+        </ul>
+        <p>Para fazer o login, <a href="<?php echo $this->serverUrl().$this->baseUrl() ?>/login">clique aqui</a>.</p>
+        <p>Para alterar a sua senha, <a href="<?php echo $this->serverUrl().$this->baseUrl() ?>/painel/usuario/alterar-senha">clique aqui</a>.</p>
+        <p>Caso você não seja <?php echo $this->user->name ?> <?php echo $this->user->family_name ?>, favor ignore este email.</p>
+        <p>Abraços, <br/>Equipe Empreendemia</p>
+    </div>
+
+</body>

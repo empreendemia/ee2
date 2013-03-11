@@ -1,0 +1,27 @@
+<?php
+/**
+ * list.phtml
+ * Listagem e exibição dos anúncios
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-05
+ */
+?>
+<?php $this->layout()->setLayout('clean') ?>
+
+<div class="ads">
+    <h2 class="h_title">Publicidade (<a href="publicidade" class="tip_tool_top" title="Gostaria de anunciar também?">saiba mais</a>)</h2>
+
+<?php if ($this->ads) : ?>
+    <?php foreach ($this->ads as $ad) : ?>
+    <div class="ad">
+        <a href="ver-anuncio/<?php echo $ad->id ?>/<?php echo $ad->product->company->slug ?>/<?php echo $ad->product->slug ?>"  onclick="<?php echo $this->Tracker()->userEvent('clicked ad: '.$ad->id, null, true) ?>">
+            <span class="thumb"><?php echo $ad->product->image(80) ?></span>
+            <h3 class="name"><?php echo $ad->product->name ?></h3>
+            <span class="description"><?php echo $ad->product->description ?></span>
+        </a>
+    </div>
+    <?php endforeach ?>
+    <div class="clear"></div>
+<?php endif ?>
+</div>

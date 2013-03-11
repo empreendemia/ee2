@@ -1,0 +1,294 @@
+<?php
+/**
+ * acsp.phtml
+ * Landing Page para campanha da ACSP
+ * 
+ * @author Mauro Ribeiro
+ * @since 2012-05-29
+ */
+?>
+<?php $this->layout()->setLayout('clean') ?>
+
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml" itemtype="http://schema.org/LocalBusiness">
+   
+<head>
+<?php
+// -----------------------------------------------------------------------------
+// Titles e definições
+// -----------------------------------------------------------------------------
+?>
+    <title>Cadastre-se no Empreendemia</title>
+    <base href="<?php echo $this->serverUrl().$this->baseUrl();?>/" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+<?php
+// -----------------------------------------------------------------------------
+// Links
+// -----------------------------------------------------------------------------
+?>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link href="css/global.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/layout.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/cols/large.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/layouts/home.css" media="screen" rel="stylesheet" type="text/css" />
+    
+<?php
+// -----------------------------------------------------------------------------
+// Google Analytics
+// -----------------------------------------------------------------------------
+?>
+    <style type="text/css">
+        body {
+            background-color: #fff;
+        }
+        #home_header {
+            height: 82px;
+        }
+        
+        .home_logo img {
+            width: 202px;
+            height: 42px;
+        }
+        
+        #home_slide_show {
+            height: 220px;
+            border-bottom: none;
+        }
+        
+        #home_slide_show h1 {
+            font-size: 32px;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 550px;
+            padding-top: 25px;
+            padding-bottom: 10px;
+            line-height: 1.2em;
+        }
+        
+        #home_slide_show p {
+            font-size: 12px;
+            color: #fff;
+            margin-left: 550px;
+            line-height: 2em;
+        }
+        
+        #home_slide_show img {
+            position: absolute;
+            top: 10px;
+        }
+        
+        #testimonial_signup {
+            height: 140px;
+            padding: 30px 20px 50px 20px;
+        }
+        
+        #testimonial {
+            float: left;
+            width: 500px;
+            position: relative;
+        }
+        
+        #testimonial h1 {
+            color: #0C478B;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
+        
+        #testimonial p {
+            margin: 10px 0;
+            line-height: 1.4em;
+        }
+        
+        #signup {
+            float: right;
+            width: 450px;
+        }
+        
+        #signup a {
+            display: block;
+            padding: 30px 0;
+            background-color: #b20;
+            text-align: center;
+            width: 420px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            font-size: 20px;
+            border-radius: 10px;
+        }
+        
+        #signup a:hover {
+            background-color: #e80;
+        }
+        
+        #signup a strong {
+            font-weight: bold;
+        }
+        #signup p {
+            color: #b20;
+            font-size: 20px;
+            text-align: center;
+            padding: 20px 0;
+            width: 420px;
+        }
+        
+        #benefits {
+            padding: 0 20px;
+        }
+        
+        .benefit {
+            width: 300px;
+            float: left;
+            display:block;
+            padding-top: 20px;
+        }
+        
+        .benefit_2 {
+            margin: 0 40px;
+        }
+        
+        .benefit .icon {
+            float: left;
+        }
+        
+        .benefit h3 {
+            margin-left: 90px;
+            color: #222;
+            line-height: 1.6em;
+        }
+        
+        .benefit p {
+            margin-left: 90px;
+            font-size: 11px;
+            line-height: 1.4em;
+            color: #666;
+        }
+    </style>
+    
+    
+<?php
+// -----------------------------------------------------------------------------
+// Scripts
+// -----------------------------------------------------------------------------
+?>
+    <script type="text/javascript" src="js/jquery/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js/Utils/Tracker.js"></script>
+
+
+<?php
+// -----------------------------------------------------------------------------
+// Google Analytics
+// -----------------------------------------------------------------------------
+?>
+    <script type="text/javascript">
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '/*' ?>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7274902-2']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_trackPageLoadTime']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    <?php 
+        // include dos eventos
+        //echo $this->Tracker()->eventsScript()
+    ?>
+
+    <?php if(strpos($_SERVER["SERVER_NAME"], '.com') == false) echo '*/' ?>
+    </script>
+    
+    
+<?php
+// -----------------------------------------------------------------------------
+// Loads 
+// -----------------------------------------------------------------------------
+?>
+    <script type="text/javascript">
+        $(function() {
+            Tracker.ga.pushEvents();
+        });
+    </script>
+
+</head>
+<body>
+
+
+
+
+<div id="body">
+
+    <div id="home_header">
+        <div class="container">
+            <h1 class="empreendemia_title">Empreendemia</h1>
+            <div class="home_logo"><img src="images/home/logo.png" /></div>
+        </div>
+    </div><!-- #home_header -->
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Conteúdo da view
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="home">
+
+
+        <div id="home_slide_show">
+            <div class="container">
+                <img src="images/pages/landingpage/silhuetas.png" />
+                <h1>Faça novos negócios<br />com empresas</h1>
+                <p>No Empreendemia você cria a página da sua empresa, <br />entra em contato com possíveis clientes e fornecedores <br />e fecha novos negócios.</p>
+            </div>
+        </div>
+        
+        <div id="testimonial_signup">
+            <div class="container">
+                <div id="testimonial">
+                    <h1>Vantagens exclusivas para associados ACSP!</h1>
+                    <p>Além de poder aproveitar o cadastro gratuito para conhecer mais clientes e fornecedores, você que é associado ACSP tem um benefício exclusivo para se expôr para mais de 14 mil empresas: 3 meses de perfil Premium e R$ 200 em crédito de publicidade dentro do Empreendemia.</p>
+                    <p>Para aproveitar aproveitar esses benefícios, construa o seu perfil e depois envie um email para <a href="mailto:acsp@empreendemia.com.br">acsp@empreendemia.com.br</a> com o nome da sua empresa.</p>
+                </div>
+                <div id="signup">
+                    <a href="cadastre-se">Cadastre-se <strong>gratuitamente</strong>!</a>
+                    <p>Leva menos que 1 minuto!</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <img src="images/pages/landingpage/separator.gif" />
+        </div>
+        
+        <div id="benefits">
+            <div class="container">
+                <div class="benefit benefit_1">
+                    <div class="icon"><img src="images/pages/landingpage/chat_72.gif" /></div>
+                    <h3>Conheça novas empresas</h3>
+                    <p>Tenha acesso ao nosso diretório e conheça clientes e fornecedores da sua cidade</p>
+                </div>
+                <div class="benefit benefit_2">
+                    <div class="icon"><img src="images/pages/landingpage/show_72.gif" /></div>
+                    <h3>Crie sua vitrine virtual</h3>
+                    <p>No Empreendemia você cria rapidamente sua vitrine de produtos e serviços e pode usá-la para divulgar o seu trabalho</p>
+                </div>
+                <div class="benefit benefit_3">
+                    <div class="icon"><img src="images/pages/landingpage/offer_72.gif" /></div>
+                    <h3>Acesso a descontos exclusivos</h3>
+                    <p>Através do Mural de Ofertas você pode contratar diversos serviços com desconto exclusivo para usuários Empreendemia</p>
+                </div>
+            </div>
+        </div>
+        
+    </div> <!-- #home -->
+
+
+</div> <!-- #body -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<?php
+/**
+ * alelo.phtml
+ * Layout personalizado da Alelo
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2012-10-15
+ */
+?>
+<?php
+    if(!isset($this->company)) {
+        throw new Exception('VIEW::company not set');
+    }
+
+    $this->headLink()->appendStylesheet('css/cols/large-small.css');
+    $this->headLink()->appendStylesheet('css/layouts/vip/default.css');
+    $this->headLink()->appendStylesheet('css/layouts/vip/alelo.css');
+    
+?>
+
+<?php include(APPLICATION_PATH."/layouts/scripts/elements/head.phtml") ?>
+
+<div id="body">
+
+    <?php include(APPLICATION_PATH."/layouts/scripts/elements/user_header.phtml"); ?>
+
+    <?php include(APPLICATION_PATH."/layouts/scripts/elements/header.phtml"); ?>
+
+    <div id="page">
+        <div class="container">
+            <?php
+            // -----------------------------------------------------------------
+            // Primeira coluna
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_1">
+                <?php
+                // -------------------------------------------------------------
+                // Header da Alelo
+                // -------------------------------------------------------------
+                ?>
+                <div class="company_header page_header">
+
+                    <div id="company_logo"><img src="images/vip/alelo/logo.png" /></div>
+
+                    <h1 id="company_name"><?php echo $this->company->name ?></h1>
+
+                    <div id="company_thumb"><?php echo $this->company->image(140) ?></div>
+
+                    <div id="company_sector"><a href="lista-de-empresas/<?php echo $this->company->city->region->slug ?>/<?php echo $this->company->city->slug ?>/<?php echo $this->company->sector->slug ?> "><?php echo $this->company->sector->name ?></a> - <a href="lista-de-empresas/<?php echo $this->company->city->region->slug ?>/<?php echo $this->company->city->slug ?>/<?php echo $this->company->sector->slug ?>?s=<?php echo urlencode($this->company->activity) ?>"><?php echo $this->company->activity ?></a></div>
+
+                </div> <!-- .page_header .company_header -->
+                
+                
+                <?php
+                // -------------------------------------------------------------
+                // View
+                // -------------------------------------------------------------
+                ?>
+                <div class="content">
+                    <?php echo $this->layout()->content ?>
+                </div>
+
+                <div class="clear"></div>
+            </div><!-- col_1 -->
+
+
+            <?php
+            // -----------------------------------------------------------------
+            // Segunda coluna
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_2">
+                <?php
+                // -------------------------------------------------------------
+                // Header lateral da Alelo
+                // -------------------------------------------------------------
+                ?>
+                <div class="company_side_header">
+                    Seja Cliente<br /> a partir de<br /> <strong>1 funcionário</strong>
+                </div>
+                <?php
+                // -------------------------------------------------------------
+                // Banner lateral da Locaweb
+                // -------------------------------------------------------------
+                ?>
+                <div class="company_side_banner">
+                    <h3>Solicite uma proposta comercial</h3>
+                    <p>Informe seus dados e um consultor Alelo entrará em contato com você</p>
+                    <div class="more"><a href="http://www.alelobeneficios.com.br/ecommerce/ProspectEmpresaForm.jsp?utm_source=Empreendemia&utm_medium=hotsite&utm_term=proposta&utm_content=proposta&utm_campaign=varejo" onclick="<?php echo $this->Tracker()->vipEvent('view link: solicitar proposta', 'Alelo', null, true) ?>">> clique aqui</a></div>
+                    
+                    <h3>Compre agora pela internet</h3>
+                    <div class="more"><a href="http://www.alelobeneficios.com.br/ecommerce/ActionServletApp?mode=BEGIN&classname=com.kaizen.visavale.ECommerceLogic&utm_source=Empreendemia&utm_medium=hotsite&utm_term=ecommerce&utm_content=ecommerce&utm_campaign=varejo" onclick="<?php echo $this->Tracker()->vipEvent('view link: comprar online', 'Alelo', null, true) ?>">> clique aqui</a></div>
+                    
+                    <h3>Ligue para: 4003-3115</h3>
+                    <p>Por favor, mencione que você nos encontrou pela <strong>Empreendemia</strong></p>
+                </div>
+            </div><!-- .col_2 -->
+
+            <div class="clear"></div>
+        </div><!-- .container -->
+    </div> <!-- #page -->
+
+    <?php include(APPLICATION_PATH."/layouts/scripts/elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footerdo layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include(APPLICATION_PATH."/layouts/scripts/elements/foot.phtml") ?>

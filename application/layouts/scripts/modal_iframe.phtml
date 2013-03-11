@@ -1,0 +1,51 @@
+<?php
+/**
+ * modal_iframe.phtml
+ * Layout de um modal aberto com iframe
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-29
+ */
+?>
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><?php echo $this->layout()->title ?></title>
+    <base href="<?php echo $this->serverUrl().$this->baseUrl();?>/" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <link href="css/global.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/layouts/modal.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/ui/flash-messages.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/ui/modal.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/ui/tool-tip.css" media="screen" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery/plugins/jquery.colorbox-1.3.17.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery/plugins/jquery.tipTip.minified.js"></script>
+    <script type="text/javascript" src="js/ui.js"></script>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headScript() ?>
+    
+    <?php if (isset($this->modal) && isset($this->modal->width) && isset($this->modal->height)) : ?>
+    <script type="text/javascript">
+    $(function() {
+       parent.$.colorbox.resize({
+            innerHeight: <?php echo $this->modal->height ?>,
+            innerWidth: <?php echo $this->modal->width ?>
+        });
+    });
+    <?php endif ?>
+    </script>
+</head>
+<body>
+    <div class="modal_content">
+        <div id="modal_flash_messages" class="modal_flash_messages">
+            <?php echo $this->flashMessages(); ?>
+        </div>
+        <?php echo $this->layout()->content ?>
+    </div>
+</body>
+</html>

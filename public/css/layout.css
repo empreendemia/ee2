@@ -1,0 +1,356 @@
+
+
+body {
+    background-color: #888;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10pt;
+}
+
+.container {
+    position: relative;
+    width: 1000px;
+    margin: auto;
+    clear: both;
+}
+
+#page {
+    background-color: #fff;
+}
+
+#page .container {
+    width: 980px;
+    padding-bottom: 20px;
+}
+
+/*
+--------------------------------------------------------------------------------
+User Header
+--------------------------------------------------------------------------------
+*/
+#user_header {
+    height: 19px;
+    width: 100%;
+    position: fixed;
+    border-bottom: 1px solid #182044;
+    font-size: 8pt;
+    z-index: 10000;
+}
+
+#user_header .background {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 19px;
+    width: 100%;
+    background-color: #223162; /* real: #236 */
+    opacity: 0.9;
+}
+
+#user_header img {
+    vertical-align: middle;
+}
+
+#user_header menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: absolute;
+    top: 4px;
+}
+
+#user_header menu li {
+    display: block;
+    float: left;
+    margin: 0 5px;
+}
+
+
+#user_header menu#user_nav_menu {
+    left: 5px;
+}
+
+#user_header menu#user_nav_menu li a {
+    color: #fff;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #182044;
+}
+
+#user_header menu#user_nav_menu li.mails a {
+    padding-left: 20px;
+    background-image: url(../images/layout/user-header-mails.png);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+#user_header menu#user_nav_menu li.notifies a {
+    padding-left: 20px;
+    background-image: url(../images/layout/user-header-notifies.png);
+    background-repeat: no-repeat;
+    background-position: center left;
+}
+
+#user_header menu#user_auth_menu {
+    color: #fff;
+    right: 5px;
+}
+
+#user_header menu#user_auth_menu li a {
+    color: #fa0;
+    font-weight: bold;
+}
+
+#user_header menu#user_auth_menu li.logout a {
+    color: #f00;
+    padding-right: 14px;
+    background-image: url(../images/layout/user-header-logout.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Login
+--------------------------------------------------------------------------------
+*/
+
+#user_auth_login {
+    padding: 20px;
+    padding-left: 180px;
+    width: 320px;
+    background-image: url(../images/ui/login_box.gif);
+    background-repeat: no-repeat;
+    background-position: 20px 20px;
+}
+
+#user_auth_login .h_title {
+    margin-bottom: 20px;
+    font-size: 12pt;
+    color: #0C478B;
+    font-weight: bold;
+}
+
+#user_auth_login dt {
+    float: left;
+    clear: left;
+    margin: 5px;
+    padding-top: 6px;
+    text-align: right;
+    width: 60px;
+    font-weight: bold;
+    color: #888;
+    font-size: 9pt;
+}
+
+#user_auth_login dd {
+    float: left;
+    margin: 5px;
+}
+
+#user_auth_login input[type=text],
+#user_auth_login input[type=password] {
+    width: 200px;
+}
+
+#user_auth_login input[type=submit] {
+    background-color: #0C478B;
+    border-top: 1px solid #259;
+    border-left: 1px solid #259;
+    border-right: 1px solid #236;
+    border-bottom: 1px solid #236;
+    padding: 5px 20px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #236;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+#user_auth_login .facebook-login{
+    text-align: right;
+    margin-top: 20px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Header
+--------------------------------------------------------------------------------
+*/
+#header {
+    height: 70px;
+    background-color: #0C478B;
+    border-bottom: 1px solid #236;
+}
+
+    #header .spacer {
+        padding-top: 20px;
+        border-bottom: 1px solid #259;
+    }
+
+    #header .logo {
+        position: absolute;
+        left: 10px;
+        top: 8px;
+    }
+
+    #header .search {
+        position: absolute;
+        right: 10px;
+        top: 11px;
+    }
+
+    #header .search input[type=text] {
+        width: 180px;
+    }
+
+
+/*
+--------------------------------------------------------------------------------
+Feedback
+--------------------------------------------------------------------------------
+*/
+
+#feedback_button {
+    right: -5px;
+    top: 30%;
+    position: fixed;
+    font-size: 8pt;
+    z-index: 1000;
+}
+
+#feedback_button:hover {
+    right: -1px;
+}
+
+#feedback {
+    width: 400px;
+}
+
+#feedback h1 {
+    color: #0C478B;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-bottom:10px;
+}
+
+#feedback h2 {
+    color: #0C478B;
+    font-size: 10pt;
+    margin-bottom:20px;
+}
+
+#feedback p {
+    font-size: 10pt;
+    margin: 20px 0;
+    line-height: 1.2em;
+}
+
+#feedback textarea {
+    width: 390px;
+    height: 200px;
+}
+
+#feedback #body-label {
+    font-size: 10pt;
+    margin: 20px 0 10px 0;
+    color: #888;
+}
+
+
+#feedback input[type=submit] {
+    background-color: #0C478B;
+    border-top: 1px solid #259;
+    border-left: 1px solid #259;
+    border-right: 1px solid #236;
+    border-bottom: 1px solid #236;
+    padding: 5px 20px;
+    color: #fff;
+    text-shadow: -1px -1px 0 #236;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+/*
+--------------------------------------------------------------------------------
+Content
+--------------------------------------------------------------------------------
+*/
+.content {
+    padding: 20px 0;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+Navigation Footer
+--------------------------------------------------------------------------------
+*/
+#navigation_footer {
+    font-size: 8pt;
+    height: 19px;
+    background-color: #236;
+    border-bottom: 1px solid #182044;
+}
+
+
+#navigation_footer menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: absolute;
+    top: 4px;
+}
+
+#navigation_footer menu li {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+#navigation_footer menu {
+    left: 5px;
+}
+
+#navigation_footer menu li a {
+    color: #fff;
+    text-shadow: -1px -1px 0 #182044;
+}
+
+/*
+--------------------------------------------------------------------------------
+Footer
+--------------------------------------------------------------------------------
+*/
+#footer {
+    height: 40px;
+    background-color: #0C478B;
+    border-top: 1px solid #259;
+    border-bottom: 1px solid #236;
+}
+
+#footer .copyright {
+    position: absolute;
+    left: 10px;
+    top: 16px;
+    font-size: 6pt;
+    font-weight: bold;
+    color: #fff;
+}
+
+
+#footer .logo {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+}
+
+/*
+--------------------------------------------------------------------------------
+Bottom Footer
+--------------------------------------------------------------------------------
+*/
+#bottom_footer {
+    padding: 20px 0;
+}

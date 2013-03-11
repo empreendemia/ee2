@@ -1,0 +1,57 @@
+/*
+    Document   : chat.css
+    Created on : 09/04/2012, 11:14:35
+    Author     : rafael
+    Description:
+        Janela de chat
+*/
+
+#chat
+{
+    position: fixed;
+    z-index: 99999;
+    bottom: 0;
+    right: 30px;
+}
+
+#chat .chat_container
+{
+    background-color: white;
+    float: left;
+
+    border-radius: 10px 10px 0 0;
+    border: solid 1px #AAAAAA;
+
+}
+
+.chat_container .chat_header
+{
+    padding: 10px;
+
+    background-color: #223162;
+    text-shadow: -1px -1px 0 #182044;
+    font-weight: bold;
+    font-size: 11px;
+    color:white;
+
+    border-radius: 10px 10px 0 0;
+}
+
+.chat_container .chat_header .chat_close
+{
+    float:right;
+    color:red;
+}
+
+.chat_container .messages_container
+{
+   overflow: auto;
+   height: 250px;
+   width: 300px;
+   padding: 5px;
+}
+
+.chat_container .chat_message
+{
+    width: 240px;
+}

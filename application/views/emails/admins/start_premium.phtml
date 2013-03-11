@@ -1,0 +1,22 @@
+<?php
+/**
+ * start_premium.phtml
+ * Email para admins quando usuário solicita plano Premium
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-26
+ */
+?>
+<body>
+    <h1>Novo Premium</h1>
+    <p>Usuário: <a method="ajax" target="#body" template="company" href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->url() ?>"><?php echo $this->user->fullName() ?></a></p>
+    <p>Email: <?php echo $this->user->login ?></p>
+    <p>Empresa: <a method="ajax" target="#body" template="company" href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->company->url() ?>"><?php echo $this->user->company->name ?></a></p>
+    <p>Período: <?php echo $this->period ?></p>
+
+    <h2>Expiração</h2>
+    <p>Antiga: <?php if ($this->expirations['old']) echo $this->expirations['old'] ?></p>
+    <p>Atual: <?php if ($this->expirations['prov']) echo $this->expirations['prov'] ?></p>
+    <p>Após o pagamento: <?php if ($this->expirations['new']) echo $this->expirations['new'] ?></p>
+
+</body>

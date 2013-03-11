@@ -1,0 +1,164 @@
+<?php
+/**
+ * offers.phtml
+ * Mural de ofertas
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+<?php $this->layout()->setLayout('offers') ?>
+<?php $this->headScript()->appendFile('js/forms/locations.js') ?>
+<?php
+
+    $title = '';
+    $sector = '';
+    $location = '';
+
+    if ($this->offers->sector) {
+        $sector = ' de '.$this->offers->sector->name;
+    }
+
+    if ($this->offers->region && $this->offers->city)
+        $location = ' em '.$this->offers->city->name.', '.$this->offers->region->symbol;
+    else if ($this->offers->region)
+        $location = ' em '.$this->offers->region->name;
+
+
+    if ($sector == '' && $location == ''){
+            $title = 'Mural de Ofertas';
+            $this->layout()->header_subtitle = null;
+        }
+    else {
+        $title = 'Ofertas';
+        $this->layout()->header_subtitle = $title.$sector.$location;
+    }
+
+    $this->layout()->title = $title.$sector.$location;
+
+?>
+
+
+<div class="sub_cols">
+    <div class="sub_col_1">
+        <?php
+        // -----------------------------------------------------------------------------
+        // Filtro por cidade ou estado
+        // -----------------------------------------------------------------------------
+        ?>
+        <div class="location_filter">
+            <h2>Filtrar por cidade ou estado</h2>
+            <form id="location_filter" method="post" action="<?php echo $this->url() ?>">
+                <select name="region_id" class="select_region">
+                    <option value="">- estado</option>
+                    <?php foreach ($this->regions as $id => $region) : ?>
+                    <option value="<?php echo $id ?>" <?php if ($this->region_id == $id) echo 'selected="selected"'; ?>><?php echo $region ?></option>
+                    <?php endforeach ?>
+                </select>
+                <select name="city_id" class="select_city">
+                    <option>- cidade</option>
+                    <?php foreach ($this->cities as $id => $city) : ?>
+                    <option value="<?php echo $id ?>"><?php echo $city ?></option>
+                    <?php endforeach ?>
+                </select>
+                <input type="hidden" class="city_id_hidden" value="<?php echo $this->city_id ?>" />
+                <input type="hidden" class="sector_id" name="sector_id" value="<?php echo $this->sector_id ?>" />
+                <input type="submit" class="submit" value="filtrar" />
+            </form>
+        </div>
+        <?php
+        // -----------------------------------------------------------------------------
+        // Filtro por setor
+        // -----------------------------------------------------------------------------
+        ?>
+        <?php if ($this->search == null) : ?>
+        <div class="sector_filter">
+            <ul class="sectors">
+                <?php
+                $count = 0;
+                if ($this->region_id && $this->city_id) $url = 'quero-comprar/ofertas/'.$this->region_id.'/'.$this->city_id;
+                else if ($this->region_id) $url = 'quero-comprar/ofertas/'.$this->region_id;
+                else  $url = 'quero-comprar/ofertas';
+                foreach ($this->sectors as $sector) $count += $sector->count_companies;
+                ?>
+                <li class="all sector <?php if (!$this->sector_id) echo 'selected' ?>">
+                    <a href="<?php echo $url ?>" >Todos os setores <span class="count_companies">(<?php echo $count ?>)</span></a>
+                </li>
+                <?php foreach ($this->sectors as $sector) : ?>
+                <li class="sector <?php if ($sector->id == $this->sector_id || $sector->slug == $this->sector_id) echo 'selected' ?>">
+                    <?php
+                    if ($this->region_id && $this->city_id) $url = 'quero-comprar/ofertas/'.$this->region_id.'/'.$this->city_id.'/'.$sector->slug;
+                    else if ($this->region_id) $url = 'quero-comprar/ofertas/'.$this->region_id.'/todas-cidades/'.$sector->slug;
+                    else  $url = 'quero-comprar/ofertas/todos-estados/todas-cidades/'.$sector->slug;
+                    ?>
+                    <a href="<?php echo $url ?>" ><?php echo $sector->name ?> <span class="count_companies">(<?php echo $sector->count_companies ?>)</span></a>
+                </li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+        <?php endif ?>
+    </div>
+
+    <div class="sub_col_2">
+        <?php
+        // -----------------------------------------------------------------------------
+        // Lista de ofertas
+        // -----------------------------------------------------------------------------
+        ?>
+        <div class="offers_list">
+            <div class="results">Exibindo <strong><?php echo $this->offers->count ?></strong> resultados</div>
+            <ul class="offers">
+            <?php foreach ($this->offers->products as $product) : ?>
+                <?php $premium = $product->company->isPlan('premium'); ?>
+                <li class="offer <?php if ($premium) echo 'offer_premium' ?>">
+                    <?php if ($premium) : ?><div class="thumb"><?php echo $product->imageLink(80) ?></div><?php endif ?>
+                    <h3 class="name"><a href="<?php echo $product->url() ?>"><?php echo $product->name ?></a></h3>
+                    <div class="sector">
+                        <?php echo $product->company->sector->name ?><?php if ($product->company->activity && $product->company->activity != '') : ?>, <?php echo $product->company->activity ?><?php endif ?>
+                    </div>
+                    <?php if ($product->offer_description && $product->offer_description != '') : ?>
+                    <div class="description">
+                        <?php echo $product->offer_description ?>
+                    </div>
+                    <?php endif ?>
+                    <div class="city"><?php echo $product->company->city->name ?>, <?php echo $product->company->city->region->symbol ?></div>
+
+                    <div class="clear"></div>
+                </li>
+            <?php endforeach ?>
+            </ul>
+        </div>
+        <?php
+        // -----------------------------------------------------------------------------
+        // Paginação
+        // -----------------------------------------------------------------------------
+        ?>
+        <div class="pagination">
+            <?php
+                $params = '';
+                $page = $this->offers->page;
+                $pages = $this->offers->pages;
+                $glue = strpos($params, '?') === FALSE ? '?' : '&';
+
+                $minnum = 3;
+                $maxnum = 3;
+                $delta = 3;
+
+                echo '<div class="pagination">';
+
+                for ($i = 1; $i <= $pages; $i++) {
+                    if ($page == $i) {
+                        echo ' <a class="selected">'.$i.'</a> ';
+                    }
+                    else if ($i <= $minnum || $i > $pages - $maxnum || ($i >= $page - $delta && $i <= $page + $delta)) {
+                        if ($i == $pages - $maxnum + 1 && $page + $delta < $pages - $maxnum) echo ' ... ';
+                        echo '<a href="'.$this->url().$params.$glue.'p='.$i.'">'.$i.'</a>';
+                        if ($i == $minnum && $page - $delta > $minnum + 1) echo ' ... ';
+                    }
+                }
+
+                echo '</div>';
+            ?>
+        </div>
+    </div>
+</div>

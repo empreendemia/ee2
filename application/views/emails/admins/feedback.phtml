@@ -1,0 +1,20 @@
+<?php
+/**
+ * feedback.phtml
+ * Email para admins quando usuário envia feedback
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-26
+ */
+?>
+<body>
+    <h1>Novo Feedback</h1>
+    <p>Usuário: <a href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->url() ?>"><?php echo $this->user->fullName() ?></a></p>
+    <p>Email: <?php echo $this->user->login ?></p>
+    <p>Empresa: <a href="<?php echo $this->serverUrl().$this->baseUrl().$this->user->company->url() ?>"><?php echo $this->user->company->name ?></a></p>
+    <p>URL: <a href="<?php echo $this->feedback->url ?>"><?php echo $this->feedback->url ?></a></p>
+
+    <h2>Mensagem</h2>
+    <p><?php echo nl2br($this->feedback->body) ?></p>
+
+</body>

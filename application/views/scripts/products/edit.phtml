@@ -1,0 +1,54 @@
+<?php
+/**
+ * edit.phtml
+ * Edita os dados do produto
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-23
+ */
+?>
+<?php $this->layout()->setLayout('modal_iframe') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+<?php $this->headScript()->appendFile('js/forms/wordcount.js') ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Formulário
+// -----------------------------------------------------------------------------
+?>
+<?php if ($this->sent == false) : ?>
+
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 600 ?>
+<?php $this->modal->height = 450 ?>
+
+<h1 class="h_title h_blue h_medium h_margin h_border"><?php echo $this->product->image(80) ?>  Editar <?php echo $this->product->name ?> </h1>
+
+<div class="form">
+    <?php $this->form->submit->setLabel('Salvar alterações') ?>
+    <?php echo $this->form ?>
+</div>
+
+<?php
+// -----------------------------------------------------------------------------
+// Produto alterado
+// -----------------------------------------------------------------------------
+?>
+<?php else : ?>
+
+<script type="text/javascript">
+    $(function() {
+       parent.$('#product_<?php echo $this->product->id ?> .name').html('<?php echo $this->product->name ?>');
+       parent.$('#product_<?php echo $this->product->id ?> .thumb').html('<?php echo $this->product->image(120) ?>');
+    });
+</script>
+
+<?php $this->modal = null ?>
+<?php $this->modal->width = 600 ?>
+<?php $this->modal->height = 160 ?>
+<div class="plaintext">
+<h1 class="h_title h_blue h_medium h_margin h_border"><?php echo $this->product->image(80) ?> <?php echo $this->product->name ?>  editado com sucesso!</h1>
+<p><a href="<?php echo $this->product->url() ?>" target="_top">Clique aqui</a> para visualizar o produto.</p>
+</div>
+<?php endif ?>

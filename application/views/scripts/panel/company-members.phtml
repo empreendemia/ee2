@@ -1,0 +1,40 @@
+<?php
+/**
+ * company-members.phtml
+ * Lista os membros da empresa
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-19
+ */
+?>
+<?php $this->layout()->setLayout('panel_company') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css'); ?>
+
+
+<script type="text/javascript">
+$(function() {
+    <?php if ($this->user_id) : ?>
+        $('#user_<?php echo $this->user_id ?>').delay(100).fadeTo(2000, 1);
+    <?php endif ?>
+});
+</script>
+
+<h2 class="h_title h_blue h_margin">Membros da minha empresa</h2>
+
+<div class="members_matrix">
+    <ul class="members">
+        <?php foreach ($this->users as $user) : ?>
+        <ul id="user_<?php echo $user->id ?>" class="member" <?php if ($user->id == $this->user_id) echo 'style="display:none"' ?>>
+            <li class="thumb"><?php if ($user->group == 'unconfirmed') echo $user->image(80); else echo $user->imageLink(80); ?></li>
+            <li class="name"><?php if ($user->group != 'unconfirmed') : ?><a href="<?php echo $user->url() ?>"><?php endif ?><?php echo $user->fullName() ?><?php if ($user->group != 'unconfirmed') : ?></a><?php endif ?></li>
+            <li class="job"><?php echo $user->job ?></li>
+        </ul>
+        <?php endforeach ?>
+    </ul>
+    <div class="clear"></div>
+</div>
+
+<h2 class="h_title h_blue h_margin">Adicionar membro à minha empresa</h2>
+<div class="form">
+    <?php echo $this->form ?>
+</div>

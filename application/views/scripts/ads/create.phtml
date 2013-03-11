@@ -1,0 +1,227 @@
+<?php
+/**
+ * create.phtml
+ * Configuração de campanha
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-12
+ */
+?>
+<?php $this->layout()->setLayout('2_cols_large_small') ?>
+<?php $this->layout()->title = "Configurar campanha" ?>
+<?php $this->layout()->header_title = "Configurar campanha" ?>
+<?php $this->headLink()->appendStylesheet('css/layouts/ads.css'); ?>
+<?php $this->headScript()->appendFile('js/forms/ads_create.js'); ?>
+
+<script type="text/javascript">
+<?php echo $this->Tracker()->userEvent('ads: started setup', null, true) ?>
+$(function() {
+    $('#products_select').change(function() {
+        <?php echo $this->Tracker()->userEvent('ads: chose product', null, true) ?>
+    });
+
+    $('.regions_list input[type=checkbox]').change(function() {
+        <?php echo $this->Tracker()->userEvent('ads: chose region', null, true) ?>
+    });
+
+    $('.cities_list input[type=checkbox]').live('change', function() {
+        <?php echo $this->Tracker()->userEvent('ads: chose city', null, true) ?>
+    });
+
+    $('.sectors_list input[type=checkbox]').live('change', function() {
+        <?php echo $this->Tracker()->userEvent('ads: chose sector', null, true) ?>
+    });
+})
+</script>
+
+<div class="ads_create">
+
+    <form id="create_ad_form" action="publicidade/configurar-campanha/pagamento" method="POST">
+        <?php
+        // ---------------------------------------------------------------------
+        // Lista de produtos para anunciar
+        // ---------------------------------------------------------------------
+        ?>
+        <div class="products">
+            Escolha um produto para anunciar:
+            <select id="products_select" name="product_id">
+                <?php foreach ($this->products as $product) : ?>
+                <option value="<?php echo $product->id ?>"><?php echo $product->name ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <?php
+        // ---------------------------------------------------------------------
+        // Quantidade de meses
+        // ---------------------------------------------------------------------
+        ?>
+        <div class="months">
+            Por quantos meses você quer anunciar?
+            <select id="months_select" name="months">
+                <option value="1">1 mês</option>
+                <option value="2">2 meses</option>
+                <option value="3">3 meses</option>
+                <option value="4">4 meses</option>
+                <option value="5">5 meses</option>
+                <option value="6">6 meses</option>
+                <option value="7">7 meses</option>
+                <option value="8">8 meses</option>
+                <option value="9">9 meses</option>
+                <option value="10">10 meses</option>
+                <option value="11">11 meses</option>
+                <option value="12">12 meses</option>
+            </select>
+        </div>
+
+        <div class="ads_columns">
+
+            <?php
+            // -----------------------------------------------------------------
+            // Para quais estados?
+            // -----------------------------------------------------------------
+            ?>
+            <div class="ads_column_regions">
+                <h3>Para quais estados?</h3>
+
+                <div class="select_all">
+                    <input type="checkbox" id="all_regions" name="all_regions" />
+                    <label for="all_regions">
+                        Todos os estados
+                    </label>
+                </div>
+
+                <div class="regions_list">
+                    <ul>
+                    <?php foreach ($this->regions as $region) : ?>
+                        <li>
+                            <input type="checkbox" id="region_<?php echo $region->id ?>" name="region_<?php echo $region->id ?>" <?php if ($this->user->company->city->region->id == $region->id) echo 'checked="yes"' ?> />
+                            <label for="region_<?php echo $region->id ?>">
+                                <?php echo $region->name ?>
+                                <span class="count">(<?php echo $region->count_companies ?>)</span>
+                            </label>
+                        </li>
+                    <?php endforeach ?>
+                    </ul>
+                </div>
+            </div>
+
+            <?php
+            // -----------------------------------------------------------------
+            // Para quais cidades?
+            // -----------------------------------------------------------------
+            ?>
+            <div class="ads_column_cities">
+                <h3>Para quais cidades?</h3>
+
+                <div class="select_all">
+                    <input type="checkbox" id="all_cities" name="all_cities" />
+                    <label for="all_cities">
+                        Todas as cidades
+                    </label>
+                </div>
+
+                <div class="cities_list">
+                    <ul>
+                    <?php foreach ($this->cities as $city) : ?>
+                        <li>
+                            <input type="checkbox" id="city_<?php echo $city->id ?>" name="city_<?php echo $city->id ?>" <?php if ($this->user->company->city->id == $city->id) echo 'checked="yes"' ?> />
+                            <label for="city_<?php echo $city->id ?>">
+                                <span class="city"><?php echo $city->name ?></span>
+                                <span class="count">(<?php echo $city->count_companies ?>)</span>
+                            </label>
+                        </li>
+                    <?php endforeach ?>
+                    </ul>
+                </div>
+            </div>
+
+            <?php
+            // -----------------------------------------------------------------
+            // Para quais setores?
+            // -----------------------------------------------------------------
+            ?>
+            <div class="ads_column_sectors">
+                <h3>Para quais setores?</h3>
+
+                <div class="select_all">
+                    <input type="checkbox" id="all_sectors" name="all_sectors" />
+                    <label for="all_sectors">
+                        Todos os setores
+                    </label>
+                </div>
+
+                <div class="sectors_list">
+                    <ul>
+                    <?php foreach ($this->sectors as $sector) : ?>
+                        <li>
+                            <input type="hidden" id="count_sector_<?php echo $sector->id ?>" name="count_sector_<?php echo $sector->id ?>" class="companies_count" value="<?php echo $sector->count_companies ?>" />
+                            <input type="checkbox" id="sector_<?php echo $sector->id ?>" name="sector_<?php echo $sector->id ?>" />
+                            <label for="sector_<?php echo $sector->id ?>">
+                                <?php echo $sector->name ?>
+                                <span class="count">(<?php echo $sector->count_companies ?>)</span>
+                            </label>
+                        </li>
+                    <?php endforeach ?>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+        <input id="total_companies_count" type="hidden" value="0" />
+
+    </form>
+
+</div>
+
+
+<?php
+/*
+ * -----------------------------------------------------------------------------
+ * Conteúdo lateral - Resumo da Campanha
+ * -----------------------------------------------------------------------------
+ */
+ob_start()
+?>
+
+<div class="ads_create_panel">
+    <div class="header">
+        <h2>Sua campanha:</h2>
+    </div>
+    <div class="data">
+        <div class="counter"><span id="count_regions" class="count">1</span> estados</div>
+        <div class="counter"><span id="count_cities" class="count">1</span> cidades</div>
+        <div class="counter"><span id="count_sectors" class="count">0</span> setores</div>
+        <div class="counter"><span id="count_companies" class="count">0</span> empresas</div>
+    </div>
+    <div class="price">
+        <span class="symbol">R$</span> <span id="campaign_price">0</span><span class="cents">,00</span>
+        <input type="hidden" id="price_0" value="0" />
+        <input type="hidden" id="price_1" value="70" />
+        <input type="hidden" id="price_2" value="150" />
+        <input type="hidden" id="price_3" value="250" />
+        <input type="hidden" id="price_4" value="450" />
+    </div>
+    <div class="sample">
+        <div class="ads">
+            <h2 class="h_title">Amostra</h2>
+            <?php foreach ($this->products as $id => $product) : ?>
+            <div class="ad" id="show_product_<?php echo $product->id ?>" <?php if ($id) echo 'style="display:none"' ?>>
+                <a>
+                    <span class="thumb"><?php echo $product->image(80) ?></span>
+                    <h3 class="name"><?php echo $product->name ?></h3>
+                    <span class="description"><?php echo $product->description ?></span>
+                </a>
+            </div>
+            <?php endforeach ?>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="buy">
+        <a href="javascript: finishAd()">Finalizar publicidade</a>
+        <div class="loading" style="display:none"><img src="images/ui/ajax-loader.gif" /></div>
+    </div>
+    <div class="shadow"></div>
+</div>
+<?php $this->layout()->side = ob_get_clean() ?>

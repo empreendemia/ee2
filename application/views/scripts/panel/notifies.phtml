@@ -1,0 +1,79 @@
+<?php
+/**
+ * notifies.phtml
+ * Notificações pendentes do usuário
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-08-02
+ */
+?><?php $this->layout()->setLayout('panel_user') ?>
+
+<?php
+// -----------------------------------------------------------------------------
+// Pedidos de troca de cartão pendentes
+// -----------------------------------------------------------------------------
+?>
+<div class="contact_requests">
+    <h2 class="h_title">Pedidos de troca de cartão</h2>
+
+    <?php if ($this->requests) : ?>
+    <?php foreach ($this->requests as $user) : ?>
+    <div id="request_<?php echo $user->id?>" class="contact_request">
+        <div class="user_thumb"><?php echo $user->imageLink(50) ?></div>
+        <div class="user_name"><a href="<?php echo $user->url() ?>"><?php echo $user->fullName() ?></a></div>
+        <div class="company_thumb"><?php echo $user->company->imageLink(50) ?></div>
+        <div class="company_name"><a href="<?php echo $user->company->url() ?>"><?php echo $user->company->name ?></a></div>
+        <div class="actions"><a href="recusar-cartao/<?php echo $user->id?>" class="delete modal_iframe" title="Recusar trocar cartão com <?php echo $user->fullName() ?>">recusar cartão</a><a href="aceitar-cartao/<?php echo $user->id?>" class="modal_iframe" title="Aceitar trocar cartão com <?php echo $user->fullName() ?>">aceitar cartão</a></div>
+    </div>
+    <?php endforeach ?>
+    <?php endif ?>
+
+</div>
+
+<script type="text/javascript">
+function removeNotify(id) {
+    notify_container = $('#notify_'+id);
+    notify_container.fadeTo(0, 0.5);
+    notify_container.find('a.remove_notify').html('removendo...');
+
+    $.ajax({
+           url: 'painel/usuario/notificacoes/remover-notificacao',
+           type: 'POST',
+           cache: false,
+           data: {
+                notify_id: id
+           },
+           success: function() {
+                notify_container.slideUp(200);
+           },
+           error: function() {
+               alert('Erro ao remover notificação');
+                notify_container.fadeTo(0, 1);
+            notify_container.find('a.remove_notify').html('remover notificação');
+           }
+        });
+}
+</script>
+
+<?php
+// -----------------------------------------------------------------------------
+// Notificações do sistema pendentes
+// -----------------------------------------------------------------------------
+?>
+<div class="notifies">
+    <h2 class="h_title">Notificações do sistema</h2>
+<?php if ($this->notifies) : ?>
+<?php foreach ($this->notifies as $notify) : ?>
+    <?php if ($notify->from_user) : ?>
+        <div id="notify_<?php echo $notify->id?>" class="notify">
+            <div class="user_thumb"><?php echo $notify->from_user->imageLink(50) ?></div>
+            <div class="user_name"><a href="<?php echo $notify->from_user->url() ?>"><?php echo $notify->from_user->fullName() ?></a></div>
+            <div class="company_thumb"><?php echo $notify->from_user->company->imageLink(50) ?></div>
+            <div class="company_name"><a href="<?php echo $notify->from_user->company->url() ?>"><?php echo $notify->from_user->company->name ?></a></div>
+            <div class="message"><?php echo $notify->message ?></div>
+            <div class="actions"><a class="remove_notify" href="javascript: removeNotify(<?php echo $notify->id ?>)">remover notificação</a></div>
+        </div>
+    <?php endif;?>
+<?php endforeach ?>
+<?php endif ?>
+</div>

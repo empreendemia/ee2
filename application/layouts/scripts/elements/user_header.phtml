@@ -1,0 +1,79 @@
+<?php
+/**
+ * user_header.phtml
+ * Cabeçalho do usuário
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-06
+ */
+?>
+    <div id="user_header">
+        <div class="background"></div>
+        <div class="container">
+            
+            <?php
+            // -----------------------------------------------------------------
+            // Menu do cara conectado
+            // -----------------------------------------------------------------
+            ?>
+            <?php if (Zend_Auth::getInstance()->hasIdentity()) : ?>
+            <?php
+                $userData = new Zend_Session_Namespace('UserData');
+                $message_mapper = new Ee_Model_Messages();
+                $notify_mapper = new Ee_Model_Notifies();
+                $contact_mapper = new Ee_Model_Contacts();
+                $count_messages = $message_mapper->countUnread($userData->user->id);
+                $count_notifies = $notify_mapper->count($userData->user->id)+$contact_mapper->countRequests($userData->user->id);
+
+                $count = strlen(substr($_SERVER['PHP_SELF'], 0)) - 9;
+                $logout_redirect = substr($this->url(), $count);
+            ?>
+            <menu id="user_nav_menu">
+                <li class="mails"><a href="meus-contatos"><?php echo $count_messages ?></a></li>
+                <li class="notifies"><a href="painel/usuario/notificacoes"><?php echo $count_notifies ?></a></li>
+                <li><a href="passo-a-passo" class="tip_tool_bottom" title="voltar para minha página">principal</a></li>
+                <li><a href="e/<?php echo $userData->user->company->slug ?>" class="tip_tool_bottom" title="visualizar perfil da minha empresa">minha empresa</a></li>
+                <li><a href="meus-contatos" class="tip_tool_bottom" title="ver meus contatos">meus contatos</a></li>
+                <li><a href="lista-de-empresas/<?php echo $userData->user->company->city->region->slug ?>/<?php echo $userData->user->company->city->slug ?>" class="tip_tool_bottom" title="ver lista de empresas na rede">empresas</a></li>
+                <li><a href="painel" class="tip_tool_bottom" title="editar meus dados e configurações">painel de controle</a></li>
+            </menu>
+            <menu id="user_auth_menu">
+                <li>Olá, <a href="painel/usuario" class="tip_tool_bottom" title="editar meus dados e configurações"><?php echo Zend_Auth::getInstance()->getIdentity()->name ?></a>!</li>
+                <li class="logout"><a href="logout?url=<?php echo $logout_redirect ?>" class="tip_tool_bottom" title="deslogar do sistema">sair</a></li>
+            </menu>
+            
+            <?php
+            // -----------------------------------------------------------------
+            // Menu do cara deslogado
+            // -----------------------------------------------------------------
+            ?>
+            <?php else : ?>
+            <menu id="user_nav_menu">
+                <li><a href="lista-de-empresas" class="tip_tool_bottom" title="ver lista de empresas na rede">lista de empresas</a></li>
+            </menu>
+            <menu id="user_auth_menu">
+                <li><a href="cadastre-se" class="tip_tool_bottom" title="crie uma conta">cadastre-se</a></li>
+                <li><a href="login" class="tip_tool_bottom modal_login" title="entrar como usuário">efetuar login</a></li>
+            </menu>
+            <?php endif; ?>
+            
+            <?php
+            // -----------------------------------------------------------------
+            // Formulário de login
+            // -----------------------------------------------------------------
+            ?>
+            <div style="display:none">
+                <div id="user_auth_login">
+                    <h2 class="h_title">Efetuar Login</h2>
+                    <?php $login_form = new Ee_Form_Login(); ?>
+                    <?php $login_form->setAction('login') ?>
+                    <?php echo $login_form ?>
+                    <div class="clear"></div>
+                    <div class="facebook-login">
+                        <a href="javascript: facebookLogin()">Fazer login pelo Facebook</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- #user_header -->

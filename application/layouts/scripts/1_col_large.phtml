@@ -1,0 +1,48 @@
+<?php
+/**
+ * 1_col_large.phtml
+ * Layout com apenas uma coluna
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-06-29
+ */
+?>
+<?php $this->headLink()->appendStylesheet('css/cols/large.css') ?>
+<?php include("elements/head.phtml") ?>
+
+<div id="body">
+
+    <?php include("elements/user_header.phtml"); ?>
+
+    <?php include("elements/header.phtml"); ?>
+
+    <div id="page">
+        <div class="container">
+            <div class="col">
+                <div class="page_header">
+                    <h1 class="h_title h_blue h_xxxlarge"><?php echo $this->layout()->header_title ?></h1>
+                </div> <!-- .page_header .company_header -->
+                <div class="content">
+                    <?php echo $this->layout()->content ?>
+                </div>
+            </div>
+        </div><!-- .container -->
+    </div> <!-- #page -->
+
+    <?php include("elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footerdo layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include("elements/foot.phtml") ?>

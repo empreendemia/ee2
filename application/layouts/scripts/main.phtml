@@ -1,0 +1,130 @@
+<?php
+/**
+ * main.phtml
+ * Layout da página principal do usuário 
+ * 
+ * @package layouts
+ * @author Mauro Ribeiro
+ * @since 2011-07-29
+ */
+?>
+<?php
+    if(!isset($this->user)) {
+        throw new Exception('VIEW::user not set');
+    }
+
+    $this->headLink()->appendStylesheet('css/cols/large-small.css');
+    $this->headLink()->appendStylesheet('css/layouts/main.css');
+
+    $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+    $selected['getstarted'] = '';
+    $selected['updates'] = '';
+    $selected['buy'] = '';
+    $selected['sell'] = '';
+
+    if ($action == 'get-started') $selected['getstarted'] = 'class="selected"';
+    if ($action == 'updates') $selected['updates'] = 'class="selected"';
+    if ($action == 'buy') $selected['buy'] = 'class="selected"';
+    if ($action == 'sell') $selected['sell'] = 'class="selected"';
+
+?>
+
+<?php include("elements/head.phtml") ?>
+
+<div id="body">
+
+    <?php include("elements/user_header.phtml"); ?>
+
+    <?php include("elements/header.phtml"); ?>
+
+    <div id="page">
+        <div class="container">
+            <?php
+            // -----------------------------------------------------------------
+            // Primeira coluna
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_1">
+                <div class="main_header page_header">
+
+
+                    <h1 id="user_name">
+                        <?php
+                            if (date('G') >= 19) echo "Boa noite, ";
+                            else if (date('G') >= 12) echo "Boa tarde, ";
+                            else if (date('G') >= 4) echo "Bom dia, ";
+                            else echo "Boa noite, "
+                        ?>
+                        <strong><?php echo $this->user->fullName() ?></strong>!
+                    </h1>
+
+                    <div id="user_thumb"><?php echo $this->user->image(80) ?></div>
+
+                    <menu id="user_menu">
+                        <li <?php echo $selected['getstarted'] ?>>
+                            <a href="passo-a-passo">
+                                Principal
+                            </a>
+                        </li>
+                        <li <?php echo $selected['updates'] ?>>
+                            <a href="novidades">
+                                Novidades
+                            </a>
+                        </li>
+                        <li <?php echo $selected['buy'] ?>>
+                            <a href="quero-comprar">
+                                Quero comprar
+                            </a>
+                        </li>
+                        <li <?php echo $selected['sell'] ?>>
+                            <a href="quero-vender">
+                                Quero vender
+                            </a>
+                        </li>
+                    </menu>
+
+                </div> <!-- .page_header .company_header -->
+
+                <?php
+                // -------------------------------------------------------------
+                // Conteúdo da view
+                // -------------------------------------------------------------
+                ?>
+                <div class="content">
+                    <?php echo $this->layout()->content ?>
+                </div>
+
+                <div class="clear"></div>
+            </div><!-- col_1 -->
+
+            <?php
+            // -----------------------------------------------------------------
+            // Segunda coluna - espaço para anúncios
+            // -----------------------------------------------------------------
+            ?>
+            <div class="col_2">
+                <div id="quiz"> </div>
+                <div class="ads_display ads_display_lateral ads_display_4"></div>
+            </div><!-- .col_2 -->
+
+            <div class="clear"></div>
+        </div><!-- .container -->
+    </div> <!-- #page -->
+
+    <?php include("elements/footer.phtml"); ?>
+
+    <?php
+    // -------------------------------------------------------------------------
+    // Espaço para segundo footer do layout
+    // -------------------------------------------------------------------------
+    ?>
+    <div id="content_footer">
+        <div class="container">
+
+        </div>
+    </div><!-- #content_footer -->
+
+</div> <!-- #body -->
+
+<?php include("elements/foot.phtml") ?>
