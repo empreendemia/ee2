@@ -224,6 +224,7 @@ class Ee_UserFile {
         resize_image($image, $user_folder.'100_'.$file, 100);
         resize_image($image, $user_folder.'200_'.$file, 200);
         // envia para AWS S3
+die($user_folder.'50_'.$file);
         $obj = $s3->create_object($bucket, $aws_folder.'50_'.$file, array(
             'fileUpload' => $user_folder.'50_'.$file,
             'acl' => AmazonS3::ACL_PUBLIC
