@@ -222,7 +222,7 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
         $mail->setSubject('[Empreendemia] Vamos trocar cartões?');
 
         // envia o email
-        return $mail->send();
+        return $this->sendEmail($mail, 'convite');
     }
 
     /**
@@ -252,7 +252,7 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
         $mail->setSubject('[Empreendemia] Você foi adicionado na empresa '.$company->name);
         
         // envia o email
-        return $mail->send();
+        return $this->sendEmail($mail, 'novo membro');
     }
 
     /**
@@ -324,7 +324,7 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
         $mail->setReplyTo($config->email->sysadmins->address, $config->email->sysadmins->address);
         $mail->addTo($config->email->sysadmins->address, $config->email->sysadmins->name);
         $mail->setSubject('[Empreendemia] '.$subject);
-        return $mail->send();
+        return $this->sendEmail($mail, 'sysadmins');
     }
 
     /**
@@ -351,7 +351,7 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
         $mail->setSubject('[Empreendemia] Novo feedback de '.$user->fullName());
 
         // envia o email
-        return $mail->send();
+        return $this->sendEmail($mail, 'feedback');
     }
 
     /**
@@ -423,7 +423,7 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
         $mail->setSubject('[Empreendemia] '.$from_user->fullName().' avaliou sua empresa');
         
         // envia o email
-        return $mail->send();
+        return $this->sendEmail($mail, 'avaliou empresa');
     }
 
     /**
@@ -452,7 +452,7 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
         $mail->setSubject('[Empreendemia] Gerar nova senha');
 
         // envia o email
-        return $mail->send();
+        return $this->sendEmail($mail, 'esqueceu senha');
     }
 
     /**
@@ -493,7 +493,7 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
         $mail->setSubject('[Empreendemia] Sua campanha foi configurada!');
 
         // envia o email
-        return $mail->send();
+        return $this->sendEmail($mail, 'campanha configurada');
     }
 
     /**
