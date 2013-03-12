@@ -15,7 +15,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`sectors` (
   `name` VARCHAR(50) NOT NULL ,
   `slug` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`id`) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -26,7 +27,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`countries` (
   `name` VARCHAR(50) NOT NULL ,
   `slug` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`id`) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -40,7 +42,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`regions` (
   `slug` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_regions_countries1` (`country_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -55,7 +58,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`cities` (
   UNIQUE INDEX `slug_unique` (`slug` ASC) ,
   INDEX `region_id` (`region_id` ASC) ,
   PRIMARY KEY (`id`) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -103,7 +107,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`companies` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_companies_sectors1` (`sector_id` ASC) ,
   INDEX `fk_companies_cities1` (`city_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -137,7 +142,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`products` (
   `offer_date_deadline` DATE NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_products_companies1` (`company_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -152,7 +158,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`ads` (
   `date_deadline` DATE NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_ads_products1` (`product_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -167,7 +174,7 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`ads_cities` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_ads_cities_ads1` (`ad_id` ASC) ,
   INDEX `fk_ads_cities_cities1` (`city_id` ASC) )
-ENGINE = MyISAM;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -182,7 +189,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`ads_sectors` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_ads_sectors_ads1` (`ad_id` ASC) ,
   INDEX `fk_ads_sectors_sectors1` (`sector_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -209,7 +217,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`users` (
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
   INDEX `fk_users_companies` (`company_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -226,7 +235,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`budgets` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_budgets_companies1` (`company_id` ASC) ,
   INDEX `fk_budgets_users1` (`user_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -244,7 +254,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`businesses` (
   INDEX `fk_testimonials_users1` (`user_id` ASC) ,
   INDEX `fk_testimonials_companies1` (`company_id` ASC) ,
   INDEX `fk_testimonials_companies2` (`to_company_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -258,7 +269,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`contacts` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_contacts_users1` (`user_id` ASC) ,
   INDEX `fk_contacts_users2` (`contact_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -284,7 +296,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`demands` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_demands_users1` (`user_id` ASC) ,
   INDEX `fk_demands_sectors1` (`sector_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -300,7 +313,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`invites` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_invites_users1` (`user_id` ASC) ,
   INDEX `fk_invites_users2` (`invited_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -325,7 +339,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`messages` (
   INDEX `fk_messages_users1` (`user_id` ASC) ,
   INDEX `fk_messages_users2` (`to_user_id` ASC) ,
   INDEX `fk_messages_companies1` (`to_company_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -343,7 +358,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`notifies` (
   INDEX `fk_notifies_users1` (`user_id` ASC) ,
   INDEX `fk_notifies_users2` (`from_user_id` ASC) ,
   INDEX `fk_notifies_companies1` (`from_company_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -357,7 +373,8 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`subscriptions` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_subscriptions_users1` (`user_id` ASC) ,
   INDEX `fk_subscriptions_companies1` (`company_id` ASC) )
-ENGINE = MyISAM;
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -375,20 +392,15 @@ CREATE  TABLE IF NOT EXISTS `empreendemia_dev`.`updates` (
   INDEX `fk_updates_users1` (`user_id` ASC) ,
   INDEX `fk_updates_companies1` (`company_id` ASC) ,
   INDEX `fk_updates_products1` (`product_id` ASC) )
-ENGINE = MyISAM;
-
-
--- -----------------------------------------------------
--- Placeholder table for view `empreendemia_dev`.`view_companies_search`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empreendemia_dev`.`view_companies_search` (`company_id` INT, `company_text` INT);
+CHARACTER SET utf8 COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- View `empreendemia_dev`.`view_companies_search`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `empreendemia_dev`.`view_companies_search`;
 USE `empreendemia_dev`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `empreendemia_dev`.`view_companies_search` AS select sql_no_cache `company`.`id` AS `company_id`,concat_ws(' ',`sector`.`name`,`city`.`name`,`region`.`name`,`region`.`symbol`,`company`.`name`,`company`.`activity`,`company`.`address_street`,`company`.`description`,group_concat(`product`.`name` separator ','),group_concat(`product`.`description` separator ',')) AS `company_text` from ((((`empreendemia_dev`.`companies` `company` join `empreendemia_dev`.`sectors` `sector` on((`company`.`sector_id` = `sector`.`id`))) join `empreendemia_dev`.`cities` `city` on((`company`.`city_id` = `city`.`id`))) join `empreendemia_dev`.`regions` `region` on((`city`.`region_id` = `region`.`id`))) left join `empreendemia_dev`.`products` `product` on((`product`.`company_id` = `company`.`id`))) where (`company`.`status` = 'active') group by `company`.`id`;
+CREATE  OR REPLACE VIEW `empreendemia_dev`.`view_companies_search` AS select sql_no_cache `company`.`id` AS `company_id`,concat_ws(' ',`sector`.`name`,`city`.`name`,`region`.`name`,`region`.`symbol`,`company`.`name`,`company`.`activity`,`company`.`address_street`,`company`.`description`,group_concat(`product`.`name` separator ','),group_concat(`product`.`description` separator ',')) AS `company_text` from ((((`empreendemia_dev`.`companies` `company` join `empreendemia_dev`.`sectors` `sector` on((`company`.`sector_id` = `sector`.`id`))) join `empreendemia_dev`.`cities` `city` on((`company`.`city_id` = `city`.`id`))) join `empreendemia_dev`.`regions` `region` on((`city`.`region_id` = `region`.`id`))) left join `empreendemia_dev`.`products` `product` on((`product`.`company_id` = `company`.`id`))) where (`company`.`status` = 'active') group by `company`.`id`;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
