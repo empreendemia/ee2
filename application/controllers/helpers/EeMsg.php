@@ -18,7 +18,7 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
      * @author Mauro Ribeiro
      */
     private function sendEmail($mail, $category = false) {
-        if(strpos($_SERVER["SERVER_NAME"], 'empreendemia.com.br') !== false) {
+        if($config->login->sendgrid->user && $config->login->sendgrid->user != '' && $config->login->sendgrid->password && $config->login->sendgrid->password != '') {
             $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/ee.ini','production');
             $login = array(
                 'auth' => 'login',

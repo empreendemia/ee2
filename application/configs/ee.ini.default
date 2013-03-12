@@ -23,8 +23,8 @@ security.pwdsalt = 'DigiteQualquerHashAleatorio'
 ; ------------------------------------------------------------
 ; Logins
 ; ------------------------------------------------------------
-login.sendgrid.user = 'user'
-login.sendgrid.password = 'password'
+login.sendgrid.user = ''
+login.sendgrid.password = ''
 
 login.facebook.app_ip = '';
 login.facebook.secret = '';
