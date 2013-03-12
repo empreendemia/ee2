@@ -568,7 +568,8 @@ class Ee_Model_Products extends Ee_Model_Mapper
         }
         // para galeria de imagens
         else {
-            $userfile->setProductImage($product->company->id, $product->id, $product->image, $image);
+            $index_name = 'image_'.$index;
+            $userfile->setProductImage($product->company->id, $product->id, $product->$index_name, $image);
             $save_data->id = $product->id;
             $index_name = 'image_'.$index;
             $save_data->$index_name = $userfile->file;
