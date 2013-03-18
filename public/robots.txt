@@ -4,6 +4,6 @@ Disallow: /cadastre-se/
 Disallow: /autenticar/
 Disallow: /login/
 Sitemap: /sitemap
-Request-rate: 1/20
-Crawl-delay: 20
+Request-rate: 1/120
+Crawl-delay: 120
 Visit-time: 0100-0600
