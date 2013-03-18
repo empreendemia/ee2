@@ -65,6 +65,13 @@ class IndexController extends Zend_Controller_Action
         $this->view->regions = $region_mapper->findAll();
 
     }
+    
+    /**
+     * Ping 
+     */
+    public function pingAction() {
+        die('pong');
+    }
 
 
 }
