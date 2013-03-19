@@ -23,7 +23,6 @@ nbproject
 config.js
 config.sh
 *.log
-.*
 
 node_modules
 Icon?
