@@ -133,13 +133,7 @@ class AdsController extends Zend_Controller_Action
         if ($this->_helper->Access->notAjax(true)) return;
         
         // pega os region_ids via post
-        $regions_ids = array();
-        foreach ($_POST as $id => $post) {
-            $explode = explode('_', $id);
-            if ($explode[0] == 'region') {
-                $regions_ids[] = $explode[1];
-            }
-        }
+        $regions_ids = explode(',',$_POST['regions']);
 
         // atualiza cidades das regiões
         $city_mapper = new Ee_Model_Cities();
@@ -157,13 +151,7 @@ class AdsController extends Zend_Controller_Action
         if ($this->_helper->Access->notAjax(true)) return;
         
         // pega as city_ids do post
-        $cities_ids = array();
-        foreach ($_POST as $id => $post) {
-            $explode = explode('_', $id);
-            if ($explode[0] == 'city') {
-                $cities_ids[] = $explode[1];
-            }
-        }
+        $cities_ids = explode(',',$_POST['cities']);
         
         // atualiza setores que tem empresas nas cidades escolhidas
         $sector_mapper = new Ee_Model_Sectors();
@@ -181,16 +169,13 @@ class AdsController extends Zend_Controller_Action
      */
     public function finishAction()
     {
-                // aceita apenas ajax
+        // aceita apenas ajax
         if ($this->_helper->Access->notAjax(true)) return;
         
         // pega os parâmetros regions, cities e sectors do usuário
-        foreach ($_POST as $id => $post) {
-            $explode = explode('_', $id);
-            if ($explode[0] == 'sector') $sectors_ids[] = $explode[1];
-            else if ($explode[0] == 'city') $cities_ids[] = $explode[1];
-            else if ($explode[0] == 'region') $regions_ids[] = $explode[1];
-        }
+        $regions_ids = explode(',',$_POST['regions']);
+        $cities_ids = explode(',',$_POST['cities']);
+        $sectors_ids = explode(',',$_POST['sectors']);
 
         // total de empresas
         $companies_count = isset($_POST['total_companies_count']) ? $_POST['total_companies_count'] : 0;
@@ -200,7 +185,7 @@ class AdsController extends Zend_Controller_Action
         $months = isset($_POST['months']) ? $_POST['months'] : null;
 
         // se o usuário selecionou tudo que precisa
-        if (count($cities_ids) && count($regions_ids) && $companies_count && $product_id && $months) {
+        if (count($cities_ids) && count($regions_ids) && count($sectors_ids) && $companies_count && $product_id && $months) {
             $userdata = new Zend_Session_Namespace('UserData');
             $user = $userdata->user;
 
@@ -227,6 +212,9 @@ class AdsController extends Zend_Controller_Action
         }
         // se ele nào selecionou alguma coisa, FAIL
         else {
+            var_dump($cities_ids);
+            var_dump($regions_ids);
+            var_dump($sectors_ids);
             $this->getResponse()->setHttpResponseCode(400);
             $this->renderScript('response/ajax.phtml');
         }
@@ -279,12 +267,9 @@ class AdsController extends Zend_Controller_Action
         if ($this->_helper->Access->notAjax(true)) return;
         
         // pega os parâmetros regions, cities e sectors do usuário
-        foreach ($_POST as $id => $post) {
-            $explode = explode('_', $id);
-            if ($explode[0] == 'sector') $sectors_ids[] = $explode[1];
-            else if ($explode[0] == 'city') $cities_ids[] = $explode[1];
-            else if ($explode[0] == 'region') $regions_ids[] = $explode[1];
-        }
+        $regions_ids = explode(',',$_POST['regions']);
+        $cities_ids = explode(',',$_POST['cities']);
+        $sectors_ids = explode(',',$_POST['sectors']);
 
         // total de empresas
         $companies_count = isset($_POST['total_companies_count']) ? $_POST['total_companies_count'] : 0;
@@ -294,7 +279,7 @@ class AdsController extends Zend_Controller_Action
         $months = 3;
 
         // se o usuário selecionou tudo que precisa
-        if (count($cities_ids) && count($regions_ids) && $companies_count && $product_id && $months) {
+        if (count($cities_ids) && count($regions_ids)&& count($sectors_ids) && $companies_count && $product_id && $months) {
             $userdata = new Zend_Session_Namespace('UserData');
             $user = $userdata->user;
 
@@ -343,7 +328,7 @@ class AdsController extends Zend_Controller_Action
                     $expirations['prov'] = $prov_expiration;
                     $expirations['new'] = $expiration;
 
-                    $this->_helper->EeMsg->startPremiumEmail($user, $expirations, $period);
+                    $this->_helper->EeMsg->startPremiumEmail($user, $expirations, 'half');
                 }
                 /*
                 * /premium

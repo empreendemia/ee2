@@ -1,14 +1,17 @@
-var selected_checkboxes = {};
+var selected_regions = '';
+var selected_cities = '';
+var selected_sectors = '';
 
 function loadCities() {
     $('.sectors_list').html('');
     $('#all_cities').prop("checked", false);
     $('#all_sectors').prop("checked", false);
-    selected_checkboxes = {};
+    selected_regions = '';
     var count = 0;
     $('.regions_list input[type=checkbox]:checked').each(function(){
         var checkbox = $(this);
-        selected_checkboxes[checkbox.attr('name')] = checkbox.val();
+        if (selected_regions !== '') selected_regions += ',';
+        selected_regions += checkbox.val();
         count++;
     });
     if (count > 0) {
@@ -16,7 +19,7 @@ function loadCities() {
         $.ajax({
            type: "POST",
            url: "ads/select-cities",
-           data: selected_checkboxes,
+           data: { regions : selected_regions },
            success: function(html) {
                $('.cities_list').html(html);
            },
@@ -35,16 +38,19 @@ function loadCities() {
 
 function loadSectors() {
     $('#all_sectors').prop("checked", false);
-    selected_checkboxes = {};
+    selected_regions = '';
+    selected_cities = '';
     var count = 0;
     $('.regions_list input[type=checkbox]:checked').each(function(){
         var checkbox = $(this);
-        selected_checkboxes[checkbox.attr('name')] = checkbox.val();
+        if (selected_regions !== '') selected_regions += ',';
+        selected_regions += checkbox.val();
         count++;
     });
     $('.cities_list input[type=checkbox]:checked').each(function(){
         var checkbox = $(this);
-        selected_checkboxes[checkbox.attr('name')] = checkbox.val();
+        if (selected_cities !== '') selected_cities += ',';
+        selected_cities += checkbox.val();
         count++;
     });
     if (count > 0) {
@@ -52,7 +58,7 @@ function loadSectors() {
         $.ajax({
            type: "POST",
            url: "ads/select-sectors",
-           data: selected_checkboxes,
+           data: { cities : selected_cities },
            success: function(html) {
                $('.sectors_list').html(html);
            },
@@ -111,6 +117,9 @@ function companiesCounter(){
 
 function finishAd() {
     var companies_count = $('#total_companies_count').val();
+    selected_regions = '';
+    selected_cities = '';
+    selected_sectors = '';
 
     if (companies_count > 0) {
         $('.buy a').hide();
@@ -121,25 +130,35 @@ function finishAd() {
         $('.regions_list input[type=checkbox]:checked').each(function(){
             var checkbox = $(this);
             post_data[checkbox.attr('name')] = checkbox.val();
+            if (selected_regions !== '') selected_regions += ',';
+            selected_regions += checkbox.val();
             count++;
         });
         $('.cities_list input[type=checkbox]:checked').each(function(){
             var checkbox = $(this);
             post_data[checkbox.attr('name')] = checkbox.val();
+            if (selected_cities !== '') selected_cities += ',';
+            selected_cities += checkbox.val();
             count++;
         });
         $('.sectors_list input[type=checkbox]:checked').each(function(){
             var checkbox = $(this);
             post_data[checkbox.attr('name')] = checkbox.val();
+            if (selected_sectors !== '') selected_sectors += ',';
+            selected_sectors += checkbox.val();
             count++;
         });
-        post_data['total_companies_count']  = companies_count;
-        post_data['product_id'] = $('#products_select').val();
-        post_data['months'] = $('#months_select').val();
         $.ajax({
            type: "POST",
            url: "publicidade/configurar-campanha/pagamento",
-           data: post_data,
+           data: { 
+               regions : selected_regions, 
+               cities : selected_cities, 
+               sectors : selected_sectors,
+               total_companies_count : companies_count,
+               product_id : $('#products_select').val(),
+               months : $('#months_select').val()
+           },
            success: function(html) {
                 $('.ads_create').html(html).fadeTo(100, 1);
                 $('.buy').slideUp();

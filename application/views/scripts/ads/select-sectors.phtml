@@ -13,7 +13,7 @@
 <?php foreach ($this->sectors as $sector) : ?>
     <li>
         <input type="hidden" id="count_sector_<?php echo $sector->id ?>" class="companies_count" name="count_sector_<?php echo $sector->id ?>" value="<?php echo $sector->count_companies ?>" />
-        <input type="checkbox" id="sector_<?php echo $sector->id ?>" name="sector_<?php echo $sector->id ?>" />
+        <input type="checkbox" id="sector_<?php echo $sector->id ?>" name="sector_<?php echo $sector->id ?>" value="<?php echo $sector->id ?>" />
         <label for="sector_<?php echo $sector->id ?>">
             <?php echo $sector->name ?>
             <span class="count">(<?php echo $sector->count_companies ?>)</span>

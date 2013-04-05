@@ -84,7 +84,7 @@ $(function() {
                     <ul>
                     <?php foreach ($this->regions as $region) : ?>
                         <li>
-                            <input type="checkbox" id="region_<?php echo $region->id ?>" name="region_<?php echo $region->id ?>" <?php if ($this->user->company->city->region->id == $region->id) echo 'checked="yes"' ?> />
+                            <input type="checkbox" id="region_<?php echo $region->id ?>" name="region_<?php echo $region->id ?>" <?php if ($this->user->company->city->region->id == $region->id) echo 'checked="yes"' ?> value="<?php echo $region->id ?>" />
                             <label for="region_<?php echo $region->id ?>">
                                 <?php echo $region->name ?>
                                 <span class="count">(<?php echo $region->count_companies ?>)</span>
@@ -114,7 +114,7 @@ $(function() {
                     <ul>
                     <?php foreach ($this->cities as $city) : ?>
                         <li>
-                            <input type="checkbox" id="city_<?php echo $city->id ?>" name="city_<?php echo $city->id ?>" <?php if ($this->user->company->city->id == $city->id) echo 'checked="yes"' ?> />
+                            <input type="checkbox" id="city_<?php echo $city->id ?>" name="city_<?php echo $city->id ?>" <?php if ($this->user->company->city->id == $city->id) echo 'checked="yes"' ?> value="<?php echo $city->id ?>" />
                             <label for="city_<?php echo $city->id ?>">
                                 <span class="city"><?php echo $city->name ?></span>
                                 <span class="count">(<?php echo $city->count_companies ?>)</span>
@@ -144,7 +144,7 @@ $(function() {
                     <ul>
                     <?php foreach ($this->sectors as $sector) : ?>
                         <li>
-                            <input type="hidden" id="count_sector_<?php echo $sector->id ?>" name="count_sector_<?php echo $sector->id ?>" class="companies_count" value="<?php echo $sector->count_companies ?>" />
+                            <input type="hidden" id="count_sector_<?php echo $sector->id ?>" name="count_sector_<?php echo $sector->id ?>" class="companies_count" value="<?php echo $sector->count_companies ?>" value="<?php echo $sector->id ?>" />
                             <input type="checkbox" id="sector_<?php echo $sector->id ?>" name="sector_<?php echo $sector->id ?>" />
                             <label for="sector_<?php echo $sector->id ?>">
                                 <?php echo $sector->name ?>
