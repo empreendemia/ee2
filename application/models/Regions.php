@@ -101,6 +101,7 @@ class Ee_Model_Regions extends Ee_Model_Mapper
             ->join('cities', 'cities.id = companies.city_id', null)
             ->join('regions', 'regions.id = cities.region_id', array('id','symbol','name'))
             ->group('regions.id')
+            ->where('status = ?','active')
             ->setIntegrityCheck(false);
         $rows = $company_db->fetchAll($select);
 

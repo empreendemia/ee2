@@ -76,6 +76,7 @@ class Ee_Model_Cities extends Ee_Model_Mapper
             ->from('companies', array('COUNT(*) as count_companies'))
             ->join('cities', 'cities.id = companies.city_id', array('id','name'))
             ->where('cities.region_id IN ('.implode(',', $regions_ids).')')
+            ->where('status = ?','active')
             ->group('cities.id')
             ->setIntegrityCheck(false);
         $rows = $company_db->fetchAll($select);

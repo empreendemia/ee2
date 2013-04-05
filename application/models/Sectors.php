@@ -137,6 +137,7 @@ class Ee_Model_Sectors extends Ee_Model_Mapper
             $company_db = new Ee_Model_DbTable_Companies();
             $select = $company_db->select()
                 ->from('companies', array('COUNT(*) as num'))
+                ->where('status = ?','active')
                 ->where('sector_id = ?', $row->id);
             $count = $company_db->fetchRow($select)->num;
             if ($count > 0) {
@@ -168,6 +169,7 @@ class Ee_Model_Sectors extends Ee_Model_Mapper
             $select = $company_db->select()
                 ->from('companies', array('COUNT(*) as num'))
                 ->where('city_id IN ('.implode(',',$cities_ids).')')
+                ->where('status = ?','active')
                 ->where('sector_id = ?', $row->id);
             $count = $company_db->fetchRow($select)->num;
             if ($count > 0) {
