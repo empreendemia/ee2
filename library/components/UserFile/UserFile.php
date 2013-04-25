@@ -663,7 +663,7 @@ class Ee_UserFile {
         resize_image($image, $products_folder.'50_'.$file, 50);
         resize_image($image, $products_folder.'100_'.$file, 100);
         resize_image($image, $products_folder.'200_'.$file, 200);
-        resize_image($image, $products_folder.'full_'.$file, 200);
+        scale_image($image, $products_folder.'full_'.$file, 0, 800);
         // envia para AWS S3
         $s3->create_object($bucket, $aws_folder.'50_'.$file, array(
             'fileUpload' => $products_folder.'50_'.$file,
