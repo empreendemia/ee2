@@ -10,7 +10,7 @@
  */
 ?>
 <?php $this->layout()->og_title = $this->company->name ?>
-<?php $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200) ?>
+<?php $this->layout()->og_image = $this->company->imagePath(200) ?>
 <?php $this->layout()->og_description = $this->company->description ?>
 
 <?php $this->headScript()->appendFile('js/jquery/plugins/jcarousellite_1.0.1.min.js') ?>

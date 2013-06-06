@@ -14,14 +14,14 @@
         $this->layout()->title = $this->product->name;
 
         $this->layout()->og_title = $this->product->name;
-        $this->layout()->og_image = $this->serverUrl().'/'.$this->product->imagePath(200);
+        $this->layout()->og_image = $this->product->imagePath(200);
         $this->layout()->og_description = $this->product->description;
     }
     else {
         $this->layout()->title = 'Soluções Locaweb';
 
         $this->layout()->og_title = $this->company->name;
-        $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200);
+        $this->layout()->og_image = $this->company->imagePath(200);
         $this->layout()->og_description = 'Veja nossos produtos e/ou serviços!';
     }
 ?>

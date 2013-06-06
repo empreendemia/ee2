@@ -8,7 +8,7 @@
  */
 ?>
 <body>
-    <div style="display:block;float:left"><a href="<?php echo $this->serverUrl().$this->company->url() ?>"><img src="<?php echo $this->serverUrl().$this->baseUrl().'/'.$this->company->imagePath(120) ?>" width="120" height="120" /></a></div>
+    <div style="display:block;float:left"><a href="<?php echo $this->serverUrl().$this->company->url() ?>"><img src="<?php echo $this->company->imagePath(120) ?>" width="120" height="120" /></a></div>
 
     <h1 style="display:block;margin:10px 140px;padding-top:10px;"><a href="<?php echo $this->serverUrl().$this->company->url() ?>" style="text-decoration:none"><?php echo $this->company->name ?></a></h1>
     <h3 style="display:block;margin:10px 140px;">Você foi adicionado na Empreendemia!</h3>

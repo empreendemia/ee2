@@ -8,7 +8,7 @@
  */
 ?>
 <body>
-    <div style="display:block;float:left"><a href="<?php echo $this->serverUrl().$this->user->url() ?>"><img src="<?php echo $this->serverUrl().$this->baseUrl().'/'.$this->user->imagePath(120) ?>" width="120" height="120" /></a></div>
+    <div style="display:block;float:left"><a href="<?php echo $this->serverUrl().$this->user->url() ?>"><img src="<?php echo $this->user->imagePath(120) ?>" width="120" height="120" /></a></div>
 
     <h1 style="display:block;margin:10px 140px;padding-top:10px;"><a href="<?php echo $this->serverUrl().$this->user->url() ?>" style="text-decoration:none"><?php echo $this->user->fullName() ?></a></h1>
     <h3 style="display:block;margin:10px 140px;"><a href="<?php echo $this->serverUrl().$this->user->company->url() ?>" style="text-decoration:none"><?php echo $this->user->company->name ?></a></h3>

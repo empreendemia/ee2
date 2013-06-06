@@ -15,12 +15,12 @@
 <?php
     if (isset($this->user)) {
         $this->layout()->og_title = $this->user->fullName();
-        $this->layout()->og_image = $this->serverUrl().'/'.$this->user->imagePath(200);
+        $this->layout()->og_image = $this->user->imagePath(200);
         $this->layout()->og_description = $this->user->description;
     }
     else {
         $this->layout()->og_title = $this->company->name;
-        $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200);
+        $this->layout()->og_image = $this->company->imagePath(200);
         $this->layout()->og_description = 'Nossa equipe!';
     }
 ?>

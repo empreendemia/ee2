@@ -21,7 +21,7 @@
     }
 
     $this->layout()->og_title = $this->company->name;
-    $this->layout()->og_image = $this->serverUrl().'/'.$this->company->imagePath(200);
+    $this->layout()->og_image = $this->company->imagePath(200);
     if (count($positive) == 0) $this->layout()->og_description = 'Deixe-nos uma avaliação!';
     else if (count($positive) == 1) $this->layout()->og_description = 'Temos apenas uma avaliação, deixe-nos mais uma!';
     else $this->layout()->og_description = 'Já temos '.count($positive).' avaliações positivas! Que tal você nos escrever mais uma?';
