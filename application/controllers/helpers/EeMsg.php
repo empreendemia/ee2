@@ -177,10 +177,11 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
      * @param int|Ee_Model_Data_User $from_user     usuário que enviou
      * @param type $body                            corpo da mensagem
      */
-    public function demandContactEmail($user_name, $user_email, $from_user, $body) {
+    public function demandContactEmail($from_user, $to_user, $body) {
         $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/ee.ini','production');
         
         $from_user = $this->_user($from_user);
+        $to_user = $this->_user($to_user);
         
         // passa os valores para a view e renderiza o html
         $view->body = $body;
@@ -189,11 +190,11 @@ class Ee_Controller_Helper_EeMsg extends Zend_Controller_Action_Helper_Abstract
         // monta o email
         $mail = new Zend_Mail('utf-8');
         $mail->setBodyHtml($render);
-        $mail->setFrom($config->email->noreply->address, $user_name);
-        $mail->setReplyTo($user_email, $user_name);
-        $mail->addTo($user_email, $user_name);
+        $mail->setFrom($config->email->noreply->address, $from_user->fullName());
+        $mail->setReplyTo($from_user->login, $from_user->fullName());
+        $mail->addTo($to_user->login, $to_user->fullName());
         $mail->setSubject('Contato referente ao seu pedido no Empreendemia');
-
+        
         // envia o email
         return $this->sendEmail($mail, 'mensagem demanda');
     }

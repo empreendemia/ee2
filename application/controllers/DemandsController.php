@@ -141,24 +141,11 @@ class DemandsController extends Zend_Controller_Action
                 if ($this->_helper->BotBlocker->timeCheck(1) == false || $form->honeyPotsCheck() == false)
                     $this->_helper->BotBlocker->block();
                 
-                // se o comprador é usuário Empreendemia, pega seu ID e procura suas informações no banco de dados
-                $user_id = $this->_helper->Access->getAuth()->id;
-                
-                if ($demand->user_id != NULL){
-                    $user_mapper = new Ee_Model_Users();
-                    $user = $user_mapper->find($demand->user_id);
-
-                    $to_user->name = $user->fullName();
-                    $to_user->email = $user->login;
-                }
-                // se o comprador não é usuário Empreendemia
-                else{
-                    $to_user->name = $demand->name;
-                    $to_user->email = $demand->email;
-                }
+                $from_user = $this->_helper->Access->getAuth()->id;
+                $to_user = $demand->user_id;
                 
                 // chama controller de envio de e-mail
-                $this->_helper->EeMsg->demandContactEmail($to_user->name, $to_user->email, $user_id, $body);
+                $this->_helper->EeMsg->demandContactEmail($from_user, $to_user, $body);
 
                 $this->_helper->Tracker->userEvent('interaction: sent message');
                 die('<div class="message_status">Mensagem enviada com sucesso!</div>');
