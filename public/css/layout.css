@@ -13,6 +13,17 @@ body {
     clear: both;
 }
 
+#top_banner {
+    background-color: #888;
+    padding: 10px;
+    display: none;
+}
+
+#top_banner .banner{
+    margin: auto;
+    height: 90px;
+}
+
 #page {
     background-color: #fff;
 }

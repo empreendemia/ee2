@@ -78,6 +78,11 @@ $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/ee.ini','production',
     <script type="text/javascript" src="<?php echo $config->server->talk ?>"></script>
     <?php endif ?>
 
+<?php
+// -----------------------------------------------------------------------------
+// DFP
+// -----------------------------------------------------------------------------
+?>
     <script type='text/javascript'>
     var googletag = googletag || {};
     googletag.cmd = googletag.cmd || [];
@@ -95,12 +100,19 @@ $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/ee.ini','production',
 
     <script type='text/javascript'>
     googletag.cmd.push(function() {
-    googletag.defineSlot('/5901366/ee-header', [468, 60], 'div-gpt-ad-1376060400258-0').addService(googletag.pubads());
+    googletag.defineSlot('/36701243/Empreendemia_ListaDeEmpresas_Topo_728x90', [728, 90], 'div-gpt-ad-1376655270387-0').addService(googletag.pubads());
     googletag.pubads().enableSingleRequest();
     googletag.enableServices();
     });
     </script>
 
+    <script type='text/javascript'>
+    googletag.cmd.push(function() {
+    googletag.defineSlot('/36701243/Empreendemia_Empresa_Topo_728x90', [728, 90], 'div-gpt-ad-1376656261904-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+    });
+    </script>
 <?php
 // -----------------------------------------------------------------------------
 // Includes de links e scripts
