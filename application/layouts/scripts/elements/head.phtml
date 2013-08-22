@@ -69,6 +69,7 @@ $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/ee.ini','production',
     <script type="text/javascript" src="js/ads.js"></script>
     <script type="text/javascript" src="js/Utils/Tracker.js"></script>
     <script type="text/javascript" src="js/Form/Input.js"></script>
+    <script type="text/javascript" src="js/Utils/Facebook.js"></script>
     
     <?php if (isset($config->server->poll) && $config->server->poll) : ?>
     <script type="text/javascript" src="<?php echo $config->server->poll ?>"></script>
