@@ -119,12 +119,11 @@ class AuthController extends Zend_Controller_Action
             );
             return $this->_redirect('passo-a-passo');
         }
-        
+
         $fp = fopen('https://graph.facebook.com/'.$fb_id.'?access_token='.$fb_token, 'r');
         $response = stream_get_contents($fp);
         $fbuser = Zend_Json::decode($response);
                 
-        
         if ($fbuser && isset($fbuser['email'])) {
             $email = $fbuser['email'];
 

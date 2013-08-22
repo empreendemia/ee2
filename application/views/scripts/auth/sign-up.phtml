@@ -30,6 +30,8 @@ $(function() {
 
 <h1 class="h_title h_blue h_xxxlarge h_border">Cadastre-se gratuitamente</h1>
 
+<div class="facebook-signup"><a href="javascript:facebookSignup()">Puxar os dados do facebook</a></div>
+
 <div class="form signup_form">
     <?php $this->form->setAction($this->url()) ?>
     <?php if ($this->interruption == false) $this->form->return->setValue('passo-a-passo?ustatus=registered') ?>
