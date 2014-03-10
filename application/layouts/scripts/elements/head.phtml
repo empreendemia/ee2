@@ -70,13 +70,10 @@ $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/ee.ini','production',
     <script type="text/javascript" src="js/Utils/Tracker.js"></script>
     <script type="text/javascript" src="js/Form/Input.js"></script>
     <script type="text/javascript" src="js/Utils/Facebook.js"></script>
-    
-    <?php if (isset($config->server->poll) && $config->server->poll) : ?>
-    <script type="text/javascript" src="<?php echo $config->server->poll ?>"></script>
-    <?php endif ?>
-    
-    <?php if (isset($config->server->talk) && $config->server->talk) : ?>
-    <script type="text/javascript" src="<?php echo $config->server->talk ?>"></script>
+    <script type="text/javascript" src="js/chat.js"></script>    
+
+    <?php if (isset($config->server->chat) && $config->server->chat) : ?>
+    <script type="text/javascript" src="<?php echo $config->server->chat ?>socket.io/socket.io.js"></script>
     <?php endif ?>
 
 <?php
@@ -122,6 +119,15 @@ $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/ee.ini','production',
     googletag.enableServices();
     });
     </script>
+
+    <script type='text/javascript'>
+    googletag.cmd.push(function() {
+    googletag.defineSlot('/36701243/Empreendemia_Logout', [728, 90], 'div-gpt-ad-1390310404743-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+    });
+    </script>
+
 <?php
 // -----------------------------------------------------------------------------
 // Includes de links e scripts

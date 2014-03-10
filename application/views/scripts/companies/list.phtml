@@ -180,7 +180,13 @@
 		        <a href="<?php echo $company->url() ?>"><?php echo $company->name ?></a>
 		        <span style="color: green;" id="company_status_<?php echo $company->id?>">
 			    <script>
-			        Chat.showCompanyStatus(<?php echo $company->id?>);
+                                $(function() {
+                                   EeChat.companyStatus('<?php echo $company->id ?>', function(data) {
+                                       if (data.status == 'online') {
+                                           $('#company_status_<?php echo $company->id?>').html('(estamos online)');
+                                       }
+                                   });
+                                });
 			    </script>
 			</span>
 		    </h3>

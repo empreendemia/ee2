@@ -13,6 +13,8 @@
 <?php $this->layout()->og_image = $this->company->imagePath(200) ?>
 <?php $this->layout()->og_description = $this->company->description ?>
 
+<?php $this->layout()->title = $this->company->name ?>
+
 <?php
     $card_image = '';
     if ($this->company->isPlan('premium')) {

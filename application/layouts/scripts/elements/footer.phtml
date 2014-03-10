@@ -14,109 +14,45 @@
 
 
 
-<div id="chat"> </div>
+<div id="ee-chat"> </div>
 
 <script>
-      
-  <?php if (isset($this->company)) : ?>
-    <?php
-    $user_mapper = new Ee_Model_Users();
-    $users = $user_mapper->findByCompany($this->company);
-    $user = $users[0];
-    $username = $user->name.$user->family_name;
-    ?>
-    var sent = false;
-    var receive = false;
-    Chat.connect({
-        companyId : '<?php echo (isset($userData->user->company_id)) ? $userData->user->company_id : '' ?>',
+$(function() {
+    <?php if (isset($userData->user)) : ?>
 
-        user: '<?php 
-            if(isset($userData->user)) {
-                echo $userData->user->name.$userData->user->family_name;
-            }
-            else {
-                echo 'IP'.str_replace(".", "", $_SERVER["REMOTE_ADDR"]);
-            }
-        ?>',
-
-        label: '<?php 
-            if(isset($userData->user)) {
-                echo $userData->user->name;
-            }
-            else {
-                echo 'Visitante';
-            }
-        ?>',
-
-        target: '#chat',
-        chatOpen : function(user, type) {
-            if ((type === undefined || type == 'buyer') && user == '<?php echo $username ?>') {
-                Tracker.ga.userEvent('chat view');
-            }   
-        },
-        messageSend : function(user, type) {
-            if ((type === undefined || type == 'buyer') && !sent && user == '<?php echo $username ?>') {
-                Tracker.ga.userEvent('chat start');
-                sent = true;
-            }
-        },
-        messageReceive : function(user, type) {
-            if ((type === undefined || type == 'buyer') && !receive && user == '<?php echo $username ?>') {
-                Tracker.ga.userEvent('chat receive reply');
-                receive = true;
-            }
-        },
-        chatClose : function(user, type) {
-
-        }
-
+    var chat = new EeChat({
+        userId : '<?php echo $userData->user->id ?>',
+        userName : '<?php echo $userData->user->name ?>',
+        companyId : '<?php echo $userData->user->company->id ?>',
+        companyName : '<?php echo $userData->user->company->name ?>'
     });
 
+
+        <?php if (isset($this->company) && $this->company->id != $userData->user->company->id) : ?>
+            chat.attend('<?php echo $this->company->id ?>');
+        <?php endif; ?>
+   
     <?php else : ?>
-      
-    Chat.connect({
-        companyId : '<?php echo (isset($userData->user->company_id)) ? $userData->user->company_id : '' ?>',
-        user: '<?php 
-            if(isset($userData->user)) {
-                echo $userData->user->name.$userData->user->family_name;
-            }
-            else {
-                echo 'IP'.str_replace(".", "", $_SERVER["REMOTE_ADDR"]);
-            }
-        ?>',
-        label: '<?php 
-            if(isset($userData->user)) {
-                echo $userData->user->name;
-            }
-            else {
-                echo 'Visitante';
-            }
-        ?>',
-        target: '#chat'
+
+    var chat = new EeChat({
+        userId : '<?php echo 'IP'.str_replace(".", "", $_SERVER["REMOTE_ADDR"]) ?>',
+        userName : 'Visitante',
+        companyId : 'IP<?php echo str_replace(".", "", $_SERVER["REMOTE_ADDR"]) ?>'
     });
+
+
+        <?php if (isset($this->company)) : ?>
+
+        chat.attend(<?php echo $this->company->id ?>);
+
+        <?php endif; ?>
+
     <?php endif ?>
-    
+
+    chat.getOldMessages();
+
+});
 </script>
-<?php if(isset($userData->user)):?>
-    <script type="text/javascript">
-        quiz({
-            target : '#quiz', 
-            user : '<?php echo $userData->user->id?>', 
-            view: function(question) {
-                Tracker.ga.userEvent('poll view(' + question + ')');
-            },
-            change: function(question,option) { 
-                Tracker.ga.userEvent('poll select(' + question + '): ' + question);
-            },
-            submit: function(question,option) { 
-                Tracker.ga.userEvent('poll submit(' + question + '): ' + question);
-            },
-	    followup: function(question,option){
-	        Tracker.ga.userEvent('poll followup(' + question + '): ' + question);
-	    }
-        });
-    </script>
-<?endif;?>
 
 <?php
 // -----------------------------------------------------------------------------

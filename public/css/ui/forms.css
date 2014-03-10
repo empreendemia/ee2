@@ -14,8 +14,8 @@
 .form form dl dt label {
     display: block;
     color: #888;
-    padding-top: 3px;
-    text-align: left;
+    padding-top: 2px;
+    text-align: right;
 }
 
 .form form dl dd {
@@ -57,7 +57,7 @@
 
 .form form input[type=radio] {
     margin-left: 5px;
-    vertical-align: sub;
+    vertical-align: top;
 }
 
 .form form input[type=submit] {
