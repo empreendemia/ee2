@@ -328,7 +328,7 @@ class ProductsController extends Zend_Controller_Action
         $correct_hash = sha1($product_id.$product->company_id.$user->id);
 
         // se o usuário pode apagar o produto
-        if ($confirmation == $correct_hash) {
+        if ($confirmation == $correct_hash && $user->company_id == $product->company_id) {
             $product_mapper->delete($product);
             $this->view->removed = true;
         }
