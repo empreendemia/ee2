@@ -113,9 +113,10 @@ class Ee_Form_SignUp extends Ee_Form_Form
               ->addFilter('StringTrim')
               ->addFilter('StringToLower')
               ->addValidator('NotEmpty', true, array('messages'=>'digite um email'))
-              ->addValidator('EmailAddress', true, array('messages'=>array(
-                  'emailAddressInvalid'=>'digite um email válido'
-               )))
+              ->addValidator('regex', false, array(
+                  'pattern'=>'/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+                  'messages'=>'digite um email válido'
+              ))
               ->setAttrib('maxlength', 50)
               ->setAttrib('class', array('tip_tool_form', 'signup_email'))
               ->setAttrib('title', 'Seu email que será usado para login. Exemplo: nome@empresa.com.br')

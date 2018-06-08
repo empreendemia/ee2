@@ -97,7 +97,6 @@ class ContactsController extends Zend_Controller_Action
                 $contact_mapper->save($contact);
                 $this->view->sent = true;
                 //$this->_helper->FlashMessenger(array('message'=>'Contato pedido para '.$user->fullName(),'status'=>'success'));
-
                 $this->_helper->EeMsg->cardEmail($user, $contact->user_id, $values->message);
 
                 $this->_helper->Tracker->userEvent('interaction: sent card');

@@ -70,11 +70,13 @@ class MessagesController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())) {
                 // segurança contra bot
                 $this->_helper->BotBlocker->timeFinish();
-                if ($this->_helper->BotBlocker->timeCheck(1) == false || $form->honeyPotsCheck() == false)
-                    $this->_helper->BotBlocker->block();
                 
                 $values = $form->getModels();
                 $message = $values->message;
+                
+                if ($this->_helper->BotBlocker->timeCheck() == false || $this->_helper->BotBlocker->sameMessage($message->body) || $form->honeyPotsCheck() == false)
+                    $this->_helper->BotBlocker->block();
+                
                 $message->user_id = $this->_helper->Access->getAuth()->id;
                 if ($parent) $message->title = $parent->title;
                 $message_mapper->toUser($message);
@@ -137,11 +139,11 @@ class MessagesController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())) {
                 // segurança contra bot
                 $this->_helper->BotBlocker->timeFinish();
-                if ($this->_helper->BotBlocker->timeCheck(1) == false || $form->honeyPotsCheck() == false)
-                    $this->_helper->BotBlocker->block();
-                
                 $values = $form->getModels();
                 $message = $values->message;
+                
+                if ($this->_helper->BotBlocker->timeCheck() == false || $this->_helper->BotBlocker->sameMessage($message->body) || $form->honeyPotsCheck() == false)
+                    $this->_helper->BotBlocker->block();
                 
                 $user_mapper = new Ee_Model_Users();
                 $to_user = $user_mapper->find($message->to_user_id);

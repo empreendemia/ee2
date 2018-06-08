@@ -369,10 +369,12 @@ class CompaniesController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())) {
                 // segurança contra bot
                 $this->_helper->BotBlocker->timeFinish();
-                if ($this->_helper->BotBlocker->timeCheck(1) == false || $form->honeyPotsCheck() == false)
+                
+                if ($this->_helper->BotBlocker->timeCheck(2) == false || $form->honeyPotsCheck() == false)
                     $this->_helper->BotBlocker->block();
                 
                 $values = $form->getModels();
+                
                 $this->view->budget = $values;
                 $this->view->company = $company;
                 $budget_mapper = new Ee_Model_Budgets();
@@ -391,7 +393,7 @@ class CompaniesController extends Zend_Controller_Action
                 $this->_helper->Tracker->userEvent('ERROR buyer: request budget');
                 $this->_helper->Tracker->companyEvent('ERROR request budget', $company->id);
                 $this->_helper->Tracker->track('form send', array('form_name'=>'budget','form_status'=>'error','company_slug'=>$company->slug,'company_city'=>$company->city->slug,'company_region'=>$company->city->region->slug,'company_sector'=>$company->sector->slug,'contact_type'=>'budget'));
-                $this->_helper->BotBlocker->timeStart(1);
+                $this->_helper->BotBlocker->timeStart(20);
                 $this->_helper->FlashMessenger(array('message'=>'Alguns dados não foram preenchidos corretamente','status'=>'error'));
                 $this->view->form = $form;
             }

@@ -38,7 +38,7 @@ class Ee_Controller_Helper_BotBlocker extends Zend_Controller_Action_Helper_Abst
      * @author Mauro Ribeiro
      * @since 2011-09
      */
-    public function timeCheck($time_check = 2) {
+    public function timeCheck($time_check = 15) {
         $userdata = new Zend_Session_Namespace('UserData');
         if (isset($userdata->botblocker->form_start) && isset($userdata->botblocker->form_finish)) {
             $time = $userdata->botblocker->form_finish - $userdata->botblocker->form_start;
@@ -49,6 +49,22 @@ class Ee_Controller_Helper_BotBlocker extends Zend_Controller_Action_Helper_Abst
         }
         $userdata->botblocker->block = false;
         return true;
+    }
+
+    /**
+     * Verifica se o cara está mandando a mesma mensagem
+     * @author Mauro Ribeiro
+     * @since 2015-02
+     */
+    public function sameMessage($message) {
+        $userdata = new Zend_Session_Namespace('UserData');
+        if (isset($userdata->botblocker->same_message)) {
+            if ($userdata->botblocker->same_message == $message) {
+                return true;
+            }
+        }     
+        $userdata->botblocker->same_message = $message;
+        return false;
     }
 
 
@@ -79,7 +95,7 @@ class Ee_Controller_Helper_BotBlocker extends Zend_Controller_Action_Helper_Abst
         $message .= '<h2>SESSION</h2><pre>'.ob_get_clean().'</pre>';
 
         $EeMsg->adminsEmail('Spammer bloqueado',$message);
-        throw new Zend_Controller_Action_Exception('Acesso negado', 403);
+        die("eee");
     }
 
 
@@ -91,7 +107,8 @@ class Ee_Controller_Helper_BotBlocker extends Zend_Controller_Action_Helper_Abst
     public function filter() {
         $userdata = new Zend_Session_Namespace('UserData');
         if (isset($userdata->botblocker) && isset($userdata->botblocker->block) && $userdata->botblocker->block == true) {
-            throw new Zend_Controller_Action_Exception('Acesso negado', 403);
+            //throw new Zend_Controller_Action_Exception('Acesso negado', 403)a;
+            die("eee");
         }
     }
 
