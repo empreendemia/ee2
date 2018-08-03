@@ -19,6 +19,7 @@ class Ee_Controller_Helper_BotBlocker extends Zend_Controller_Action_Helper_Abst
     public function timeStart() {
         $userdata = new Zend_Session_Namespace('UserData');
         $userdata->botblocker->form_start = time();
+$userdata->botblocker->block = false;
     }
 
     /**

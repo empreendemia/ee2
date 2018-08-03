@@ -19,6 +19,11 @@ class Ee_Model_Data_Company extends Ee_Model_Data
      */
     public $id;
     /**
+     * CNPJ to campeao
+     * @var string
+     */
+    public $cnpj;
+    /**
      * ID do setor de atuação da empresa
      * @var int
      */

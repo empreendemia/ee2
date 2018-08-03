@@ -228,6 +228,24 @@ class Ee_Model_Companies extends Ee_Model_Mapper
         return $save;
     }
 
+    /**
+     * Verifica se um CNPJ está disponível
+     *
+     * @param string $cnpj          cnpj
+     * @return boolean              true se está disponível, false se não
+     * @author Mauro Ribeiro
+     * @since 2018-07
+     */
+    public function isCNPJAvailable($cnpj) {
+        $cnpj = filter_var($cnpj, FILTER_SANITIZE_NUMBER_INT);
+        $select = $this->_dbTable->select()
+                ->where('`cnpj` = ?', $cnpj);
+        $rows = $this->_dbTable->fetchAll($select);
+        if (0 == count($rows)) return true;
+        else return false;
+    }
+
+
     
     /**
      * Altera imagem de uma empresa

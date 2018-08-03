@@ -486,6 +486,183 @@ class AuthController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
+
+    /**
+     * Usuário se cadastra no sistema
+     */
+    public function signUpSouEmpreendedorAction()
+    {
+                // se o camarada está logado
+        if (Zend_Auth::getInstance()->hasIdentity() == true) {
+            $this->_helper->FlashMessenger(array(
+                'message'=>'Você já está cadastrado no sistema',
+                'status'=>'alert')
+            );
+            return $this->_redirect('passo-a-passo');
+        }
+
+        // navegação interrompida
+        $interruption = $this->_getParam('interruption');
+        // veio por facebook
+        $facebook = $this->_getParam('facebook');
+
+        $this->view->interruption = $interruption;
+        if (!$interruption) {
+            $this->_helper->Tracker->userEvent('started sign up');
+        }
+        $request = $this->getRequest();
+        $form =  new Ee_Form_SignUpSouEmpreendedor();
+
+        if ($request->isPost()) {
+
+            // se ta tudo preenchido bonitinhamente
+            if ($form->isValid($request->getPost())) {
+                // segurança contra bot
+                $this->_helper->BotBlocker->timeFinish();
+                if ($this->_helper->BotBlocker->timeCheck() == false || $form->honeyPotsCheck() == false)
+                    $this->_helper->BotBlocker->block();
+
+                $values = $form->getModels();
+                $user_mapper = new Ee_Model_Users();
+                $company_mapper = new Ee_Model_Companies();
+                $user = new Ee_Model_Data_User($values->user);
+
+                // salva os dados da empresa
+                $values->company->date_created = date('Y-m-d H:i:s');
+                $values->company->date_updated = $user->date_created;
+                $company = new Ee_Model_Data_Company($values->company);
+                $company_mapper->save($company);
+
+                // salva os dados do usuário
+                $password = $user->password;
+                $user->group = 'user';
+                $user->email = $user->login;
+                $user->company_id = $company->id;
+                $user->date_created = date('Y-m-d');
+                $user->date_updated = $user->date_created;
+                $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/ee.ini','production');
+                $user->password = sha1($config->security->pwdsalt.$password);
+                $user_mapper->save($user);
+
+                // manda os dados pro Sou Empreendedor
+
+                if ($user->mails[1]) {
+                    // pega a cidade
+                    $city_mapper = new Ee_Model_Cities();
+                    $city = $city_mapper->find($company->city_id);
+
+                    // pega o estado
+                    $region_mapper = new Ee_Model_Regions();
+                    $region = $region_mapper->find($city->region_id);
+
+                    $post = Array(
+                        'nome' => $user->name . ' ' . $user->family_name,
+                        'email' => $user->login,
+                        'senha' => $password,
+                        'cnpj' => $company->cnpj,
+                        'cidade' => $city->name,
+                        'uf' => $region->symbol,
+                        'utm_source' => 'proxymedia_9070',
+                        'utm_medium' => 'email',
+                        'utm_campaign' => 'pme'
+                    );
+
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'https://clubesouempreendedor.com.br/auth/cadastro/pme/');
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                    curl_setopt($ch, CURLOPT_HEADER, false);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($ch);
+                    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                    curl_close($ch);
+
+                    if (!$response || $httpcode !== 200) {
+                      $user->mails[1] = 0;
+                      $user_mapper->save($user);
+                    }
+                } 
+
+                // loga o cara
+                $this->login($user->login, $password, true);
+
+                $this->_helper->Tracker->userEvent('finished sign up');
+
+                $userdata = new Zend_Session_Namespace('UserData');
+                $this->_helper->Tracker->track('form send', array('form_name'=>'signup','form_status'=>'success'));
+                $this->_helper->Tracker->signup($userdata->user);
+
+                // email de boas vindas
+                $this->_helper->EeMsg->welcomeEmail($user);
+
+                $redirect = $form->getValue('return');
+                $this->_redirect($redirect);
+            }
+            // se algum dado foi preenchido incorretamente
+            else {
+                $this->_helper->Tracker->userEvent('ERROR sign up');
+                // inicia timer contra bot
+                $this->_helper->BotBlocker->timeStart();
+                $values = $form->getModels();
+                $user_login_errors = $form->getElement('user_login')->getErrors();
+
+                // se o cara tentou cadastrar um email já cadastrado
+                if (isset($user_login_errors[0]) && $user_login_errors[0] == 'uniqueLoginNotMatch') {
+                    $this->_helper->FlashMessenger(array(
+                        'message'=>'O email <strong>'.$values->user->login.'</strong> já está cadastrado no sistema',
+                        'status'=>'error')
+                    );
+                }
+                $this->_helper->FlashMessenger(array(
+                    'message'=>'Dados preenchidos incorretamente',
+                    'status'=>'error')
+                );
+
+                $this->_helper->Tracker->track('form send', array('form_name'=>'sign-up','form_status'=>'error'));
+            }
+        }
+        // se o cara acabou de entrar na página
+        else {
+            // inicia timer contra o bot
+            $this->_helper->BotBlocker->timeStart();
+
+            $userdata = new Zend_Session_Namespace('UserData');
+
+            if (!$interruption) {
+                $this->_helper->Tracker->register_once(array('signup_type'=>'organic','signup_url'=> $userdata->Navigation->last));
+
+            }
+            else {
+                $this->_helper->Tracker->register_once(array('signup_type'=>'interruption','signup_url'=> $userdata->Navigation->last));
+            }
+
+            if ($facebook) {
+                $fb_id = $this->_getParam('fbid');
+                $fb_token = $this->_getParam('fbtoken');
+                $fp = fopen('https://graph.facebook.com/'.$fb_id.'?access_token='.$fb_token, 'r');
+                $response = stream_get_contents($fp);
+                $fbuser = Zend_Json::decode($response);
+
+                $nameexp = explode(' ',$fbuser['name']);
+                $form->user_name->setValue($nameexp[0]);
+                $form->user_family_name->setValue($nameexp[count($nameexp)-1]);
+                $form->user_login->setValue($fbuser['email']);
+                $form->user_login_confirmation->setValue($fbuser['email']);
+                if (isset($fbuser['work']) && isset($fbuser['work'][0])) {
+                    $form->company_name->setValue($fbuser['work'][0]['employer']['name']);
+                }
+
+            }
+
+            $this->_helper->Tracker->track('signup start', array('url'=> $userdata->Navigation->last));
+
+        }
+
+        $this->view->form = $form;
+    }
+
+
+
     /**
      * Se o usuário esqueceu a senha, gera uma nova senha e envia por email
      */
