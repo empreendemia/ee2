@@ -1,0 +1,114 @@
+<?php
+/**
+ * sign-up.php
+ * Cadastro de novo usuário
+ * 
+ * @author Mauro Ribeiro
+ * @since 2011-07-20
+ */
+?>
+<?php $this->layout()->setLayout('2_cols_large_small') ?>
+<?php $this->headLink()->appendStylesheet('css/ui/forms.css') ?>
+<?php $this->headLink()->appendStylesheet('css/layouts/auth.css') ?>
+<?php $this->headScript()->appendFile('js/forms/locations.js') ?>
+
+<?php if ($this->interruption) : ?>
+<script type="text/javascript">
+var throw_event = false;
+$(function() {
+    $('#page .container').prepend('<div id="must_auth_message" style="display:none"><h1>Você precisa estar logado para realizar essa ação.</h1><h2>Se você ainda não faz parte da rede, <strong>cadastre-se gratuitamente</strong>!</h2></div>');
+    $('#must_auth_message').slideDown(500);
+    $('.signup_form input, .faq').hover(function() {
+        if (throw_event == false) {
+           <?php echo $this->Tracker()->userEvent('started sign up', null, true) ?>
+           throw_event = true;
+        }
+    });
+});
+</script>
+<?php endif ?>
+
+<h1 class="h_title h_blue h_xxxlarge h_border">Cadastre-se gratuitamente</h1>
+
+<div class="form signup_form">
+    <?php $this->form->setAction($this->url()) ?>
+    <?php if ($this->interruption == false) $this->form->return->setValue('passo-a-passo?ustatus=registered') ?>
+    <?php echo $this->form ?>
+</div>
+
+<script>
+
+function checkEmail(){
+    if($('.signup_email_confirmation').val() !== $('.signup_email').val())
+    {
+        if($('#signup_email_error').length == 0)$('#user_login_confirmation-element').append("<span style='color:red' id='signup_email_error'>Os e-mails digitados sao diferentes</span>");
+    }
+    else
+    {
+        $('#signup_email_error').remove()
+    } 
+}
+
+function maskCNPJ () {
+    var cnpj = $('.signup_cnpj').val()
+        .replace(/\D/g, '')
+        .substring(0, 14)
+        .replace(/^(\d{1,2})(\d{1,3})?(\d{1,3})?(\d{1,4})?(\d{1,2})?/, "$1.$2.$3/$4-$5");
+console.log(cnpj);
+    $('.signup_cnpj').val(cnpj);
+}
+
+$('.signup_email_confirmation').blur(checkEmail);
+$('.signup_email_confirmation').change(checkEmail);
+$('.signup_cnpj').change(maskCNPJ);
+
+</script>
+
+<?php
+/*
+ * ------------------------------------------------------------
+ * Aqui começa o conteúdo lateral
+ * ------------------------------------------------------------
+ */
+ob_start()
+?>
+
+<div class="login">
+    <h2>Já é cadastrado?</h2>
+    <?php $login_form = new Ee_Form_Login(); ?>
+    <?php $login_form->setAction('login') ?>
+    <?php if ($this->interruption == false) $login_form->return->setValue('passo-a-passo') ?>
+    <?php echo $login_form ?>
+</div>
+
+<div class="faq">
+    <h2>Perguntas frequentes</h2>
+    <ul class="questions">
+        <ul>
+            <li class="question">O que é o Empreendemia?</li>
+            <li class="answer">O Empreendemia é um espaço virtual em que você pode conhecer novos fornecedores ou clientes para sua empresa. Através do nosso sistema de reputação, você saberá quais empresas vale a pena entrar em contato.</li>
+        </ul>
+
+        <ul>
+            <li class="question">Quanto custa?</li>
+            <li class="answer">O cadastro é completamente gratuito.</li>
+        </ul>
+
+        <ul>
+            <li class="question">Meus dados ficarão públicos?</li>
+            <li class="answer">Os dados de contato da sua empresa são visíveis para as pessoas da rede. Seus dados pessoas são visíveis apenas para os seus contatos.</li>
+            <li class="answer">A vitrine de produtos e serviços e as avaliações da empresa são visíveis para todos, inclusive usuários que vierem pelo Google.</li>
+        </ul>
+
+        <ul>
+            <li class="question">E se eu não tiver uma empresa ou minha empresa já estiver na rede?</li>
+            <li class="answer">Caso você não tenha uma empresa, você pode conhecer as empresas que fazem parte da rede a partir da nossa lista de empresas.</li>
+
+            <li class="answer">Se sua empresa já estiver cadastrada, peça para o responsável pelo perfil te convidar para a rede.</li>
+        </ul>
+        <ul>
+            <li class="answer"><br />Tendo outras dúvidas, fique a vontade para entrar em contato através do e-mail duvidas@empreendemia.com.br.</li>
+        </ul>
+    </ul>
+</div>
+<?php $this->layout()->side = ob_get_clean() ?>
